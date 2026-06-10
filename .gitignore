@@ -9,6 +9,7 @@
 *.fdb_latexmk
 *.fls
 *.pdf
+!papers/*.pdf
 
 # OS
 .DS_Store
