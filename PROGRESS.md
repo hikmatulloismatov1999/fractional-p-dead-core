@@ -8,11 +8,11 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
 - [x] Identify the program: transplant the PTU machine to $p \neq 2$
 - [ ] Fix notion of solution: weak solutions $u \in W^{s,p}_{loc} \cap L^\infty(\mathbb{R}^n)$; cite weak ≡ viscosity (Korvenpää–Kuusi–Lindgren)
 
-## Phase 1 — Scaling (Prop. `prop:scaling`)
-- [ ] Write out change of variables $y \mapsto ry$ in the singular integral
-- [ ] Verify $\alpha = \frac{sp}{p-1-\gamma}$
-- [ ] Consistency check $p=2$: recover PTU $\alpha = \frac{2s}{1-\gamma}$
-- [ ] Consistency check $s \nearrow 1$: recover da Silva–Salort $\alpha = \frac{p}{p-1-\gamma}$
+## Phase 1 — Scaling (Prop. `prop:scaling`) ✅ done 2026-06-10
+- [x] Write out change of variables $y \mapsto ry$ in the singular integral (pointwise + weak formulation)
+- [x] Verify $\alpha = \frac{sp}{p-1-\gamma}$
+- [x] Consistency check $p=2$: recover PTU $\alpha = \frac{2s}{1-\gamma}$
+- [x] Consistency check $s \nearrow 1$: recover da Silva–Salort $\alpha = \frac{p}{p-1-\gamma}$
 
 ## Phase 2 — Blow-up limit via homogeneity (Prop. `prop:homog`)
 - [ ] Direct computation: scaling + $(p-1)$-homogeneity ⇒ RHS factor $\theta_k^{\gamma-(p-1)} \to 0$

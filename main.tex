@@ -102,13 +102,68 @@ and $u_r$ solves \eqref{eq:main} (in $B_{1/r}$) if and only if
 \]
 \end{proposition}
 \begin{proof}
-\TODO{Write out the change of variables $y\mapsto ry$ in the singular
-integral: the difference contributes $r^{-\al(p-1)}$ through $\Jp{\cdot}$,
-the kernel and the volume element contribute $r^{sp}$. Then match against
-$(u_r)_+^{\gamma}-(u_r)_-^{\gamma} = r^{-\al\gamma}\big(u_+^{\gamma}-u_-^{\gamma}\big)(rx)$.
-Check consistency: $p=2$ gives $\al=\frac{2s}{1-\gamma}$ (PTU);
-$s\nearrow1$ gives $\al=\frac{p}{p-1-\gamma}$ (da Silva--Salort).}
+Write $J_p(t):=\Jp{t}$ and note the $(p-1)$-homogeneity
+$J_p(\lambda t)=\lambda^{p-1}J_p(t)$ for $\lambda>0$.
+Fix $x\in B_{1/r}$. Since $u_r(x)-u_r(y)=r^{-\al}\big(u(rx)-u(ry)\big)$,
+\[
+  \fpl{u_r}(x)
+  = c_{n,s,p}\,r^{-\al(p-1)}\,\mathrm{P.V.}\!\int_{\R^n}
+    \frac{J_p\big(u(rx)-u(ry)\big)}{|x-y|^{n+sp}}\,dy .
+\]
+Change variables $z=ry$, so $dy=r^{-n}dz$ and
+$|x-y|^{-(n+sp)}=r^{\,n+sp}\,|rx-z|^{-(n+sp)}$; the kernel and the volume
+element together contribute $r^{sp}$, and we obtain
+\begin{equation}\label{eq:scaling-identity}
+  \fpl{u_r}(x)
+  = r^{\,sp-\al(p-1)}\,
+    c_{n,s,p}\,\mathrm{P.V.}\!\int_{\R^n}
+    \frac{J_p\big(u(rx)-u(z)\big)}{|rx-z|^{n+sp}}\,dz
+  = r^{\,sp-\al(p-1)}\,\big(\fpl{u}\big)(rx).
+\end{equation}
+Now use the equation. Since $r^{-\al}>0$, positive and negative parts
+scale as $(u_r)_\pm(x)=r^{-\al}u_\pm(rx)$, whence
+\[
+  (u_r)_+^{\gamma}(x)-(u_r)_-^{\gamma}(x)
+  = r^{-\al\gamma}\Big(u_+^{\gamma}-u_-^{\gamma}\Big)(rx).
+\]
+Combining this with \eqref{eq:scaling-identity} and
+$\fpl{u}(rx)=\big(u_+^{\gamma}-u_-^{\gamma}\big)(rx)$ for $rx\in B_1$,
+\[
+  \fpl{u_r}(x)
+  = r^{\,sp-\al(p-1)+\al\gamma}\,
+    \Big[(u_r)_+^{\gamma}-(u_r)_-^{\gamma}\Big](x),
+  \qquad x\in B_{1/r}.
+\]
+Hence $u_r$ solves \eqref{eq:main} in $B_{1/r}$ if and only if
+$sp-\al(p-1)+\al\gamma=0$, i.e.\ $\al=\frac{sp}{p-1-\gamma}$
+(recall $\gamma<p-1$, so the denominator is positive).
+
+The same identity holds for weak solutions: for
+$\varphi\in C_c^\infty(B_{1/r})$, the change of variables
+$(x,y)\mapsto(rx,ry)$ in the bilinear form
+\[
+  \mathcal{E}(u,\varphi)
+  := \frac{c_{n,s,p}}{2}\iint_{\R^n\times\R^n}
+     \frac{J_p\big(u(x)-u(y)\big)\big(\varphi(x)-\varphi(y)\big)}
+          {|x-y|^{n+sp}}\,dx\,dy
+\]
+gives $\mathcal{E}(u_r,\varphi)=r^{\,sp-\al(p-1)-n}\,
+\mathcal{E}\big(u,\varphi(\cdot/r)\big)$, and the right-hand side scales
+by the matching factor $r^{-\al\gamma-n}$ after the same substitution;
+the exponent balance is identical.
+
+\emph{Consistency checks.} For $p=2$:
+$\al=\frac{2s}{1-\gamma}$, the PTU exponent \cite{PTU}. For $s\nearrow1$
+(with $p$ fixed): $\al\to\frac{p}{p-1-\gamma}$, the local dead-core
+exponent of da Silva--Salort. Finally, for $\gamma>0$ one has
+$\al=\frac{sp}{p-1-\gamma}>\frac{sp}{p-1}$, the optimal exponent of
+$(s,p)$-harmonic functions, as claimed.
 \end{proof}
+\begin{remark}[Homogeneity in the dependent variable]\label{rem:lambda}
+Alongside \eqref{eq:scaling-identity} we record, for $\lambda>0$,
+$\fpl{(\lambda u)}=\lambda^{p-1}\,\fpl{u}$, which is the identity used in
+the blow-up argument of \S\ref{sec:homog}.
+\end{remark}
 \begin{remark}
 $\al>\frac{sp}{p-1}$ for every $\gamma>0$: the target exponent strictly
 beats the optimal regularity of the homogeneous equation. This is the
