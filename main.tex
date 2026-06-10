@@ -1,0 +1,339 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!60!black, citecolor=blue!60!black, urlcolor=blue!60!black}
+% ---------- theorem environments ----------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{question}[theorem]{Open Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+% ---------- macros ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\fpl}[1]{(-\Delta_p)^{s}#1}            % fractional p-Laplacian
+\newcommand{\Jp}[1]{|#1|^{p-2}#1}                  % J_p(t) = |t|^{p-2} t
+\newcommand{\al}{\alpha}
+\newcommand{\Tail}{\mathrm{Tail}_{p-1,sp}}
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{TODO:} #1}}
+\newcommand{\NOTE}[1]{\textcolor{blue!70!black}{\textit{Note: #1}}}
+\title[Notes: nonlocal $p$-dead-core]{Working notes: improved regularity for a nonlocal\\ two-phase dead-core problem driven by the fractional $p$-Laplacian}
+\author{Hikmatullo}
+\date{\today\ --- lab notebook, not a draft}
+\begin{document}
+\maketitle
+\tableofcontents
+%======================================================================
+\section{The problem and the program}
+%======================================================================
+We study the two-phase nonlocal dead-core problem
+\begin{equation}\label{eq:main}
+  \fpl{u} = u_+^{\gamma} - u_-^{\gamma} \qquad \text{in } B_1,
+\end{equation}
+with $0<\gamma<p-1$, $s\in(0,1)$, $p\ge 2$, where
+\[
+  \fpl{u}(x) := c_{n,s,p}\;\mathrm{P.V.}\!\int_{\R^n}
+    \frac{\Jp{\big(u(x)-u(y)\big)}}{|x-y|^{n+sp}}\,dy .
+\]
+The goal is the analogue of the Prazeres--Teymurazyan--Urbano (PTU) result
+\cite{PTU}: at free boundary points $x_0$ with $u(x_0)=|Du(x_0)|=0$,
+\[
+  |u(x)| \le C\,\|u\|_{L^\infty(\R^n)}\,|x-x_0|^{\al},
+  \qquad
+  \al := \frac{sp}{\,p-1-\gamma\,},
+\]
+which exceeds the optimal regularity $\min\!\big(1,\tfrac{sp}{p-1}\big)$ of
+$(s,p)$-harmonic functions, since $\gamma>0$.
+\medskip
+\noindent\textbf{Program (the PTU machine, transplanted).}
+\begin{enumerate}
+  \item[\S\ref{sec:scaling}] Scaling exponent (Gear 2). \emph{Survives.}
+  \item[\S\ref{sec:homog}] Blow-up limit equation via $(p-1)$-homogeneity
+        (replaces linearization). \emph{Survives, new mechanism.}
+  \item[\S\ref{sec:constraints}] Constraint region in $(s,p,\gamma)$
+        (tail integrability, $\beta<1$, regularity ceiling).
+  \item[\S\ref{sec:liouville}] Liouville theorem for entire
+        $(s,p)$-harmonic functions with controlled $C^{1,\al_0}$ growth.
+        \emph{The load-bearing wall; likely the main new lemma.}
+  \item[\S\ref{sec:targets}] Target theorems: growth at the free boundary,
+        gradient estimate, Liouville with growth, the limit $s\nearrow 1$
+        (two-phase local $p$-dead-core: new even locally).
+\end{enumerate}
+\NOTE{One-phase signed dead cores are obstructed nonlocally by the strong
+minimum principle; the two-phase formulation \eqref{eq:main} is the natural
+(and essentially only) nontrivial setting. Use this in the introduction.}
+%======================================================================
+\section{Notation and standing assumptions}
+%======================================================================
+For $\al\in(0,1]$ we use the seminorms $[\,\cdot\,]_{C^{\al}(B_R)}$ and
+$[\,\cdot\,]_{C^{1+\al}(B_R)}$ as in \cite[Sec.~2]{PTU}.
+The nonlocal tail adapted to $\fpl{}$ is
+\[
+  \Tail(u;x_0,R)
+  := \left( R^{sp} \int_{\R^n\setminus B_R(x_0)}
+       \frac{|u(y)|^{p-1}}{|y-x_0|^{n+sp}}\,dy \right)^{\!\frac{1}{p-1}},
+\]
+replacing the space $L^1_s(\R^n)$ of the case $p=2$.
+\TODO{Fix the notion of solution for the first pass: \emph{weak} solutions
+$u\in W^{s,p}_{loc}\cap L^\infty(\R^n)$, with the viscosity equivalence
+(Korvenp\"a\"a--Kuusi--Lindgren) cited later. Existence plumbing deferred
+to the final write-up.}
+%======================================================================
+\section{Gear 2: the scaling exponent}\label{sec:scaling}
+%======================================================================
+\begin{proposition}[Scaling]\label{prop:scaling}
+Let $u$ solve \eqref{eq:main} and, for $r>0$ and $\al>0$, set
+$u_r(x):=u(rx)/r^{\al}$. Then
+\[
+  \fpl{u_r}(x) \;=\; r^{\,sp-\al(p-1)}\,\big(\fpl{u}\big)(rx),
+\]
+and $u_r$ solves \eqref{eq:main} (in $B_{1/r}$) if and only if
+\[
+  sp-\al(p-1)+\al\gamma=0,
+  \qquad\text{i.e.}\qquad
+  \boxed{\;\al=\frac{sp}{p-1-\gamma}\;}.
+\]
+\end{proposition}
+\begin{proof}
+\TODO{Write out the change of variables $y\mapsto ry$ in the singular
+integral: the difference contributes $r^{-\al(p-1)}$ through $\Jp{\cdot}$,
+the kernel and the volume element contribute $r^{sp}$. Then match against
+$(u_r)_+^{\gamma}-(u_r)_-^{\gamma} = r^{-\al\gamma}\big(u_+^{\gamma}-u_-^{\gamma}\big)(rx)$.
+Check consistency: $p=2$ gives $\al=\frac{2s}{1-\gamma}$ (PTU);
+$s\nearrow1$ gives $\al=\frac{p}{p-1-\gamma}$ (da Silva--Salort).}
+\end{proof}
+\begin{remark}
+$\al>\frac{sp}{p-1}$ for every $\gamma>0$: the target exponent strictly
+beats the optimal regularity of the homogeneous equation. This is the
+``better than Schauder'' punchline of the paper.
+\end{remark}
+%======================================================================
+\section{Gear 4$'$: the blow-up limit equation via homogeneity}\label{sec:homog}
+%======================================================================
+In PTU, linearity makes incremental quotients $s$-harmonic. For $p\neq2$
+this fails, but $(p-1)$-homogeneity of $\fpl{}$ makes linearization
+unnecessary: the absorption term dies in the blow-up.
+\begin{proposition}[Vanishing right-hand side along the blow-up]\label{prop:homog}
+Let $u_k$ be normalized solutions of \eqref{eq:main}, let $r_k\to0$,
+$\theta_k\to\infty$, and set
+\[
+  v_k(x):=\frac{u_k(r_kx)}{\theta_k\, r_k^{\al}},
+  \qquad \al=\frac{sp}{p-1-\gamma}.
+\]
+Then
+\[
+  \fpl{v_k}(x)
+  = \theta_k^{\,\gamma-(p-1)}
+    \Big[ (v_k)_+^{\gamma}(x) - (v_k)_-^{\gamma}(x) \Big],
+\]
+and since $\gamma<p-1$, the right-hand side tends to $0$ locally uniformly
+whenever $v_k$ is locally bounded. Consequently any local uniform limit
+$v_0$ is an entire $(s,p)$-harmonic function:
+$\fpl{v_0}=0$ in $\R^n$.
+\end{proposition}
+\begin{proof}
+\TODO{Direct computation combining Proposition~\ref{prop:scaling} with
+homogeneity $\fpl{(\lambda u)}=\Jp{\lambda}\,\fpl{u}$. Then justify the
+limit: stability of weak (or viscosity) solutions of $\fpl{}$ under local
+uniform convergence with tail control --- locate the precise stability
+lemma in Brasco--Lindgren or Korvenp\"a\"a--Kuusi--Lindgren and quote it
+with constants. This is the replacement for \cite[Lemma 5]{CS-approx}
+used by PTU.}
+\end{proof}
+\NOTE{This parallels PTU \S6 (fully nonlinear case), where
+$\delta^{-1}F(\delta M)\to DF(0)M$; here homogeneity plays the role of
+differentiability of $F$ at $0$ --- which $\fpl{}$ does not have.
+Worth a remark in the paper.}
+%======================================================================
+\section{Gear 3 bookkeeping: the admissible region in $(s,p,\gamma)$}\label{sec:constraints}
+%======================================================================
+Three constraints must hold simultaneously. Set $\al=\frac{sp}{p-1-\gamma}$
+and $\beta:=\al-1$ (the $\nu=1$ case).
+\begin{lemma}[Tail integrability]\label{lem:tail}
+The growth $|v_0(x)|\lesssim |x|^{\al}$ at infinity is compatible with
+$\Tail(v_0;0,R)<\infty$ for all $R$ if and only if $\al(p-1)<sp+p-1$,
+i.e.
+\[
+  \boxed{\;\gamma \;<\; (p-1)-\frac{sp}{1+\,sp/(p-1)}
+  \;=\;(p-1)\Big(1-\frac{sp}{p-1+sp}\Big)
+  \;=\;\frac{(p-1)^2}{p-1+sp}\;}
+\]
+\end{lemma}
+\begin{proof}
+\TODO{Compute $\int_{B_1^c}|y|^{\al(p-1)-n-sp}\,dy<\infty \iff \al(p-1)<sp$,
+then redo with the correct object: in the contradiction argument the
+quantity with growth $|x|^{\al-1}$ or $|x|^{\al}$ enters the tail at power
+$p-1$. \textbf{Careful:} decide whether the PTU step (4.11) (incremental
+quotients) is even needed in the homogeneous-blow-up route, or whether the
+tail condition applies directly to $v_0$. Recompute the boxed condition
+accordingly --- the formula above is a first pass and must be verified.
+Sanity check at $p=2$: should recover $\gamma<\frac{1}{1+2s}$, hence
+$\gamma<1/3$ uniformly for $s\in(1/2,1)$.}
+\end{proof}
+\begin{lemma}[Order of the jet: $\beta<1$]\label{lem:beta}
+The Liouville theorem with $\nu=1$ requires
+$\beta=\frac{sp}{p-1-\gamma}-1<1$, i.e.
+\[
+  \boxed{\;\gamma<(p-1)-\frac{sp}{2}\;}
+\]
+which also forces $sp<2(p-1)$.
+\end{lemma}
+\begin{lemma}[Regularity ceiling]\label{lem:ceiling}
+The compactness step requires a uniform interior estimate one derivative
+above the vanishing jet. With $\nu=1$ this means local $C^{1,\al_0}$
+estimates for normalized solutions of $\fpl{u}=f\in L^\infty$, currently
+available for
+\[
+  p\in\Big[\,2,\ \tfrac{2}{1-s}\,\Big),
+\]
+together with the constraint $\al<1+\al_0$.
+\end{lemma}
+\TODO{(i) Track down the $C^{1,\al_0}$ paper (cited as [28] in
+arXiv:2509.15988) and record the exact statement: dependence of $\al_0$
+and of the constant on $n,s,p$, presence of tail terms, and uniformity as
+$s\nearrow1$ (needed for \S\ref{sec:targets}, Theorem~\ref{thm:local}).
+(ii) Intersect the three boxed regions and draw the admissible set; this
+intersection \emph{is} the hypothesis of the main theorem, the analogue of
+$\gamma\in(0,1/3)$, $s\in(1/2,1)$ in PTU.
+(iii) Decide whether a weaker fallback (only $C^{0,\gamma_0}$ estimates,
+$\gamma_0=\min(1,\frac{sp}{p-1})$, with the free boundary condition
+$u(x_0)=0$ only and $\al\le\gamma_0$ forced) yields a nonempty parameter
+range --- this would give an unconditional but weaker theorem.}
+%======================================================================
+\section{The load-bearing wall: a Liouville theorem}\label{sec:liouville}
+%======================================================================
+\begin{conjecture}[Liouville, $\nu=1$]\label{conj:liouville}
+Let $v\in C^{1}_{loc}(\R^n)$ be an entire $(s,p)$-harmonic function such
+that, for some $0\le \al_0'<\beta<1$ and $C>0$,
+\[
+  [v]_{C^{1+\al_0'}(B_R)} \le C R^{\beta-\al_0'} \qquad \forall R\ge1 .
+\]
+Then $v$ is affine: $v(x)=v(0)+Dv(0)\cdot x$.
+\end{conjecture}
+\begin{proof}[Proof strategy]
+\TODO{Transplant PTU Theorem~3.1, Step~1. Fix a unit vector $e$ and set
+$w:=v-v(0)-Dv(0)\cdot x$; affine functions are $(s,p)$-harmonic
+\emph{only after} noting the equation is not linear --- so subtraction of
+an affine function does NOT produce a solution. \textbf{This is the real
+obstruction.} Two routes:
+(a) work with $v$ itself and the scaled functions
+$v_\rho(x):=\rho^{-\beta}\,[v(\rho x)-v(0)-\rho\,Dv(0)\cdot x]$, which
+solve an equation with a translated datum --- check whether the interior
+$C^{1,\al_0}$ estimate applies to differences of solutions of this type
+(equivalently: a $C^{1,\al_0}$ estimate ``modulo affine functions'');
+(b) use the linearization of $\fpl{}$ along $v$: incremental quotients
+$w_h=v(\cdot+h)-v(\cdot)$ solve a \emph{linear} nonlocal equation
+$L_K w_h=0$ with kernel
+$K(x,y)\simeq |v(x)-v(y)|^{p-2}|x-y|^{-n-sp}$, degenerate where $v$ is
+flat; investigate whether the growth bound keeps $K$ in a manageable
+class (note: near the free boundary $v$ IS flat --- degeneracy is at the
+worst possible place; but the Liouville is applied to the blow-up limit,
+whose gradient need not vanish identically).
+Route (a) is closer to the local quasilinear literature
+(small-perturbation / flatness-improvement arguments) and is the one to
+try first.}
+\end{proof}
+\begin{remark}
+$\nu=2$ is out of reach: quadratic polynomials are not $(s,p)$-harmonic
+for $p\neq2$, so even the statement fails at order two; consistent with
+the absence of $C^2$ theory for the (local or nonlocal) $p$-Laplacian.
+State this as a remark in the paper, mirroring PTU Remark~4.1 in reverse.
+\end{remark}
+%======================================================================
+\section{Target theorems}\label{sec:targets}
+%======================================================================
+\begin{theorem}[Main growth estimate --- target]\label{thm:main}
+Let $(s,p,\gamma)$ lie in the admissible region of
+\S\ref{sec:constraints} and let $u\in L^\infty(\R^n)$ solve
+\eqref{eq:main}. If $x_0\in B_{1/2}$ satisfies $u(x_0)=|Du(x_0)|=0$, then
+\[
+  |u(x)| \le C\,\|u\|_{L^\infty(\R^n)}\;|x-x_0|^{\frac{sp}{p-1-\gamma}},
+  \qquad x\in B_{1/2}(x_0),
+\]
+with $C=C(n,s,p,\gamma)>0$.
+\end{theorem}
+\begin{proof}[Proof skeleton]
+\TODO{Contradiction + the $\theta_k$ device of PTU (4.3)--(4.8), with
+$[\,\cdot\,]_{C^{2s+\gamma}}$ replaced by $[\,\cdot\,]_{C^{1+\al_0}}$ and
+$2s+\gamma-\frac{2s}{1-\gamma}$ replaced by $1+\al_0-\al$;
+compactness from Lemma~\ref{lem:ceiling}; limit equation from
+Proposition~\ref{prop:homog}; kill with
+Conjecture~\ref{conj:liouville}; contradiction with the surviving
+normalization $[v_0]_{C^{1+\al_0}(B_1)}\ge\frac12$.}
+\end{proof}
+\begin{corollary}[Sharp growth of the gradient --- target]
+Under the conditions of Theorem~\ref{thm:main},
+$\sup_{B_r(x_0)}|Du|\le C\,r^{\frac{sp}{p-1-\gamma}-1}$ for $r<1/2$.
+\end{corollary}
+\begin{theorem}[Two-phase local $p$-dead-core --- target, new even locally]\label{thm:local}
+Let $u$ solve $\Delta_p u = u_+^{\gamma}-u_-^{\gamma}$ in $B_1$ with
+$(p,\gamma)$ admissible. At points with $u(x_0)=|Du(x_0)|=0$,
+\[
+  |u(x)|\le C\,|x-x_0|^{\frac{p}{p-1-\gamma}} .
+\]
+\end{theorem}
+\begin{proof}[Proof skeleton]
+\TODO{$s\nearrow1$ in Theorem~\ref{thm:main}, after checking
+(i) $\fpl{u}\to-\Delta_p u$ in the appropriate sense (locate the
+Bourgain--Brezis--Mironescu-type statement for $\fpl{}$ and fix
+normalizing constants $c_{n,s,p}$), and
+(ii) uniformity in $s$ of every constant in the chain --- in particular
+of the $C^{1,\al_0}$ estimate as $s\nearrow1$ (the window
+$p<\frac{2}{1-s}$ opens to all $p\ge2$). The local two-phase result does
+not appear in da Silva--Rossi--Salort / da Silva--Salort / Teixeira, which
+are one-phase: highlight this.}
+\end{proof}
+\begin{theorem}[Liouville with growth --- target]
+Entire bounded solutions of \eqref{eq:main} in $\R^n$ with
+$u(x)=o\big(|x-x_0|^{\frac{sp}{p-1-\gamma}}\big)$ as $|x|\to\infty$, for
+some $x_0\in\partial\{u>0\}\cap\{|Du|=0\}$, vanish identically.
+\end{theorem}
+\begin{proof}[Proof skeleton]
+\TODO{Transplant PTU Theorem~5.3 verbatim: rescale, apply
+Theorem~\ref{thm:main}, squeeze. Should be a one-page corollary once the
+main theorem holds.}
+\end{proof}
+\begin{question}
+Nondegeneracy: $\sup_{B_r(x_0)}u_+\ge c\,r^{\frac{sp}{p-1-\gamma}}$ at
+free boundary points? Requires a barrier: compute (or bound) $\fpl{}$ of
+$x\mapsto |x|^{\al}$. Power-function computations for $\fpl{}$ exist in
+the literature (1-d computations of Brasco et al.; $d^s$-barriers of
+Iannizzotto--Mosconi--Squassina). Separate note.
+\end{question}
+%======================================================================
+\section{Reading list with shopping lists}
+%======================================================================
+\begin{itemize}
+  \item \textbf{PTU} (this paper, arXiv:2504.09557): \S4 line-by-line;
+        extract the $\theta_k$ device and the exponent bookkeeping.
+  \item \textbf{Brasco--Lindgren--Schikorra} (arXiv:1711.09835):
+        shopping list --- interior $C^{0,\gamma_0}$ estimate with explicit
+        tail dependence; the form of $\Tail$; stability under limits.
+  \item \textbf{$C^{1,\al_0}$ paper} ([28] in arXiv:2509.15988):
+        shopping list --- exact statement, constants, uniformity in $s$.
+  \item \textbf{Korvenp\"a\"a--Kuusi--Lindgren}: weak $\equiv$ viscosity;
+        cite, do not read deeply on the first pass.
+  \item \textbf{da Silva--Salort} (arXiv:2501.13063): the local benchmark
+        $C^{\frac{p}{p-1-q}}$; compare hypotheses and the one-phase vs
+        two-phase gap.
+  \item \textbf{Teymurazyan}, \emph{The fractional Laplacian: a primer}:
+        background reference; the author is at KAUST --- bring \S3--\S5 of
+        these notes to his office once Lemmas~\ref{lem:tail}--\ref{lem:ceiling}
+        are verified.
+\end{itemize}
+\begin{thebibliography}{9}
+\bibitem{PTU} D. dos Prazeres, R. Teymurazyan, J.M. Urbano,
+\emph{Improved regularity for a nonlocal dead-core problem},
+arXiv:2504.09557, to appear in Indiana Univ. Math. J.
+\bibitem{CS-approx} L. Caffarelli, L. Silvestre,
+\emph{Regularity results for nonlocal equations by approximation},
+Arch. Ration. Mech. Anal. 200 (2011), 59--88.
+\end{thebibliography}
+\end{document}
