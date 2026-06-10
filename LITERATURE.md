@@ -95,7 +95,22 @@ Proof mechanism (one page, no linearization, **no affine subtraction**):
 **Dimension question for us:** they need $n=2$ only to *quantify* $\alpha_p$. GJS gives $\alpha_0 = \alpha_0(d,s,p)$ non-explicitly — so our Theorem would be conditional on $\alpha > 1+\alpha_0$... no wait, conditional on $\frac{sp}{p-1-\gamma} < 1+\alpha_0$, exactly Lemma `lem:ceiling`. Worth asking: is there a nonlocal Baernstein–Kovalev (explicit $\alpha_0$ in 2D, or any $d$, for $(-\Delta_p)^s$)? If not — possible side result, or keep $\alpha_0$ implicit and state the theorem for $\gamma$ small.
 
 ### For Lemma `lem:ceiling` ($C^{1,\alpha_0}$ estimate)
-- …
+
+**✅ GJS structural assessment (2026-06-10), arXiv:2509.26565:**
+
+*Proof structure (3 stages, after Lipschitz from Biswas–Topp [3] / Biswas–Sen [2]):*
+1. **Stage 1 (most delicate, purely nonlocal):** dyadic improvement $\|\nabla u\|_{L^\infty(B_{2^{-k}})} \le C_0(1-\delta)^k$ via the linearized equation $L_u(\partial_e u)=0$ with kernel $K_u(x,y)=(p-1)\frac{|u(x)-u(y)|^{p-2}}{|x-y|^{d+sp}}$ (degenerate where $u$ flat); novelty = nondegeneracy of $K_u$ along segments where the gradient curve first leaves a neighborhood of $e$; De Giorgi iteration.
+2. **Stage 2:** Ishii–Lions on $u(x)-e\cdot x$.
+3. **Stage 3:** Hölder for $\nabla u$ in the mild-uniform-ellipticity regime à la Kassmann–Schwab [28] / **Imbert–Silvestre [26] — the latter ALREADY allows nonzero bounded RHS at the linearized level.**
+- §9 = technical extension from classical to weak solutions.
+
+*Q1 — does $f\in L^\infty$ break it?* Not claimed, but **plausible in a sub-range, by their own remark (§2):** $L_u$ has order $2-p(1-s)$; differentiating the equation costs one derivative ($\partial_e u$ solves $L_u(\partial_e u)=\partial_e f$), so when the order exceeds 1, i.e. $p < \frac{1}{1-s}$, they explicitly "expect similar regularity even if there was a non-zero bounded right-hand side." Supporting facts: stage-3 machinery [26] takes a RHS; the Lipschitz starting point with RHS exists (Biswas–Sen arXiv:2507.09920, fractional $(p,q)$-Poisson *with data*).
+- **Consequence for us:** natural conditional range $2 \le p < \frac{1}{1-s}$, which forces $s > \frac12$ — pleasingly the same restriction as PTU's $s\in(\frac12,1)$. For $\frac{1}{1-s} \le p < \frac{2}{1-s}$: open. Writing the $f\in L^\infty$ extension in the range $p<\frac{1}{1-s}$ could even be a standalone lemma/section of our paper.
+
+*Q2 — uniformity as $s\nearrow 1$?* **NO — explicitly fails.** Quote (§1.2): "the techniques we use in the first stage of our proof are purely nonlocal. Therefore, the constants … do not remain bounded in the limit $s\to1$."
+- **⚠️ STRATEGIC CONSEQUENCE:** Theorem `thm:local` (two-phase local $p$-dead-core via $s\nearrow1$) CANNOT be obtained through the GJS estimate as planned. Options: (i) prove `thm:local` directly with local $C^{1,\alpha}$ theory ($p$-harmonic functions — classical, constants $s$-free; essentially run Correa–dos Prazeres §6 with RHS $u_+^\gamma-u_-^\gamma$, which may be straightforward and publishable separately); (ii) find/await an $s$-uniform $C^{1,\alpha}$ estimate; (iii) drop `thm:local` from this paper. **Discuss with supervisor.**
+
+*Also recorded:* $p<\frac{2}{1-s}$ is natural/sharp-ish (solutions not expected Lipschitz beyond; no counterexamples known); $p<2$ entirely open ($K_u=+\infty$ issue); their $\alpha=\alpha(d,s,p)$ is NOT explicit — no nonlocal Baernstein–Kovalev, so the admissible $\gamma$-range stays implicit ("$\gamma$ small").
 
 ### For Prop. `prop:homog` (stability lemma)
 - …

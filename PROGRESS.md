@@ -26,7 +26,9 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
 - [ ] **Order of jet (Lemma `lem:beta`)**: $\gamma < (p-1) - \frac{sp}{2}$ (forces $sp < 2(p-1)$)
 - [ ] **Regularity ceiling (Lemma `lem:ceiling`)**:
   - [x] Track down the $C^{1,\alpha_0}$ paper → **Giovagnoli–Jesus–Silvestre, arXiv:2509.26565** (Thm 1.1: $C^{1,\alpha}$ for $(-\Delta_p)^s u = 0$, $p \in [2,\frac{2}{1-s})$, with Tail term)
-  - [ ] Record exact statement, constants, tail terms, uniformity as $s \nearrow 1$; ⚠️ check it extends to RHS $f \in L^\infty$ (their Thm 1.1 is homogeneous)
+  - [x] Structural assessment done 2026-06-10 (see LITERATURE.md): RHS $f\in L^\infty$ extension plausible for $2\le p<\frac{1}{1-s}$ (forces $s>\frac12$, like PTU); uniformity as $s\nearrow1$ **FAILS** (their §1.2, explicit)
+  - [ ] Write the $f \in L^\infty$ extension of GJS in the range $p < \frac{1}{1-s}$ (candidate standalone lemma for our paper)
+  - [ ] ⚠️ `thm:local` ($s\nearrow1$) blocked via GJS — decide: direct local proof (CP §6 + classical $C^{1,\alpha}$) vs drop. **Ask supervisor**
   - [ ] Record constraint $\alpha < 1 + \alpha_0$ and window $p \in [2, \frac{2}{1-s})$
 - [ ] Intersect the three boxed regions; draw the admissible set (= hypothesis of the main theorem)
 - [ ] Evaluate fallback: only $C^{0,\gamma_0}$ estimates with $u(x_0)=0$ — is the parameter range nonempty?
