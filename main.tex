@@ -295,6 +295,29 @@ Route (a) is closer to the local quasilinear literature
 (small-perturbation / flatness-improvement arguments) and is the one to
 try first.}
 \end{proof}
+\NOTE{(Update, 2026-06-10, after Correa--dos Prazeres \cite{CP} \S6.)
+The affine-subtraction obstruction dissolves: in the application the
+blow-up limit inherits the vanishing $1$-jet $v_0(0)=|Dv_0(0)|=0$ from
+the free boundary point, so the Liouville should be \emph{restated} in
+the form of their Lemma~5:
+\begin{quote}
+$v$ entire $(s,p)$-harmonic, $v(0)=|Dv(0)|=0$,
+$|v(x)|\le C(1+|x|)^{1+\beta}$ with $\beta<\al_0$
+$\Longrightarrow$ $v\equiv0$.
+\end{quote}
+Proof template (their one-page argument): $v_l:=v(l\,\cdot)/l^{1+\beta}$
+is again $(s,p)$-harmonic and bounded in $B_1$; the quantitative
+$C^{1,\al_0}$ estimate \cite{GJS} plus the vanishing jet give
+$|v_l(x)|\le C|x|^{1+\al_0}$ in $B_{1/2}$; unscaling,
+$\sup_{B_{l/2}}|v|/|x|^{1+\al_0}=l^{\beta-\al_0}\cdot(\cdots)\to0$.
+\textbf{The genuinely nonlocal gap:} applying \cite{GJS} to $v_l$
+requires $\Tail(v_l)<\infty$, but growth $|x|^{1+\beta}$ with
+$(1+\beta)(p-1)>sp$ makes the tail diverge --- naive transplantation
+fails exactly there. Candidate fixes: truncation outside $B_{2R}$ with
+the truncation error entering as an $L^\infty$ right-hand side (ties
+into the RHS question for \cite{GJS}); or PTU-style incremental
+quotients, which lower the growth by one order. This is now the precise
+content of Lemma~\ref{lem:tail}.}
 \begin{remark}
 $\nu=2$ is out of reach: quadratic polynomials are not $(s,p)$-harmonic
 for $p\neq2$, so even the statement fails at order two; consistent with

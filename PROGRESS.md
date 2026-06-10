@@ -32,9 +32,11 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
 - [ ] Evaluate fallback: only $C^{0,\gamma_0}$ estimates with $u(x_0)=0$ — is the parameter range nonempty?
 
 ## Phase 4 — Liouville theorem (Conjecture `conj:liouville`) ★ load-bearing wall
-- [ ] Read Correa–dos Prazeres §6 (arXiv:2504.11370) — supervisor's pointer: the Liouville + regularity strategy for the local $p$-Laplacian
-- [ ] Route (a) — try first: scaled functions $v_\rho$, $C^{1,\alpha_0}$ estimate "modulo affine functions" (flatness-improvement style)
-- [ ] Route (b) — backup: linearization along $v$; incremental quotients solve $L_K w_h = 0$ with degenerate kernel; check kernel class under the growth bound
+- [x] Read Correa–dos Prazeres §6 (arXiv:2504.11370) — extracted 2026-06-10, see LITERATURE.md. **Key: no affine subtraction needed** — restate Liouville with vanishing 1-jet hypothesis (their Lemma 5 form)
+- [ ] Restate Conjecture `conj:liouville`: $v$ entire $(s,p)$-harmonic, $v(0)=|Dv(0)|=0$, $|v| \le C(1+|x|)^{1+\beta}$, $\beta < \alpha_0$ ⇒ $v \equiv 0$
+- [ ] **Close the nonlocal gap**: Tail of $v_l = v(l\cdot)/l^{1+\beta}$ diverges under growth $|x|^{1+\beta}$ — try (i) truncation + $L^\infty$ RHS error, (ii) PTU-style incremental quotients (growth drops one order), (iii) mirror PTU (4.11)
+- [ ] Transplant their Lemma 6 (jet-to-growth; operator-free, should be verbatim)
+- [ ] Route (b) — backup only: linearization along $v$; incremental quotients solve $L_K w_h = 0$ with degenerate kernel
 - [ ] Write remark: $\nu = 2$ fails (quadratics not $(s,p)$-harmonic for $p \neq 2$)
 
 ## Phase 5 — Main theorems
