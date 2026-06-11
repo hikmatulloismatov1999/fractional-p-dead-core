@@ -23,7 +23,8 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
 - [x] **Tail integrability (Lemma `lem:tail`)**: VERIFIED 2026-06-10 — $\gamma < \frac{(p-1)^2}{p-1+sp}$ is exactly the incremental-quotient tail condition $(\alpha-1)(p-1) < sp$
   - [x] Decided: incremental quotients are NOT optional — uniform tails for $v_k$ itself are impossible ($\mathrm{Tail}^{p-1} \sim (\theta_k r_k^\alpha)^{-\gamma} \to \infty$ under the seminorm normalization)
   - [x] Sanity check $p=2$: $\gamma < \frac{1}{1+2s}$ ✓
-  - [ ] ★ **Remaining gap (THE open point):** far-field piece needs the lower bound $\theta_k \ge c\, r_k^{-\alpha\gamma/(p-1)}$ — check PTU (4.5)–(4.8) line-by-line, or run a dichotomy $\theta_k \gtrless r_k^{-\delta}$
+  - [x] Checked PTU §4 (2026-06-10): their device does **not** obviously give the lower bound — the same far-field issue appears unaddressed in PTU itself ((4.11) justified only up to $\frac{1}{2r_k}$). See LITERATURE.md
+  - [ ] ★ **THE open point:** resolve the far-field bound — (i) ask R.T. (it's his paper!), (ii) dichotomy $\theta_k \gtrless r_k^{-\delta}$, (iii) cutoff + error, (iv) check exact hypotheses of Caffarelli–Silvestre Lemma 5 (maybe local convergence suffices)
 - [ ] **Order of jet (Lemma `lem:beta`)**: $\gamma < (p-1) - \frac{sp}{2}$ (forces $sp < 2(p-1)$)
 - [ ] **Regularity ceiling (Lemma `lem:ceiling`)**:
   - [x] Track down the $C^{1,\alpha_0}$ paper → **Giovagnoli–Jesus–Silvestre, arXiv:2509.26565** (Thm 1.1: $C^{1,\alpha}$ for $(-\Delta_p)^s u = 0$, $p \in [2,\frac{2}{1-s})$, with Tail term)

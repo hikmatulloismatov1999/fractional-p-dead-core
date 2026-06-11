@@ -271,10 +271,17 @@ $c\,R^{sp}|h|^{-(p-1)}\,\theta_k^{-(p-1)}r_k^{-\al\gamma}$, which is
 bounded iff $\theta_k\ge c\,r_k^{-\al\gamma/(p-1)}$ --- a \emph{lower}
 bound on $\theta_k$ that the contradiction hypothesis does not obviously
 provide ($\theta_k\to\infty$, but at an unknown rate relative to $r_k$).
-\TODO{Check whether the PTU device (4.5)--(4.8) extracts exactly this
-lower bound for free, or whether a dichotomy argument
-($\theta_k\gtrless r_k^{-\delta}$) is needed. This is now the single
-remaining gap in the tail analysis; read PTU \S4 line-by-line next.}
+\TODO{(Checked 2026-06-10.) PTU \S4 does \emph{not} obviously provide
+this bound: their (4.11) rests on (4.8), valid only for
+$|x|\le\frac{1}{2r_k}$, while the limit passage (4.12) needs uniform
+$L^1_s$ control on all of $\R^n$; the outer region contributes
+$\sim\theta_k^{-1}r_k^{-\frac{2s\gamma}{1-\gamma}}$ --- the same lower
+bound, apparently unaddressed. So the far-field issue is not an artifact
+of $p\neq2$: it is present (implicitly resolved, or genuinely open) in
+the template itself. \textbf{Priority question for R.T.} Candidate
+fixes: dichotomy $\theta_k\gtrless r_k^{-\delta}$; cutoff with error
+estimate; or weaker hypotheses in the stability lemma (check
+\cite{CS-approx} Lemma 5 precisely).}
 \end{proof}
 \begin{lemma}[Order of the jet: $\beta<1$]\label{lem:beta}
 The Liouville theorem with $\nu=1$ requires

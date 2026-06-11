@@ -59,7 +59,12 @@ Strategy (supervisor, email 2026-04-26): transplant the PTU machine — Liouvill
 4. Intersect the three constraint regions → hypothesis of the main theorem.
 5. Stability lemma for $(-\Delta_p)^s$ under local uniform convergence (Brasco–Lindgren / KKL) — replaces Caffarelli–Silvestre Lemma 5.
 
-**Next session: start with PROGRESS.md Phase 3–4 + Correa–dos Prazeres §6.**
+**Questions ready for the supervisor meeting (prepared 2026-06-10):**
+1. *Far-field tail in PTU §4:* (4.11) is justified only for $|x| \le \frac{1}{2r_k}$, but the limit passage (4.12) needs uniform $L^1_s$ control on all of $\mathbb{R}^n$; the outer region needs $\theta_k \gtrsim r_k^{-2s\gamma/(1-\gamma)}$. How is this handled? (Same issue is the one remaining gap in our $p\neq2$ tail analysis.)
+2. *The $s\nearrow1$ theorem:* GJS constants blow up as $s\to1$ (their §1.2, explicit) — propose proving the local two-phase theorem directly (CP §6 scheme + classical $C^{1,\alpha}$), possibly as a separate short paper.
+3. *GJS with RHS:* propose writing the $f\in L^\infty$ extension in the range $p < \frac{1}{1-s}$ (their own remark suggests it works there; forces $s>\frac12$ like PTU) as a lemma of our paper.
+
+**Next session: PTU Theorem 3.1 (their Liouville) Step 1 in detail; then attempt the vanishing-jet Liouville for $(s,p)$ assuming the tail issue resolved; check CS Lemma 5 hypotheses.**
 
 ## 7. Conventions and decisions already made
 
