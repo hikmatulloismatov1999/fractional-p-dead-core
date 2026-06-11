@@ -221,16 +221,60 @@ i.e.
   \;=\;\frac{(p-1)^2}{p-1+sp}\;}
 \]
 \end{lemma}
-\begin{proof}
-\TODO{Compute $\int_{B_1^c}|y|^{\al(p-1)-n-sp}\,dy<\infty \iff \al(p-1)<sp$,
-then redo with the correct object: in the contradiction argument the
-quantity with growth $|x|^{\al-1}$ or $|x|^{\al}$ enters the tail at power
-$p-1$. \textbf{Careful:} decide whether the PTU step (4.11) (incremental
-quotients) is even needed in the homogeneous-blow-up route, or whether the
-tail condition applies directly to $v_0$. Recompute the boxed condition
-accordingly --- the formula above is a first pass and must be verified.
-Sanity check at $p=2$: should recover $\gamma<\frac{1}{1+2s}$, hence
-$\gamma<1/3$ uniformly for $s\in(1/2,1)$.}
+\begin{proof}[Verification (2026-06-10; constants to be rechecked)]
+We record the bookkeeping for the blow-up family
+$v_k(x)=\frac{u_k(r_kx)}{\theta_k r_k^{\al}}$, $\|u_k\|_{L^\infty(\R^n)}\le M$,
+under the seminorm normalization
+$\theta_k=\theta_k(r_k)$ with
+$\theta_k(r'):=\sup_{r'<r<1/2} r^{1+\al'-\al}[u_k]_{C^{1+\al'}(B_r)}$.
+
+\emph{Step 1: uniform tails for $v_k$ itself are impossible.}
+The interior information gives the growth bound $|v_k(y)|\le C|y|^{\al}$
+for $1\le|y|\le R^*_k:=\tfrac{1}{2r_k}$ (gradient-anchor trick of
+\cite{CP}), while globally $|v_k|\le M(\theta_k r_k^{\al})^{-1}$.
+The two bounds cross at
+$\rho_k=(M/C\theta_k)^{1/\al}\,r_k^{-1}$. Splitting the tail there and
+using $\al(p-1)-sp=\al\gamma>0$,
+\[
+  \Tail^{\,p-1}(v_k;0,R)
+  \;\le\; c\,R^{\al(p-1)}
+  \;+\; c\,R^{sp}\,\rho_k^{\al\gamma}
+  \;=\; c\,R^{\al(p-1)} + c\,R^{sp}\big(\theta_k r_k^{\al}\big)^{-\gamma},
+\]
+with both the growth region and the capped region contributing
+comparably. But the normalization forces
+$\theta_k\le [u_k]_{C^{1+\al'}(B_{1/2})}\, r_k^{1+\al'-\al}\le
+2C\,r_k^{1+\al'-\al}$, i.e.\ $\theta_k r_k^{\al}\le 2C\,r_k^{1+\al'}\to0$;
+hence $\sup_k\Tail(v_k;0,R)=\infty$. \textbf{Conclusion: the
+$C^{1,\al_0}$ estimate can never be applied to $v_k$ directly; one must
+work one order down.} This settles the ``decide'' in the old TODO: the
+incremental-quotient step (PTU (4.11)) is \emph{not} optional.
+
+\emph{Step 2: incremental quotients give exactly the boxed condition.}
+For $w_k^h:=\frac{v_k(\cdot+h)-v_k(\cdot)}{|h|}$, $0<|h|\le1$, the
+gradient bound yields $|w_k^h(y)|\le C(1+|y|)^{\al-1}$ for
+$|y|\le R^*_k$, and now the growth-region tail integral
+\[
+  R^{sp}\int_{|y|>R}|y|^{(\al-1)(p-1)-n-sp}\,dy
+\]
+converges \emph{uniformly in $k$} if and only if $(\al-1)(p-1)<sp$,
+which upon substituting $\al=\frac{sp}{p-1-\gamma}$ is precisely
+\[
+  \gamma<\frac{(p-1)^2}{p-1+sp}.
+\]
+Sanity check at $p=2$: $\gamma<\frac{1}{1+2s}$, matching PTU, and
+$\gamma<1/3$ uniformly for $s\in(\frac12,1)$. \checkmark
+
+\emph{Step 3: the residual far-field gap.}
+Beyond $R^*_k$ the cap gives the contribution
+$c\,R^{sp}|h|^{-(p-1)}\,\theta_k^{-(p-1)}r_k^{-\al\gamma}$, which is
+bounded iff $\theta_k\ge c\,r_k^{-\al\gamma/(p-1)}$ --- a \emph{lower}
+bound on $\theta_k$ that the contradiction hypothesis does not obviously
+provide ($\theta_k\to\infty$, but at an unknown rate relative to $r_k$).
+\TODO{Check whether the PTU device (4.5)--(4.8) extracts exactly this
+lower bound for free, or whether a dichotomy argument
+($\theta_k\gtrless r_k^{-\delta}$) is needed. This is now the single
+remaining gap in the tail analysis; read PTU \S4 line-by-line next.}
 \end{proof}
 \begin{lemma}[Order of the jet: $\beta<1$]\label{lem:beta}
 The Liouville theorem with $\nu=1$ requires
@@ -279,14 +323,46 @@ range --- this would give an unconditional but weaker theorem.}
 %======================================================================
 \section{The load-bearing wall: a Liouville theorem}\label{sec:liouville}
 %======================================================================
-\begin{conjecture}[Liouville, $\nu=1$]\label{conj:liouville}
-Let $v\in C^{1}_{loc}(\R^n)$ be an entire $(s,p)$-harmonic function such
-that, for some $0\le \al_0'<\beta<1$ and $C>0$,
+\begin{conjecture}[Liouville with vanishing jet, $\nu=1$;
+restated 2026-06-10 after \cite{CP}]\label{conj:liouville}
+Let $v\in C^{1}_{loc}(\R^n)$ be an entire $(s,p)$-harmonic function with
 \[
-  [v]_{C^{1+\al_0'}(B_R)} \le C R^{\beta-\al_0'} \qquad \forall R\ge1 .
+  v(0)=|Dv(0)|=0
+  \qquad\text{and}\qquad
+  |v(x)|\le C\,(1+|x|)^{1+\beta}\quad\text{in }\R^n,
 \]
-Then $v$ is affine: $v(x)=v(0)+Dv(0)\cdot x$.
+for some $0<\beta<\al_0$, where $\al_0$ is the exponent of the interior
+$C^{1,\al_0}$ estimate \cite{GJS}. Then $v\equiv0$.
 \end{conjecture}
+\begin{remark}
+The earlier formulation (seminorm growth, conclusion ``$v$ is affine'')
+required subtracting the affine part, which destroys the equation for
+$p\neq2$. The vanishing-jet form avoids this entirely and suffices for
+the application, since the blow-up limit inherits
+$v_0(0)=|Dv_0(0)|=0$ from the free boundary point. The jet-to-growth
+Lemma~\ref{lem:jet} below converts the seminorm information produced by
+the $\theta_k$ device into the growth hypothesis above.
+\end{remark}
+\begin{lemma}[Jet-to-growth; \cite{CP} Lemma 6, transplanted]\label{lem:jet}
+Let $u\in C^{1+\al'}(B_1)$ with $0<\al'<1$, where
+$[u]_{C^{1+\al'}}:=[Du]_{C^{0,\al'}}$. If $u(0)=|Du(0)|=0$ and
+\[
+  \sup_{0<r<1/2} r^{\al'-\beta}\,[u]_{C^{1+\al'}(B_r)} \le A
+  \qquad\text{for some } \beta>\al',
+\]
+then $|u(x)|\le A|x|^{1+\beta}$ for $x\in B_{1/2}$.
+\end{lemma}
+\begin{proof}
+Fix $x\in B_{1/2}$. Since $u(0)=0$, the mean value theorem gives
+$|u(x)|\le|Du(\xi)|\,|x|$ for some $\xi\in B_{|x|}$. Since $Du(0)=0$,
+\[
+  |Du(\xi)| = |Du(\xi)-Du(0)|
+  \le [u]_{C^{1+\al'}(B_{|x|})}\,|\xi|^{\al'}
+  \le A\,|x|^{\beta-\al'}\,|x|^{\al'} = A|x|^{\beta},
+\]
+and the claim follows. (The argument is operator-free: it uses only the
+vanishing jet and the seminorm decay.)
+\end{proof}
 \begin{proof}[Proof strategy]
 \TODO{Transplant PTU Theorem~3.1, Step~1. Fix a unit vector $e$ and set
 $w:=v-v(0)-Dv(0)\cdot x$; affine functions are $(s,p)$-harmonic

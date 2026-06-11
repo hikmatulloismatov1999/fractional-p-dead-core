@@ -20,9 +20,10 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
 - [ ] Write the remark: homogeneity replaces differentiability of $F$ at $0$ (PTU §6 parallel)
 
 ## Phase 3 — Admissible region in $(s,p,\gamma)$
-- [ ] **Tail integrability (Lemma `lem:tail`)**: recompute the boxed condition $\gamma < \frac{(p-1)^2}{p-1+sp}$ — first pass, MUST be verified
-  - [ ] Decide: is PTU step (4.11) (incremental quotients) needed, or does the tail condition apply directly to $v_0$?
-  - [ ] Sanity check $p=2$: recover $\gamma < \frac{1}{1+2s}$
+- [x] **Tail integrability (Lemma `lem:tail`)**: VERIFIED 2026-06-10 — $\gamma < \frac{(p-1)^2}{p-1+sp}$ is exactly the incremental-quotient tail condition $(\alpha-1)(p-1) < sp$
+  - [x] Decided: incremental quotients are NOT optional — uniform tails for $v_k$ itself are impossible ($\mathrm{Tail}^{p-1} \sim (\theta_k r_k^\alpha)^{-\gamma} \to \infty$ under the seminorm normalization)
+  - [x] Sanity check $p=2$: $\gamma < \frac{1}{1+2s}$ ✓
+  - [ ] ★ **Remaining gap (THE open point):** far-field piece needs the lower bound $\theta_k \ge c\, r_k^{-\alpha\gamma/(p-1)}$ — check PTU (4.5)–(4.8) line-by-line, or run a dichotomy $\theta_k \gtrless r_k^{-\delta}$
 - [ ] **Order of jet (Lemma `lem:beta`)**: $\gamma < (p-1) - \frac{sp}{2}$ (forces $sp < 2(p-1)$)
 - [ ] **Regularity ceiling (Lemma `lem:ceiling`)**:
   - [x] Track down the $C^{1,\alpha_0}$ paper → **Giovagnoli–Jesus–Silvestre, arXiv:2509.26565** (Thm 1.1: $C^{1,\alpha}$ for $(-\Delta_p)^s u = 0$, $p \in [2,\frac{2}{1-s})$, with Tail term)
@@ -35,9 +36,9 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
 
 ## Phase 4 — Liouville theorem (Conjecture `conj:liouville`) ★ load-bearing wall
 - [x] Read Correa–dos Prazeres §6 (arXiv:2504.11370) — extracted 2026-06-10, see LITERATURE.md. **Key: no affine subtraction needed** — restate Liouville with vanishing 1-jet hypothesis (their Lemma 5 form)
-- [ ] Restate Conjecture `conj:liouville`: $v$ entire $(s,p)$-harmonic, $v(0)=|Dv(0)|=0$, $|v| \le C(1+|x|)^{1+\beta}$, $\beta < \alpha_0$ ⇒ $v \equiv 0$
+- [x] Restate Conjecture `conj:liouville` in vanishing-jet form — done 2026-06-10 in main.tex
 - [ ] **Close the nonlocal gap**: Tail of $v_l = v(l\cdot)/l^{1+\beta}$ diverges under growth $|x|^{1+\beta}$ — try (i) truncation + $L^\infty$ RHS error, (ii) PTU-style incremental quotients (growth drops one order), (iii) mirror PTU (4.11)
-- [ ] Transplant their Lemma 6 (jet-to-growth; operator-free, should be verbatim)
+- [x] Transplant their Lemma 6 (jet-to-growth) — done 2026-06-10, Lemma `lem:jet` in main.tex with proof
 - [ ] Route (b) — backup only: linearization along $v$; incremental quotients solve $L_K w_h = 0$ with degenerate kernel
 - [ ] Write remark: $\nu = 2$ fails (quadratics not $(s,p)$-harmonic for $p \neq 2$)
 
