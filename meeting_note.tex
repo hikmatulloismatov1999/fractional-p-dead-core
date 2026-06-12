@@ -1,0 +1,90 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{xcolor}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\fpl}[1]{(-\Delta_p)^{s}#1}
+\newcommand{\al}{\alpha}
+\title[Discussion note]{Discussion note: two-phase dead core for the
+fractional $p$-Laplacian\\ \large status, one question about
+\emph{Improved regularity for a nonlocal dead-core problem}, and a proposed argument}
+\author{Hikmatullo Ismatov}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section{Status in one paragraph}
+For $\fpl{u}=u_+^{\gamma}-u_-^{\gamma}$ in $B_1$ ($0<\gamma<p-1$,
+$p\ge2$), the target is growth of order $\al=\frac{sp}{p-1-\gamma}$ at
+points with $u=|Du|=0$. The scaling exponent and the vanishing of the
+right-hand side along blow-ups (via $(p-1)$-homogeneity, replacing
+linearization) are done. Following Correa--dos Prazeres \S6, the
+Liouville theorem is reformulated with a vanishing $1$-jet hypothesis,
+avoiding affine subtraction; the jet-to-growth lemma transplants
+verbatim. The interior $C^{1,\al_0}$ input is
+Giovagnoli--Jesus--Silvestre (arXiv:2509.26565); their own remark
+suggests the needed $f\in L^\infty$ extension is feasible for
+$p<\frac{1}{1-s}$ (forcing $s>\frac12$, as in your paper). Two
+caveats found: their constants blow up as $s\nearrow1$, so the local
+two-phase theorem should be proved directly rather than by the
+$s\nearrow1$ limit; and the tail bookkeeping below.
+
+\section{The question about (4.12)}
+In the proof of Theorem 4.1, the growth bound (4.11) for
+$w_k=v_k(\cdot+h)-v_k(\cdot)$ rests on (4.8), which is justified for
+$|x|\le\frac{1}{2r_k}$ (as (4.7) requires $r_kR<1/2$). Beyond that
+radius, $u_k$ is only bounded, so $|w_k|\le 2(\theta_k(r_k)
+r_k^{\frac{2s}{1-\gamma}})^{-1}$. Passing (4.12) to the limit via
+[CS, ARMA 2011] requires $w_k\to w_0$ in $L^1(\R^n,\omega)$
+\emph{globally} (their Remark~4.4 shows local convergence cannot
+suffice), and the outer region contributes
+$\sim\theta_k^{-1}r_k^{-\frac{2s\gamma}{1-\gamma}}$, which is bounded
+only under a lower bound on $\theta_k$ that (4.5) does not seem to
+provide. \textbf{Question: how is the far field handled in (4.12)?}
+I may well be missing something standard.
+
+\section{A proposed argument (in outline; unchecked)}
+Truncate: $\tilde w_k=w_k\chi_{B_{\rho_k}}$, $\rho_k=\frac{1}{4r_k}$.
+Then $(-\Delta)^s\tilde w_k=f_k+H_k$ in $B_R$, where $H_k$ is the far
+field as a datum. The point is that only the \emph{oscillation} of
+$H_k$ matters:
+\begin{enumerate}
+\item $\|\nabla H_k\|_{L^\infty(B_R)}\lesssim
+  C_h\rho_k^{\al-2s-2}+\theta_k^{-1}r_k^{2s+1-\al}\to0$, the second
+  exponent being positive iff $\gamma<\frac{1}{1+2s}$ (the standing
+  assumption). Hence $H_k=a_k+o(1)$, $a_k$ constant.
+\item $a_k$ is bounded \emph{a posteriori}: $\tilde w_k$ has uniform
+  local regularity and uniform $L^1_s$ norm, so
+  $(-\Delta)^s\tilde w_k$ is uniformly bounded at a fixed point, while
+  $f_k\to0$.
+\item Stability now applies and gives
+  $(-\Delta)^s(v_0(\cdot+h)-v_0)=a(h)$ with $a(h)$ finite.
+\item The cocycle identity $w^{h_1+h_2}=w^{h_1}(\cdot+h_2)+w^{h_2}$
+  forces $a(h)=b\cdot h$.
+\item Second differences: $(-\Delta)^s\Delta_h^2v_0=0$ entire, with
+  growth $(1+|x|)^{\al-2}$; Theorem~3.1 ($\nu=1$) makes $\Delta_h^2v_0$
+  affine for every $h$, so $v_0$ is a polynomial of degree $\le2$ (by
+  the growth $\al<1+2s$), and the vanishing $2$-jet at the branching
+  point gives $v_0\equiv0$.
+\end{enumerate}
+No lower bound on $\theta_k$ is needed. If correct, the same
+far-field-as-datum mechanism should carry to $p\neq2$, where the
+increments solve the \emph{linear} equation $L_{K_{v_k}}w=g$ with the
+kernel $K_v\simeq|v(x)-v(y)|^{p-2}|x-y|^{-n-sp}$ of GJS \S7; the
+oscillation computation there produces the additional condition
+$\gamma<\frac{p-1}{1+sp}$ (which coincides with $\frac{1}{1+2s}$ at
+$p=2$ and is stricter for $p>2$).
+
+\section{What I would like to discuss}
+(1) Whether \S2--\S3 above are correct or whether (4.12) has a
+standard justification I missed. (2) The plan to prove the local
+two-phase $p$-dead-core theorem directly (the $s\nearrow1$ route is
+blocked by the non-uniformity of the GJS constants); it does not seem
+to appear in the literature and may stand alone. (3) Whether to include
+the $f\in L^\infty$ extension of GJS for $p<\frac{1}{1-s}$ as a section
+of our paper.
+
+\medskip
+\noindent\emph{All details, computations and sources are in the project
+repository:} \texttt{github.com/hikmatulloismatov1999/fractional-p-dead-core}
+\end{document}
