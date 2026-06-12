@@ -25,7 +25,10 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
   - [x] Sanity check $p=2$: $\gamma < \frac{1}{1+2s}$ ✓
   - [x] Checked PTU §4 (2026-06-10): their device does **not** obviously give the lower bound — the same far-field issue appears unaddressed in PTU itself ((4.11) justified only up to $\frac{1}{2r_k}$). See LITERATURE.md
   - [x] Checked CS stability hypotheses (2026-06-10): Lemma 4.3 requires **global** $L^1(\mathbb{R}^n,\omega)$ convergence, and their Remark 4.4 counterexample (far-field mass at radius $2^k$) shows it cannot be weakened — option (iv) is closed
-  - [ ] ★ **THE open point (sharpened):** obtain $\theta_k \gtrsim r_k^{-\alpha\gamma/(p-1)}$ or design a cutoff/dichotomy — (i) ask R.T., (ii) dichotomy $\theta_k \gtrless r_k^{-\delta}$, (iii) cutoff + $L^\infty$ error in the equation
+  - [x] Attack notes written (2026-06-10, main.tex §5 end, HEURISTIC): (a) compatibility forces $\alpha' \le \frac{sp-(p-1)}{p-1}$, hence $s > 1-\frac1p$ (explains PTU's $s>\frac12$?); (b) **likely fix: far field = slowly-varying datum** — its oscillation (not size) is what matters; at $p=2$ increments kill the divergent constant and oscillation $\to 0$ iff $\gamma < \frac{1}{1+2s}$ = the tail condition, no lower bound on $\theta_k$ needed; (c) for $p\neq2$: truncation error $G_k = a_k + g_k$ with $\|\nabla g_k\| \to 0$ iff $\gamma < \frac{p-1}{1+sp}$ (NEW candidate constraint, stricter than tail for $p>2$); crux = what kills the constant $a_k$
+  - [ ] ★ Make (b) rigorous at $p=2$ (repairs PTU (4.12); publishable remark) — then port to $p\neq2$ via (c)
+  - [ ] ★ Resolve the (a)/(d) constraint clash — likely spurious (weak formulation avoids pointwise evaluation; PTU work at $\nu=2$). Redo all exponent bookkeeping slowly on paper
+  - [ ] Still: ask R.T. about PTU (4.12) — now with a proposed fix in hand
 - [ ] **Order of jet (Lemma `lem:beta`)**: $\gamma < (p-1) - \frac{sp}{2}$ (forces $sp < 2(p-1)$)
 - [ ] **Regularity ceiling (Lemma `lem:ceiling`)**:
   - [x] Track down the $C^{1,\alpha_0}$ paper → **Giovagnoli–Jesus–Silvestre, arXiv:2509.26565** (Thm 1.1: $C^{1,\alpha}$ for $(-\Delta_p)^s u = 0$, $p \in [2,\frac{2}{1-s})$, with Tail term)

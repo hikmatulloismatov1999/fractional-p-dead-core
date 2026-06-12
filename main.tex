@@ -329,6 +329,80 @@ $\gamma\in(0,1/3)$, $s\in(1/2,1)$ in PTU.
 $\gamma_0=\min(1,\frac{sp}{p-1})$, with the free boundary condition
 $u(x_0)=0$ only and $\al\le\gamma_0$ forced) yields a nonempty parameter
 range --- this would give an unconditional but weaker theorem.}
+\subsection*{Attack notes on the far-field bound (2026-06-10; heuristic,
+exponents to be redone slowly on paper)}
+Write the needed bound as
+\[
+  \textbf{(N)}\qquad \theta_k^{\,p-1}\, r_k^{\,\al\gamma}\;\ge\; c\;>\;0 .
+\]
+
+\emph{(a) Compatibility constraint on the working seminorm order.}
+The device forces $\theta_k\le 2C\,r_k^{1+\al'-\al}$, so (N) is
+consistent with the worst case only if
+$r^{1+\al'-\al}\gtrsim r^{-\al\gamma/(p-1)}$ for small $r$, i.e.
+\[
+  1+\al' \;\le\; \al\,\frac{p-1-\gamma}{p-1} \;=\; \frac{sp}{p-1},
+  \qquad\text{equivalently}\qquad
+  \al' \le \frac{sp-(p-1)}{p-1},
+\]
+which requires $s>1-\frac1p$. At $p=2$ this reads $s>\frac12$ ---
+precisely the PTU range; plausibly the structural reason for it.
+
+\emph{(b) Far field as a slowly varying datum --- the likely implicit
+fix in PTU.} For $x\in B_R$, split the operator at $R^*_k=\frac{1}{2r_k}$
+and treat the far region as a datum $F_k(x)$. Its \emph{size} diverges
+like $\theta_k^{-(p-1)}r_k^{-\al\gamma}$ when (N) fails --- but its
+\emph{oscillation} on $B_R$ is much better. At $p=2$: the divergent part
+of $F_k$ is constant in $x$ and increments kill it; the $x$-variation is
+controlled by one extra power of kernel decay,
+\[
+  \mathrm{cap}_k\,(R^*_k)^{-2s-1}
+  = M\theta_k^{-1}r_k^{\,2s+1-\al}\longrightarrow 0
+  \iff \gamma<\tfrac{1}{1+2s},
+\]
+\emph{exactly the tail condition.} So for $p=2$ the limit equation for
+increments survives without any lower bound on $\theta_k$: stability
+should be applied to the \emph{localized} function with the far field
+carried as a datum of vanishing oscillation, not via global $L^1_s$
+convergence. \TODO{Make this rigorous at $p=2$ first; it would repair
+PTU (4.12) and is publishable as a remark/appendix.}
+
+\emph{(c) The $p\neq2$ version.} Truncate: $\tilde v_k=v_k\chi_{B_{R^*_k/2}}$
+solves the equation in $B_R$ up to an error
+$G_k(x)=c\int_{|y|>R^*_k/2}[\Jp{(v_k(x)-v_k(y))}-\Jp{v_k(x)}]\,|x-y|^{-n-sp}dy$.
+Decompose $G_k=a_k+g_k$, $a_k$ constant. Two estimates:
+\[
+  \|\nabla g_k\|_{L^\infty(B_R)}
+  \lesssim
+  \underbrace{\mathrm{cap}_k^{\,p-2}(R^*_k)^{-sp}}_{\to\,0\ \text{since}\ sp-\al(p-2)=\al(1-\gamma)>0}
+  +\;
+  \underbrace{\mathrm{cap}_k^{\,p-1}(R^*_k)^{-sp-1}}_{\to\,0\ \iff\ \gamma<\frac{p-1}{1+sp}} .
+\]
+The new admissibility condition
+\[
+  \boxed{\;\gamma<\frac{p-1}{1+sp}\;}
+\]
+coincides with the tail condition $\gamma<\frac{(p-1)^2}{p-1+sp}$ at
+$p=2$ and is \emph{stricter} for $p>2$; if (b)/(c) are the right
+mechanism, this replaces (or joins) Lemma~\ref{lem:tail} in the
+hypotheses. The divergent constant $a_k$: for $p=2$ increments kill it;
+for $p\neq2$ \TODO{decide what kills $a_k$ --- a posteriori boundedness
+(if $a_k\to\infty$, interior estimates on the now-tail-finite
+$\tilde v_k$ force a contradiction in the equation), or a smarter
+truncation. This is the crux for $p\neq2$.}
+
+\emph{(d) A warning on pointwise evaluation.} Evaluating
+$\fpl{\tilde v_k}$ classically at a point with only $C^{1,\al'}$
+regularity needs (after odd-cancellation of the gradient term in the
+P.V.) the remainder exponent $p-1+\al'-sp>-... $, i.e.\
+$\al'>sp-(p-1)$ when $sp>p-1$ --- which \emph{clashes} with the upper
+bound in (a): the window $sp-(p-1)<\al'\le\frac{sp-(p-1)}{p-1}$ is empty
+for $p>2$ and borderline-empty at $p=2$. \TODO{This suggests (a) and (d)
+do not actually bind simultaneously (PTU work at order $\nu=2$ where the
+bookkeeping differs, and weak formulations avoid pointwise evaluation
+altogether). Sort out which constraints are real in the weak framework
+--- priority for the next session, fresh head needed.}
+
 %======================================================================
 \section{The load-bearing wall: a Liouville theorem}\label{sec:liouville}
 %======================================================================
