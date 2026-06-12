@@ -60,7 +60,7 @@ Strategy (supervisor, email 2026-04-26): transplant the PTU machine — Liouvill
 5. Stability lemma for $(-\Delta_p)^s$ under local uniform convergence (Brasco–Lindgren / KKL) — replaces Caffarelli–Silvestre Lemma 5.
 
 **Questions ready for the supervisor meeting (prepared 2026-06-10):**
-1. *Far-field tail in PTU §4:* (4.11) is justified only for $|x| \le \frac{1}{2r_k}$, but the limit passage (4.12) needs uniform $L^1_s$ control on all of $\mathbb{R}^n$; the outer region needs $\theta_k \gtrsim r_k^{-2s\gamma/(1-\gamma)}$. How is this handled? (Same issue is the one remaining gap in our $p\neq2$ tail analysis.)
+1. *Far-field tail in PTU §4:* (4.11) is justified only for $|x| \le \frac{1}{2r_k}$, but the limit passage (4.12) needs uniform $L^1_s$ control on all of $\mathbb{R}^n$; the outer region needs $\theta_k \gtrsim r_k^{-2s\gamma/(1-\gamma)}$. How is this handled? **Confirmed it cannot be waved away: CS Lemma 4.3 requires global $L^1(\omega)$ convergence and their Remark 4.4 gives a counterexample of exactly this far-field-mass type.** (Same issue is the one remaining gap in our $p\neq2$ tail analysis; the $p=2$ fix will be our fix.)
 2. *The $s\nearrow1$ theorem:* GJS constants blow up as $s\to1$ (their §1.2, explicit) — propose proving the local two-phase theorem directly (CP §6 scheme + classical $C^{1,\alpha}$), possibly as a separate short paper.
 3. *GJS with RHS:* propose writing the $f\in L^\infty$ extension in the range $p < \frac{1}{1-s}$ (their own remark suggests it works there; forces $s>\frac12$ like PTU) as a lemma of our paper.
 

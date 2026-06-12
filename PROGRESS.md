@@ -24,7 +24,8 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
   - [x] Decided: incremental quotients are NOT optional — uniform tails for $v_k$ itself are impossible ($\mathrm{Tail}^{p-1} \sim (\theta_k r_k^\alpha)^{-\gamma} \to \infty$ under the seminorm normalization)
   - [x] Sanity check $p=2$: $\gamma < \frac{1}{1+2s}$ ✓
   - [x] Checked PTU §4 (2026-06-10): their device does **not** obviously give the lower bound — the same far-field issue appears unaddressed in PTU itself ((4.11) justified only up to $\frac{1}{2r_k}$). See LITERATURE.md
-  - [ ] ★ **THE open point:** resolve the far-field bound — (i) ask R.T. (it's his paper!), (ii) dichotomy $\theta_k \gtrless r_k^{-\delta}$, (iii) cutoff + error, (iv) check exact hypotheses of Caffarelli–Silvestre Lemma 5 (maybe local convergence suffices)
+  - [x] Checked CS stability hypotheses (2026-06-10): Lemma 4.3 requires **global** $L^1(\mathbb{R}^n,\omega)$ convergence, and their Remark 4.4 counterexample (far-field mass at radius $2^k$) shows it cannot be weakened — option (iv) is closed
+  - [ ] ★ **THE open point (sharpened):** obtain $\theta_k \gtrsim r_k^{-\alpha\gamma/(p-1)}$ or design a cutoff/dichotomy — (i) ask R.T., (ii) dichotomy $\theta_k \gtrless r_k^{-\delta}$, (iii) cutoff + $L^\infty$ error in the equation
 - [ ] **Order of jet (Lemma `lem:beta`)**: $\gamma < (p-1) - \frac{sp}{2}$ (forces $sp < 2(p-1)$)
 - [ ] **Regularity ceiling (Lemma `lem:ceiling`)**:
   - [x] Track down the $C^{1,\alpha_0}$ paper → **Giovagnoli–Jesus–Silvestre, arXiv:2509.26565** (Thm 1.1: $C^{1,\alpha}$ for $(-\Delta_p)^s u = 0$, $p \in [2,\frac{2}{1-s})$, with Tail term)
