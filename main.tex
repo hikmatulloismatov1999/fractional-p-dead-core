@@ -391,6 +391,62 @@ for $p\neq2$ \TODO{decide what kills $a_k$ --- a posteriori boundedness
 $\tilde v_k$ force a contradiction in the equation), or a smarter
 truncation. This is the crux for $p\neq2$.}
 
+\emph{(c$'$) Proposed repair at $p=2$ (2026-06-10; complete in outline,
+every step to be checked).} Let $w_k=v_k(\cdot+h)-v_k(\cdot)$ as in PTU
+(4.11)--(4.12), $\rho_k:=\frac{1}{4r_k}$, and truncate:
+$\tilde w_k:=w_k\chi_{B_{\rho_k}}$. For $x\in B_R$,
+\[
+  (-\Delta)^s\tilde w_k(x) = f_k(x) + H_k(x),
+  \qquad
+  H_k(x):=c\int_{|y|>\rho_k} w_k(y)\,|x-y|^{-n-2s}\,dy,
+\]
+with $f_k\to0$ locally uniformly (PTU (4.12)). Then:
+\begin{enumerate}
+\item \emph{Oscillation of $H_k$ vanishes:} $|\nabla H_k|\lesssim
+  C_h\rho_k^{\al-2s-2} + \theta_k^{-1}r_k^{\,2s+1-\al}\to0$, using the
+  growth bound in the annulus and the cap beyond, with
+  $2s+1-\al>0\iff\gamma<\frac{1}{1+2s}$. So $H_k=a_k+o(1)$ with $a_k$
+  constant.
+\item \emph{$a_k$ is bounded a posteriori:} $\tilde w_k$ has uniform
+  local $C^{2s+\gamma'}$ bounds and uniform $L^1_s$ norm (growth
+  $|y|^{\al-1}$, integrable by the tail condition), so
+  $|(-\Delta)^s\tilde w_k(x_0)|\le A$ uniformly at a fixed point; since
+  $f_k\to0$, $|a_k|\le A+o(1)$. (No lower bound on $\theta_k$ ever
+  needed.)
+\item \emph{Limit equation with a constant:} dominated convergence gives
+  $\tilde w_k\to w_0$ in $L^1_s$; CS stability now applies and yields
+  $(-\Delta)^s\big(v_0(\cdot+h)-v_0\big)=a(h)$ in $B_R$, all $R$, where
+  $a(h):=\lim a_k$ (subsequence).
+\item \emph{$a(h)$ is linear in $h$:} the cocycle identity
+  $w^{h_1+h_2}=w^{h_1}(\cdot+h_2)+w^{h_2}$ and translation invariance
+  give $a(h_1+h_2)=a(h_1)+a(h_2)$; with measurability, $a(h)=b\cdot h$.
+\item \emph{Second differences kill $b$:}
+  $\Delta_h^2v_0 = w^{h}(\cdot+h)-w^{h}$ satisfies
+  $(-\Delta)^s\Delta^2_hv_0 = a(h)-a(h)=0$ entire, with growth
+  $|\Delta^2_hv_0(x)|\le C_h(1+|x|)^{\al-2}$. PTU Theorem~3.1
+  ($\nu=1$, $\beta=\al-2<1$) applies: $\Delta^2_hv_0$ is affine for
+  every $h$, hence $v_0$ is a polynomial of degree $\le3$; growth
+  $\al<1+2s<3$ cuts it to degree $\le2$; the vanishing $2$-jet at the
+  branching point ($\nu=2$) gives $v_0\equiv0$, contradicting the
+  normalization. \emph{The Liouville input is even weaker than PTU's
+  original use.}
+\end{enumerate}
+\TODO{Check (1)--(5) line by line, especially: the uniform local
+regularity needed in (2) (PTU's $C^{2s+\gamma}$ bounds suffice?);
+measurability/continuity of $a(h)$ in (4); and that the degree-$\le3$
+deduction in (5) is correct ($\Delta^2_h v$ affine $\forall h$ $\iff$
+$v$ cubic --- standard, but verify the nonsmooth case). If this holds,
+it repairs PTU (4.12) \emph{and} removes the need for any far-field
+lower bound. Then port to $p\neq2$: $w_k^h$ solves the \emph{linear}
+equation $L_{K_k}w_k^h=\text{RHS-difference}$ with the GJS kernel
+$K_k\simeq|v_k(x)-v_k(y)|^{p-2}|x-y|^{-n-sp}$ (exactly the object of
+GJS \S7); the datum trick is linear-friendly, and the new constraint
+$\gamma<\frac{p-1}{1+sp}$ from (c) should be what makes the kernel-datum
+oscillation vanish. The cocycle/second-difference steps (4)--(5) need
+rethinking for the vanishing-jet ($\nu=1$) formulation --- but there
+$a(h)$ may not even appear, since the CP-style Liouville works with
+$v$ itself.}
+
 \emph{(d) A warning on pointwise evaluation.} Evaluating
 $\fpl{\tilde v_k}$ classically at a point with only $C^{1,\al'}$
 regularity needs (after odd-cancellation of the gradient term in the

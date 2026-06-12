@@ -64,7 +64,9 @@ Strategy (supervisor, email 2026-04-26): transplant the PTU machine — Liouvill
 2. *The $s\nearrow1$ theorem:* GJS constants blow up as $s\to1$ (their §1.2, explicit) — propose proving the local two-phase theorem directly (CP §6 scheme + classical $C^{1,\alpha}$), possibly as a separate short paper.
 3. *GJS with RHS:* propose writing the $f\in L^\infty$ extension in the range $p < \frac{1}{1-s}$ (their own remark suggests it works there; forces $s>\frac12$ like PTU) as a lemma of our paper.
 
-**Next session: PTU Theorem 3.1 (their Liouville) Step 1 in detail; then attempt the vanishing-jet Liouville for $(s,p)$ assuming the tail issue resolved; check CS Lemma 5 hypotheses.**
+**Major development (2026-06-10, end of session): proposed 5-step repair of PTU (4.12) at $p=2$** — main.tex, attack notes (c′): truncate increments; far-field datum has vanishing oscillation (iff $\gamma<\frac{1}{1+2s}$); divergent constant $a_k$ is bounded *a posteriori* by evaluating the equation; limit equation $(-\Delta)^s(v_0(\cdot+h)-v_0)=b\cdot h$; second differences kill $b$ and PTU's own Liouville finishes. **No lower bound on $\theta_k$ needed anywhere.** If it checks out: fixes the template paper AND removes the main obstacle for $p\neq2$ (where increments solve the linear $L_{K}$ equation with GJS's kernel; new constraint $\gamma<\frac{p-1}{1+sp}$).
+
+**Next session: (1) check repair steps (1)–(5) on paper line by line; (2) bring to R.T. — agenda question 1 now comes WITH a proposed answer; (3) start the $p\neq2$ port via the linearized equation.**
 
 ## 7. Conventions and decisions already made
 
