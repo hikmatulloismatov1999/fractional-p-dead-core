@@ -27,11 +27,12 @@ suggests the needed $f\in L^\infty$ extension is feasible for
 $p<\frac{1}{1-s}$ (forcing $s>\frac12$, as in your paper). Two
 caveats found: their constants blow up as $s\nearrow1$, so the local
 two-phase theorem should be proved directly rather than by the
-$s\nearrow1$ limit; and the tail bookkeeping below. Since we last spoke I
-have checked the proposed (4.12) repair step by step (\S3, now sound in
-outline) and intersected the constraint regions (\S4): the explicit
-admissible region is nonempty, and the one genuinely binding constraint
-turns out to be the size of the $C^{1,\al_0}$ exponent.
+$s\nearrow1$ limit; and the tail bookkeeping below. With these ingredients
+the \textbf{main growth estimate is proved modulo one Liouville statement}
+(contradiction $+$ a $\theta_k$ blow-up run at a generic sub-sharp
+exponent, the absorption killed by homogeneity, the limit killed by the
+Liouville). The only open inputs are that Liouville in the nonlocal
+setting and a nondegeneracy property; see \S4.
 
 \section{The question about (4.12)}
 In the proof of Theorem 4.1, the growth bound (4.11) for
@@ -99,15 +100,24 @@ of the points I would like to confirm with you.
 \item Whether, for $p\neq2$, the vanishing-jet Liouville on $v_0$ indeed
   removes the need for steps (4)--(5) (which rely on the translation
   invariance lost when $p\neq2$).
-\item The one genuinely binding constraint: after intersecting the tail,
-  jet-order and datum conditions (all explicit and jointly nonempty;
-  $\nu=1$ alone suffices for $p>2$, the window staying open up to $s=1$),
-  the binding requirement is $\al<1+\al_0$ with $\al_0$ the GJS exponent.
-  Do we state the theorem with $\al_0$ as an abstract constant, or try to
-  extract an explicit lower bound $\al_0(n,s,p)$ from their proof? Also:
-  the kernel $K_v$ degenerates where $v$ is flat (worst at the branching
-  point) --- is there a clean way to see $v_0$ is nondegenerate on an open
-  set?
+\item \textbf{The nonlocal Liouville --- which route?} Your \S6 (and
+  Correa--dos Prazeres) prove it by rescaling $v$ and applying the sharp
+  $C^{1,\al_0}$ estimate to $v_l=v(l\cdot)/l^{1+\beta}$. Nonlocally this
+  seems blocked: $v_l$ keeps the growth $1+\beta=\al$, and
+  $\mathrm{Tail}(v_l)<\infty$ would need $\al(p-1)<sp$, whereas
+  $\al(p-1)-sp=\frac{\gamma ps}{p-1-\gamma}>0$ for every $\gamma>0$
+  (truncating leaves a datum with the same divergent exponent). So I expect
+  one must pass to \emph{increments} $w^h$ (which lower the growth to
+  $\beta<1$ and have finite tail under the tail condition), giving the cap
+  $\al<2$ rather than $\al<1+\al_0$ --- with $\al_0$ then needed only for
+  compactness, not quantitatively. Two questions: (a) is the direct route
+  really unavailable nonlocally, or is there a way to apply the estimate
+  past the divergent tail? (b) for the increment route, the linearized
+  kernel $K_v\simeq|v(x)-v(y)|^{p-2}|x-y|^{-n-sp}$ degenerates where $v$ is
+  flat; is there a clean way to get \emph{nondegeneracy} of the blow-up
+  limit $v_0$ (gradient not identically zero on open sets) so the kernel is
+  uniformly elliptic? These two are now the only open inputs to the main
+  theorem.
 \item Proving the local two-phase $p$-dead-core theorem directly (the
   $s\nearrow1$ route is blocked by the non-uniformity of the GJS
   constants); it does not appear in the literature and may stand alone.
