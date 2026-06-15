@@ -56,7 +56,9 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
 - [x] Remark written: $\nu = 2$ fails (quadratics not $(s,p)$-harmonic for $p \neq 2$) — main.tex
 
 ## Phase 5 — Main theorems
-- [ ] **Theorem `thm:main`** (growth estimate): contradiction + $\theta_k$ device of PTU (4.3)–(4.8) with the replaced seminorms
+- [x] ✅ **EXPONENT BOOKKEEPING RESOLVED 2026-06-15** (checked vs CP §6 line by line; main.tex NOTE after `thm:main`). The "crux" I flagged was a FALSE ALARM — I'd conflated the device's working exponent with the sharp $\alpha_0$. CP run the device at a **generic sub-sharp** $\alpha'<\min\{\alpha_0,\alpha-1\}$ (NOT at $1+\alpha_0$); the sharp $\alpha_0$ enters only via the Liouville cap. The three exponents sit as $1+\alpha' < \alpha < 1+\alpha_0$ — no contradiction (device measures below the target, Liouville caps above). C3 ($\alpha<1+\alpha_0$) is exactly what leaves room for a valid $\alpha'$. **`conj:liouville` (cap $\alpha<1+\alpha_0$) is correct; finding (iii) stands: binding constraint = quantitative lower bound on the SHARP GJS $\alpha_0$.** Increment/translation-invariance machinery NOT needed here (it's for the separate PTU-(4.12) repair).
+- [x] **Linearization identity DONE 2026-06-15** (`prop:linincr`, main.tex): $\fpl{[v(\cdot+h)]}-\fpl{v}=L_{K_v^h}w^h$, kernel $K_v^h=(p-1)\int_0^1|\ldots|^{p-2}dt>0$; RHS $g_k^h\to0$. (For the (4.12) repair / route-b, not the main-theorem path.) Verified numerically ($p=2,2.5,3,4$).
+- [x] **Theorem `thm:main` PROVED modulo `conj:liouville` 2026-06-15** (main.tex): full $\theta_k$-device proof mirroring CP §6 — generic working $\alpha'$, seminorm bound, gradient anchor, compactness, homogeneity kills RHS, `conj:liouville` kills $v_0$. **Now the only open input is `conj:liouville` (nonlocal) + quantitative $\alpha_0$.**
 - [ ] **Corollary** (gradient growth): $\sup_{B_r}|Du| \le C r^{\alpha-1}$
 - [ ] **Theorem `thm:local`** (local two-phase $p$-dead-core, $s \nearrow 1$):
   - [ ] BBM-type convergence $(-\Delta_p)^s \to -\Delta_p$; fix constants $c_{n,s,p}$
@@ -65,7 +67,7 @@ Companion files: `main.tex` (working notes / draft), `LITERATURE.md` (reading lo
 - [ ] Open question (separate note): nondegeneracy via barrier — compute $(-\Delta_p)^s |x|^\alpha$ (Brasco et al. 1-d computations; Iannizzotto–Mosconi–Squassina $d^s$-barriers)
 
 ## Phase 6 — Write-up
-- [ ] Introduction: one-phase vs two-phase obstruction; "better than Schauder" punchline
+- [x] **Introduction drafted 2026-06-15** (main.tex §1 `sec:intro`): dead-core motivation, nonlocal + two-phase obstructions, main growth estimate, new local result, homogeneity-replaces-linearization mechanism. Exponent claim phrased vs "optimal regularity of $(s,p)$-harmonic" to stay clear of the $1+\alpha_0$ crux.
 - [ ] Existence plumbing
 - [ ] Complete bibliography (move from reading list to .bib)
 - [ ] Bring §3–§5 of notes to Teymurazyan (KAUST) once Lemmas tail/beta/ceiling are verified

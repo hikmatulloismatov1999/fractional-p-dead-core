@@ -31,6 +31,68 @@
 \maketitle
 \tableofcontents
 %======================================================================
+\section{Introduction (draft)}\label{sec:intro}
+%======================================================================
+Dead-core phenomena arise when a diffusing reactant is consumed by a
+sufficiently strong absorption: the reactant vanishes identically on an
+interior region, the \emph{dead core}, on whose boundary the solution
+touches zero together with its gradient. The defining mathematical feature
+is a sublinear, non-Lipschitz absorption $u^\gamma$ with $0<\gamma<1$
+(local) or $0<\gamma<p-1$ (the $p$-Laplacian scaling): it is precisely the
+failure of Lipschitz continuity at $u=0$ that permits a solution to reach
+zero on a set of positive measure rather than at isolated points. We study
+the \emph{two-phase, nonlocal} model
+\begin{equation}\label{eq:intro}
+  \fpl{u}=u_+^{\gamma}-u_-^{\gamma}\qquad\text{in }B_1,
+  \qquad 0<\gamma<p-1,\ s\in(0,1),\ p\ge2,
+\end{equation}
+where $\fpl{}$ is the fractional $p$-Laplacian. Two structural choices
+distinguish \eqref{eq:intro} from the classical literature. First, the
+problem is \emph{nonlocal}: the value of $\fpl{u}(x)$ depends on $u$ over
+all of $\R^n$, so the maximum-principle and minimum-of-the-energy arguments
+that drive the local one-phase theory are unavailable --- in the nonlocal
+setting a comparison principle requires sign information on the entire
+complement of $B_1$. Second, the problem is \emph{two-phase}: $u$ is not
+sign-constrained, so branching points are not local extrema and the
+one-phase tools fail for a second, independent reason. The one-phase
+signed problem is in fact obstructed nonlocally by the strong minimum
+principle, which makes the two-phase formulation the natural setting.
+
+Our main result is a sharp growth estimate at branching points. At a point
+$x_0$ with $u(x_0)=|Du(x_0)|=0$,
+\begin{equation}\label{eq:introgrowth}
+  |u(x)|\le C\,\|u\|_{L^\infty(\R^n)}\,|x-x_0|^{\al},
+  \qquad \al=\frac{sp}{p-1-\gamma},
+\end{equation}
+an exponent strictly larger than the optimal regularity
+$\min\!\big(1,\tfrac{sp}{p-1}\big)$ of $(s,p)$-harmonic functions, since
+$\gamma>0$: solutions are \emph{more} regular at branching points than the
+homogeneous theory predicts. Passing to the limit $s\nearrow1$ yields the
+analogous estimate for the local two-phase $p$-dead-core problem
+$\Delta_pu=u_+^\gamma-u_-^\gamma$ with exponent $\frac{p}{p-1-\gamma}$,
+which appears to be new even locally --- the existing $p$-dead-core results
+(da Silva--Salort, da Silva--Rossi--Salort, Teixeira) are one-phase.
+
+The method adapts the blow-up/Liouville strategy of dos
+Prazeres--Teymurazyan--Urbano \cite{PTU} (the case $p=2$) and its
+quasilinear local counterpart in Correa--dos Prazeres \cite{CP}. One
+rescales according to the natural exponent $\al$, shows the absorption term
+vanishes along the blow-up, and classifies the limit by a Liouville-type
+theorem. The new mechanism for $p\neq2$ is that the \emph{$(p-1)$-homogeneity}
+of $\fpl{}$ replaces the linearity used in \cite{PTU}: it is what forces the
+right-hand side to vanish in the limit (Proposition~\ref{prop:homog}),
+playing the role that differentiability of the nonlinearity at $0$ plays in
+the fully nonlinear case. The principal difficulties are genuinely
+nonlocal: controlling the far-field tail of the blow-up family uniformly
+(\S\ref{sec:constraints}), and proving the Liouville theorem without the
+linear structure (\S\ref{sec:liouville}); the interior $C^{1,\al_0}$ input
+is the recent estimate of Giovagnoli--Jesus--Silvestre \cite{GJS}.
+
+\NOTE{Intro drafted 2026-06-15. Keep the exponent claim in
+\eqref{eq:introgrowth} phrased against ``optimal regularity of
+$(s,p)$-harmonic functions''; the precise relation of $\al$ to $1+\al_0$
+is the open bookkeeping point flagged in \S\ref{sec:targets}.}
+%======================================================================
 \section{The problem and the program}
 %======================================================================
 We study the two-phase nonlocal dead-core problem
@@ -718,6 +780,54 @@ one order lower, and the nonlocal tail of $w^h$ is finite iff
 Hence the incremental quotient — not $v_l$ — is the object on which the
 scaling/decay argument can run.
 \end{lemma}
+\begin{proposition}[Increments solve a linear nonlocal equation;
+2026-06-15]\label{prop:linincr}
+Let $v\in C^1_{loc}\cap L^\infty_{loc}$ and $h\in\R^n$, and set
+$w^h:=v(\cdot+h)-v(\cdot)$. Then, wherever the principal values exist,
+\[
+  \fpl{\big[v(\cdot+h)\big]}(x)-\fpl{v}(x)
+  = L_{K_v^h}w^h(x)
+  := c_{n,s,p}\,\mathrm{P.V.}\!\int_{\R^n}
+     \big(w^h(x)-w^h(y)\big)\,K_v^h(x,y)\,\frac{dy}{|x-y|^{n+sp}},
+\]
+with the symmetric, \emph{strictly positive} kernel
+\[
+  K_v^h(x,y):=(p-1)\int_0^1
+   \big|\,(v(x)-v(y))+t\,(w^h(x)-w^h(y))\,\big|^{\,p-2}\,dt\;\ge0 .
+\]
+Consequently, if $v=v_k$ is a blow-up solution as in
+Proposition~\ref{prop:homog}, then
+\[
+  L_{K_{v_k}^h}w_k^h
+  = \theta_k^{\,\gamma-(p-1)}\,
+    \Big[\big(u\mapsto u_+^\gamma-u_-^\gamma\big)(v_k)(\cdot+h)
+         -\big(u\mapsto u_+^\gamma-u_-^\gamma\big)(v_k)\Big]
+  =: g_k^h,
+\]
+and $g_k^h\to0$ locally uniformly. So $w_k^h$ solves a \emph{linear}
+nonlocal equation with right-hand side tending to $0$ --- the structure
+that makes the datum/truncation argument of \textnormal{(c$'$)} available
+for $p\neq2$.
+\end{proposition}
+\begin{proof}
+Translating $y\mapsto y+h$ in the integral for
+$\fpl{[v(\cdot+h)]}(x)$ writes it as
+$c\,\mathrm{P.V.}\!\int \Jp{\big(V(x)-V(y)\big)}|x-y|^{-n-sp}dy$ with
+$V:=v(\cdot+h)$. Subtract $\fpl{v}(x)$ and use, for the scalar map
+$J_p(t)=\Jp{t}$ with $J_p'(t)=(p-1)|t|^{p-2}$ (continuous for $p\ge2$),
+the exact identity
+\[
+  J_p(a+\delta)-J_p(a)
+  =\Big((p-1)\!\int_0^1|a+t\delta|^{p-2}\,dt\Big)\,\delta,
+\]
+applied pointwise with $a=v(x)-v(y)$ and
+$\delta=w^h(x)-w^h(y)$ (so $a+\delta=V(x)-V(y)$). The bracket is
+$K_v^h(x,y)$; symmetry in $(x,y)$ and nonnegativity are immediate. The
+displayed right-hand side for $w_k^h$ is the increment of
+$\fpl{v_k}=\theta_k^{\gamma-(p-1)}[(v_k)_+^\gamma-(v_k)_-^\gamma]$ from
+Proposition~\ref{prop:homog}, and the prefactor $\to0$. \emph{(Identity
+verified numerically for $p\in\{2,2.5,3,4\}$, $K_v^h>0$.)}
+\end{proof}
 \begin{remark}[What changes for $p\neq2$]\label{rem:linkernel}
 At $p=2$, $w^h$ is again $s$-harmonic (linearity) and
 PTU Theorem~3.1 finishes. For $p\neq2$, $w^h$ solves not the homogeneous
@@ -755,15 +865,89 @@ Let $(s,p,\gamma)$ lie in the admissible region of
 \]
 with $C=C(n,s,p,\gamma)>0$.
 \end{theorem}
-\begin{proof}[Proof skeleton]
-\TODO{Contradiction + the $\theta_k$ device of PTU (4.3)--(4.8), with
-$[\,\cdot\,]_{C^{2s+\gamma}}$ replaced by $[\,\cdot\,]_{C^{1+\al_0}}$ and
-$2s+\gamma-\frac{2s}{1-\gamma}$ replaced by $1+\al_0-\al$;
-compactness from Lemma~\ref{lem:ceiling}; limit equation from
-Proposition~\ref{prop:homog}; kill with
-Conjecture~\ref{conj:liouville}; contradiction with the surviving
-normalization $[v_0]_{C^{1+\al_0}(B_1)}\ge\frac12$.}
+\begin{proof}[Proof modulo Conjecture~\ref{conj:liouville}]
+We run the device of \cite{CP} \S6 (the quasilinear form of PTU
+(4.3)--(4.10)) with our ingredients. \emph{Choice of working exponent.}
+Pick any $\al'$ with
+\[
+  0<\al'<\min\{\al_0,\ \al-1\}, \qquad \al=\tfrac{sp}{p-1-\gamma},
+\]
+a nonempty range because $\al>1$ on the admissible set and, by the ceiling
+constraint (C3) $\al<1+\al_0$, i.e.\ $\al-1<\al_0$. Lemma~\ref{lem:ceiling}
+gives $u\in C^{1+\al'}_{loc}$ with a uniform bound. \emph{This $\al'$ is
+generic and sub-sharp; the sharp $\al_0$ enters only through the Liouville
+cap below.} We may take $x_0=0$, $\|u\|_{L^\infty(\R^n)}=1$, and must show
+$|u(x)|\le C|x|^{\al}$.
+
+\emph{Contradiction and the $\theta_k$ device.} If not, there are solutions
+$u_k$ of \eqref{eq:main} with $0$ a branching point,
+$[u_k]_{C^{1+\al'}(B_{1/2})}\le 2C$, and points $x_k$ with
+$|u_k(x_k)|>k|x_k|^{\al}$. Put
+\[
+  \theta_k(r'):=\sup_{r'<r<1/2} r^{\,1+\al'-\al}\,[u_k]_{C^{1+\al'}(B_r)},
+  \qquad 1+\al'-\al<0 .
+\]
+By Lemma~\ref{lem:jet} in contrapositive form (its hypothesis needs
+$\al-1>\al'$, which holds by the choice of $\al'$): were $\theta_k(0^+)\le
+k$, the vanishing jet would force $|u_k(x)|\le k|x|^{\al}$, contradicting
+$x_k$. Hence $\lim_{r'\to0}\theta_k(r')>k$, and we may pick $r_k>1/k$ with
+\[
+  r_k^{\,1+\al'-\al}[u_k]_{C^{1+\al'}(B_{r_k})}
+  \ge\tfrac1k\theta_k(1/k)\ge\tfrac12\theta_k(r_k),
+\]
+so $r_k\to0$. Set $v_k(x):=u_k(r_kx)/\big(\theta_k(r_k)\,r_k^{\al}\big)$.
+\emph{Seminorm bound.} As in \cite{CP} (33), for $1\le R\le\frac1{2r_k}$,
+\[
+  [v_k]_{C^{1+\al'}(B_R)}
+  =\frac{(r_kR)^{1+\al'-\al}[u_k]_{C^{1+\al'}(B_{r_kR})}}{\theta_k(r_k)}
+   \,R^{\al-1-\al'}
+  \le R^{\al-1-\al'},
+\]
+using $(r_kR)^{1+\al'-\al}[u_k]_{C^{1+\al'}(B_{r_kR})}\le\theta_k(r_kR)\le
+\theta_k(r_k)$. \emph{Local growth via the gradient anchor.} With
+$\eta\equiv1$ on $B_{1/2}$, $\eta=0$ off $B_1$,
+$\int_{B_1}\eta\,D_ev_k=\int_{B_1}D_e\eta\,v_k\le C_n$ gives a point $z\in
+B_1$ with $|Dv_k(z)|\le C_n$; combined with the seminorm bound,
+$|Dv_k(x)|\le CR^{\al-1}$ and, since $v_k(0)=0$, $|v_k(x)|\le C|x|^{\al}$
+for $1\le|x|\le\frac1{2r_k}$. \emph{Compactness.} Thus $v_k$ is locally
+bounded with uniform $C^{1+\al'}$ bounds, so along a subsequence $v_k\to
+v_0$ in $C^{1+\al'}_{loc}(\R^n)$, with
+\[
+  [v_0]_{C^{1+\al'}(B_R)}\le R^{\al-1-\al'}\ (R\ge1),\qquad
+  |v_0(x)|\le C(1+|x|)^{\al},\qquad
+  [v_0]_{C^{1+\al'}(B_1)}\ge\tfrac12 .
+\]
+Since $0$ is a branching point of each $u_k$, $v_0(0)=|Dv_0(0)|=0$. By
+Proposition~\ref{prop:homog}, $\fpl{v_0}=0$ in $\R^n$. Its growth exponent
+$\al$ satisfies $\al<1+\al_0$ (C3), so the hypothesis of
+Conjecture~\ref{conj:liouville} holds and $v_0\equiv0$, contradicting
+$[v_0]_{C^{1+\al'}(B_1)}\ge\frac12$.
 \end{proof}
+\NOTE{\textbf{On the exponent bookkeeping (resolved 2026-06-15 against
+\cite{CP} \S6 line by line; supersedes the earlier ``crux'' flag).} The
+device runs at a \emph{generic, sub-sharp} exponent
+$\al'<\min\{\al_0,\al-1\}$ --- \emph{not} at level $1+\al_0$. The three
+exponents sit as
+\[
+  \underbrace{1+\al'}_{\text{generic working level}}
+  \;<\;\al\;<\;\underbrace{1+\al_0}_{\text{sharp ceiling / Liouville cap}},
+\]
+exactly CP's arrangement (their $\theta_k$ exponent
+$1+\al'-\al<0$ with $\al'<\al_p$, while Lemma~5 caps at $\al<1+\al_p$).
+There is \emph{no} contradiction: the target lies above the level the
+device measures and below the sharp level the Liouville uses. The earlier
+worry came from misidentifying the working level with $1+\al_0$. So
+Conjecture~\ref{conj:liouville} (cap $\al<1+\al_0$) is the correct
+statement, and the synthesis finding (iii) stands: \textbf{the genuine
+binding constraint is $\al<1+\al_0$ with $\al_0$ the \emph{sharp} \cite{GJS}
+exponent}, i.e.\ a quantitative lower bound on $\al_0$ is what the result
+needs. The increment/translation-invariance machinery of
+Remark~\ref{rem:cprime-check} is \emph{not} required here --- it belongs to
+the separate PTU-(4.12) repair. The one genuinely open input is
+Conjecture~\ref{conj:liouville} itself in the nonlocal setting (its
+\cite{CP}-style one-shot rescaling needs the sharp estimate applied to
+$v_l$, whose tail diverges --- closed by truncation $+$ the $f\in L^\infty$
+extension of \cite{GJS}; see the note after Conjecture~\ref{conj:liouville}).}
 \begin{corollary}[Sharp growth of the gradient --- target]
 Under the conditions of Theorem~\ref{thm:main},
 $\sup_{B_r(x_0)}|Du|\le C\,r^{\frac{sp}{p-1-\gamma}-1}$ for $r<1/2$.

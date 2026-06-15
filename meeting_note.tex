@@ -27,7 +27,11 @@ suggests the needed $f\in L^\infty$ extension is feasible for
 $p<\frac{1}{1-s}$ (forcing $s>\frac12$, as in your paper). Two
 caveats found: their constants blow up as $s\nearrow1$, so the local
 two-phase theorem should be proved directly rather than by the
-$s\nearrow1$ limit; and the tail bookkeeping below.
+$s\nearrow1$ limit; and the tail bookkeeping below. Since we last spoke I
+have checked the proposed (4.12) repair step by step (\S3, now sound in
+outline) and intersected the constraint regions (\S4): the explicit
+admissible region is nonempty, and the one genuinely binding constraint
+turns out to be the size of the $C^{1,\al_0}$ exponent.
 
 \section{The question about (4.12)}
 In the proof of Theorem 4.1, the growth bound (4.11) for
@@ -43,7 +47,7 @@ only under a lower bound on $\theta_k$ that (4.5) does not seem to
 provide. \textbf{Question: how is the far field handled in (4.12)?}
 I may well be missing something standard.
 
-\section{A proposed argument (in outline; unchecked)}
+\section{A proposed argument (checked step by step; sound in outline)}
 Truncate: $\tilde w_k=w_k\chi_{B_{\rho_k}}$, $\rho_k=\frac{1}{4r_k}$.
 Then $(-\Delta)^s\tilde w_k=f_k+H_k$ in $B_R$, where $H_k$ is the far
 field as a datum. The point is that only the \emph{oscillation} of
@@ -67,22 +71,49 @@ $H_k$ matters:
   the growth $\al<1+2s$), and the vanishing $2$-jet at the branching
   point gives $v_0\equiv0$.
 \end{enumerate}
-No lower bound on $\theta_k$ is needed. If correct, the same
-far-field-as-datum mechanism should carry to $p\neq2$, where the
-increments solve the \emph{linear} equation $L_{K_{v_k}}w=g$ with the
-kernel $K_v\simeq|v(x)-v(y)|^{p-2}|x-y|^{-n-sp}$ of GJS \S7; the
-oscillation computation there produces the additional condition
-$\gamma<\frac{p-1}{1+sp}$ (which coincides with $\frac{1}{1+2s}$ at
-$p=2$ and is stricter for $p>2$).
+No lower bound on $\theta_k$ is needed. The step I worried about most is
+(2): it is \emph{not} circular --- the bound on $(-\Delta)^s\tilde w_k$ at
+a fixed point splits into a local singular part (controlled by the uniform
+interior $C^{2s+\gamma}$ estimate) and a tail (controlled using only the
+growth bound $|w_k(y)|\le C_h|y|^{\al-1}$ on the truncated support, finite
+iff $\gamma<\frac{1}{1+2s}$), neither of which uses $a_k$ or any bound on
+$\theta_k$; $a_k$ is then solved for. The truncation is precisely what
+manufactures the global $L^1_s$ convergence that (4.12) needs.
+
+The same far-field-as-datum mechanism carries to $p\neq2$ for steps
+(1)--(3): the increments solve the \emph{linear} equation
+$L_{K_{v_k}}w=g$ with the kernel
+$K_v\simeq|v(x)-v(y)|^{p-2}|x-y|^{-n-sp}$ of GJS \S7, and the oscillation
+computation produces the additional condition $\gamma<\frac{p-1}{1+sp}$
+(which coincides with $\frac{1}{1+2s}$ at $p=2$, stricter for $p>2$).
+Steps (4)--(5), however, use translation invariance of $(-\Delta)^s$,
+which the $v$-dependent kernel $K_v$ does \emph{not} have; so for $p\neq2$
+I would drop the constant-$a(h)$ route and apply the vanishing-jet
+Liouville to $v_0$ directly (where $a(h)$ never appears) --- this is one
+of the points I would like to confirm with you.
 
 \section{What I would like to discuss}
-(1) Whether \S2--\S3 above are correct or whether (4.12) has a
-standard justification I missed. (2) The plan to prove the local
-two-phase $p$-dead-core theorem directly (the $s\nearrow1$ route is
-blocked by the non-uniformity of the GJS constants); it does not seem
-to appear in the literature and may stand alone. (3) Whether to include
-the $f\in L^\infty$ extension of GJS for $p<\frac{1}{1-s}$ as a section
-of our paper.
+\begin{enumerate}
+\item Whether the (4.12) argument of \S2--\S3 is right, or whether the
+  far field has a standard justification I missed.
+\item Whether, for $p\neq2$, the vanishing-jet Liouville on $v_0$ indeed
+  removes the need for steps (4)--(5) (which rely on the translation
+  invariance lost when $p\neq2$).
+\item The one genuinely binding constraint: after intersecting the tail,
+  jet-order and datum conditions (all explicit and jointly nonempty;
+  $\nu=1$ alone suffices for $p>2$, the window staying open up to $s=1$),
+  the binding requirement is $\al<1+\al_0$ with $\al_0$ the GJS exponent.
+  Do we state the theorem with $\al_0$ as an abstract constant, or try to
+  extract an explicit lower bound $\al_0(n,s,p)$ from their proof? Also:
+  the kernel $K_v$ degenerates where $v$ is flat (worst at the branching
+  point) --- is there a clean way to see $v_0$ is nondegenerate on an open
+  set?
+\item Proving the local two-phase $p$-dead-core theorem directly (the
+  $s\nearrow1$ route is blocked by the non-uniformity of the GJS
+  constants); it does not appear in the literature and may stand alone.
+\item Whether to include the $f\in L^\infty$ extension of GJS for
+  $p<\frac{1}{1-s}$ as a section of our paper.
+\end{enumerate}
 
 \medskip
 \noindent\emph{All details, computations and sources are in the project
