@@ -194,14 +194,63 @@ $v_0$ is an entire $(s,p)$-harmonic function:
 $\fpl{v_0}=0$ in $\R^n$.
 \end{proposition}
 \begin{proof}
-\TODO{Direct computation combining Proposition~\ref{prop:scaling} with
-homogeneity $\fpl{(\lambda u)}=\Jp{\lambda}\,\fpl{u}$. Then justify the
-limit: stability of weak (or viscosity) solutions of $\fpl{}$ under local
-uniform convergence with tail control --- locate the precise stability
-lemma in Brasco--Lindgren or Korvenp\"a\"a--Kuusi--Lindgren and quote it
-with constants. This is the replacement for \cite[Lemma 5]{CS-approx}
-used by PTU.}
+Write $\lambda_k:=(\theta_k r_k^{\al})^{-1}>0$, so that
+$v_k(x)=\lambda_k\,u_k(r_kx)$. We combine two scalings.
+
+\emph{Spatial scaling.} For the dilation $x\mapsto r_kx$, the change of
+variables of Proposition~\ref{prop:scaling} (with the multiplicative
+homogeneity $\fpl{(\lambda w)}=\Jp{\lambda}\,\fpl{w}=\lambda^{p-1}\fpl{w}$
+of Remark~\ref{rem:lambda} absorbing the prefactor) gives the order-$sp$
+identity
+\[
+  \fpl{\big[u_k(r_k\,\cdot)\big]}(x)
+  = r_k^{\,sp}\,\big(\fpl{u_k}\big)(r_kx).
+\]
+
+\emph{Amplitude scaling.} By $(p-1)$-homogeneity in the dependent variable,
+\[
+  \fpl{v_k}(x)
+  = \fpl{\big[\lambda_k\,u_k(r_k\,\cdot)\big]}(x)
+  = \lambda_k^{\,p-1}\,r_k^{\,sp}\,\big(\fpl{u_k}\big)(r_kx).
+\]
+
+\emph{Use the equation.} For $r_kx\in B_1$, $\fpl{u_k}(r_kx)
+=u_k(r_kx)_+^{\gamma}-u_k(r_kx)_-^{\gamma}$. Since $\lambda_k>0$,
+$(v_k)_\pm(x)=\lambda_k\,u_k(r_kx)_\pm$, whence
+$u_k(r_kx)_\pm^{\gamma}=\lambda_k^{-\gamma}(v_k)_\pm^{\gamma}(x)$ and
+\[
+  \fpl{v_k}(x)
+  = \lambda_k^{\,p-1-\gamma}\,r_k^{\,sp}
+    \Big[(v_k)_+^{\gamma}-(v_k)_-^{\gamma}\Big](x).
+\]
+
+\emph{The exponents collapse.} By definition of $\lambda_k$,
+$\lambda_k^{\,p-1-\gamma}r_k^{\,sp}
+=\theta_k^{-(p-1-\gamma)}\,r_k^{\,sp-\al(p-1-\gamma)}$, and
+$\al(p-1-\gamma)=sp$ \emph{exactly} (this is the defining property of
+$\al$), so the power of $r_k$ vanishes and
+\[
+  \fpl{v_k}(x)
+  = \theta_k^{\,\gamma-(p-1)}\Big[(v_k)_+^{\gamma}-(v_k)_-^{\gamma}\Big](x),
+  \qquad x\in B_{1/r_k}.
+\]
+Since $0<\gamma<p-1$, the exponent $\gamma-(p-1)<0$ and $\theta_k\to\infty$,
+so the prefactor $\to0$; if $v_k$ is locally bounded the bracket is locally
+bounded and the right-hand side $\to0$ locally uniformly. Passing to the
+limit (stability of weak/viscosity solutions of $\fpl{}$ under local
+uniform convergence with tail control, see the discussion below) yields
+$\fpl{v_0}=0$ in $\R^n$.
 \end{proof}
+\NOTE{The cancellation is the whole mechanism: spatial scaling supplies
+$r_k^{sp}$, amplitude scaling supplies $(\theta_k r_k^{\al})^{-(p-1-\gamma)}$,
+and the choice $\al=\frac{sp}{p-1-\gamma}$ is precisely what makes the two
+powers of $r_k$ cancel, leaving the pure damping factor
+$\theta_k^{-(p-1-\gamma)}\to0$. This is what we mean by ``homogeneity
+replaces linearization''. The only analytic input still to pin down is the
+stability lemma for $\fpl{}$ (Brasco--Lindgren / Korvenp\"a\"a--Kuusi--Lindgren),
+the $p\neq2$ replacement for \cite[Lemma 5]{CS-approx}; it carries the same
+\emph{global} tail-convergence hypothesis whose verification is the subject
+of \S\ref{sec:constraints}.}
 \NOTE{This parallels PTU \S6 (fully nonlinear case), where
 $\delta^{-1}F(\delta M)\to DF(0)M$; here homogeneity plays the role of
 differentiability of $F$ at $0$ --- which $\fpl{}$ does not have.
@@ -447,6 +496,64 @@ rethinking for the vanishing-jet ($\nu=1$) formulation --- but there
 $a(h)$ may not even appear, since the CP-style Liouville works with
 $v$ itself.}
 
+\begin{remark}[Verification verdict on (c$'$), 2026-06-15]\label{rem:cprime-check}
+A careful pass over steps (1)--(5) at $p=2$ finds the argument
+\emph{sound in outline}, under the single hypothesis
+$\gamma<\frac{1}{1+2s}$ (the tail condition). Specifically:
+\begin{itemize}
+\item[(1)] $|\nabla H_k|$ splits into an annulus piece
+  $\lesssim C_h\rho_k^{\al-2s-2}$ (with $\al-2s-2<0$ since $\al<3<2s+2$
+  for $s>\frac12$) and a cap piece $\lesssim\theta_k^{-1}r_k^{2s+1-\al}$
+  (with $2s+1-\al>0\iff\gamma<\frac1{1+2s}$); both $\to0$. So
+  $H_k=a_k+o(1)$ in $C^1(B_R)$, $a_k$ constant. \checkmark
+\item[(2)] \textbf{Not circular.} Decompose
+  $(-\Delta)^s\tilde w_k(x_0)=$ (local singular part)$+$(tail). The local
+  part is bounded by the uniform interior $[\,\cdot\,]_{C^{2s+\gamma}}$
+  bound on $w_k$ (PTU (4.8), $2s+\gamma>2s$); the tail
+  $\|\tilde w_k\|_{L^1_s}=\int_{|y|>1}|w_k(y)|\,|y|^{-n-2s}\,dy$ uses
+  \emph{only} the growth bound $|w_k(y)|\le C_h|y|^{\al-1}$ on the support
+  $B_{\rho_k}$, which converges (uniformly in $k$) iff $\al-1-2s<0$, again
+  $\gamma<\frac1{1+2s}$. Neither bound uses $a_k$ or any lower bound on
+  $\theta_k$. Then $a_k=(-\Delta)^s\tilde w_k(x_0)-f_k(x_0)-o(1)$ is
+  bounded a posteriori. \checkmark \emph{(This was the flagged ``riskiest''
+  step; it holds. The truncation manufactures the very $L^1_s$ control PTU
+  could not get globally.)}
+\item[(3)] Dominated convergence ($|w_k|\le C_h(1+|y|)^{\al-1}\in L^1_s$,
+  pointwise $\tilde w_k(y)\to w_0(y)$ since eventually $y\in B_{\rho_k}$)
+  gives $\tilde w_k\to w_0$ in $L^1_s$ \emph{globally}; CS stability then
+  legitimately applies (its global hypothesis is now met) and yields
+  $(-\Delta)^s(v_0(\cdot+h)-v_0)=a(h)$. \checkmark
+\item[(4)] Cocycle $w^{h_1+h_2}=w^{h_1}(\cdot+h_2)+w^{h_2}$ plus
+  translation invariance of $(-\Delta)^s$ gives $a(h_1{+}h_2)=a(h_1)+a(h_2)$;
+  with measurability (pointwise limit of $h\mapsto a_k(h)$, continuous),
+  $a(h)=b\cdot h$. \checkmark \emph{Minor: extract one diagonal subsequence
+  over a countable dense set of $h$, then use continuity, so $a(\cdot)$ is
+  well defined.}
+\item[(5)] $\Delta^2_hv_0$ is entire $s$-harmonic with growth
+  $(1+|x|)^{\al-2}$, $\al-2<1$, hence \emph{constant} (sublinear-growth
+  Liouville); thus $\Delta^3_hv_0\equiv0$, so $v_0$ is a quadratic
+  polynomial; the vanishing $2$-jet at the branching point forces
+  $v_0\equiv0$, contradicting the normalization. \checkmark
+\end{itemize}
+\textbf{Conclusion: (c$'$) repairs PTU (4.12) at $p=2$ with no lower bound
+on $\theta_k$.} The mechanism is truncate $\to$ oscillation vanishes $\to$
+constant bounded a posteriori $\to$ stability now legal $\to$ second
+differences annihilate the constant.
+
+\textbf{The $p\neq2$ obstruction, located precisely.} The datum steps
+(1)--(3) port (the increment $w^h_k$ solves the linear $L_{K_k}$ equation,
+Remark~\ref{rem:linkernel}, and truncation is linear-friendly). But steps
+(4)--(5) use \emph{translation invariance} of the operator
+($(-\Delta)^sw^{h_1}(\cdot+h_2)=a(h_1)$), and the $v_k$-dependent kernel
+$K_k$ is \emph{not} translation invariant. So the cocycle/second-difference
+finish does not transplant. The fix is to drop the additive-constant route
+altogether and use the vanishing-jet (CP) Liouville on $v_0$ directly,
+where $a(h)$ never appears --- consistent with the restatement in
+Conjecture~\ref{conj:liouville}. \emph{This is the one item to confirm with
+R.T.: that the vanishing-jet formulation removes the need for steps
+(4)--(5) in the nonlinear setting.}
+\end{remark}
+
 \emph{(d) A warning on pointwise evaluation.} Evaluating
 $\fpl{\tilde v_k}$ classically at a point with only $C^{1,\al'}$
 regularity needs (after odd-cancellation of the gradient term in the
@@ -458,6 +565,49 @@ do not actually bind simultaneously (PTU work at order $\nu=2$ where the
 bookkeeping differs, and weak formulations avoid pointwise evaluation
 altogether). Sort out which constraints are real in the weak framework
 --- priority for the next session, fresh head needed.}
+
+\subsection*{Synthesis: intersecting the regions (2026-06-15)}
+Working at order $\nu=1$ (the only order available for $p\neq2$, since
+quadratics are not $(s,p)$-harmonic), the explicit constraints are
+\[
+  \text{(C1) tail: }\gamma<\tfrac{(p-1)^2}{p-1+sp},\quad
+  \text{(C2) jet }\beta<1\text{: }\gamma<(p-1)-\tfrac{sp}{2},\quad
+  \text{(C4) datum: }\gamma<\tfrac{p-1}{1+sp},
+\]
+together with the soft \emph{ceiling} (C3) $\;\al<1+\al_0\;$ and the
+\cite{GJS} window $p\in[2,\tfrac{2}{1-s})$ (equivalently $s>1-\tfrac2p$).
+Three findings from the bookkeeping (all verified symbolically):
+\begin{itemize}
+\item[(i)] \textbf{C4 is the binding explicit constraint for $p>2$.} One
+  has $C4\le C1$ with equality only at $p=2$
+  ($\frac{C4}{C1}=\frac{p-1+sp}{(p-1)(1+sp)}\le1$); and C4 is typically
+  below C2 as well (e.g.\ $p=3,s=\tfrac34$: $C4=0.62<C2=0.88<C1=0.94$).
+  So the explicit region is $\gamma<\min(C2,C4)$ and is \emph{nonempty}.
+\item[(ii)] \textbf{Restricting to $\nu=1$ is not fatal for the new
+  ($p>2$) range.} The $\nu=1$ cap C2 reads $\gamma<(p-1)-\tfrac{sp}{2}$;
+  at $s=1$ this is $\gamma<\tfrac p2-1$, which is \emph{positive for every
+  $p>2$}. Only at $p=2$ does the window pinch to $0$ as $s\nearrow1$ ---
+  which is exactly why PTU needed $\nu=2$ there, and exactly the case
+  already covered by \cite{PTU}. So the unavailability of $\nu=2$ costs us
+  nothing where the result is new.
+\item[(iii)] \textbf{The real binding constraint is the ceiling (C3),
+  $\al<1+\al_0$.} Since $\al=\frac{sp}{p-1-\gamma}>1$ in the relevant
+  range, this needs the \cite{GJS} exponent to satisfy
+  $\al_0>\al-1=\frac{sp-(p-1)+\gamma}{p-1-\gamma}$. At $p=3,s=\tfrac34,
+  \gamma=\tfrac12$ this demands $\al_0>\tfrac12$ --- a \emph{quantitative}
+  lower bound on $\al_0$ that \cite{GJS} (existence of some $\al_0$) does
+  not by itself supply.
+\end{itemize}
+\TODO{Decision point for the meeting. The explicit region
+$\gamma<\min(C2,C4)$ is fine; the theorem is conditional on a
+\emph{quantitative} $\al_0$ from \cite{GJS} (or a regime where $\al-1$ is
+small, i.e.\ $\gamma$ small and $sp$ close to $p-1$). Two honest options:
+(A) state the main theorem with hypothesis ``$\al<1+\al_0$'' and carry
+$\al_0$ as an abstract constant (clean, but the admissible set is then
+only proved nonempty in the perturbative corner $sp\downarrow p-1$);
+(B) extract or lower-bound $\al_0(n,s,p)$ from the \cite{GJS} proof
+(harder, but yields an explicit region). Ask R.T.\ which framing he
+prefers; this is the analogue of PTU's clean $\gamma\in(0,1/3)$.}
 
 %======================================================================
 \section{The load-bearing wall: a Liouville theorem}\label{sec:liouville}
@@ -548,6 +698,44 @@ the truncation error entering as an $L^\infty$ right-hand side (ties
 into the RHS question for \cite{GJS}); or PTU-style incremental
 quotients, which lower the growth by one order. This is now the precise
 content of Lemma~\ref{lem:tail}.}
+\begin{lemma}[Resolution of the nonlocal tail gap via increments;
+2026-06-15]\label{lem:tailfix}
+Let $v$ satisfy the hypotheses of Conjecture~\ref{conj:liouville}, so
+$|v(x)|\le C(1+|x|)^{1+\beta}$ with $\beta=\al-1$. The rescaled
+$v_l:=v(l\cdot)/l^{1+\beta}$ has \emph{divergent} tail
+$\Tail(v_l)=\infty$, because $(1+\beta)(p-1)=\al(p-1)>sp$; thus
+\cite{GJS} cannot be applied to $v_l$ directly. Pass instead to first
+increments $w^h:=v(\cdot+h)-v(\cdot)$. Since $v\in C^1$ with $Dv(0)=0$,
+\[
+  |w^h(x)|\le |h|\sup_{[x,x+h]}|Dv|\;\lesssim\;|h|\,(1+|x|)^{\beta},
+\]
+one order lower, and the nonlocal tail of $w^h$ is finite iff
+\[
+  \beta(p-1)=(\al-1)(p-1)<sp,
+  \qquad\text{i.e.\ iff the tail condition \emph{(C1)}}\
+  \gamma<\tfrac{(p-1)^2}{p-1+sp}.
+\]
+Hence the incremental quotient — not $v_l$ — is the object on which the
+scaling/decay argument can run.
+\end{lemma}
+\begin{remark}[What changes for $p\neq2$]\label{rem:linkernel}
+At $p=2$, $w^h$ is again $s$-harmonic (linearity) and
+PTU Theorem~3.1 finishes. For $p\neq2$, $w^h$ solves not the homogeneous
+equation but a \emph{linear} nonlocal equation $L_{K_v}w^h=0$ with the
+$v$-dependent kernel
+$K_v(x,y)\simeq|v(x)-v(y)|^{p-2}|x-y|^{-n-sp}$ (the linearization object of
+\cite{GJS} \S7). Two consequences. (i) The $C^{\al_0}$/$C^{1,\al_0}$
+estimate one applies is the one for this \emph{measurable-kernel} linear
+class (\cite{GJS} \S7), not Theorem~1.1 for $\fpl{w}=0$; its tail term is
+finite exactly under (C1). (ii) \textbf{Caveat (degeneracy):} $K_v$
+degenerates where $v$ is flat ($|v(x)-v(y)|$ small). At the branching
+point $v$ has a vanishing $1$-jet, so the kernel is weakest precisely
+there; one must check the blow-up limit $v_0$ is not flat on an open set
+(its gradient does not vanish identically away from $0$) so that $K_{v_0}$
+lies in a uniform ellipticity class on the relevant region. This is the
+genuine technical content of the $p\neq2$ Liouville and should be flagged
+to R.T.
+\end{remark}
 \begin{remark}
 $\nu=2$ is out of reach: quadratic polynomials are not $(s,p)$-harmonic
 for $p\neq2$, so even the statement fails at order two; consistent with
