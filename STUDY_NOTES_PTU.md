@@ -82,6 +82,42 @@ Flow: 2.3 → differentiable regime; 2.4 → ceiling $C^{2s+\gamma}$; 2.2 → en
 
 ---
 
+## Lesson 4 — §4: the blow-up proof and the gap
+
+Goal: Theorem 4.1, the sharp growth $|u(x)|\le C|x-x_0|^{\alpha}$, $\alpha=\frac{2s}{1-\gamma}$, at a **branching point** ($u(x_0)=|Du(x_0)|=0$). The whole proof is one **argument by contradiction**.
+
+**Architecture (memorize this skeleton — the project reuses it verbatim):**
+contradiction $\to$ $\theta_k$ device picks the right blow-up scale $\to$ compactness gives a limit $v_0$ $\to$ Liouville forces $v_0$ polynomial $\to$ vanishing jet kills it $\to$ contradicts the normalization.
+
+**Step 1 — set up.** Normalize $x_0=0$, $\|u\|_\infty=1$. Baseline theory: $u\in C^{2s+\gamma}$ (the **Schauder ceiling**, best generic regularity). If the estimate fails, get solutions $u_k$, branching point $0$, uniform $[u_k]_{C^{2s+\gamma}}$, and points $x_k$ with $|u_k(x_k)|>k|x_k|^{\alpha}$ (4.3) — the violation grows with $k$.
+
+**Step 2 — the $\theta_k$ device (the engine).**
+$$\theta_k(r'):=\sup_{r'<r<1/2} r^{\,2s+\gamma-\alpha}\,[u_k]_{C^{2s+\gamma}(B_r)}\qquad(4.4).$$
+The prefactor exponent $2s+\gamma-\alpha<0$ (since $\alpha>2s+\gamma$, "better than Schauder"). The violation (4.3) + jet-to-growth (Lemma 3.1) force $\lim_{r'\to0}\theta_k(r')>k$. *Why:* if $\theta_k$ stayed bounded, the seminorm would decay at the rate that **implies** the good growth $|u_k|\le C|x|^\alpha$, contradicting $x_k$.
+
+**Step 3 — blow-up scale $r_k$.** Pick $r_k>\frac1k$ nearly achieving the sup: $r_k^{2s+\gamma-\alpha}[u_k]_{C^{2s+\gamma}(B_{r_k})}\ge\frac12\theta_k(r_k)$ and $\ge\frac1k\theta_k(1/k)\to\infty$. Forces $r_k\to0$ (zoom into the branching point).
+
+**Step 4 — the blow-up $v_k$.** $v_k(x):=\dfrac{u_k(r_kx)}{\theta_k(r_k)\,r_k^{\alpha}}$ (4.6). Two normalizations chosen to hold together:
+- **Seminorm bound (4.8):** $[v_k]_{C^{2s+\gamma}(B_R)}\le R^{\alpha-2s-\gamma}$, **only for $1\le R\le\frac{1}{2r_k}$** — flag this, it is the source of the gap.
+- **Surviving normalization (4.10):** $[v_0]_{C^{2s+\gamma}(B_1)}\ge\frac12$ (limit is nontrivial).
+
+The **anchor trick** ($\int\eta\,D_{ee}v_k=\int D_{ee}\eta\,v_k\le C_n$ pins a 2nd derivative at one point) + the seminorm bound give $|D_{ee}v_k|\le CR^{\alpha-2}$, hence **compactness**: $v_k\to v_0$ in $C^{2s+\gamma}_{loc}$.
+
+**Step 5 — increments + the $\gamma<1/3$ condition.** Pass to increments $w^h=v_k(\cdot+h)-v_k$ (first differences, lower the order by one). Mean value theorem + (4.8): $|w^h(x)|\le C_h|x|^{\alpha-1}$ for $|x|\ge1$ (4.11). This is in the tail space $L^1_s$ **iff $\gamma<\frac{1}{1+2s}$** — implied by $\gamma<1/3$. **This is the entire reason for $\gamma<1/3$**: the integrability of the increment's tail. (= your project's tail condition C1.)
+
+**Step 6 — limit passage (4.12) and THE GAP.** Since $u_k$ solves the equation,
+$$-(-\Delta)^s\big(v_k(\cdot+h)-v_k\big)=(\text{prefactor}\to0)\cdot[\text{RHS difference}]\quad(4.12),$$
+and PTU pass to the limit via the **stability lemma** (needs *global* $L^1_s$ convergence) to get $(-\Delta)^s(v_0(\cdot+h)-v_0)=0$ in $\mathbb{R}^n$. **The gap:** (4.11) holds only for $|x|\le\frac{1}{2r_k}$ (it rests on 4.8); beyond that $v_k$ is merely bounded by $2(\theta_k r_k^\alpha)^{-1}$, and the far-field tail contributes $\sim\theta_k^{-1}r_k^{-\frac{2s\gamma}{1-\gamma}}$, bounded only under a **lower bound on $\theta_k$** that (4.5) does not supply. CS Remark 4.4 shows the global hypothesis cannot be weakened ⇒ genuine question for R.T. (your (c′) repair fixes it by **truncating** at $\rho_k=\frac{1}{4r_k}$).
+
+**Step 7 — Liouville finishes.** $v_0$ satisfies the increment-form hypothesis (3.1) with $\nu=2$ (vanishing 2-jet at the branching point), growth $\beta=\alpha-2<1$. Theorem 3.1 ⇒ $v_0$ is a degree-$\le2$ polynomial; vanishing 2-jet ⇒ $v_0\equiv0$, contradicting (4.10). ∎
+
+**Carry-outs:**
+1. Skeleton is reused in the project: swap $C^{2s+\gamma}\to C^{1,\alpha_0}$, linearity $\to$ homogeneity.
+2. $\gamma<1/3$ = the $L^1_s$ integrability of the increment = tail condition **C1**.
+3. The gap is at (4.12); the far-field needs a $\theta_k$ lower bound the device doesn't give — **(c′) truncation repair**.
+
+---
+
 ## Glossary — every recurring term, in plain language
 
 Read this whenever a term in the notes or in `main.tex` is unfamiliar. Each entry gives the intuition first, then the precise meaning, then where it shows up.
