@@ -79,3 +79,55 @@ Flow: 2.3 → differentiable regime; 2.4 → ceiling $C^{2s+\gamma}$; 2.2 → en
 1. **Linearity used twice** (affine subtraction; derivative = limit of $s$-harmonic increments) — both fail for $p\ne2$ ⇒ must use Correa–dos Prazeres no-subtraction Liouville.
 2. **Stability's global-$L^1_s$ hypothesis** = seed of the §4 gap.
 3. **$\rho^{\beta-1}\to0$ decay trick survives** to the nonlinear/p setting.
+
+---
+
+## Glossary — every recurring term, in plain language
+
+Read this whenever a term in the notes or in `main.tex` is unfamiliar. Each entry gives the intuition first, then the precise meaning, then where it shows up.
+
+**Dead core.** The interior region where the solution $u$ is *exactly* zero. Physically: where the reactant has been completely consumed. It exists because the absorption $u^\gamma$ with $\gamma<1$ is non-Lipschitz at $0$.
+
+**Branching point / free-boundary point.** A point $x_0$ on the edge of the dead core where $u$ touches zero *with* a horizontal tangent: $u(x_0)=0$ and $Du(x_0)=0$. These are the points at which the sharp growth estimate is proved. ("Free boundary" = the boundary $\partial\{u>0\}$, unknown in advance; "branching" because the two phases $\{u>0\}$ and $\{u<0\}$ can meet there.)
+
+**Jet (1-jet, 2-jet).** The Taylor data of $u$ at a point. The **$k$-jet** is $(u(x_0),Du(x_0),\dots,D^k u(x_0))$. The **1-jet** $=(u(x_0),Du(x_0))$ is value + gradient (the best affine approximation). A **vanishing 1-jet** means $u(x_0)=|Du(x_0)|=0$ — exactly the branching-point condition. A **vanishing 2-jet** adds $|D^2u(x_0)|=0$ (Hessian zero too); this is the $\nu=2$ case, available only at $p=2$.
+
+**$\nu$ (nu).** The order of vanishing assumed at the branching point: $\nu=1$ uses a vanishing 1-jet, $\nu=2$ a vanishing 2-jet. For $p\neq2$ only $\nu=1$ is usable (quadratics aren't $(s,p)$-harmonic).
+
+**Fractional Laplacian $(-\Delta)^s$.** Nonlocal diffusion of order $2s$. $(-\Delta)^s u(x)=c_{n,s}\,\text{P.V.}\!\int \frac{u(x)-u(y)}{|x-y|^{n+2s}}dy$ — averages how $u(x)$ differs from $u$ everywhere else.
+
+**Fractional $p$-Laplacian $(-\Delta_p)^s$.** The nonlinear ($p\neq2$) version: replace the difference $u(x)-u(y)$ by $J_p(u(x)-u(y))=|u(x)-u(y)|^{p-2}(u(x)-u(y))$. Reduces to $(-\Delta)^s$ when $p=2$.
+
+**$s$-harmonic / $(s,p)$-harmonic.** A function with $(-\Delta)^s u=0$ (resp. $(-\Delta_p)^s u=0$) — the nonlocal analogue of "harmonic" ($\Delta u=0$). These are the "trivial" solutions the Liouville theorem classifies.
+
+**P.V. (principal value).** A symmetric way to make sense of the singular integral defining the operator (the weight $|x-y|^{-n-2s}$ blows up at $y=x$); the odd part cancels, leaving a finite value.
+
+**Tail / $L^1_s$ / $\mathrm{Tail}_{p-1,sp}$.** Bookkeeping for the far-field. Because the operator is nonlocal, it only makes sense if $u$ doesn't grow too fast at infinity. $\|u\|_{L^1_s}=\int\frac{|u(y)|}{1+|y|^{n+2s}}dy$ (the $p=2$ version); $\mathrm{Tail}_{p-1,sp}$ is its $p$-analogue. "Finite tail" = "far-field tame enough for the theory to work." Almost every difficulty in the project is a tail question.
+
+**Seminorm $[u]_{C^\alpha}$, Hölder space $C^{k,\alpha}$.** Measures of smoothness. $[u]_{C^\alpha}=\sup_{x\neq y}\frac{|u(x)-u(y)|}{|x-y|^\alpha}$ quantifies $\alpha$-Hölder continuity; $C^{k,\alpha}=C^{k+\alpha}$ means $k$ derivatives, the $k$-th being $\alpha$-Hölder. $[u]_{C^{1+\alpha}}$ controls the gradient's Hölder norm.
+
+**Viscosity solution.** A notion of solution needing no derivatives of $u$: test against smooth functions touching $u$ from above/below. Used because solutions may not be twice differentiable, and because it extends to nonlinear/$p$ operators.
+
+**Weak solution.** The other notion of solution, defined by integrating against test functions ($u\in W^{s,p}$). For this problem weak $\equiv$ viscosity (Korvenpää–Kuusi–Lindgren).
+
+**Blow-up / rescaling.** Zoom in at a branching point: $v_r(x)=u(rx)/r^\alpha$, study $r\to0$. The exponent $\alpha$ is chosen so the rescaled functions stay balanced; their limit $v_0$ is a clean model solution.
+
+**Homogeneity (of the operator).** $(-\Delta_p)^s(\lambda u)=\lambda^{p-1}(-\Delta_p)^s u$ for $\lambda>0$ ($(p-1)$-homogeneity), and the order-$sp$ spatial scaling. In our project these two together make the absorption term vanish along the blow-up — *this replaces the differentiation step that needs linearity*.
+
+**Liouville theorem.** "Entire solution + controlled growth $\Rightarrow$ trivial (a polynomial / zero)." The engine that classifies the blow-up limit $v_0$ and forces the contradiction. The project's "load-bearing wall."
+
+**Increment / first difference $w^h$.** $w^h(x)=u(x+h)-u(x)$. Differencing lowers the growth order by one and, for $p\neq2$, turns the nonlinear equation into a *linear* one for $w^h$ (with a $u$-dependent kernel). **Second difference** $\Delta_h^2u=u(\cdot+2h)-2u(\cdot+h)+u(\cdot)$ lowers it by two.
+
+**Cocycle identity.** The bookkeeping rule $w^{h_1+h_2}=w^{h_1}(\cdot+h_2)+w^{h_2}$ for increments; used to show a quantity depending on $h$ is linear in $h$.
+
+**Stability lemma.** The theorem letting you pass an equation to the limit: if $u_k\to u$ (with global tail control) and $(-\Delta)^s u_k=f_k$, then $(-\Delta)^s u=\lim f_k$. The hypothesis that the convergence be *global* (in $L^1_s$) is the subtle one — the source of the §4 gap.
+
+**$\theta_k$ device.** The contradiction machine (PTU §4 / CP §6): assume the estimate fails, build a sequence whose rescaled blow-up survives a normalization but must vanish by Liouville. $\theta_k(r')$ measures the worst seminorm growth across scales.
+
+**Gradient anchor.** A trick ($\int\eta\,D_e v=\int D_e\eta\,v\le C$) that pins the gradient at one point, giving local bounds on $v_k$ *without* normalizing it in $L^\infty$ — useful nonlocally.
+
+**Schauder estimate / "better than Schauder."** Schauder theory gives the generic a-priori regularity ($C^{2s+\gamma}$ for $p=2$). "Better than Schauder" = the growth at branching points is *smoother* than that generic ceiling — the whole point of the word "improved" in the title.
+
+**Nondegeneracy.** Two uses. (1) Lower bound matching the growth: $\sup_{B_r}|u|\ge c\,r^\alpha$ (makes the estimate sharp). (2) For the $p\neq2$ Liouville: that the limit $v_0$ has $Dv_0\not\equiv0$ on open sets, so the increment's $v_0$-dependent kernel stays uniformly elliptic.
+
+**Admissible region.** The set of parameters $(s,p,\gamma)$ for which the theorem's hypotheses hold simultaneously — the analogue of PTU's $\gamma\in(0,1/3),s\in(1/2,1)$. Determined by intersecting the constraint conditions (C1 tail, C2 the cap $\alpha<2$, etc.).
