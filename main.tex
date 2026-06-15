@@ -675,24 +675,38 @@ prefers; this is the analogue of PTU's clean $\gamma\in(0,1/3)$.}
 \section{The load-bearing wall: a Liouville theorem}\label{sec:liouville}
 %======================================================================
 \begin{conjecture}[Liouville with vanishing jet, $\nu=1$;
-restated 2026-06-10 after \cite{CP}]\label{conj:liouville}
+restated 2026-06-15, cap $\beta<1$ via increments]\label{conj:liouville}
 Let $v\in C^{1}_{loc}(\R^n)$ be an entire $(s,p)$-harmonic function with
 \[
   v(0)=|Dv(0)|=0
   \qquad\text{and}\qquad
   |v(x)|\le C\,(1+|x|)^{1+\beta}\quad\text{in }\R^n,
 \]
-for some $0<\beta<\al_0$, where $\al_0$ is the exponent of the interior
-$C^{1,\al_0}$ estimate \cite{GJS}. Then $v\equiv0$.
+for some $0<\beta<1$ (equivalently $\al<2$, i.e.\ Lemma~\ref{lem:beta},
+C2), with the tail condition \emph{(C1)} $(\,(1+\beta)(p-1)<sp+(p-1)\,$,
+i.e.\ Lemma~\ref{lem:tail}$)$ in force, and assume $v$ is
+\emph{nondegenerate} ($Dv\not\equiv0$ on any open set). Then $v\equiv0$.
 \end{conjecture}
-\begin{remark}
-The earlier formulation (seminorm growth, conclusion ``$v$ is affine'')
-required subtracting the affine part, which destroys the equation for
-$p\neq2$. The vanishing-jet form avoids this entirely and suffices for
-the application, since the blow-up limit inherits
-$v_0(0)=|Dv_0(0)|=0$ from the free boundary point. The jet-to-growth
-Lemma~\ref{lem:jet} below converts the seminorm information produced by
-the $\theta_k$ device into the growth hypothesis above.
+\begin{remark}[Why the cap is $\beta<1$, not $\beta<\al_0$ --- the route is
+forced, 2026-06-15]\label{rem:routeforced}
+The earlier ``$\beta<\al_0$'' form copied \cite{CP}'s \emph{local} Lemma~5,
+whose proof rescales $v_l=v(l\cdot)/l^{1+\beta}$ and applies the
+\emph{sharp} $C^{1,\al_0}$ estimate to $v_l$. \textbf{That route is blocked
+nonlocally:} $v_l$ has the same growth $1+\beta$ as $v$, and
+$\Tail(v_l)<\infty$ would require $(1+\beta)(p-1)<sp$ --- but the target
+$1+\beta=\al=\frac{sp}{p-1-\gamma}$ gives $\al(p-1)-sp=\frac{\gamma ps}{p-1-\gamma}>0$
+for \emph{every} $\gamma>0$, so the tail diverges; truncating leaves a
+far-field datum with the same divergent exponent, so \cite{GJS} cannot be
+applied to $v_l$ at all. The route that \emph{does} survive nonlocally is
+PTU's: pass to increments $w^h=v(\cdot+h)-v$, which lower the growth by one
+order to $\beta<1$ and (under C1) have finite tail. This is why the correct
+cap is $\beta<1$ ($\al<2$), exactly the cap of PTU Theorem~3.1, and why the
+sharp exponent $\al_0$ is needed only for compactness (any $\al_0>0$), not
+quantitatively. \emph{This supersedes synthesis finding (iii) and the
+``need a quantitative $\al_0$'' worry: under the increment route the
+binding constraints are C1 and C2, both explicit.} The price is instead the
+\textbf{nondegeneracy} hypothesis, which controls the $v$-dependent kernel
+$K_v^h$ (Proposition~\ref{prop:linincr}, Remark~\ref{rem:linkernel}).
 \end{remark}
 \begin{lemma}[Jet-to-growth; \cite{CP} Lemma 6, transplanted]\label{lem:jet}
 Let $u\in C^{1+\al'}(B_1)$ with $0<\al'<1$, where
@@ -714,52 +728,50 @@ $|u(x)|\le|Du(\xi)|\,|x|$ for some $\xi\in B_{|x|}$. Since $Du(0)=0$,
 and the claim follows. (The argument is operator-free: it uses only the
 vanishing jet and the seminorm decay.)
 \end{proof}
-\begin{proof}[Proof strategy]
-\TODO{Transplant PTU Theorem~3.1, Step~1. Fix a unit vector $e$ and set
-$w:=v-v(0)-Dv(0)\cdot x$; affine functions are $(s,p)$-harmonic
-\emph{only after} noting the equation is not linear --- so subtraction of
-an affine function does NOT produce a solution. \textbf{This is the real
-obstruction.} Two routes:
-(a) work with $v$ itself and the scaled functions
-$v_\rho(x):=\rho^{-\beta}\,[v(\rho x)-v(0)-\rho\,Dv(0)\cdot x]$, which
-solve an equation with a translated datum --- check whether the interior
-$C^{1,\al_0}$ estimate applies to differences of solutions of this type
-(equivalently: a $C^{1,\al_0}$ estimate ``modulo affine functions'');
-(b) use the linearization of $\fpl{}$ along $v$: incremental quotients
-$w_h=v(\cdot+h)-v(\cdot)$ solve a \emph{linear} nonlocal equation
-$L_K w_h=0$ with kernel
-$K(x,y)\simeq |v(x)-v(y)|^{p-2}|x-y|^{-n-sp}$, degenerate where $v$ is
-flat; investigate whether the growth bound keeps $K$ in a manageable
-class (note: near the free boundary $v$ IS flat --- degeneracy is at the
-worst possible place; but the Liouville is applied to the blow-up limit,
-whose gradient need not vanish identically).
-Route (a) is closer to the local quasilinear literature
-(small-perturbation / flatness-improvement arguments) and is the one to
-try first.}
+\begin{proof}[Proof strategy (route (b), increments; 2026-06-15)]
+The local route (a) of \cite{CP} (rescale $v$, apply the sharp estimate)
+is \emph{not available} nonlocally, by Remark~\ref{rem:routeforced}: the
+tail of the rescaled $v_l$ diverges for every $\gamma>0$. We therefore
+follow PTU's increment route, made linear by
+Proposition~\ref{prop:linincr}.
+\begin{enumerate}
+\item \emph{Increment equation.} For a unit vector $h$ (small), set
+  $w^h:=v(\cdot+h)-v$. By Proposition~\ref{prop:linincr} (with $\fpl{v}=0$,
+  so the right-hand side is $0$),
+  \[
+    L_{K_v^h}w^h=0,\qquad
+    K_v^h(x,y)=(p-1)\!\int_0^1|(v(x){-}v(y))+t(w^h(x){-}w^h(y))|^{p-2}dt .
+  \]
+\item \emph{Lowered growth and finite tail.} Since $v\in C^1$ with
+  $Dv(0)=0$ and $|v|\le C(1+|x|)^{1+\beta}$, one has
+  $|w^h(x)|\le|h|\sup_{[x,x+h]}|Dv|\le C_h(1+|x|)^{\beta}$ with $\beta<1$;
+  under (C1) this growth is in the tail space of $L_{K_v^h}$
+  (Lemma~\ref{lem:tailfix}).
+\item \emph{Linear regularity + decay.} On compact sets where $v$ is
+  nondegenerate, $K_v^h$ lies in the measurable-kernel ellipticity class of
+  \cite{GJS} \S7, which supplies an interior $C^{1,\al_0}$ estimate with
+  tail term for $w^h$. The PTU rescaling/decay argument
+  ($w^h_\rho:=\rho^{-\beta}w^h(\rho\cdot)$, interior estimate, then
+  $\|Dw^h\|_{L^\infty(B_{1/2\rho})}\le C\rho^{\beta-1}\to0$ as $\rho\to\infty$
+  because $\beta<1$) forces $Dw^h(0)=0$; running it at every centre (where
+  ellipticity is locally uniform --- this replaces translation invariance)
+  gives $Dw^h\equiv0$, so $w^h$ is constant.
+\item \emph{Reconstruction.} $w^h\equiv c(h)$ for all small $h$; the cocycle
+  $w^{h_1+h_2}=w^{h_1}(\cdot+h_2)+w^{h_2}$ forces $c$ additive and (by
+  continuity) linear, $c(h)=b\cdot h$; but $w^h(0)=v(h)$ has a double zero
+  at $h=0$, so $b=0$ and $v$ is constant on the lattice of increments,
+  hence (with the vanishing jet) $v\equiv0$.
+\end{enumerate}
+\TODO{Two genuine gaps, both to raise with R.T.: (i) \textbf{nondegeneracy}
+--- that the blow-up limit $v_0$ has $Dv_0\not\equiv0$ on open sets, so
+$K_{v_0}^h$ is uniformly elliptic on compacta (near the branching point $v$
+is flat, but that is a single point); (ii) the precise \textbf{linear
+nonlocal Liouville} ``$L_K w=0$, $K$ measurable elliptic, sublinear growth
+$\Rightarrow$ constant'' --- locate the exact reference (Kassmann; or
+\cite{GJS} \S7 run as a Liouville) with the tail hypothesis matching (C1).
+Step (3)'s ``run at every centre'' needs the ellipticity constants locally
+uniform, which is where (i) enters.}
 \end{proof}
-\NOTE{(Update, 2026-06-10, after Correa--dos Prazeres \cite{CP} \S6.)
-The affine-subtraction obstruction dissolves: in the application the
-blow-up limit inherits the vanishing $1$-jet $v_0(0)=|Dv_0(0)|=0$ from
-the free boundary point, so the Liouville should be \emph{restated} in
-the form of their Lemma~5:
-\begin{quote}
-$v$ entire $(s,p)$-harmonic, $v(0)=|Dv(0)|=0$,
-$|v(x)|\le C(1+|x|)^{1+\beta}$ with $\beta<\al_0$
-$\Longrightarrow$ $v\equiv0$.
-\end{quote}
-Proof template (their one-page argument): $v_l:=v(l\,\cdot)/l^{1+\beta}$
-is again $(s,p)$-harmonic and bounded in $B_1$; the quantitative
-$C^{1,\al_0}$ estimate \cite{GJS} plus the vanishing jet give
-$|v_l(x)|\le C|x|^{1+\al_0}$ in $B_{1/2}$; unscaling,
-$\sup_{B_{l/2}}|v|/|x|^{1+\al_0}=l^{\beta-\al_0}\cdot(\cdots)\to0$.
-\textbf{The genuinely nonlocal gap:} applying \cite{GJS} to $v_l$
-requires $\Tail(v_l)<\infty$, but growth $|x|^{1+\beta}$ with
-$(1+\beta)(p-1)>sp$ makes the tail diverge --- naive transplantation
-fails exactly there. Candidate fixes: truncation outside $B_{2R}$ with
-the truncation error entering as an $L^\infty$ right-hand side (ties
-into the RHS question for \cite{GJS}); or PTU-style incremental
-quotients, which lower the growth by one order. This is now the precise
-content of Lemma~\ref{lem:tail}.}
 \begin{lemma}[Resolution of the nonlocal tail gap via increments;
 2026-06-15]\label{lem:tailfix}
 Let $v$ satisfy the hypotheses of Conjecture~\ref{conj:liouville}, so
@@ -872,11 +884,10 @@ Pick any $\al'$ with
 \[
   0<\al'<\min\{\al_0,\ \al-1\}, \qquad \al=\tfrac{sp}{p-1-\gamma},
 \]
-a nonempty range because $\al>1$ on the admissible set and, by the ceiling
-constraint (C3) $\al<1+\al_0$, i.e.\ $\al-1<\al_0$. Lemma~\ref{lem:ceiling}
-gives $u\in C^{1+\al'}_{loc}$ with a uniform bound. \emph{This $\al'$ is
-generic and sub-sharp; the sharp $\al_0$ enters only through the Liouville
-cap below.} We may take $x_0=0$, $\|u\|_{L^\infty(\R^n)}=1$, and must show
+a nonempty range because $\al>1$ on the admissible set and
+$\al_0>0$ (Lemma~\ref{lem:ceiling}). \emph{This $\al'$ is generic and
+sub-sharp; the sharp $\al_0$ is used only for this compactness step, not
+quantitatively.} We may take $x_0=0$, $\|u\|_{L^\infty(\R^n)}=1$, and must show
 $|u(x)|\le C|x|^{\al}$.
 
 \emph{Contradiction and the $\theta_k$ device.} If not, there are solutions
@@ -919,35 +930,30 @@ v_0$ in $C^{1+\al'}_{loc}(\R^n)$, with
 \]
 Since $0$ is a branching point of each $u_k$, $v_0(0)=|Dv_0(0)|=0$. By
 Proposition~\ref{prop:homog}, $\fpl{v_0}=0$ in $\R^n$. Its growth exponent
-$\al$ satisfies $\al<1+\al_0$ (C3), so the hypothesis of
+$\al$ satisfies $\al<2$ (Lemma~\ref{lem:beta}, C2), i.e.\ $\beta=\al-1<1$,
+so --- provided $v_0$ is nondegenerate --- the hypothesis of
 Conjecture~\ref{conj:liouville} holds and $v_0\equiv0$, contradicting
 $[v_0]_{C^{1+\al'}(B_1)}\ge\frac12$.
 \end{proof}
-\NOTE{\textbf{On the exponent bookkeeping (resolved 2026-06-15 against
-\cite{CP} \S6 line by line; supersedes the earlier ``crux'' flag).} The
-device runs at a \emph{generic, sub-sharp} exponent
-$\al'<\min\{\al_0,\al-1\}$ --- \emph{not} at level $1+\al_0$. The three
-exponents sit as
-\[
-  \underbrace{1+\al'}_{\text{generic working level}}
-  \;<\;\al\;<\;\underbrace{1+\al_0}_{\text{sharp ceiling / Liouville cap}},
-\]
-exactly CP's arrangement (their $\theta_k$ exponent
-$1+\al'-\al<0$ with $\al'<\al_p$, while Lemma~5 caps at $\al<1+\al_p$).
-There is \emph{no} contradiction: the target lies above the level the
-device measures and below the sharp level the Liouville uses. The earlier
-worry came from misidentifying the working level with $1+\al_0$. So
-Conjecture~\ref{conj:liouville} (cap $\al<1+\al_0$) is the correct
-statement, and the synthesis finding (iii) stands: \textbf{the genuine
-binding constraint is $\al<1+\al_0$ with $\al_0$ the \emph{sharp} \cite{GJS}
-exponent}, i.e.\ a quantitative lower bound on $\al_0$ is what the result
-needs. The increment/translation-invariance machinery of
-Remark~\ref{rem:cprime-check} is \emph{not} required here --- it belongs to
-the separate PTU-(4.12) repair. The one genuinely open input is
-Conjecture~\ref{conj:liouville} itself in the nonlocal setting (its
-\cite{CP}-style one-shot rescaling needs the sharp estimate applied to
-$v_l$, whose tail diverges --- closed by truncation $+$ the $f\in L^\infty$
-extension of \cite{GJS}; see the note after Conjecture~\ref{conj:liouville}).}
+\NOTE{\textbf{On the exponent bookkeeping (settled 2026-06-15; this note
+records the final state after two corrections).} (a) The device runs at a
+\emph{generic, sub-sharp} $\al'<\min\{\al_0,\al-1\}$, \emph{not} at level
+$1+\al_0$; so the earlier ``$1+\al_0<\al<2$ contradicts the conjecture''
+panic was a misidentification --- there is no contradiction, and $\al_0$
+enters only for compactness (any $\al_0>0$). (b) But the \emph{opposite}
+over-correction (``so the binding constraint is the sharp $\al<1+\al_0$,
+CP-style'') is \emph{also} wrong nonlocally: CP's one-shot rescaling is
+\textbf{blocked by the tail} (Remark~\ref{rem:routeforced}, verified ---
+$\al(p-1)-sp=\frac{\gamma ps}{p-1-\gamma}>0$ always). The Liouville must go
+through \emph{increments}, whose cap is $\beta<1$, i.e.\ $\boxed{\al<2}$
+(Lemma~\ref{lem:beta}, C2). \textbf{Net: the binding constraints are C1
+(tail) and C2 ($\al<2$), both explicit; no quantitative lower bound on
+$\al_0$ is needed.} The price moves elsewhere: the increment route needs
+the \textbf{nondegeneracy} of $v_0$ (Conjecture~\ref{conj:liouville},
+Remark~\ref{rem:routeforced}) and a linear nonlocal Liouville. \emph{This
+supersedes synthesis finding (iii).} $\,$Update \S\ref{sec:constraints}
+accordingly when the dust settles; for now the corrected story lives here
+and in Remark~\ref{rem:routeforced}.}
 \begin{corollary}[Sharp growth of the gradient --- target]
 Under the conditions of Theorem~\ref{thm:main},
 $\sup_{B_r(x_0)}|Du|\le C\,r^{\frac{sp}{p-1-\gamma}-1}$ for $r<1/2$.
