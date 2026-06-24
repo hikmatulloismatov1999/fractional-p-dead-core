@@ -1,11 +1,12 @@
 \documentclass[11pt]{amsart}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage[margin=1.15in]{geometry}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{enumitem}
 \hypersetup{colorlinks=true, linkcolor=blue!55!black, citecolor=blue!55!black,
   urlcolor=blue!55!black}
-% ---------- theorem environments (PTU style) ----------
+% ---------- theorem environments ----------
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
@@ -13,6 +14,7 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 % ---------- macros ----------
@@ -20,10 +22,12 @@
 \newcommand{\fpl}[1]{(-\Delta_p)^{s}#1}
 \newcommand{\Jp}[1]{|#1|^{p-2}#1}
 \newcommand{\al}{\alpha}
+\newcommand{\asp}{\alpha_{s,p}}
 \newcommand{\Tail}{\mathrm{Tail}_{p-1,sp}}
 
-\title[A nonlocal two-phase $p$-dead-core problem]{Improved regularity for a
-two-phase nonlocal dead-core problem\\ driven by the fractional $p$-Laplacian}
+\title[A nonlocal two-phase $p$-dead-core problem]{Improved growth at branching
+points for a two-phase nonlocal dead-core problem driven by the fractional
+$p$-Laplacian: a conditional analysis}
 \author{Hikmatullo Ismatov}
 \address{King Abdullah University of Science and Technology (KAUST)}
 \email{hikmatullo.ismatov@kaust.edu.sa}
@@ -32,534 +36,599 @@ two-phase nonlocal dead-core problem\\ driven by the fractional $p$-Laplacian}
 \begin{document}
 \begin{abstract}
 We study the two-phase nonlocal dead-core problem
-$\fpl{u}=u_+^{\gamma}-u_-^{\gamma}$ governed by the fractional
-$p$-Laplacian, with $0<\gamma<p-1$, $s\in(0,1)$ and $p\ge2$. At branching
-points---points where $u$ vanishes together with its gradient---we obtain
-the improved growth
-$|u(x)|\le C\,|x-x_0|^{\frac{sp}{p-1-\gamma}}$, an exponent strictly larger
-than the optimal regularity of $(s,p)$-harmonic functions. Following the
-strategy of dos Prazeres, Teymurazyan and Urbano for the case $p=2$, the
-proof combines the natural scaling of the equation with a Liouville-type
-theorem; the new ingredient for $p\neq2$ is that the $(p-1)$-homogeneity of
-the operator replaces the linearization available in the linear case. As a
-byproduct, letting $s\nearrow1$ yields the corresponding estimate for the
-local two-phase $p$-dead-core problem, which appears to be new even in the
-local setting.
+$\fpl{u}=u_+^{\gamma}-u_-^{\gamma}$ governed by the fractional $p$-Laplacian,
+with $0<\gamma<p-1$, $s\in(0,1)$ and $p\ge2$. The natural scaling predicts the
+improved growth $|u(x)|\le C|x-x_0|^{\beta}$, $\beta=\frac{sp}{p-1-\gamma}$, at
+flat branching points. We carry out an honest analysis of the blow-up
+strategy. The scaling identity and the disappearance of the absorption term
+along the amplified blow-up are unconditional. We show that direct compactness
+of the normalized blow-ups is \emph{obstructed} by a tail blow-up, and that the
+first increments of an entire $(s,p)$-harmonic function solve a \emph{linear}
+nonlocal equation; the existing regularity theory (Brasco--Lindgren--Schikorra,
+Giovagnoli--Jesus--Silvestre) provides \emph{local} H\"older estimates for this
+linearized equation but \emph{not} the global, scale-uniform Liouville theorem
+that the argument needs. Accordingly we state the growth estimate
+\emph{conditionally}, isolating the missing linearized Liouville input, the
+compactness/tail control, and the inhomogeneous $C^{1}$-regularity required to
+make sense of flatness. We also record the admissible parameter range for the
+increment route and note that, for $p\neq2$, the usable cap is
+$\beta<1+\asp$, not $\beta<2$.
 \end{abstract}
 \maketitle
 
 %======================================================================
 \section{Introduction}\label{sec:intro}
 %======================================================================
-In this work we obtain improved regularity properties for solutions of the
-two-phase nonlocal problem
+We study the two-phase nonlocal problem
 \begin{equation}\label{eq:main}
-  \fpl{u}=u_+^{\gamma}-u_-^{\gamma}\qquad\text{in }B_1,
+  \fpl{u}=u_+^{\gamma}-u_-^{\gamma}\qquad\text{in }B_1\subset\R^n,
 \end{equation}
 where $\fpl{}$ is the fractional $p$-Laplacian (Section~\ref{sec:prelim}),
-$0<\gamma<p-1$, $s\in(0,1)$ and $p\ge2$. Problems of this type model
-diffusion in the presence of a strong absorption: when the reaction order
-$\gamma$ is sublinear, the solution may vanish on a whole interior region,
-the \emph{dead core}, on whose boundary $u$ touches zero together with its
-gradient. The non-Lipschitz character of the absorption $u\mapsto u^{\gamma}$
-at the origin is precisely what allows such dead cores to form. The study of
-these phenomena, originating in the classical Alt--Phillips problem, has a
-long history in the local setting $s=1$.
+$0<\gamma<p-1$, $s\in(0,1)$ and $p\ge2$. Such equations model diffusion in
+the presence of a strong absorption: when the reaction order $\gamma$ is
+sublinear, the solution may vanish on a whole interior region, the
+\emph{dead core}, on whose boundary $u$ touches zero together with its
+gradient. The non-Lipschitz character of $u\mapsto u^{\gamma}$ at the origin
+is what permits dead cores to form.
 
-Two features set \eqref{eq:main} apart from the classical theory. First, the
-problem is \emph{nonlocal}: $\fpl{u}(x)$ depends on the values of $u$ over
-all of $\R^n$, so the maximum-principle techniques that drive the local
-one-phase theory are not available---in the nonlocal setting a comparison
-principle would require sign information on the entire complement of $B_1$.
-Second, the problem is \emph{two-phase}: $u$ is not sign-constrained, and the
-points where it touches zero need not be local extrema. The one-phase signed
-problem is, moreover, obstructed nonlocally by the strong minimum principle,
-which makes the two-phase formulation \eqref{eq:main} the natural setting.
+Two features distinguish \eqref{eq:main} from the classical theory. It is
+\emph{nonlocal}: $\fpl{u}(x)$ depends on $u$ over all of $\R^n$, so the
+maximum-principle techniques of the local one-phase theory are unavailable.
+And it is \emph{two-phase}: $u$ is not sign-constrained, so the points where
+it touches zero need not be extrema. The one-phase signed problem is, in
+addition, obstructed nonlocally by the strong minimum principle, which makes
+the two-phase formulation \eqref{eq:main} the natural setting.
 
-To state the main result, recall that a point $x_0\in B_1$ is a
-\emph{branching point} of $u$ if $u(x_0)=|Du(x_0)|=0$. Set
-\begin{equation}\label{eq:alpha}
-  \al:=\frac{sp}{\,p-1-\gamma\,}\,,
+The exponent dictated by the scaling of \eqref{eq:main}
+(Proposition~\ref{prop:scaling}) is
+\begin{equation}\label{eq:beta}
+  \beta:=\frac{sp}{\,p-1-\gamma\,},
 \end{equation}
-the exponent dictated by the scaling of \eqref{eq:main}
-(Proposition~\ref{prop:scaling}).
+the analogue of $\frac{2s}{1-\gamma}$ in the fractional Laplacian case
+$p=2$ of dos Prazeres, Teymurazyan and Urbano~\cite{PTU}.
 
-\begin{theorem}[Main result]\label{thm:main-intro}
-Let $(s,p,\gamma)$ lie in the admissible range of
-Section~\ref{sec:branching} and let $u\in L^\infty(\R^n)$ be a solution of
-\eqref{eq:main}. If $x_0\in B_{1/2}$ is a branching point of $u$, then there
-is a constant $C=C(n,s,p,\gamma)>0$ such that
-\[
-  |u(x)|\le C\,\|u\|_{L^\infty(\R^n)}\,|x-x_0|^{\al},
-  \qquad x\in B_{1/2}(x_0).
-\]
+\subsection{Strategy and the present obstruction}
+The general regularity theory of the fractional $p$-Laplacian provides a
+baseline regularity scale for solutions of \eqref{eq:main}: by Biswas and
+Topp~\cite{BT} bounded solutions are $C^{0,\gamma_\circ}$ with
+$\gamma_\circ=\min\{1,\frac{sp}{p-1}\}$, hence locally Lipschitz when
+$\frac{sp}{p-1}>1$. The free-boundary scaling \eqref{eq:beta} predicts a
+\emph{better} exponent $\beta$ at branching points, and the natural route to it
+is a blow-up argument: rescale $u$ around the branching point, show the
+absorption term vanishes in the limit, and classify the limit by a
+Liouville-type theorem. This is the scheme of~\cite{PTU} for $p=2$ and of
+Correa--dos Prazeres~\cite{CP} for the local $p$-Laplacian.
+
+Unlike those settings, the nonlinear \emph{nonlocal} operator creates two
+serious difficulties that this paper isolates rather than hides.
+\begin{enumerate}[leftmargin=2em]
+\item \emph{Compactness/tails.} Interior H\"older estimates for $\fpl{}$ carry
+nonlocal tail terms. We show (Proposition~\ref{prop:tailobstruction}) that the
+naturally normalized blow-up sequence has a \emph{divergent} tail, so its
+compactness does \emph{not} follow from local $L^\infty$ bounds alone.
+\item \emph{Nonlinearity in the Liouville step.} For $p\neq2$ differences of
+solutions are not solutions, so the linear-nonlocal Liouville theorem
+of~\cite{PTU} cannot be copied. We observe that first increments solve a
+\emph{linear} nonlocal equation (Proposition~\ref{prop:linincr}); the
+literature~\cite{BLS,GJS} gives \emph{local} H\"older regularity for that
+equation, but the \emph{global, scale-uniform} Liouville theorem the argument
+needs is not available and is isolated here as a hypothesis~$(\star)$.
+\end{enumerate}
+Consequently we state the growth estimate as a \emph{conditional} theorem
+(Theorem~\ref{thm:growth}), with all missing analytic inputs collected in
+Section~\ref{sec:open}.
+
+\subsection{What ``improved regularity'' should mean}
+For $p=2$ the comparison is clean: once $u$ is Lipschitz the right-hand side
+of $-(-\Delta)^s u=u_+^\gamma-u_-^\gamma$ is $C^\gamma$, Schauder theory gives
+the baseline $C^{2s+\gamma}$, and $\frac{2s}{1-\gamma}$ exceeds it for
+$s>\tfrac12$. For the fractional $p$-Laplacian the operator is nonlinear and
+degenerate, and a Schauder statement $f\in C^\gamma\Rightarrow u\in
+C^{sp+\gamma}$ for $\fpl{u}=f$ is \emph{not} among the inputs currently
+available (see Remark~\ref{rem:baseline}). We therefore keep two exponents
+separate. The scaling exponent $\beta$ is unconditional. A \emph{formal}
+Schauder baseline $sp+\gamma$, treating the operator as of order $sp$, makes
+the estimate a genuine improvement precisely when
+\begin{equation}\label{eq:improve}
+  \frac{sp}{p-1-\gamma}>sp+\gamma
+  \quad\Longleftrightarrow\quad
+  \gamma^2+(sp-(p-1))\gamma+sp(2-p)>0 .
+\end{equation}
+For $p=2$ this reads $\gamma^2+(2s-1)\gamma>0$, valid for all $\gamma>0$ when
+$s>\tfrac12$; for $p>2$ it becomes $\gamma>\gamma_S$ with
+$\gamma_S=\frac{(p-1)-sp+\sqrt{(sp-(p-1))^2+4sp(p-2)}}{2}$.
+The third relevant exponent is $1+\asp$, where $\asp=\asp(n)\in(0,1)$ is the
+H\"older exponent furnished by the regularity theory for the linearized
+increment equation (Section~\ref{sec:liouville}). It is \emph{not} a Schauder
+baseline but the threshold of the Liouville step, which requires
+$\beta<1+\asp$.
+
+\subsection{The admissible parameter range for the increment route}
+The increment route (Section~\ref{sec:liouville}) carries, besides $0<\gamma<p-1$,
+two constraints: a tail condition and the Liouville cap. The tail condition is
+\begin{equation}\label{eq:tailcond}
+  \beta(p-1)<sp+1
+  \qquad\Longleftrightarrow\qquad
+  \boxed{\ \gamma<\frac{p-1}{1+sp}\ }
+\end{equation}
+(see Remark~\ref{rem:tailcond}), and the Liouville cap is $\beta<1+\asp$. We
+work in the range of~\cite{GJS},
+\begin{equation}\label{eq:gjs-range}
+  p\ge2,\qquad p<\frac{2}{1-s}\quad\Longleftrightarrow\quad s>1-\frac2p,
+\end{equation}
+which is exactly the range in which the linearized operator is elliptic of
+positive order $sp-p+2$ (Remark~\ref{rem:order}). For a cleaner first theorem
+we may further restrict to the Lipschitz regime
+\begin{equation}\label{eq:lip-range}
+  sp>p-1\quad\Longleftrightarrow\quad s>1-\frac1p,
+\end{equation}
+in which $\beta>1$ is automatic and the flat branching condition is
+meaningful. The clean hypothesis block is then
+\begin{equation}\label{eq:hyp-block}
+  p\ge2,\qquad s>1-\frac1p,\qquad p<\frac{2}{1-s},\qquad
+  0<\gamma<\frac{p-1}{1+sp},\qquad \frac{sp}{p-1-\gamma}<1+\asp .
+\end{equation}
+A direct computation (Remark~\ref{rem:nonempty}) shows that, with the cap
+written either as $\beta<2$ or as $\beta<1+\asp$ for any $\asp>0$, the
+resulting $\gamma$-range is nonempty \emph{if and only if} $p<\frac2{1-s}$; and
+at $p=2$ the tail condition \eqref{eq:tailcond} reduces to PTU's
+$\gamma<\frac1{1+2s}$.
+
+\subsection{Main result}
+The robust part of the argument is unconditional
+(Propositions~\ref{prop:scaling}, \ref{prop:homog}, \ref{prop:linincr}); the
+growth estimate is conditional.
+
+\begin{theorem}[Conditional growth estimate; informal]\label{thm:main-intro}
+Assume \eqref{eq:hyp-block}, the compactness/admissibility
+Assumption~\ref{ass:compact}, and the linearized Liouville
+input~$(\star)$ of Theorem~\ref{thm:liouville-incr}. Let $u\in L^\infty(\R^n)$
+solve \eqref{eq:main} with $0$ a flat branching point
+(Definition~\ref{def:branch}). Then $|u(x)|\le C|x|^{\beta}$ for $x\in B_{1/2}$,
+with $C=C(n,s,p,\gamma)$.
 \end{theorem}
 
-Since $\gamma>0$, the exponent $\al=\frac{sp}{p-1-\gamma}$ strictly exceeds
-$\min\{1,\frac{sp}{p-1}\}$, the optimal regularity of $(s,p)$-harmonic
-functions. Thus solutions are \emph{more} regular at branching points than
-the homogeneous theory predicts; this is the ``better than expected''
-phenomenon already present in the case $p=2$.
+Letting $s\nearrow1$ \emph{formally} yields the analogous estimate for the
+local two-phase problem $\Delta_p u=u_+^\gamma-u_-^\gamma$ with exponent
+$\frac{p}{p-1-\gamma}$ (Section~\ref{sec:consequences}), which does not appear
+to be recorded in the literature; this limit is itself conditional, as the
+constants of~\cite{GJS} are not uniform as $s\to1$.
 
 \medskip
-\noindent\textbf{Strategy.} We follow the blow-up and Liouville strategy
-introduced by dos Prazeres, Teymurazyan and Urbano~\cite{PTU} for $p=2$, and
-its quasilinear local counterpart of Correa--dos Prazeres~\cite{CP}. One
-rescales $u$ around the branching point according to the exponent~$\al$,
-shows that the absorption term vanishes in the blow-up limit, and classifies
-that limit by a Liouville-type theorem. The essential new point for
-$p\neq2$ is that the operator is no longer linear, so one cannot
-differentiate the equation; instead the $(p-1)$-homogeneity of $\fpl{}$
-forces the right-hand side to vanish along the blow-up
-(Proposition~\ref{prop:homog}), playing the role that linearity plays
-in~\cite{PTU}. The Liouville theorem itself is obtained by passing to first
-increments, which solve a linear nonlocal equation
-(Proposition~\ref{prop:linincr}); this is the nonlinear, nonlocal
-replacement for the differentiation step of~\cite{PTU}.
-
-Letting $s\nearrow1$ in Theorem~\ref{thm:main-intro} yields the analogous
-sharp growth $|u(x)|\le C|x-x_0|^{p/(p-1-\gamma)}$ for the local two-phase
-problem $\Delta_p u=u_+^{\gamma}-u_-^{\gamma}$
-(Theorem~\ref{thm:local}), a result that does not appear to be available in
-the literature, where the $p$-dead-core problem has been treated only in the
-one-phase case.
-
-\medskip
-\noindent\textbf{Organization.} Section~\ref{sec:prelim} fixes notation,
-the notion of solution, and the auxiliary regularity results, and records
-the two scaling identities. Section~\ref{sec:liouville} proves the
-Liouville-type theorem. Section~\ref{sec:branching} contains the proof of
-the main result. Section~\ref{sec:consequences} collects consequences,
-including the local limit $s\nearrow1$.
+\noindent\textbf{Organization.} Section~\ref{sec:prelim} fixes notation, the
+notion of solution, the scaling and homogeneity identities, the increment
+linearization, the regularity inputs, and the tail obstruction.
+Section~\ref{sec:liouville} treats the Liouville step, both the conditional
+direct form and the conditional increment form. Section~\ref{sec:growth} proves
+the conditional growth theorem. Section~\ref{sec:consequences} collects
+consequences, and Section~\ref{sec:open} lists the remaining analytic inputs.
 
 %======================================================================
-\section{Notation and auxiliary results}\label{sec:prelim}
+\section{Preliminaries}\label{sec:prelim}
 %======================================================================
 
 \subsection{Notation and the operator}
-We write $B_r(x_0)$ for the open ball of radius $r$ centered at $x_0$, and
-$B_r:=B_r(0)$. For $\al\in(0,1]$ the H\"older seminorms
-$[\,\cdot\,]_{C^{\al}(B_R)}$ and $[\,\cdot\,]_{C^{1+\al}(B_R)}:=
-[D\,\cdot\,]_{C^{\al}(B_R)}$ are as usual, and $u_\pm:=\max\{\pm u,0\}$. With
-$J_p(t):=\Jp{t}$, the fractional $p$-Laplacian is
+$B_r(x_0)$ is the open ball of radius $r$ at $x_0$, $B_r:=B_r(0)$, and
+$u_\pm:=\max\{\pm u,0\}$. With $J_p(t):=\Jp{t}$,
 \[
-  \fpl{u}(x):=c_{n,s,p}\,\mathrm{P.V.}\!\int_{\R^n}
+  \fpl{u}(x):=\mathrm{P.V.}\!\int_{\R^n}
     \frac{J_p\big(u(x)-u(y)\big)}{|x-y|^{n+sp}}\,dy,
 \]
-where $c_{n,s,p}>0$ is a normalizing constant and the principal value is
-understood in the usual symmetric sense. For $p=2$ this is the fractional
-Laplacian $(-\Delta)^s$. The nonlocal tail adapted to $\fpl{}$ is
+the normalizing constant being omitted. The nonlocal tail is
 \[
   \Tail(u;x_0,R):=\Big(R^{sp}\!\int_{\R^n\setminus B_R(x_0)}
-    \frac{|u(y)|^{p-1}}{|y-x_0|^{n+sp}}\,dy\Big)^{\!\frac{1}{p-1}},
+    \frac{|u(y)|^{p-1}}{|y-x_0|^{n+sp}}\,dy\Big)^{\!\frac{1}{p-1}}.
 \]
-which replaces the space $L^1_s(\R^n)$ used in the case $p=2$; finiteness of
-the tail is exactly the condition under which $\fpl{u}$ is well defined and
-stable under limits.
+Solutions of \eqref{eq:main} are taken in the weak sense, with
+$u\in W^{s,p}_{loc}\cap L^\infty(\R^n)$ and finite tail; weak and viscosity
+solutions coincide~\cite{KKL}.
 
-\subsection{Notion of solution}
-Solutions of \eqref{eq:main} are understood in the weak sense, with
-$u\in W^{s,p}_{loc}(\R^n)\cap L^\infty(\R^n)$ and $\Tail(u;x_0,R)<\infty$ for
-all $B_R(x_0)\subset B_1$. By the equivalence of weak and viscosity
-solutions for the fractional $p$-Laplacian (Korvenp\"a\"a, Kuusi and
-Lindgren~\cite{KKL}) the two notions coincide for \eqref{eq:main}, and we
-use whichever is convenient. Existence for the associated Dirichlet problem
-follows from the comparison principle and Perron's method; we take it for
-granted and focus on regularity.
-
-\subsection{Two scaling identities}
-The exponent~\eqref{eq:alpha} is forced by the scaling of the equation.
-
+\subsection{Scaling and homogeneity}
 \begin{proposition}[Scaling]\label{prop:scaling}
-Let $u$ solve \eqref{eq:main} and, for $r>0$, set $u_r(x):=u(rx)/r^{\al}$
-with $\al>0$. Then
+For $A>0$, $r>0$ and $v(x):=u(rx)/A$,
 \[
-  \fpl{u_r}(x)=r^{\,sp-\al(p-1)}\,\big(\fpl{u}\big)(rx),
+  \fpl{v}(x)=A^{1-p}\,r^{\,sp}\,(\fpl{u})(rx).
 \]
-and $u_r$ solves \eqref{eq:main} in $B_{1/r}$ if and only if
-$sp-\al(p-1)+\al\gamma=0$, i.e.\ $\al=\frac{sp}{p-1-\gamma}$.
+In particular, for $u_r(x):=u(rx)/r^{\beta}$ (i.e.\ $A=r^{\beta}$),
+$\fpl{u_r}(x)=r^{\,sp-\beta(p-1)}(\fpl{u})(rx)$, and $u_r$ solves
+\eqref{eq:main} in $B_{1/r}$ if and only if $sp-\beta(p-1)+\beta\gamma=0$, i.e.\
+$\beta=\frac{sp}{p-1-\gamma}$.
 \end{proposition}
-
 \begin{proof}
-Since $u_r(x)-u_r(y)=r^{-\al}(u(rx)-u(ry))$ and $J_p$ is
-$(p-1)$-homogeneous, $\fpl{u_r}(x)=c_{n,s,p}r^{-\al(p-1)}
-\mathrm{P.V.}\!\int J_p(u(rx)-u(ry))|x-y|^{-n-sp}dy$. The substitution
-$z=ry$ contributes $r^{sp}$ from kernel and volume element, giving the
-displayed identity. As $r^{-\al}>0$, $(u_r)_\pm(x)=r^{-\al}u_\pm(rx)$, so the
-right-hand side of \eqref{eq:main} scales by $r^{-\al\gamma}$; balancing the
-two powers of $r$ yields $sp-\al(p-1)+\al\gamma=0$, i.e.\ \eqref{eq:alpha}.
+Since $v(x)-v(y)=A^{-1}(u(rx)-u(ry))$ and $J_p$ is $(p-1)$-homogeneous,
+$\fpl{v}(x)=A^{1-p}\mathrm{P.V.}\!\int J_p(u(rx)-u(ry))|x-y|^{-n-sp}\,dy$; the
+substitution $z=ry$ contributes $r^{sp}$, giving the first identity. Taking
+$A=r^{\beta}$ and using $(u_r)_\pm=r^{-\beta}u_\pm(r\cdot)$, the right-hand side
+of \eqref{eq:main} scales by $r^{-\beta\gamma}$; balancing the powers of $r$
+gives \eqref{eq:beta}.
 \end{proof}
 
-The second identity is the multiplicative homogeneity in the dependent
-variable, $\fpl{(\lambda u)}=\lambda^{p-1}\fpl{u}$ for $\lambda>0$. Combined
-with Proposition~\ref{prop:scaling} it gives the mechanism that replaces
-linearization.
-
-\begin{proposition}[Vanishing right-hand side along blow-ups]\label{prop:homog}
-Let $u_k$ be solutions of \eqref{eq:main} with $\|u_k\|_{L^\infty(\R^n)}\le
-M$, let $r_k\to0$, $\theta_k\to\infty$, and set
-$v_k(x):=u_k(r_kx)/(\theta_k r_k^{\al})$. Then
+\begin{proposition}[Amplified blow-up: vanishing right-hand side]\label{prop:homog}
+Let $u_k$ solve \eqref{eq:main} with $\|u_k\|_{L^\infty}\le M$, let $r_k\to0$,
+$\theta_k\to\infty$, and
 \[
-  \fpl{v_k}(x)=\theta_k^{\,\gamma-(p-1)}
-   \big[(v_k)_+^{\gamma}(x)-(v_k)_-^{\gamma}(x)\big],
-   \qquad x\in B_{1/r_k},
+  \theta_k=\frac{\sup_{B_{r_k}}|u_k|}{r_k^{\beta}},\qquad
+  v_k(x):=\frac{u_k(r_kx)}{\theta_k r_k^{\beta}}.
 \]
-and, since $\gamma<p-1$, the right-hand side tends to $0$ locally uniformly
-whenever $v_k$ is locally bounded. Consequently any local uniform limit
-$v_0$ of $(v_k)$ is an entire $(s,p)$-harmonic function: $\fpl{v_0}=0$ in
-$\R^n$.
+Then
+\[
+  \fpl{v_k}=\theta_k^{\,\gamma-(p-1)}
+   \big[(v_k)_+^{\gamma}-(v_k)_-^{\gamma}\big]\quad\text{in }B_{1/r_k},
+\]
+and since $\gamma<p-1$ the coefficient $\theta_k^{\gamma-(p-1)}\to0$. Hence any
+local uniform limit $v_0$ of $(v_k)$ \emph{that is admissible for stability}
+satisfies $\fpl{v_0}=0$ in $\R^n$.
 \end{proposition}
-
 \begin{proof}
-Write $\lambda_k:=(\theta_k r_k^{\al})^{-1}>0$, so $v_k=\lambda_k u_k(r_k\cdot)$.
-By the spatial scaling of Proposition~\ref{prop:scaling} together with the
-homogeneity $\fpl{(\lambda w)}=\lambda^{p-1}\fpl{w}$,
-\[
-  \fpl{v_k}(x)=\lambda_k^{\,p-1}r_k^{\,sp}\,\big(\fpl{u_k}\big)(r_kx).
-\]
-Using the equation and $(v_k)_\pm=\lambda_k (u_k)_\pm(r_k\cdot)$,
-\[
-  \fpl{v_k}(x)=\lambda_k^{\,p-1-\gamma}\,r_k^{\,sp}
-   \big[(v_k)_+^{\gamma}-(v_k)_-^{\gamma}\big](x).
-\]
-Finally $\lambda_k^{\,p-1-\gamma}r_k^{\,sp}=\theta_k^{-(p-1-\gamma)}
-r_k^{\,sp-\al(p-1-\gamma)}=\theta_k^{\,\gamma-(p-1)}$, because
-$\al(p-1-\gamma)=sp$ by~\eqref{eq:alpha}. The exponent $\gamma-(p-1)<0$, so
-the prefactor vanishes as $\theta_k\to\infty$; passing to the limit (using
-the stability of solutions of $\fpl{}$ under local uniform convergence with
-tail control, \cite{BLS,KKL}) gives $\fpl{v_0}=0$.
+With $A=\theta_k r_k^\beta$, Proposition~\ref{prop:scaling} gives
+$\fpl{v_k}=(\theta_k r_k^\beta)^{1-p}r_k^{sp}(\fpl{u_k})(r_k\cdot)$. Inserting
+the equation and $(v_k)_\pm=(\theta_kr_k^\beta)^{-1}(u_k)_\pm(r_k\cdot)$
+produces the factor $(\theta_kr_k^\beta)^{\gamma-(p-1)}r_k^{sp}
+=\theta_k^{\gamma-(p-1)}$, since $\beta(p-1-\gamma)=sp$. The passage to the
+limit requires a stability statement for $\fpl{}$ under local uniform
+convergence \emph{with tail control}; the latter is not automatic
+(Proposition~\ref{prop:tailobstruction}) and is part of
+Assumption~\ref{ass:compact}.
 \end{proof}
-
-\begin{remark}
-Proposition~\ref{prop:homog} is the nonlinear analogue of the step in
-\cite[\S6]{PTU} where $\delta^{-1}F(\delta M)\to DF(0)M$: here the
-$(p-1)$-homogeneity plays the role of the differentiability of the
-nonlinearity at the origin, which $\fpl{}$ does not possess.
-\end{remark}
 
 \subsection{Increments solve a linear equation}
-The key device for the nonlinear Liouville theorem is that first increments
-of a solution satisfy a \emph{linear} nonlocal equation.
-
 \begin{proposition}[Linearization along increments]\label{prop:linincr}
-Let $v\in C^1_{loc}\cap L^\infty_{loc}$ and $h\in\R^n$, and set
-$w^h:=v(\cdot+h)-v$. Then, wherever the principal values exist,
+For $v\in C^1_{loc}\cap L^\infty_{loc}$ and $h\in\R^n$, set $w^h:=v(\cdot+h)-v$.
+Then, in the weak sense, for every $\varphi\in C^\infty_c(\R^n)$,
 \[
-  \fpl{\big[v(\cdot+h)\big]}(x)-\fpl{v}(x)
-  =L_{K}w^h(x):=c_{n,s,p}\,\mathrm{P.V.}\!\int_{\R^n}
-   \big(w^h(x)-w^h(y)\big)\,\frac{K(x,y)}{|x-y|^{n+sp}}\,dy,
+  \iint_{\R^n\times\R^n}\big(w^h(x)-w^h(y)\big)\big(\varphi(x)-\varphi(y)\big)
+   \frac{K_h(x,y)}{|x-y|^{n+sp}}\,dx\,dy
+   = \langle\fpl{[v(\cdot+h)]}-\fpl{v},\varphi\rangle,
 \]
-with the symmetric, nonnegative kernel
+with the \emph{symmetric, nonnegative} kernel
 \[
-  K(x,y)=(p-1)\!\int_0^1\big|(v(x)-v(y))+t(w^h(x)-w^h(y))\big|^{\,p-2}dt .
+  K_h(x,y)=(p-1)\int_0^1\big|(1-t)(v(x)-v(y))+t\,(v(x+h)-v(y+h))\big|^{p-2}dt .
 \]
-In particular, if $v$ is $(s,p)$-harmonic then $L_{K}w^h=0$.
+In particular, if $v$ is $(s,p)$-harmonic then $w^h$ is a weak solution of the
+\emph{linear} nonlocal equation $L_{K_h}w^h=0$ --- though not of the
+homogeneous fractional $p$-Laplacian.
 \end{proposition}
-
 \begin{proof}
-Translating $y\mapsto y+h$ in the integral for $\fpl{[v(\cdot+h)]}(x)$ writes
-it as $c_{n,s,p}\,\mathrm{P.V.}\!\int J_p(V(x)-V(y))|x-y|^{-n-sp}dy$ with
-$V:=v(\cdot+h)$. Subtracting $\fpl{v}(x)$ and using the elementary identity
-$J_p(a+\delta)-J_p(a)=\big((p-1)\int_0^1|a+t\delta|^{p-2}dt\big)\delta$
-(valid for $p\ge2$) with $a=v(x)-v(y)$ and $\delta=w^h(x)-w^h(y)$ gives the
-claim; symmetry and nonnegativity of $K$ are immediate.
+Since $\fpl{}$ is translation invariant, $V:=v(\cdot+h)$ is $(s,p)$-harmonic
+whenever $v$ is. Subtracting the weak formulations of $V$ and $v$ tested
+against $\varphi$, and using the identity (valid for $p\ge2$, where $J_p\in
+C^1$)
+\[
+  J_p(b)-J_p(a)=(p-1)\Big(\int_0^1|a+t(b-a)|^{p-2}dt\Big)(b-a),\quad
+  a=v(x)-v(y),\ b=V(x)-V(y),
+\]
+with $b-a=w^h(x)-w^h(y)$, yields the displayed bilinear identity.
 \end{proof}
 
-\subsection{Auxiliary regularity}
-We use the interior regularity theory for the fractional $p$-Laplacian. The
-following is the result of Giovagnoli, Jesus and Silvestre~\cite{GJS}.
-
-\begin{lemma}[Interior $C^{1,\al_0}$ estimate]\label{lem:gjs}
-Let $2\le p<\frac{2}{1-s}$ and let $v$ be $(s,p)$-harmonic in $B_2$ with
-$\Tail(v;0,2)<\infty$. Then $v\in C^{1,\al_0}(B_1)$ for some
-$\al_0=\al_0(n,s,p)\in(0,1)$, and
-\[
-  \|v\|_{C^{1,\al_0}(B_1)}\le C\big(\|v\|_{L^\infty(B_2)}+\Tail(v;0,2)\big),
-  \qquad C=C(n,s,p).
-\]
-The same estimate holds, with the same exponent $\al_0$, for solutions of
-the linear equation $L_K w=0$ with a measurable kernel $K$ comparable to a
-constant on the relevant region \textnormal{(\cite[\S7]{GJS})}.
-\end{lemma}
-
-\begin{lemma}[Bounded right-hand side]\label{lem:rhs}
-Let $2\le p<\frac{1}{1-s}$ and let $u$ be a bounded solution of
-$\fpl{u}=f$ in $B_2$ with $f\in L^\infty(B_2)$ and $\Tail(u;0,2)<\infty$.
-Then $u\in C^{1,\sigma}(B_1)$ for some $\sigma=\sigma(n,s,p)>0$, with
-\[
-  \|u\|_{C^{1,\sigma}(B_1)}\le
-   C\big(\|u\|_{L^\infty(\R^n)}+\Tail(u;0,2)+\|f\|_{L^\infty(B_2)}^{1/(p-1)}\big).
-\]
-\end{lemma}
-
-\begin{remark}\label{rem:rhs}
-Lemma~\ref{lem:rhs} is the inhomogeneous counterpart of Lemma~\ref{lem:gjs};
-the restriction $p<\frac1{1-s}$ (which forces $s>\frac12$, as in the case
-$p=2$ of~\cite{PTU}) is what keeps the linearized operator of order greater
-than one, so that a bounded right-hand side is a lower-order perturbation.
-Its proof follows the scheme of~\cite{GJS}, whose oscillation-improvement
-stage already accommodates a right-hand side, started from the Lipschitz
-estimate with data of~\cite{BS}. We record it here as the precise
-regularity input to Section~\ref{sec:branching}; a self-contained proof is
-deferred.
+\begin{remark}[Degeneracy and order of the linearized kernel]\label{rem:order}
+When $v$ is differentiable, $K_h(x,y)\sim(p-1)|Dv(x)|^{p-2}|x-y|^{p-2}$ near
+the diagonal, so $K_h(x,y)|x-y|^{-n-sp}$ is of homogeneity $-n-(sp-(p-2))$:
+the linearized operator $L_{K_h}$ has order $sp-p+2$, positive precisely when
+$s>1-\frac2p$, i.e.\ in the range \eqref{eq:gjs-range}. For $p>2$ the weight
+$|Dv|^{p-2}$ \emph{vanishes where $Dv=0$} and grows in the far field; thus
+$L_{K_h}$ is \emph{degenerate} at critical points of $v$ and is not uniformly
+elliptic globally. This is a serious issue here, because the blow-up limit is
+expected to be flat at the origin ($Dv_0(0)=0$), exactly where the kernel
+degenerates.
 \end{remark}
 
-Since the right-hand side of \eqref{eq:main} is bounded by
-$\|u\|_{L^\infty}^{\gamma}$, Lemma~\ref{lem:rhs} applies to solutions of
-\eqref{eq:main} and yields a uniform interior $C^{1,\sigma}$ bound for any
-$0<\sigma<\al_0$.
+\subsection{Regularity inputs}
+We record the two regularity facts we use. Both are \emph{local}.
 
-%======================================================================
-\section{A Liouville-type theorem}\label{sec:liouville}
-%======================================================================
-The core of the argument is the classification of entire $(s,p)$-harmonic
-functions with controlled growth and a vanishing first jet. We first record
-the elementary passage from a seminorm bound to a pointwise growth bound,
-which transplants verbatim from~\cite[Lemma~6]{CP}.
-
-\begin{lemma}[Jet to growth]\label{lem:jet}
-Let $w\in C^{1+\al'}(B_1)$ with $0<\al'<1$, $w(0)=|Dw(0)|=0$, and suppose
-\[
-  \sup_{0<r<1/2} r^{\,\al'-\beta}\,[w]_{C^{1+\al'}(B_r)}\le A
-  \qquad\text{for some }\beta>\al'.
-\]
-Then $|w(x)|\le A\,|x|^{1+\beta}$ for $x\in B_{1/2}$.
+\begin{lemma}[Inhomogeneous H\"older/Lipschitz baseline~\cite{BT}]\label{lem:bt}
+Let $p>1$, $s\in(0,1)$ and let $u$ be a bounded weak solution of $\fpl{u}=f$
+in $B_2$ with $f\in L^\infty(B_2)$ and $\frac{sp}{p-1}\neq1$. Then
+$u\in C^{0,\gamma_\circ}_{loc}(B_2)$ with
+$\gamma_\circ=\min\{1,\frac{sp}{p-1}\}$; in particular $u$ is locally Lipschitz
+when $\frac{sp}{p-1}>1$.
 \end{lemma}
 
+\begin{lemma}[Homogeneous $C^{1,\al_0}$ estimate and local linearized regularity~\cite{GJS}]\label{lem:gjs}
+Let $2\le p<\frac{2}{1-s}$. If $v$ is $(s,p)$-harmonic in $B_2$ with
+$\Tail(v;0,2)<\infty$, then $v\in C^{1,\al_0}(B_1)$ for some
+$\al_0=\al_0(n,s,p)\in(0,1)$, with
+$\|v\|_{C^{1,\al_0}(B_1)}\le C(\|v\|_{L^\infty(B_2)}+\Tail(v;0,2))$.
+Moreover~\cite[\S7]{GJS} establishes a \emph{local} interior H\"older estimate
+$[w]_{C^{\asp}(B_{1/2})}\le C(\|w\|_{L^\infty(\R^n)}+\|f\|_{L^\infty(B_1)})$ for
+weak solutions of the linear equation $L_K w=f$ with a measurable kernel $K$
+satisfying symmetry, a scaled upper bound, and a coercivity (ellipticity)
+hypothesis --- the latter requiring the kernel to be \emph{nondegenerate}.
+\end{lemma}
+
+\begin{remark}[The Schauder baseline; flatness is conditional]\label{rem:baseline}
+Lemma~\ref{lem:bt} is the best presently available regularity for solutions of
+\eqref{eq:main}: $C^{0,\gamma_\circ}$, and Lipschitz exactly when
+$\frac{sp}{p-1}>1$. A Schauder statement $f\in C^\gamma\Rightarrow u\in
+C^{sp+\gamma}$, or even an \emph{inhomogeneous} $C^{1,\sigma}$ estimate for
+$\fpl{u}=f\in L^\infty$, is \emph{not} available from~\cite{BT,GJS}.
+Consequently two things are conditional and must be flagged. First, the
+comparison \eqref{eq:improve} is against a \emph{formal} baseline. Second, the
+condition $Du(x_0)=0$ in the definition of a flat branching point presupposes
+$C^1$-regularity of $u$, which we do \emph{not} have for the inhomogeneous
+equation; see Definition~\ref{def:branch}. Whether inhomogeneous fractional
+$p$-Poisson regularity (e.g.\ B\"ogelein--Duzaar--Liao--Moring~\cite{BDLM})
+upgrades Lemma~\ref{lem:bt} to a genuine interior $C^{1,\al}$ estimate, thereby
+licensing $Du(x_0)=0$ and the $C^{1,\al'}$ blow-up device, is an open input
+(Section~\ref{sec:open}).
+\end{remark}
+
+\subsection{The tail obstruction to compactness}
+\begin{proposition}[Tail blow-up of the normalized sequence]\label{prop:tailobstruction}
+Let $u_k$, $r_k$, $\theta_k$, $v_k$ be as in Proposition~\ref{prop:homog}, with
+$\|u_k\|_{L^\infty(\R^n)}\le M$, and set $\varepsilon_k:=\sup_{B_{r_k}}|u_k|
+=\theta_k r_k^{\beta}$, so that $v_k(y)=u_k(r_ky)/\varepsilon_k$. Then:
+\begin{enumerate}[leftmargin=2em]
+\item $|v_k(y)|\le M/\varepsilon_k$ for all $y\in\R^n$;
+\item if $0$ is a branching point and the $u_k$ are uniformly Lipschitz near
+$0$ \textnormal{(Lemma~\ref{lem:bt}, $\frac{sp}{p-1}>1$)}, then
+$\varepsilon_k\to0$, and along the local growth $|v_k(y)|\le C|y|^\beta$ valid
+for $1\le|y|\lesssim 1/r_k$ one has, for each fixed $R$,
+\[
+  \Tail(v_k;0,R)^{\,p-1}\ \asymp\ C(R,n,s,p)\,\varepsilon_k^{-\gamma}
+  \ \longrightarrow\ \infty .
+\]
+\end{enumerate}
+\end{proposition}
 \begin{proof}
-Fix $x\in B_{1/2}$. Since $w(0)=0$, the mean value theorem gives
-$|w(x)|\le|Dw(\xi)||x|$ for some $\xi\in B_{|x|}$, and since $Dw(0)=0$,
-$|Dw(\xi)|=|Dw(\xi)-Dw(0)|\le[w]_{C^{1+\al'}(B_{|x|})}|x|^{\al'}\le
-A|x|^{\beta}$, whence $|w(x)|\le A|x|^{1+\beta}$.
+(1) is immediate from $|u_k|\le M$. For (2): at a branching point with
+$u_k(0)=0$ and uniform Lipschitz bound $L$, $\varepsilon_k\le Lr_k\to0$. Split
+the tail of $v_k$ at the crossover $\rho_k=(M/C\varepsilon_k)^{1/\beta}$ of the
+two bounds $|v_k|\le C|y|^\beta$ and $|v_k|\le M/\varepsilon_k$; using
+$\beta(p-1)-sp=\frac{\gamma sp}{p-1-\gamma}>0$, both regions contribute at the
+order $C(R)\varepsilon_k^{-\gamma}$ (the exponent identity $\delta/\beta=\gamma$
+with $\delta=\beta(p-1)-sp$), which diverges since $\varepsilon_k\to0$.
 \end{proof}
 
-\begin{theorem}[Liouville]\label{thm:liouville}
-Let $v\in C^{1}_{loc}(\R^n)$ be an entire $(s,p)$-harmonic function with
-\[
-  v(0)=|Dv(0)|=0,\qquad |v(x)|\le C\,(1+|x|)^{1+\beta}\ \text{ in }\R^n,
-\]
-for some $0<\beta<1$ with $\beta(p-1)<sp$. Assume in addition that $v$ is
-\emph{nondegenerate}, i.e.\ $Dv$ does not vanish identically on any open set.
-Then $v\equiv0$.
-\end{theorem}
+\begin{remark}\label{rem:nocompact}
+Known interior H\"older estimates for fractional $p$-Laplacian equations
+contain tail terms. Therefore \emph{local $L^\infty$-bounds alone are not
+enough to obtain compactness of $(v_k)$}: by
+Proposition~\ref{prop:tailobstruction} the tail term entering such estimates
+diverges, so the sequence is not, a priori, precompact even in
+$C^0_{loc}$. Any compactness statement must either supply uniform tail control
+or replace $v_k$ by a modified (truncated or differenced) sequence; we do
+\emph{not} assume compactness silently. This is the content of
+Assumption~\ref{ass:compact}.
+\end{remark}
 
-The nondegeneracy hypothesis controls the kernel produced by
-Proposition~\ref{prop:linincr}: where $v$ is flat the linearized kernel
-degenerates, and nondegeneracy keeps it within the ellipticity class of
-Lemma~\ref{lem:gjs}. We comment on it after the proof.
+%======================================================================
+\section{The Liouville step}\label{sec:liouville}
+%======================================================================
+The blow-up limit, if it exists and solves $\fpl{v_0}=0$, must be classified
+among entire $(s,p)$-harmonic functions with a vanishing first jet. Both
+statements below are \emph{conditional}.
 
-\begin{proof}
-For a unit vector $h$ and $\tau>0$, consider the increment
-$w:=v(\cdot+\tau h)-v$. By Proposition~\ref{prop:linincr}, since $v$ is
-$(s,p)$-harmonic,
-\begin{equation}\label{eq:incr-eq}
-  L_{K}w=0\qquad\text{in }\R^n,\qquad
-  K(x,y)=(p-1)\!\int_0^1|(v(x)-v(y))+t(w(x)-w(y))|^{p-2}dt .
+\subsection{Direct rescaling: a global tail hypothesis}
+\begin{lemma}[Conditional Liouville, direct route]\label{lem:liouville-cond}
+Let $v$ be $(s,p)$-harmonic in $\R^n$ with $v(0)=|Dv(0)|=0$ and
+$\beta<1+\al_0$. Suppose the rescalings $v_R(x):=v(Rx)/R^{\beta}$, $R\ge1$,
+satisfy the uniform admissibility bound
+\begin{equation}\label{eq:tail-assumption}
+  \|v_R\|_{L^\infty(B_2)}+\Tail(v_R;0,2)\le M_0\qquad(R\ge1).
 \end{equation}
-\emph{Growth and tail of $w$.} Since $v\in C^1$ with $Dv(0)=0$ and
-$|v|\le C(1+|x|)^{1+\beta}$, the interior gradient estimate gives
-$|Dv(x)|\le C(1+|x|)^{\beta}$, hence
-\[
-  |w(x)|\le\tau\sup_{[x,x+\tau h]}|Dv|\le C_\tau(1+|x|)^{\beta},
-\]
-which is one order below the growth of $v$. As $\beta(p-1)<sp$, this growth
-is admissible for $L_{K}$, i.e.\ the relevant tail of $w$ is finite.
-
-\emph{Regularity and decay.} On compact sets, nondegeneracy of $v$ keeps
-$K$ within the measurable-kernel class of Lemma~\ref{lem:gjs}, which yields
-an interior $C^{1,\al_0}$ estimate for $w$ with the tail term controlled by
-the previous step. Rescaling $w_\rho(x):=\rho^{-\beta}w(\rho x)$, the growth
-bound makes $\|w_\rho\|_{L^\infty(B_1)}$ bounded uniformly in $\rho$, so the
-estimate gives $\|Dw_\rho\|_{L^\infty(B_{1/2})}\le C$; unscaling,
-\[
-  \|Dw\|_{L^\infty(B_{1/(2\rho)})}=\rho^{\beta-1}\|Dw_\rho\|_{L^\infty(B_{1/2})}
-  \le C\rho^{\beta-1}\xrightarrow[\rho\to\infty]{}0,
-\]
-because $\beta<1$. Hence $Dw(0)=0$; running the same argument centered at an
-arbitrary point---where, by nondegeneracy, the ellipticity constants are
-locally uniform---gives $Dw\equiv0$, so $w$ is constant.
-
-\emph{Conclusion.} Thus $v(\cdot+\tau h)-v\equiv c(\tau h)$ for every
-increment. The cocycle identity
-$v(\cdot+h_1+h_2)-v=(v(\cdot+h_1+h_2)-v(\cdot+h_2))+(v(\cdot+h_2)-v)$ forces
-$c$ additive, and by continuity $c(h)=b\cdot h$ for some $b\in\R^n$. But
-$c(h)=v(h)-v(0)=v(h)$ has a double zero at $h=0$ (the vanishing jet), so
-$b=0$. Therefore $v$ is constant, and $v(0)=0$ gives $v\equiv0$.
+Then $v\equiv0$.
+\end{lemma}
+\begin{proof}
+Each $v_R$ is $(s,p)$-harmonic. By Lemma~\ref{lem:gjs} and
+\eqref{eq:tail-assumption}, $\|v_R\|_{C^{1,\al_0}(B_1)}\le CM_0$; since
+$v_R(0)=|Dv_R(0)|=0$, $|v_R(x)|\le CM_0|x|^{1+\al_0}$ on $B_1$. For fixed $z$
+and $R>2|z|$, $\frac{|v(z)|}{R^{\beta}}=|v_R(z/R)|\le CM_0|z/R|^{1+\al_0}$, so
+$|v(z)|\le CM_0|z|^{1+\al_0}R^{\beta-(1+\al_0)}\to0$ since $\beta<1+\al_0$.
 \end{proof}
 
-\begin{remark}[On the hypotheses]\label{rem:liouville}
-Two comments. First, the cap $\beta<1$ is the natural one for the increment
-method, and coincides with the cap of~\cite[Theorem~3.1]{PTU} at $p=2$; the
-exponent $\al_0$ of Lemma~\ref{lem:gjs} is used only to obtain compactness
-and need not be quantified. Second, the local rescaling argument
-of~\cite[Lemma~5]{CP}---which applies the sharp estimate to $v$ itself---is
-not available here: the rescaled function inherits the growth $1+\beta$ of
-$v$, and the corresponding nonlocal tail diverges, so one is forced to pass
-to increments. The nondegeneracy hypothesis is what makes the linearized
-problem~\eqref{eq:incr-eq} uniformly elliptic on compacta; establishing it
-for the blow-up limits of Section~\ref{sec:branching} is the one technical
-point that genuinely uses the structure of \eqref{eq:main}.
+\begin{remark}[Why \eqref{eq:tail-assumption} is not cosmetic]\label{rem:tail}
+A pointwise growth bound $|v(x)|\le C(1+|x|)^{\beta}$ does \emph{not} imply
+\eqref{eq:tail-assumption}: the tail of $v_R$ scales like
+$\int^\infty R^{\beta(p-1)-sp-1}dR$, finite only if $\beta(p-1)<sp$, whereas
+$\beta(p-1)-sp=\frac{\gamma sp}{p-1-\gamma}>0$ for every $\gamma>0$. So the
+direct route genuinely requires \eqref{eq:tail-assumption}. In the linear case
+$p=2$ one bypasses it by working with differences, whose growth is one order
+lower; for $p\neq2$ differences do not solve the homogeneous equation, the
+obstruction addressed next.
+\end{remark}
+
+\subsection{Increment route: a conditional Liouville lemma}
+By Proposition~\ref{prop:linincr}, $w^h=v(\cdot+h)-v$ solves the linear
+equation $L_{K_h}w^h=0$; its growth is one order below that of $v$. The
+relevant tail for this \emph{linear} equation carries the kernel coefficient
+$K_h(x,y)\sim|v(y)|^{p-2}$ in the far field, so finiteness requires
+$\beta(p-1)<sp+1$, not $(\beta-1)(p-1)<sp$.
+
+\begin{remark}[The increment tail condition]\label{rem:tailcond}
+For $|w^h(y)|\sim|y|^{\beta-1}$ and $K_h(x,y)|y|^{-n-sp}\sim
+|y|^{\beta(p-2)-n-sp}$, the integral $\int_{|y|>1}|w^h(y)|K_h(x,y)|y|^{-n-sp}dy$
+converges iff $(\beta-1)+\beta(p-2)-sp<0$, i.e.\ $\beta(p-1)<sp+1$, which is
+\eqref{eq:tailcond}: $\gamma<\frac{p-1}{1+sp}$. This is consistent with the
+$\mathrm{Tail}_{p-1,sp+1}$ that appears in the linearized estimates of~\cite{GJS}.
+\end{remark}
+
+\begin{theorem}[Conditional Liouville, increment route]\label{thm:liouville-incr}
+Let $p\ge2$, $s>1-\frac2p$, and let $v\in C^{1,\al_0}_{loc}(\R^n)$ be entire
+$(s,p)$-harmonic with $v(0)=|Dv(0)|=0$, growth $|v(x)|\le C(1+|x|)^{\beta}$ and
+$|Dv(x)|\le C(1+|x|)^{\beta-1}$, with $1<\beta<1+\asp$ and
+$\beta(p-1)<sp+1$. Assume:
+\begin{itemize}[leftmargin=2em]
+\item[\textnormal{(ND)}] $v$ is \emph{nondegenerate}: $Dv\not\equiv0$ on any
+open set, and on every compact subset of $\{Dv\neq0\}$ the kernel $K_h$ is
+uniformly elliptic of order $sp-p+2$;
+\item[$(\star)$] the local H\"older estimate of Lemma~\ref{lem:gjs} for
+$L_{K_h}$ holds \emph{scale-uniformly}: there is $\asp\in(0,1)$ such that, for
+the rescalings $w_R:=w^h(R\cdot)/R^{\beta-1}$ and centers in $\{Dv\neq0\}$,
+$[w_R]_{C^{\asp}(B_{1/2})}\le C$ uniformly in $R\ge1$.
+\end{itemize}
+Then every increment $w^h$ is constant; hence $v$ is affine, and the vanishing
+jet gives $v\equiv0$.
+\end{theorem}
+\begin{proof}
+Fix $h$ and write $w=w^h$, $\beta'=\beta-1<\asp$. By $(\star)$,
+$[w]_{C^{\asp}(B_{R/2})}=R^{\beta'-\asp}[w_R]_{C^{\asp}(B_{1/2})}\le
+CR^{\beta'-\asp}\to0$ as $R\to\infty$, since $\beta'<\asp$. Hence
+$[w]_{C^{\asp}(\R^n)}=0$, so $w$ is constant. (No translation invariance of the
+kernel is used in this step; (ND) is what makes $(\star)$ meaningful across
+centers.) Thus $v(\cdot+h)-v\equiv c(h)$; the cocycle identity
+$c(h_1+h_2)=c(h_1)+c(h_2)$ and continuity give $c(h)=b\cdot h$, while
+$c(h)=v(h)$ has a double zero at $0$, so $b=0$ and $v\equiv$ const $=0$.
+\end{proof}
+
+\begin{remark}[The cap is $\beta<1+\asp$, not $\beta<2$]\label{rem:incr-cap}
+Two points must be stated honestly. First, $(\star)$ is the genuinely missing
+input: \cite{BLS,GJS} prove the \emph{local} H\"older estimate
+(Lemma~\ref{lem:gjs}) and use it to bootstrap the regularity of a given
+solution, but they do \emph{not} prove the global, scale-uniform Liouville
+property used above. Second, with only a $C^{\asp}$ (H\"older) estimate
+available for the linearized equation, the rescaling forces the cap
+$\beta-1<\asp$, i.e.\ $\beta<1+\asp$. The stronger cap $\beta<2$ would require a
+$C^{1,\asp}$ estimate for the increment --- equivalently $C^{2,\asp}$ for the
+$p$-Laplacian --- which does not exist for $p\neq2$. The value $\beta<2$ is
+special to $p=2$, where the increment is $s$-harmonic and smooth. We therefore
+write the cap as $\beta<1+\asp$ throughout.
+\end{remark}
+
+\begin{remark}[Nonemptiness]\label{rem:nonempty}
+Under \eqref{eq:gjs-range} the constraints $\beta>1$, $\gamma<\frac{p-1}{1+sp}$,
+and $\beta<1+\asp$ (any $\asp>0$) define a nonempty $\gamma$-interval
+\[
+  \max\Big\{0,\,p-1-sp\Big\}<\gamma<
+   \min\Big\{\tfrac{p-1}{1+sp},\ (p-1)-\tfrac{sp}{1+\asp}\Big\},
+\]
+and the interval is nonempty \emph{iff} $s>1-\frac2p$ (equivalently
+$p<\frac2{1-s}$). Indeed $\big(\tfrac{p-1}{1+sp}-(p-1-sp)\big)(1+sp)
+=sp\,(sp-p+2)$, positive iff $sp-p+2>0$. At $p=2$ the tail condition is
+$\gamma<\frac1{1+2s}$, matching~\cite{PTU}.
 \end{remark}
 
 %======================================================================
-\section{Improved regularity at branching points}\label{sec:branching}
+\section{The conditional growth estimate}\label{sec:growth}
 %======================================================================
-
-\begin{definition}\label{def:branch}
-A point $x_0\in B_1$ is a \emph{branching point} of $u$ if
-$u(x_0)=|Du(x_0)|=0$.
+\begin{definition}[Flat branching point]\label{def:branch}
+A point $x_0\in B_1$ is a \emph{flat branching point} of $u$ if $u(x_0)=0$ and
+$u$ vanishes to first order at $x_0$, i.e.\ $\sup_{B_r(x_0)}|u|=o(r)$ as
+$r\to0$. When $u$ is of class $C^1$ near $x_0$ --- which, for the inhomogeneous
+equation, is presently available only conditionally (Remark~\ref{rem:baseline})
+--- this is equivalent to $u(x_0)=|Du(x_0)|=0$.
 \end{definition}
 
-Throughout this section $(s,p,\gamma)$ is \emph{admissible}, by which we mean
-\begin{equation}\label{eq:admissible}
-  2\le p<\tfrac{1}{1-s},\qquad
-  \gamma<(p-1)-\tfrac{sp}{2}\ \ (\text{i.e. }\al<2),\qquad
-  (\al-1)(p-1)<sp,
-\end{equation}
-and the blow-up limits arising below are nondegenerate in the sense of
-Theorem~\ref{thm:liouville}. The first condition places us in the range of
-Lemmas~\ref{lem:gjs}--\ref{lem:rhs}; the second is the cap $\beta=\al-1<1$
-required by the Liouville theorem; the third is the tail condition ensuring
-that increments are admissible. All three are explicit and jointly
-nonempty.
+\begin{assumption}[Compactness and admissibility]\label{ass:compact}
+Solutions of \eqref{eq:main} are of class $C^{1+\al'}_{loc}$ for some
+$\al'\in(0,\al_0)$, with uniform interior bounds under the normalizations
+below \textnormal{(}an inhomogeneous $C^{1,\al'}$ input,
+Remark~\ref{rem:baseline}\textnormal{)}. Moreover, whenever amplified blow-ups
+$v_k$ (Proposition~\ref{prop:homog}) satisfy $\sup_{B_R}|v_k|\le CR^{\beta}$ for
+$1\le R\le c/r_k$ and are nontrivial on $B_1$, a subsequence converges locally
+uniformly to an entire $v_0$ with $\fpl{v_0}=0$, $v_0(0)=|Dv_0(0)|=0$, and
+$v_0$ admissible for the Liouville step (Lemma~\ref{lem:liouville-cond} or
+Theorem~\ref{thm:liouville-incr}, including its hypotheses \textnormal{(ND)}
+and $(\star)$).
+\end{assumption}
 
-\begin{theorem}\label{thm:main}
-Let $(s,p,\gamma)$ be admissible and $u\in L^\infty(\R^n)$ a solution of
-\eqref{eq:main}. If $x_0\in B_{1/2}$ is a branching point of $u$, then
+\begin{theorem}[Conditional growth estimate]\label{thm:growth}
+Assume the parameter block \eqref{eq:hyp-block} and
+Assumption~\ref{ass:compact}. Let $u\in L^\infty(\R^n)$ solve \eqref{eq:main}
+with $0$ a flat branching point. Then
 \[
-  |u(x)|\le C\,\|u\|_{L^\infty(\R^n)}\,|x-x_0|^{\al},\qquad x\in B_{1/2}(x_0),
+  |u(x)|\le C\,|x|^{\beta},\qquad x\in B_{1/2},\qquad C=C(n,s,p,\gamma).
 \]
-with $C=C(n,s,p,\gamma)>0$.
 \end{theorem}
-
 \begin{proof}
-Fix $\al'$ with $0<\al'<\min\{\al_0,\al-1\}$; this range is nonempty since
-$\al>1$ and $\al_0>0$. By Lemma~\ref{lem:rhs}, $u\in C^{1+\al'}_{loc}$ with a
-uniform bound. We may assume $x_0=0$ and $\|u\|_{L^\infty(\R^n)}=1$, and must
-prove $|u(x)|\le C|x|^{\al}$ in $B_{1/2}$.
-
-Suppose not. Then there are solutions $u_k$ of \eqref{eq:main} with $0$ a
-branching point, $[u_k]_{C^{1+\al'}(B_{1/2})}\le 2C$, and points $x_k$ with
-\begin{equation}\label{eq:viol}
-  |u_k(x_k)|>k\,|x_k|^{\al}.
-\end{equation}
-Following~\cite{PTU,CP}, set
-\[
-  \theta_k(r'):=\sup_{r'<r<1/2} r^{\,1+\al'-\al}\,[u_k]_{C^{1+\al'}(B_r)},
-  \qquad 1+\al'-\al<0 .
-\]
-Were $\lim_{r'\to0}\theta_k(r')\le k$, then Lemma~\ref{lem:jet} (with
-$\beta=\al-1>\al'$) would give $|u_k(x)|\le k|x|^{\al}$, contradicting
-\eqref{eq:viol}; hence $\lim_{r'\to0}\theta_k(r')>k$. Choose $r_k>1/k$ with
-\begin{equation}\label{eq:rk}
-  r_k^{\,1+\al'-\al}[u_k]_{C^{1+\al'}(B_{r_k})}
-  \ge\tfrac1k\theta_k(1/k)\ge\tfrac12\theta_k(r_k),
-\end{equation}
-so that $r_k\to0$. Define the blow-up
-\[
-  v_k(x):=\frac{u_k(r_kx)}{\theta_k(r_k)\,r_k^{\al}}.
-\]
-For $1\le R\le\frac1{2r_k}$, a direct computation as in~\cite[(33)]{CP} gives
-\begin{equation}\label{eq:semibound}
-  [v_k]_{C^{1+\al'}(B_R)}
-  =\frac{(r_kR)^{1+\al'-\al}[u_k]_{C^{1+\al'}(B_{r_kR})}}{\theta_k(r_k)}
-   \,R^{\al-1-\al'}\le R^{\al-1-\al'},
-\end{equation}
-using $(r_kR)^{1+\al'-\al}[u_k]_{C^{1+\al'}(B_{r_kR})}\le\theta_k(r_kR)\le
-\theta_k(r_k)$. Let $\eta\equiv1$ on $B_{1/2}$, $\eta=0$ off $B_1$. Then
-$\int_{B_1}\eta\,D_ev_k=\int_{B_1}D_e\eta\,v_k\le C_n$ yields a point
-$z\in B_1$ with $|Dv_k(z)|\le C_n$; combined with \eqref{eq:semibound} and
-$v_k(0)=0$ this gives $|Dv_k(x)|\le C R^{\al-1}$ and $|v_k(x)|\le C|x|^{\al}$
-for $1\le|x|\le\frac1{2r_k}$. Thus $(v_k)$ is locally bounded with uniform
-$C^{1+\al'}$ bounds, so along a subsequence $v_k\to v_0$ in
-$C^{1+\al'}_{loc}(\R^n)$, and
-\begin{equation}\label{eq:limit-props}
-  |v_0(x)|\le C(1+|x|)^{\al},\qquad [v_0]_{C^{1+\al'}(B_1)}\ge\tfrac12,
-\end{equation}
-the normalization coming from the first inequality in \eqref{eq:rk}. Since
-$0$ is a branching point of each $u_k$, $v_0(0)=|Dv_0(0)|=0$. By
-Proposition~\ref{prop:homog}, $\fpl{v_0}=0$ in $\R^n$. As $\al<2$
-(admissibility) and $(\al-1)(p-1)<sp$, the function $v_0$ satisfies the
-hypotheses of Theorem~\ref{thm:liouville} with $\beta=\al-1$; hence
-$v_0\equiv0$, contradicting $[v_0]_{C^{1+\al'}(B_1)}\ge\frac12$ in
-\eqref{eq:limit-props}.
+Fix $\al'\in(0,\min\{\al_0,\beta-1\})$, nonempty since $\beta>1$ and
+$\al_0>0$ (here the $C^{1,\al'}$ regularity is part of
+Assumption~\ref{ass:compact}). Suppose the estimate fails; then there are
+normalized solutions $u_k$ with $u_k(0)=|Du_k(0)|=0$,
+$[u_k]_{C^{1+\al'}(B_{1/2})}\le 2C$, and points $x_k$ with
+$|u_k(x_k)|>k|x_k|^{\beta}$. With
+$\theta_k(r'):=\sup_{r'<r<1/2}r^{1+\al'-\beta}[u_k]_{C^{1+\al'}(B_r)}$
+($1+\al'-\beta<0$), the jet-to-growth lemma forces $\theta_k(0^+)>k$; choose
+$r_k>1/k$ with
+$r_k^{1+\al'-\beta}[u_k]_{C^{1+\al'}(B_{r_k})}\ge\frac1k\theta_k(1/k)\ge
+\frac12\theta_k(r_k)$, so $r_k\to0$. Set
+$v_k:=u_k(r_k\cdot)/(\theta_k(r_k)r_k^{\beta})$. As in~\cite[(33)]{CP},
+$[v_k]_{C^{1+\al'}(B_R)}\le R^{\beta-1-\al'}$ for $1\le R\le\frac1{2r_k}$, and
+the gradient-anchor argument gives $|v_k(x)|\le C|x|^{\beta}$ on that range with
+$[v_k]_{C^{1+\al'}(B_1)}\ge\frac12$. By Assumption~\ref{ass:compact},
+$v_k\to v_0$ locally uniformly with $\fpl{v_0}=0$, $v_0(0)=|Dv_0(0)|=0$,
+$|v_0(x)|\le C(1+|x|)^{\beta}$, $[v_0]_{C^{1+\al'}(B_1)}\ge\frac12$. Since
+$\beta<1+\asp$ (and $\beta<1+\al_0$), the Liouville step
+(Lemma~\ref{lem:liouville-cond}, or Theorem~\ref{thm:liouville-incr} under
+\textnormal{(ND)} and $(\star)$) gives $v_0\equiv0$, contradicting the
+normalization.
 \end{proof}
 
 \begin{remark}
 The proof runs the blow-up at the \emph{generic} exponent $\al'$, strictly
-below the sharp $\al_0$; the sharp exponent enters only through the
-compactness of $(v_k)$. The two genuinely nonlinear-nonlocal inputs are
-Proposition~\ref{prop:homog} (vanishing right-hand side) and the increment
-Liouville Theorem~\ref{thm:liouville}, the latter conditioned on
-nondegeneracy of $v_0$.
+below $\al_0$; the sharp exponents enter only through the regularity inputs.
+The two genuinely nonlinear-nonlocal difficulties are isolated as
+Assumption~\ref{ass:compact} (compactness/tails) and the hypotheses
+\textnormal{(ND)}, $(\star)$ of Theorem~\ref{thm:liouville-incr}.
 \end{remark}
 
 %======================================================================
 \section{Consequences}\label{sec:consequences}
 %======================================================================
-We record three consequences of Theorem~\ref{thm:main}.
-
-\begin{corollary}[Gradient growth]\label{cor:grad}
-Under the hypotheses of Theorem~\ref{thm:main},
-$\sup_{B_r(x_0)}|Du|\le C\,r^{\al-1}$ for all $r<1/2$.
+\begin{corollary}[Gradient growth, conditional]\label{cor:grad}
+Under the hypotheses of Theorem~\ref{thm:growth}, and provided the
+inhomogeneous $C^{1,\al'}$ bound of Assumption~\ref{ass:compact} is available,
+$\sup_{B_r}|Du|\le Cr^{\beta-1}$ for $r<\frac12$.
 \end{corollary}
 
-\begin{proof}
-Apply Theorem~\ref{thm:main} on $B_{2r}(x_0)$ and the interior gradient
-estimate of Lemma~\ref{lem:rhs} to the rescaled solution
-$x\mapsto u(x_0+rx)/r^{\al}$, whose right-hand side is bounded uniformly in
-$r$ by the scaling of Proposition~\ref{prop:scaling}.
-\end{proof}
-
-The estimate is uniform as $s\nearrow1$ within the admissible range, which
-yields the local counterpart. Here $\Delta_p$ is the (local) $p$-Laplacian.
-
-\begin{theorem}[Local two-phase $p$-dead-core]\label{thm:local}
-Let $(p,\gamma)$ be such that $(s,p,\gamma)$ is admissible for $s$ near $1$,
-and let $u$ solve $\Delta_p u=u_+^{\gamma}-u_-^{\gamma}$ in $B_1$. If
-$x_0\in B_{1/2}$ is a branching point of $u$, then
-\[
-  |u(x)|\le C\,|x-x_0|^{\frac{p}{p-1-\gamma}},\qquad x\in B_{1/2}(x_0).
-\]
+\begin{theorem}[Local limit $s\nearrow1$, conditional]\label{thm:local}
+Assume the hypotheses of Theorem~\ref{thm:growth} hold for $s$ near $1$ with
+constants uniform in $s$, and let $u$ solve
+$\Delta_p u=u_+^\gamma-u_-^\gamma$ in $B_1$ with $0$ a flat branching point.
+Then $|u(x)|\le C|x|^{p/(p-1-\gamma)}$ in $B_{1/2}$.
 \end{theorem}
-
 \begin{proof}[Proof (sketch)]
-As $s\nearrow1$ one has $\fpl{u}\to-\Delta_p u$ after fixing the normalizing
-constants $c_{n,s,p}$ (a Bourgain--Brezis--Mironescu-type limit). The
-exponent $\al=\frac{sp}{p-1-\gamma}\to\frac{p}{p-1-\gamma}$, and the
-constants in Theorem~\ref{thm:main} stay bounded as $s\nearrow1$ provided
-the auxiliary estimates of Section~\ref{sec:prelim} are taken in a form
-uniform in $s$; passing to the limit in the conclusion gives the result. The
-two-phase local estimate does not appear to have been recorded previously;
-the existing $p$-dead-core literature is one-phase.
-\end{proof}
-
-\begin{remark}
-The uniformity in $s$ of Lemma~\ref{lem:gjs} fails near $s=1$
-(\cite[\S1.2]{GJS}); a self-contained proof of Theorem~\ref{thm:local} via
-the local quasilinear theory (the scheme of~\cite[\S6]{CP} with classical
-$C^{1,\al}$ estimates for $\Delta_p$) avoids this and is the route we adopt
-in detail elsewhere.
-\end{remark}
-
-\begin{theorem}[Liouville with growth]\label{thm:liouville-growth}
-Let $u\in L^\infty(\R^n)$ solve \eqref{eq:main} in all of $\R^n$ with a
-branching point $x_0$, and suppose $u(x)=o(|x-x_0|^{\al})$ as
-$|x|\to\infty$. Then $u\equiv0$.
-\end{theorem}
-
-\begin{proof}
-Rescale $u_R(x):=u(x_0+Rx)/R^{\al}$; by Theorem~\ref{thm:main} applied at
-every scale, $\sup_{B_1}|u_R|\le C$ and, by the growth hypothesis,
-$\sup_{B_1}|u_R|\to0$ as $R\to\infty$. Unscaling and letting $R\to\infty$
-forces $u\equiv0$ on $B_{1/2}(x_0)$, and a covering argument extends it to
-$\R^n$.
+As $s\nearrow1$, $\fpl{u}\to-\Delta_p u$ after fixing normalizing constants and
+$\beta\to\frac{p}{p-1-\gamma}$; passing to the limit in
+Theorem~\ref{thm:growth} gives the claim. The uniformity in $s$ is itself
+conditional: the constants of Lemma~\ref{lem:gjs} are \emph{not} uniform as
+$s\to1$, so the honest route to the local result is a direct one (the scheme
+of~\cite[\S6]{CP} with classical $C^{1,\al}$ theory for $\Delta_p$), to be
+carried out separately.
 \end{proof}
 
 %======================================================================
+\section{Remaining analytic inputs}\label{sec:open}
+%======================================================================
+The following are unconditional: the scaling identity
+(Proposition~\ref{prop:scaling}), the vanishing of the right-hand side along
+amplified blow-ups (Proposition~\ref{prop:homog}), the increment linearization
+(Proposition~\ref{prop:linincr}), the tail obstruction
+(Proposition~\ref{prop:tailobstruction}), and the contradiction scheme modulo
+its inputs (Theorem~\ref{thm:growth}). The growth estimate is conditional on
+the following, each a concrete analytic statement rather than a black box.
+\begin{enumerate}[leftmargin=2em]
+\item \emph{Compactness of normalized blow-ups.} By
+Proposition~\ref{prop:tailobstruction} the naive normalization has divergent
+tail, so precompactness of $(v_k)$ is not automatic; one must supply uniform
+tail control or work with a truncated/differenced sequence.
+\item \emph{Control of divergent tails / a stability theorem.} A stability
+statement for $\fpl{}$ (resp.\ $L_{K}$) under local uniform convergence with
+the appropriate global tail convergence, of the type underlying~\cite{BLS,KKL}.
+\item \emph{A global, scale-uniform Liouville theorem for the linearized
+kernel}, i.e.\ the hypothesis $(\star)$ of
+Theorem~\ref{thm:liouville-incr}. The \emph{local} H\"older estimate is
+available (\cite[\S7]{GJS}, building on the De Giorgi-type theory cited there);
+its global/scale-uniform Liouville form is, to our knowledge, not, and is the
+principal new analytic input.
+\item \emph{Degeneracy of the linearized kernel where $Dv=0$.} The kernel
+$K_h$ degenerates at critical points of $v$, in particular at the flat origin
+of the blow-up limit (Remark~\ref{rem:order}); hence the nondegeneracy
+hypothesis \textnormal{(ND)} must be established for $v_0$, e.g.\ via a barrier
+computation for $\fpl{|x|^{\beta}}$, or assumed.
+\item \emph{Inhomogeneous $C^1$-regularity / flatness.} Whether inhomogeneous
+fractional $p$-Poisson regularity (e.g.~\cite{BDLM}) is strong enough to yield
+an interior $C^{1,\al}$ estimate for $\fpl{u}=f\in L^\infty$, thereby licensing
+$Du(x_0)=0$ in Definition~\ref{def:branch} and the $C^{1,\al'}$ device of
+Theorem~\ref{thm:growth}. Absent this, only the weaker flatness
+$\sup_{B_r}|u|=o(r)$ is justified.
+\end{enumerate}
+
+%======================================================================
 \begin{thebibliography}{9}
-\bibitem{BS} A. Biswas, A. Sen, \emph{Lipschitz regularity for the fractional
-$p$-Laplacian with data}, preprint arXiv:2507.09920.
+\bibitem{BDLM} V. B\"ogelein, F. Duzaar, N. Liao, S. Moring, \emph{Gradient
+estimates for the fractional $p$-Poisson equation}. % details to verify before submission
+\bibitem{BT} A. Biswas, E. Topp, \emph{Lipschitz regularity of fractional
+$p$-Laplacian}, Ann. PDE 11 (2025), no.~2, Paper No.~27.
 \bibitem{BLS} L. Brasco, E. Lindgren, A. Schikorra, \emph{Higher H\"older
 regularity for the fractional $p$-Laplacian in the superquadratic case},
 Adv. Math. 338 (2018), 782--846.
