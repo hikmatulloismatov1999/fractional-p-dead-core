@@ -255,9 +255,10 @@ Then
   \fpl{v_k}=\theta_k^{\,\gamma-(p-1)}
    \big[(v_k)_+^{\gamma}-(v_k)_-^{\gamma}\big]\quad\text{in }B_{1/r_k},
 \]
-and since $\gamma<p-1$ the coefficient $\theta_k^{\gamma-(p-1)}\to0$. Hence any
-local uniform limit $v_0$ of $(v_k)$ \emph{that is admissible for stability}
-satisfies $\fpl{v_0}=0$ in $\R^n$.
+and since $\gamma<p-1$ the coefficient $\theta_k^{\gamma-(p-1)}\to0$, so the
+absorption term vanishes in the limit. We do \emph{not} conclude that a limit
+$v_0$ is $(s,p)$-harmonic in the standard sense; see
+Remark~\ref{rem:renorm}.
 \end{proposition}
 \begin{proof}
 With $A=\theta_k r_k^\beta$, Proposition~\ref{prop:scaling} gives
@@ -270,6 +271,20 @@ convergence \emph{with tail control}; the latter is not automatic
 (Proposition~\ref{prop:tailobstruction}) and is part of
 Assumption~\ref{ass:compact}.
 \end{proof}
+
+\begin{remark}[The limiting equation must be renormalized]\label{rem:renorm}
+The expected growth $|v_0(x)|\lesssim|x|^{\beta}$ has $\beta(p-1)>sp$, so $v_0$
+need not lie in the tail space $L^{p-1}_{sp}(\R^n)$ on which $\fpl{v_0}$ is
+defined; thus ``$\fpl{v_0}=0$'' is \emph{not} literally well-posed. This
+already occurs for $p=2$ in~\cite{PTU}, where the limit is handled only through
+its increments: $(-\Delta)^s\big(v_0(\cdot+h)-v_0\big)=0$, which is well defined
+because increments grow one order slower. We adopt the same convention: the
+limiting statement is the \emph{increment} equation $L_{K}w_0^h=0$
+(Proposition~\ref{prop:linincr}), meaningful under the tail
+condition~\eqref{eq:tailcond}. Constructing an intrinsic renormalized notion of
+``$(s,p)$-harmonic of polynomial growth'' is itself an open point
+(Section~\ref{sec:open}).
+\end{remark}
 
 \subsection{Increments solve a linear equation}
 \begin{proposition}[Linearization along increments]\label{prop:linincr}
@@ -361,12 +376,13 @@ $\|u_k\|_{L^\infty(\R^n)}\le M$, and set $\varepsilon_k:=\sup_{B_{r_k}}|u_k|
 \item $|v_k(y)|\le M/\varepsilon_k$ for all $y\in\R^n$;
 \item if $0$ is a branching point and the $u_k$ are uniformly Lipschitz near
 $0$ \textnormal{(Lemma~\ref{lem:bt}, $\frac{sp}{p-1}>1$)}, then
-$\varepsilon_k\to0$, and along the local growth $|v_k(y)|\le C|y|^\beta$ valid
-for $1\le|y|\lesssim 1/r_k$ one has, for each fixed $R$,
+$\varepsilon_k\to0$, and the \emph{available} upper bounds
+$|v_k(y)|\le\min\{C|y|^\beta,\,M/\varepsilon_k\}$ yield only
 \[
-  \Tail(v_k;0,R)^{\,p-1}\ \asymp\ C(R,n,s,p)\,\varepsilon_k^{-\gamma}
-  \ \longrightarrow\ \infty .
+  \Tail(v_k;0,R)^{\,p-1}\ \lesssim\ C(R,n,s,p)\,\varepsilon_k^{-\gamma},
 \]
+a bound that diverges as $k\to\infty$; in particular these bounds furnish
+\emph{no} uniform-in-$k$ tail control.
 \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -374,10 +390,20 @@ for $1\le|y|\lesssim 1/r_k$ one has, for each fixed $R$,
 $u_k(0)=0$ and uniform Lipschitz bound $L$, $\varepsilon_k\le Lr_k\to0$. Split
 the tail of $v_k$ at the crossover $\rho_k=(M/C\varepsilon_k)^{1/\beta}$ of the
 two bounds $|v_k|\le C|y|^\beta$ and $|v_k|\le M/\varepsilon_k$; using
-$\beta(p-1)-sp=\frac{\gamma sp}{p-1-\gamma}>0$, both regions contribute at the
-order $C(R)\varepsilon_k^{-\gamma}$ (the exponent identity $\delta/\beta=\gamma$
-with $\delta=\beta(p-1)-sp$), which diverges since $\varepsilon_k\to0$.
+$\beta(p-1)-sp=\frac{\gamma sp}{p-1-\gamma}>0$, both regions are bounded by the
+order $C(R)\varepsilon_k^{-\gamma}$ (the exponent identity $\delta/\beta=\gamma$,
+$\delta=\beta(p-1)-sp$), which diverges as $\varepsilon_k\to0$.
 \end{proof}
+
+\begin{remark}\label{rem:tail-upper}
+The estimate of Proposition~\ref{prop:tailobstruction}(2) is an
+\emph{upper}-bound obstruction: the best available bounds permit tail growth of
+order $\varepsilon_k^{-\gamma}$, which is why standard H\"older compactness
+cannot be obtained from local $L^\infty$-bounds. We do \emph{not} assert a
+matching lower bound $\Tail(v_k)\gtrsim\varepsilon_k^{-\gamma}$; that would
+require a saturation (lower-mass-on-annuli) hypothesis on the $v_k$, which we
+do not impose.
+\end{remark}
 
 \begin{remark}\label{rem:nocompact}
 Known interior H\"older estimates for fractional $p$-Laplacian equations
@@ -515,7 +541,9 @@ below \textnormal{(}an inhomogeneous $C^{1,\al'}$ input,
 Remark~\ref{rem:baseline}\textnormal{)}. Moreover, whenever amplified blow-ups
 $v_k$ (Proposition~\ref{prop:homog}) satisfy $\sup_{B_R}|v_k|\le CR^{\beta}$ for
 $1\le R\le c/r_k$ and are nontrivial on $B_1$, a subsequence converges locally
-uniformly to an entire $v_0$ with $\fpl{v_0}=0$, $v_0(0)=|Dv_0(0)|=0$, and
+uniformly to an entire $v_0$ whose increments satisfy $L_{K}w_0^h=0$ (the
+renormalized limiting equation, Remark~\ref{rem:renorm}), with
+$v_0(0)=|Dv_0(0)|=0$, and
 $v_0$ admissible for the Liouville step (Lemma~\ref{lem:liouville-cond} or
 Theorem~\ref{thm:liouville-incr}, including its hypotheses \textnormal{(ND)}
 and $(\star)$).
@@ -545,7 +573,8 @@ $v_k:=u_k(r_k\cdot)/(\theta_k(r_k)r_k^{\beta})$. As in~\cite[(33)]{CP},
 $[v_k]_{C^{1+\al'}(B_R)}\le R^{\beta-1-\al'}$ for $1\le R\le\frac1{2r_k}$, and
 the gradient-anchor argument gives $|v_k(x)|\le C|x|^{\beta}$ on that range with
 $[v_k]_{C^{1+\al'}(B_1)}\ge\frac12$. By Assumption~\ref{ass:compact},
-$v_k\to v_0$ locally uniformly with $\fpl{v_0}=0$, $v_0(0)=|Dv_0(0)|=0$,
+$v_k\to v_0$ locally uniformly, the increments of $v_0$ satisfy $L_K w_0^h=0$
+(Remark~\ref{rem:renorm}), $v_0(0)=|Dv_0(0)|=0$,
 $|v_0(x)|\le C(1+|x|)^{\beta}$, $[v_0]_{C^{1+\al'}(B_1)}\ge\frac12$. Since
 $\beta<1+\asp$ (and $\beta<1+\al_0$), the Liouville step
 (Lemma~\ref{lem:liouville-cond}, or Theorem~\ref{thm:liouville-incr} under
@@ -595,7 +624,11 @@ amplified blow-ups (Proposition~\ref{prop:homog}), the increment linearization
 (Proposition~\ref{prop:linincr}), the tail obstruction
 (Proposition~\ref{prop:tailobstruction}), and the contradiction scheme modulo
 its inputs (Theorem~\ref{thm:growth}). The growth estimate is conditional on
-the following, each a concrete analytic statement rather than a black box.
+the following, each a concrete analytic statement rather than a black box. We
+emphasize that the principal missing ingredient is \emph{not} local regularity
+---which is available (Lemma~\ref{lem:gjs})---but \emph{global rigidity for the
+degenerate linearized kernel}; items (3) and (4) together with the compactness
+of item (1) are the true bottlenecks.
 \begin{enumerate}[leftmargin=2em]
 \item \emph{Compactness of normalized blow-ups.} By
 Proposition~\ref{prop:tailobstruction} the naive normalization has divergent
@@ -615,12 +648,20 @@ $K_h$ degenerates at critical points of $v$, in particular at the flat origin
 of the blow-up limit (Remark~\ref{rem:order}); hence the nondegeneracy
 hypothesis \textnormal{(ND)} must be established for $v_0$, e.g.\ via a barrier
 computation for $\fpl{|x|^{\beta}}$, or assumed.
-\item \emph{Inhomogeneous $C^1$-regularity / flatness.} Whether inhomogeneous
-fractional $p$-Poisson regularity (e.g.~\cite{BDLM}) is strong enough to yield
-an interior $C^{1,\al}$ estimate for $\fpl{u}=f\in L^\infty$, thereby licensing
-$Du(x_0)=0$ in Definition~\ref{def:branch} and the $C^{1,\al'}$ device of
-Theorem~\ref{thm:growth}. Absent this, only the weaker flatness
-$\sup_{B_r}|u|=o(r)$ is justified.
+\item \emph{Inhomogeneous $C^1$-regularity / flatness.}
+B\"ogelein--Duzaar--Liao--Moring~\cite{BDLM} provide Calder\'on--Zygmund-type
+gradient \emph{integrability} ($\nabla u\in L^Q_{loc}$ for all finite $Q$ when
+$f\in L^\infty$) and higher differentiability $u\in W^{1+\al,p}_{loc}$, but
+\emph{not} an interior $C^{1,\al}$ estimate in general --- the embedding
+$W^{1+\al,p}\hookrightarrow C^{1,\sigma}$ requires $\al p>n$. Hence the
+$C^1$-flatness gap is \emph{not} closed: the condition $Du(x_0)=0$ in
+Definition~\ref{def:branch} remains conditional, and the weaker flatness
+$\sup_{B_r}|u|=o(r)$ is the right formulation.
+\item \emph{A renormalized limiting equation.} As the blow-up limit may have
+too large a tail to be $(s,p)$-harmonic in the standard sense
+(Remark~\ref{rem:renorm}), an intrinsic notion of ``$(s,p)$-harmonic of
+polynomial growth'', for which the increment formulation is consistent, should
+be made precise.
 \end{enumerate}
 
 %======================================================================
