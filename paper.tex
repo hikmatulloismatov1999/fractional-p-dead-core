@@ -475,6 +475,89 @@ The hypothesis $\sup_{B_R}|\nabla v_k|\le L_R$ is itself part of the conditional
 $C^1$ input (Remark~\ref{rem:baseline}).
 \end{remark}
 
+\subsection{Truncation combined with differencing}\label{ssec:truncdiff}
+The divergent constant $a_k$ of Remark~\ref{rem:trunc} can be removed by passing
+to increments before truncating, provided the constant either cancels (as at
+$p=2$) or is bounded a posteriori. We set up the construction and isolate the
+single remaining input.
+
+Let $w_k^h:=v_k(\cdot+h)-v_k$. By Proposition~\ref{prop:linincr} and the
+equation for $v_k$,
+\begin{equation}\label{eq:incr-eq-vk}
+  L_{K_k}w_k^h=f_k^h\quad\text{in }B_{1/r_k},\qquad
+  f_k^h:=\theta_k^{\gamma-(p-1)}\big[\Phi(v_k)(\cdot+h)-\Phi(v_k)\big]\to0,
+\end{equation}
+where $\Phi(t)=t_+^\gamma-t_-^\gamma$ and $K_k=K_{v_k}$ is the increment kernel.
+Truncate $\tilde w_k^h:=\eta(\cdot/R_k)w_k^h$, $R_k\sim c/r_k$. The linear
+analogue of Lemma~\ref{lem:trunc} (same proof, applied to $L_{K_k}$ and the
+growth $|w_k^h(y)|\le C(1+|y|)^{\beta-1}$) gives, for $x\in B_R$,
+\begin{equation}\label{eq:trunc-incr}
+  L_{K_k}\tilde w_k^h(x)=f_k^h(x)+E_k^h(x),\qquad
+  E_k^h=a_k(h)+g_k^h,\quad \|\nabla g_k^h\|_{L^\infty(B_R)}\to0,
+\end{equation}
+under the same condition $\beta(p-1)<sp+1$, with $a_k(h):=E_k^h(0)$.
+
+\begin{lemma}[Conditional compactness via truncation + differencing]\label{lem:truncdiff}
+Assume $p\ge2$, $s>1-\frac1p$, $p<\frac2{1-s}$, $\beta(p-1)<sp+1$, the uniform
+local bounds of Lemma~\ref{lem:trunc} for $w_k^h$, and one of:
+\begin{itemize}[leftmargin=2.4em]
+\item[\textnormal{(C2)}] $p=2$; \emph{or}
+\item[\textnormal{(AP)}] for $p\neq2$, the constants $a_k(h)$ of
+\eqref{eq:trunc-incr} are uniformly bounded, $\sup_k|a_k(h)|\le C(h)$.
+\end{itemize}
+Then, along a subsequence, $\tilde w_k^h\to w_0^h$ in $C^0_{loc}\cap L^1_s$, and
+the limit increments satisfy a linear nonlocal equation
+$L_{K_0}w_0^h=c(h)$ in $\R^n$ with a constant right-hand side $c(h)$
+\textnormal{(}$c(h)=0$ under \textnormal{(C2)} after second differencing\textnormal{)},
+yielding the renormalized limiting equation of Remark~\ref{rem:renorm}.
+\end{lemma}
+
+\begin{proof}[Proof skeleton]
+\emph{Step 1 (truncation).} By \eqref{eq:trunc-incr}, $L_{K_k}\tilde w_k^h
+=f_k^h+a_k(h)+g_k^h$ with $f_k^h\to0$ and $\|\nabla g_k^h\|_{L^\infty(B_R)}\to0$,
+so the right-hand side is $a_k(h)+o_{C^1(B_R)}(1)$. The truncated increment
+$\tilde w_k^h$ has finite, uniformly bounded tail (growth $|y|^{\beta-1}$,
+$\beta(p-1)<sp+1$), so $\tilde w_k^h\to w_0^h$ in $L^1_s$ along a subsequence.
+
+\emph{Step 2 ($p=2$, cancellation).} Here $K_k\equiv c_{n,s}|x-y|^{-n-2s}$ is
+constant and $L_{K_k}=(-\Delta)^s$ is translation invariant. The cocycle
+$w_k^{h_1+h_2}=w_k^{h_1}(\cdot+h_2)+w_k^{h_2}$ and translation invariance give
+$a(h_1+h_2)=a(h_1)+a(h_2)$; with measurability, $a(h)=b\cdot h$. Passing to the
+second difference $\Delta_h^2v_0=w_0^h(\cdot+h)-w_0^h$ removes the constant:
+$(-\Delta)^s\Delta_h^2v_0=a(h)-a(h)=0$. \emph{(Write out in full.)}
+
+\emph{Step 3 ($p\neq2$, the gap).} The kernel $K_k=K_{v_k}$ depends on $v_k$ and
+is \emph{not} translation invariant, so $L_{K_k}w_k^h(\cdot+h)\neq a(h)$ in
+general and the cocycle argument of Step 2 fails. Two sub-questions, to be
+resolved:
+\begin{itemize}[leftmargin=2.4em]
+\item[(a)] whether $a_k(h)$ satisfies additivity up to a controlled error;
+\item[(b)] whether \textnormal{(AP)} holds, e.g.\ by evaluating
+\eqref{eq:trunc-incr} at a single point $x_0$: the left side is bounded by the
+uniform local regularity of $\tilde w_k^h$ (from~\cite[\S7]{GJS} under
+nondegeneracy) plus its uniform $L^1_s$ tail, and $f_k^h\to0$, whence
+$|a_k(h)|\le \text{(those bounds)}+o(1)$. \emph{[Insert the a posteriori estimate
+and its exponent condition here.]}
+\end{itemize}
+
+\emph{Step 4 (conclusion).} Under \textnormal{(C2)} or \textnormal{(AP)},
+stability for $L_{K_k}$ under local uniform $+$ global $L^1_s$ convergence
+passes \eqref{eq:trunc-incr} to the limit, giving $L_{K_0}w_0^h=c(h)$ with
+$c(h):=\lim a_k(h)$ \textnormal{(}$=0$ after second differencing when
+$p=2$\textnormal{)}.
+\end{proof}
+
+\begin{remark}\label{rem:truncdiff-gap}
+The only non-citable input for $p\neq2$ is \textnormal{(AP)}, the a posteriori
+bound on $a_k(h)$. By the point-evaluation argument of Step 3(b) it would follow
+from a \emph{uniform} interior regularity estimate for the truncated increment
+$\tilde w_k^h$ --- precisely the local linearized estimate of~\cite[\S7]{GJS},
+but required uniformly in $k$ and on the (degenerate) increment kernel. Thus
+\textnormal{(AP)} is of the same nature as, and no stronger than, the
+scale-uniform linearized estimate isolated in
+Section~\ref{sec:open}; establishing it is the concrete next step.
+\end{remark}
+
 \begin{remark}\label{rem:nocompact}
 Known interior H\"older estimates for fractional $p$-Laplacian equations
 contain tail terms. Therefore \emph{local $L^\infty$-bounds alone are not
