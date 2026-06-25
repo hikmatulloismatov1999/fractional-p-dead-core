@@ -477,85 +477,125 @@ $C^1$ input (Remark~\ref{rem:baseline}).
 
 \subsection{Truncation combined with differencing}\label{ssec:truncdiff}
 The divergent constant $a_k$ of Remark~\ref{rem:trunc} can be removed by passing
-to increments before truncating, provided the constant either cancels (as at
-$p=2$) or is bounded a posteriori. We set up the construction and isolate the
-single remaining input.
+to increments before truncating, \emph{provided} the constant either cancels
+(as at $p=2$) or is controlled by a far-field increment estimate of the data.
+We carry out the construction; the outcome is that the constant cancels for
+$p=2$ but not for $p\neq2$, where its control is a genuinely new input.
 
 Let $w_k^h:=v_k(\cdot+h)-v_k$. By Proposition~\ref{prop:linincr} and the
 equation for $v_k$,
 \begin{equation}\label{eq:incr-eq-vk}
-  L_{K_k}w_k^h=f_k^h\quad\text{in }B_{1/r_k},\qquad
+  L_{k,h}w_k^h=f_k^h\quad\text{in }B_{1/r_k},\qquad
   f_k^h:=\theta_k^{\gamma-(p-1)}\big[\Phi(v_k)(\cdot+h)-\Phi(v_k)\big]\to0,
 \end{equation}
-where $\Phi(t)=t_+^\gamma-t_-^\gamma$ and $K_k=K_{v_k}$ is the increment kernel.
-Truncate $\tilde w_k^h:=\eta(\cdot/R_k)w_k^h$, $R_k\sim c/r_k$. The linear
-analogue of Lemma~\ref{lem:trunc} (same proof, applied to $L_{K_k}$ and the
-growth $|w_k^h(y)|\le C(1+|y|)^{\beta-1}$) gives, for $x\in B_R$,
+where $\Phi(t)=t_+^\gamma-t_-^\gamma$ and $L_{k,h}=L_{K_{k,h}}$ has the
+increment kernel $K_{k,h}=(p-1)\int_0^1|(1-t)(v_k(x)-v_k(y))+t(v_k(x+h)-v_k(y+h))|^{p-2}dt$.
+Truncate $\tilde w_k^h:=\eta(\cdot/R_k)w_k^h$, $R_k\sim c/r_k$; for $x\in B_R$,
 \begin{equation}\label{eq:trunc-incr}
-  L_{K_k}\tilde w_k^h(x)=f_k^h(x)+E_k^h(x),\qquad
-  E_k^h=a_k(h)+g_k^h,\quad \|\nabla g_k^h\|_{L^\infty(B_R)}\to0,
+  L_{k,h}\tilde w_k^h=f_k^h+a_k(h)+g_k^h,\qquad
+  a_k(h):=F_k^h(0),\quad g_k^h:=F_k^h-F_k^h(0),
 \end{equation}
-under the same condition $\beta(p-1)<sp+1$, with $a_k(h):=E_k^h(0)$.
+where $F_k^h(x)=\int(1-\eta(y/R_k))w_k^h(y)\,K_{k,h}(x,y)|x-y|^{-n-sp}\,dy$.
 
-\begin{lemma}[Conditional compactness via truncation + differencing]\label{lem:truncdiff}
-Assume $p\ge2$, $s>1-\frac1p$, $p<\frac2{1-s}$, $\beta(p-1)<sp+1$, the uniform
-local bounds of Lemma~\ref{lem:trunc} for $w_k^h$, and one of:
-\begin{itemize}[leftmargin=2.4em]
-\item[\textnormal{(C2)}] $p=2$; \emph{or}
-\item[\textnormal{(AP)}] for $p\neq2$, the constants $a_k(h)$ of
-\eqref{eq:trunc-incr} are uniformly bounded, $\sup_k|a_k(h)|\le C(h)$.
-\end{itemize}
-Then, along a subsequence, $\tilde w_k^h\to w_0^h$ in $C^0_{loc}\cap L^1_s$, and
-the limit increments satisfy a linear nonlocal equation
-$L_{K_0}w_0^h=c(h)$ in $\R^n$ with a constant right-hand side $c(h)$
-\textnormal{(}$c(h)=0$ under \textnormal{(C2)} after second differencing\textnormal{)},
-yielding the renormalized limiting equation of Remark~\ref{rem:renorm}.
+\begin{lemma}[Increment truncation: oscillation control]\label{lem:trunc-incr}
+Assume the local bounds $|v_k|+|\nabla v_k|\le C_R$ on $B_{R+|h|}$, the
+far-field growth $|v_k(y)|\le C(1+|y|)^{\beta}$, hence
+$|w_k^h(y)|\le C_h(1+|y|)^{\beta-1}$, and \textnormal{(}for the kernel-gradient
+bound\textnormal{)} either $p\ge3$ or a uniform non-cancellation lower bound on
+$K_{k,h}$. Then, for $x\in B_R$,
+\[
+  \|\nabla g_k^h\|_{L^\infty(B_R)}\le C_h\big(
+   R_k^{\beta(p-2)-sp-1}+R_k^{\beta(p-1)-sp-2}\big)\ \longrightarrow\ 0
+\]
+under $\beta(p-1)<sp+1$ \textnormal{(}$\Leftrightarrow\gamma<\frac{p-1}{1+sp}$\textnormal{)}.
+This decay is \emph{one power better} than the direct truncation
+\textnormal{(}Lemma~\ref{lem:trunc}\textnormal{)}, since $w_k^h$ grows like
+$|y|^{\beta-1}$ rather than $|y|^{\beta}$.
 \end{lemma}
-
-\begin{proof}[Proof skeleton]
-\emph{Step 1 (truncation).} By \eqref{eq:trunc-incr}, $L_{K_k}\tilde w_k^h
-=f_k^h+a_k(h)+g_k^h$ with $f_k^h\to0$ and $\|\nabla g_k^h\|_{L^\infty(B_R)}\to0$,
-so the right-hand side is $a_k(h)+o_{C^1(B_R)}(1)$. The truncated increment
-$\tilde w_k^h$ has finite, uniformly bounded tail (growth $|y|^{\beta-1}$,
-$\beta(p-1)<sp+1$), so $\tilde w_k^h\to w_0^h$ in $L^1_s$ along a subsequence.
-
-\emph{Step 2 ($p=2$, cancellation).} Here $K_k\equiv c_{n,s}|x-y|^{-n-2s}$ is
-constant and $L_{K_k}=(-\Delta)^s$ is translation invariant. The cocycle
-$w_k^{h_1+h_2}=w_k^{h_1}(\cdot+h_2)+w_k^{h_2}$ and translation invariance give
-$a(h_1+h_2)=a(h_1)+a(h_2)$; with measurability, $a(h)=b\cdot h$. Passing to the
-second difference $\Delta_h^2v_0=w_0^h(\cdot+h)-w_0^h$ removes the constant:
-$(-\Delta)^s\Delta_h^2v_0=a(h)-a(h)=0$. \emph{(Write out in full.)}
-
-\emph{Step 3 ($p\neq2$, the gap).} The kernel $K_k=K_{v_k}$ depends on $v_k$ and
-is \emph{not} translation invariant, so $L_{K_k}w_k^h(\cdot+h)\neq a(h)$ in
-general and the cocycle argument of Step 2 fails. Two sub-questions, to be
-resolved:
-\begin{itemize}[leftmargin=2.4em]
-\item[(a)] whether $a_k(h)$ satisfies additivity up to a controlled error;
-\item[(b)] whether \textnormal{(AP)} holds, e.g.\ by evaluating
-\eqref{eq:trunc-incr} at a single point $x_0$: the left side is bounded by the
-uniform local regularity of $\tilde w_k^h$ (from~\cite[\S7]{GJS} under
-nondegeneracy) plus its uniform $L^1_s$ tail, and $f_k^h\to0$, whence
-$|a_k(h)|\le \text{(those bounds)}+o(1)$. \emph{[Insert the a posteriori estimate
-and its exponent condition here.]}
-\end{itemize}
-
-\emph{Step 4 (conclusion).} Under \textnormal{(C2)} or \textnormal{(AP)},
-stability for $L_{K_k}$ under local uniform $+$ global $L^1_s$ convergence
-passes \eqref{eq:trunc-incr} to the limit, giving $L_{K_0}w_0^h=c(h)$ with
-$c(h):=\lim a_k(h)$ \textnormal{(}$=0$ after second differencing when
-$p=2$\textnormal{)}.
+\begin{proof}
+Near the far field $|x-y|\sim|y|$, $|K_{k,h}(x,y)|\le C_R(1+|y|)^{\beta(p-2)}$
+and $|\nabla_xK_{k,h}(x,y)|\le C_R(1+|y|)^{\beta(p-3)}$ (the latter under the
+$p\ge3$/non-cancellation hypothesis). Splitting $\nabla_xF_k^h$ into the
+kernel-gradient term $I_1\lesssim\int_{R_k}^\infty\rho^{\beta-1+\beta(p-3)-sp-1}d\rho
+=R_k^{\beta(p-2)-sp-1}$ and the denominator-gradient term
+$I_2\lesssim\int_{R_k}^\infty\rho^{\beta-1+\beta(p-2)-sp-2}d\rho
+=R_k^{\beta(p-1)-sp-2}$ gives the bound; both exponents are negative under
+$\beta(p-1)<sp+1$.
 \end{proof}
 
-\begin{remark}\label{rem:truncdiff-gap}
-The only non-citable input for $p\neq2$ is \textnormal{(AP)}, the a posteriori
-bound on $a_k(h)$. By the point-evaluation argument of Step 3(b) it would follow
-from a \emph{uniform} interior regularity estimate for the truncated increment
-$\tilde w_k^h$ --- precisely the local linearized estimate of~\cite[\S7]{GJS},
-but required uniformly in $k$ and on the (degenerate) increment kernel. Thus
-\textnormal{(AP)} is of the same nature as, and no stronger than, the
-scale-uniform linearized estimate isolated in
-Section~\ref{sec:open}; establishing it is the concrete next step.
+The \emph{constant} $a_k(h)$, however, behaves like the direct case. If the
+increment growth $|w_k^h(y)|\le C_h(1+|y|)^{\beta-1}$ held \emph{globally} then
+$|a_k(h)|\lesssim R_k^{\beta(p-1)-sp-1}=r_k^{1-\delta}\to0$
+($\delta=\beta(p-1)-sp<1$). But for actual blow-ups only the global $L^\infty$
+bound $|w_k^h|\le 2M/\varepsilon_k$ is available beyond $\sim1/r_k$, giving an
+outer contribution $\sim M^{p-1}\theta_k^{-(p-1)}r_k^{\,sp-\beta(p-1)}
+=M^{p-1}\theta_k^{-(p-1)}r_k^{-\delta}$, which need \emph{not} vanish.
+
+\begin{proposition}[$p=2$: the constant cancels]\label{prop:p2cancel}
+For $p=2$, $K_{k,h}\equiv c_{n,s}$ and $L_{k,h}=(-\Delta)^s$ is linear and
+translation invariant, so $(-\Delta)^s\Delta_\ell=\Delta_\ell(-\Delta)^s$.
+Applying a further difference to \eqref{eq:trunc-incr} gives
+$(-\Delta)^s\Delta_\ell\tilde w_k^h=\Delta_\ell f_k^h+\Delta_\ell g_k^h$,
+in which the constant $a_k(h)$ has cancelled ($\Delta_\ell a_k(h)=0$). Hence
+truncation $+$ second differencing closes the constant-mode problem at $p=2$
+\textnormal{(}the PTU mechanism\textnormal{)}.
+\end{proposition}
+
+\begin{proposition}[$p\neq2$: the constant is not removed]\label{prop:pneq2}
+For $p\neq2$ the cancellation of Proposition~\ref{prop:p2cancel} fails, for
+three independent reasons.
+\begin{enumerate}[leftmargin=2em]
+\item \emph{No commutator identity.} Since $K_{k,h}$ depends on $v_k$,
+$L_{k,h}\Delta_\ell\neq\Delta_\ell L_{k,h}$; the commutator
+$\Delta_\ell(L_{k,h}\tilde w_k^h)-L_{k,h}\Delta_\ell\tilde w_k^h$ contains the
+$x$-oscillation $K_{k,h}(x+\ell,y)|x+\ell-y|^{-n-sp}-K_{k,h}(x,y)|x-y|^{-n-sp}$,
+which depends on $Dv_k$ and degenerates where $Dv_k=0$; it is not small under
+the present hypotheses.
+\item \emph{No exact cocycle for $a_k$.} While $w^{h+\ell}=w^h(\cdot+\ell)+w^\ell$,
+the constants $a_k(h+\ell),a_k(h),a_k(\ell)$ carry the distinct kernels
+$K_{k,h+\ell},K_{k,h},K_{k,\ell}$; the defect $a_k(h+\ell)-a_k(h)-a_k(\ell)$ is
+a sum of kernel-difference integrals, small only under the same global
+increment control that fails for blow-ups.
+\item \emph{No a posteriori bound from local regularity.} Pointwise evaluation
+of $L_{k,h}\tilde w_k^h(0)$ requires regularity above the operator order
+$sp-p+2$, whereas \cite[\S7]{GJS} supplies only a H\"older estimate; and weak
+testing $a_k(h)\int\varphi=\mathcal E_{K_{k,h}}(\tilde w_k^h,\varphi)-\int(f_k^h+g_k^h)\varphi$
+needs a \emph{uniform energy bound} for $\tilde w_k^h$ in $K_{k,h}$, which is
+itself another compactness/tail input. Hence no bound on $a_k(h)$ follows.
+\end{enumerate}
+\end{proposition}
+
+\begin{lemma}[Conditional compactness for increments]\label{lem:truncdiff}
+Assume $p\ge2$, $s>1-\frac1p$, $p<\frac2{1-s}$, $\beta(p-1)<sp+1$; the kernels
+$K_{k,h}$ satisfy the GJS-type hypotheses on $B_{2R}$ \textnormal{(}symmetry,
+scaled upper bound, coercivity of order $sp-p+2$\textnormal{)} with constants
+independent of $k$; the local bounds of Lemma~\ref{lem:trunc-incr}; and the
+\emph{constant-mode control}
+\[
+  \textnormal{(CM)}\qquad |a_k(h)|\le C_h\quad\text{(better: }a_k(h)\to0\text{)}.
+\]
+Then $\tilde w_k^h\to w_0^h$ in $C^{\asp}_{loc}$ along a subsequence, and the
+limit increment solves $L_{K_0}w_0^h=c(h)$ with $c(h)=\lim a_k(h)$. If
+$a_k(h)\to0$ the limit equation is homogeneous; if $a_k(h)\to a(h)\neq0$ it is
+inhomogeneous with a constant right-hand side, which does \emph{not} suffice for
+the Liouville step unless the constant can be removed.
+\end{lemma}
+
+\begin{remark}[The precise missing input]\label{rem:farfield}
+By Propositions~\ref{prop:p2cancel}--\ref{prop:pneq2}, for $p\neq2$ the
+constant-mode hypothesis \textnormal{(CM)} is \emph{not} a consequence of local
+regularity, the cocycle, or differencing. It is equivalent to a
+\emph{uniform far-field increment estimate of the data},
+\[
+  |v_k(y+h)-v_k(y)|\ \lesssim_h\ (1+|y|)^{\beta-1}\quad\text{globally in }y,
+\]
+i.e.\ $a_k(h)\to0$ --- which is precisely the information that local behavior
+near the free boundary does not supply. This, not the size of the truncation
+oscillation, is the exact remaining obstruction to compactness for $p\neq2$;
+\[
+  \textbf{truncation }+\textbf{ differencing closes }p=2\textbf{, but for }
+  p\neq2\textbf{ it requires uniform far-field increment control.}
+\]
 \end{remark}
 
 \begin{remark}\label{rem:nocompact}
@@ -783,13 +823,17 @@ emphasize that the principal missing ingredient is \emph{not} local regularity
 degenerate linearized kernel}; items (3) and (4) together with the compactness
 of item (1) are the true bottlenecks.
 \begin{enumerate}[leftmargin=2em]
-\item \emph{Compactness of normalized blow-ups.} By
-Proposition~\ref{prop:tailobstruction} the available bounds permit a divergent
-tail, so precompactness of $(v_k)$ is not automatic. Truncation
-(Lemma~\ref{lem:trunc}) controls the far-field \emph{oscillation} under
-$\beta(p-1)<sp+1$, but not its constant part (Remark~\ref{rem:trunc}); it must
-therefore be combined with differencing. A self-contained compactness lemma
-along these lines is the most concrete next target.
+\item \emph{Compactness of normalized blow-ups, and the far-field increment
+control.} By Proposition~\ref{prop:tailobstruction} the available bounds permit
+a divergent tail. Truncation (Lemma~\ref{lem:trunc}) controls the far-field
+\emph{oscillation} under $\beta(p-1)<sp+1$ but not its constant; combining
+truncation with differencing closes the constant at $p=2$
+(Proposition~\ref{prop:p2cancel}) but, for $p\neq2$, the constant $a_k(h)$ is
+removed neither by a commutator/cocycle nor by an a posteriori bound
+(Proposition~\ref{prop:pneq2}). The precise remaining obstruction is therefore
+the \emph{uniform far-field increment control} $a_k(h)\to0$ of
+Remark~\ref{rem:farfield}; establishing it (or replacing it by a nondegeneracy
+input) is the most concrete next target.
 \item \emph{Control of divergent tails / a stability theorem.} A stability
 statement for $\fpl{}$ (resp.\ $L_{K}$) under local uniform convergence with
 the appropriate global tail convergence, of the type underlying~\cite{BLS,KKL}.
