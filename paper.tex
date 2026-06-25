@@ -405,6 +405,76 @@ require a saturation (lower-mass-on-annuli) hypothesis on the $v_k$, which we
 do not impose.
 \end{remark}
 
+\subsection{Truncation: oscillation control, but not constant control}
+A natural attempt to bypass the tail obstruction is to truncate $v_k$ at an
+intermediate scale and carry the far field as a datum. This controls the
+\emph{oscillation} of the resulting error but not its (possibly divergent)
+constant part. Fix $\eta\in C^1_c(\R^n)$ with $0\le\eta\le1$, $\eta\equiv1$ on
+$B_1$, $\eta\equiv0$ off $B_2$. For $R_k\to\infty$ set $\eta_k(y)=\eta(y/R_k)$
+and $\tilde v_k:=\eta_k v_k$. For a fixed ball $B_R$ with $R\ll R_k$ one has
+$\tilde v_k=v_k$ on $B_{R_k}$, so for $x\in B_R$ the singular part cancels and
+\[
+  E_k(x):=\fpl{\tilde v_k}(x)-\fpl{v_k}(x)
+  =\int_{|y|>R_k}\frac{J_p(v_k(x)-\eta_k(y)v_k(y))-J_p(v_k(x)-v_k(y))}
+   {|x-y|^{n+sp}}\,dy,
+\]
+absolutely convergent since $\tilde v_k$ is compactly supported.
+
+\begin{lemma}[Truncation oscillation estimate]\label{lem:trunc}
+Assume, for large $k$, $\sup_{B_R}|v_k|\le A$, $\sup_{B_R}|\nabla v_k|\le L_R$,
+$|v_k(y)|\le A(1+|y|)^{\beta}$ for $|y|\le 2R_k$, and $|v_k(y)|\le B_k$ on
+$\R^n$. Write $E_k=a_k+g_k$ with $a_k:=E_k(0)$, $g_k:=E_k-E_k(0)$. Then
+\[
+  \|\nabla g_k\|_{L^\infty(B_R)}\le C\Big[
+   R_k^{\beta(p-2)-sp}+R_k^{\beta(p-1)-sp-1}
+   +B_k^{p-2}R_k^{-sp}+B_k^{p-1}R_k^{-sp-1}\Big],
+\]
+$C=C(n,s,p,\eta,R,A,L_R)$. In the blow-up case $R_k\sim c/r_k$,
+$B_k=M/(\theta_k r_k^{\beta})$, this yields $\|\nabla g_k\|_{L^\infty(B_R)}\to0$
+provided
+\[
+  \beta(p-1)<sp+1
+  \qquad\Big(\Longleftrightarrow\ \gamma<\tfrac{p-1}{1+sp}\Big),
+\]
+which, since $\beta>1$, also forces $\beta(p-2)<sp$.
+\end{lemma}
+\begin{proof}
+With $N_k(x,y)=J_p(v_k(x)-\eta_k(y)v_k(y))-J_p(v_k(x)-v_k(y))$ one has
+$E_k(x)=\int_{|y|>R_k}N_k(x,y)|x-y|^{-n-sp}dy$, and for $x\in B_R$,
+$|y|>R_k\gg R$, $|x-y|\sim|y|$. Two contributions to $\nabla_x E_k$. (i)
+\emph{Numerator}: since $J_p\in C^1$ with $|J_p'(t)|=(p-1)|t|^{p-2}$,
+$|\nabla_xN_k(x,y)|\le C|\nabla v_k(x)|(1+|v_k(y)|)^{p-2}\le
+CL_R(1+|v_k(y)|)^{p-2}$; splitting $\{R_k<|y|<2R_k\}$ (where $|v_k|\le A|y|^\beta$)
+from $\{|y|>2R_k\}$ (where $|v_k|\le B_k$) gives the first and third terms. (ii)
+\emph{Denominator}: $|\nabla_x|x-y|^{-n-sp}|\le C|y|^{-n-sp-1}$ and
+$|N_k(x,y)|\le C(1+|v_k(y)|)^{p-1}$; the same splitting gives the second and
+fourth terms. Substituting $R_k\sim c/r_k$, $B_k=M/(\theta_k r_k^\beta)$ and
+using $\beta(p-1-\gamma)=sp$ gives the four terms
+$r_k^{sp-\beta(p-2)},\,r_k^{sp+1-\beta(p-1)},\,
+\theta_k^{-(p-2)}r_k^{sp-\beta(p-2)},\,\theta_k^{-(p-1)}r_k^{sp+1-\beta(p-1)}$,
+all $\to0$ under $\beta(p-1)<sp+1$.
+\end{proof}
+
+\begin{remark}[Truncation controls oscillation, not the constant]\label{rem:trunc}
+Under $\beta(p-1)<sp+1$, Lemma~\ref{lem:trunc} gives $E_k=a_k+o_{C^1(B_R)}(1)$:
+truncation converts the far field into a \emph{nearly constant} forcing term.
+It does \emph{not} bound $a_k$. Indeed
+$|a_k|=|E_k(0)|\lesssim\int_{|y|>R_k}(1+|v_k(y)|)^{p-1}|y|^{-n-sp}dy\sim
+R_k^{\beta(p-1)-sp}=r_k^{-\delta}$, with $\delta:=\beta(p-1)-sp>0$, which
+\emph{diverges}; the $x$-oscillation gains exactly one power $|y|^{-1}\sim r_k$,
+turning $r_k^{-\delta}$ into $r_k^{1-\delta}\to0$ (valid precisely when
+$\delta<1$, i.e.\ $\beta(p-1)<sp+1$), but leaves the constant uncontrolled. For
+$p=2$ the constant is removed by passing to (second) differences; for $p\neq2$
+it cannot be removed from the nonlinear equation for $v_k$ itself, and no a
+posteriori bound on $a_k$ follows from these hypotheses. Hence
+\[
+  \textbf{truncation alone does not close compactness for }v_k;
+  \textbf{ it must be combined with differencing.}
+\]
+The hypothesis $\sup_{B_R}|\nabla v_k|\le L_R$ is itself part of the conditional
+$C^1$ input (Remark~\ref{rem:baseline}).
+\end{remark}
+
 \begin{remark}\label{rem:nocompact}
 Known interior H\"older estimates for fractional $p$-Laplacian equations
 contain tail terms. Therefore \emph{local $L^\infty$-bounds alone are not
@@ -631,9 +701,12 @@ degenerate linearized kernel}; items (3) and (4) together with the compactness
 of item (1) are the true bottlenecks.
 \begin{enumerate}[leftmargin=2em]
 \item \emph{Compactness of normalized blow-ups.} By
-Proposition~\ref{prop:tailobstruction} the naive normalization has divergent
-tail, so precompactness of $(v_k)$ is not automatic; one must supply uniform
-tail control or work with a truncated/differenced sequence.
+Proposition~\ref{prop:tailobstruction} the available bounds permit a divergent
+tail, so precompactness of $(v_k)$ is not automatic. Truncation
+(Lemma~\ref{lem:trunc}) controls the far-field \emph{oscillation} under
+$\beta(p-1)<sp+1$, but not its constant part (Remark~\ref{rem:trunc}); it must
+therefore be combined with differencing. A self-contained compactness lemma
+along these lines is the most concrete next target.
 \item \emph{Control of divergent tails / a stability theorem.} A stability
 statement for $\fpl{}$ (resp.\ $L_{K}$) under local uniform convergence with
 the appropriate global tail convergence, of the type underlying~\cite{BLS,KKL}.
