@@ -281,8 +281,14 @@ its increments: $(-\Delta)^s\big(v_0(\cdot+h)-v_0\big)=0$, which is well defined
 because increments grow one order slower. We adopt the same convention: the
 limiting statement is the \emph{increment} equation $L_{K}w_0^h=0$
 (Proposition~\ref{prop:linincr}), meaningful under the tail
-condition~\eqref{eq:tailcond}. Constructing an intrinsic renormalized notion of
-``$(s,p)$-harmonic of polynomial growth'' is itself an open point
+condition~\eqref{eq:tailcond}. A rigorous framework for this is the notion of
+Dipierro--Savin--Valdinoci~\cite{DSV} of solutions of polynomial growth, in
+which the equation is read \emph{modulo polynomials}: a constant (or affine)
+right-hand side is identified with $0$. For $p=2$ this makes precise the
+second-difference cancellation of~\cite{PTU}. For $p\neq2$, however, the
+increment kernel is variable, degenerate and non-translation-invariant, and
+\cite{DSV} (stated for the fractional Laplacian) does not cover it; the
+corresponding modulo-polynomial theory for $L_{K_h}$ is an open analytic input
 (Section~\ref{sec:open}).
 \end{remark}
 
@@ -598,6 +604,24 @@ oscillation, is the exact remaining obstruction to compactness for $p\neq2$;
 \]
 \end{remark}
 
+\begin{remark}[The constant as a degree-zero polynomial: the DSV viewpoint]\label{rem:dsv}
+The constant $a_k(h)$ is a degree-$0$ polynomial. In the polynomial-growth
+framework of Dipierro--Savin--Valdinoci~\cite{DSV}, where the equation is read
+\emph{modulo polynomials}, such a constant is identified with $0$, so the
+far-field constant is not part of the meaningful limit equation. At $p=2$ this
+is exactly the second-difference mechanism (Proposition~\ref{prop:p2cancel}),
+and \cite{DSV} makes it rigorous. For $p\neq2$ the same viewpoint indicates the
+correct formulation --- $L_{K_h}w^h=0$ \emph{modulo constants} --- but
+\cite{DSV}, and the measurable-kernel Schauder theory of~\cite{FRO,Serra}, are
+established for \emph{uniformly elliptic} kernels, not for the variable,
+degenerate kernel $K_h$. The needed modulo-polynomial stability/Liouville
+theory for $L_{K_h}$ is therefore a genuine new input, not a citation
+(Section~\ref{sec:open}). \emph{This reframes the obstruction: the constant is
+not mysterious, it is a degree-zero polynomial obstruction; handled by the
+\textnormal{DSV/PTU} framework at $p=2$, and requiring its degenerate-kernel
+analogue for $p\neq2$.}
+\end{remark}
+
 \begin{remark}\label{rem:nocompact}
 Known interior H\"older estimates for fractional $p$-Laplacian equations
 contain tail terms. Therefore \emph{local $L^\infty$-bounds alone are not
@@ -857,11 +881,25 @@ $W^{1+\al,p}\hookrightarrow C^{1,\sigma}$ requires $\al p>n$. Hence the
 $C^1$-flatness gap is \emph{not} closed: the condition $Du(x_0)=0$ in
 Definition~\ref{def:branch} remains conditional, and the weaker flatness
 $\sup_{B_r}|u|=o(r)$ is the right formulation.
-\item \emph{A renormalized limiting equation.} As the blow-up limit may have
-too large a tail to be $(s,p)$-harmonic in the standard sense
-(Remark~\ref{rem:renorm}), an intrinsic notion of ``$(s,p)$-harmonic of
-polynomial growth'', for which the increment formulation is consistent, should
-be made precise.
+\item \emph{A modulo-polynomial theory for the degenerate increment kernel.}
+The blow-up limit has too large a tail to be $(s,p)$-harmonic in the standard
+sense (Remark~\ref{rem:renorm}); the right framework is the polynomial-growth
+notion of~\cite{DSV}, in which the equation holds \emph{modulo polynomials} and
+the far-field constant $a_k$ (degree $0$) is identified with $0$. This resolves
+the constant/stability obstruction for $p=2$ (Remark~\ref{rem:dsv}). For
+$p\neq2$ one needs the analogue of~\cite{DSV} for the variable, degenerate,
+non-translation-invariant kernel $K_h$, in two pieces:
+\begin{itemize}[leftmargin=2.2em]
+\item[(i)] a \emph{modulo-polynomial stability} statement: if
+  $L_{K_k}\tilde w_k=f_k+a_k+g_k$ on fixed balls with $f_k,g_k\to0$ and $a_k$
+  constant, and $K_k\to K_0$, $\tilde w_k\to w_0$ locally with polynomial
+  growth, then $L_{K_0}w_0=0$ modulo constants;
+\item[(ii)] a \emph{Liouville modulo constants}: if $L_{K_h}w=0$ modulo
+  constants in $\R^n$ with $|w(x)|\le C(1+|x|)^{\beta-1}$, $\beta-1<\asp$, then
+  $w$ is constant.
+\end{itemize}
+Neither is supplied by \cite{DSV,FRO,Serra}, which require uniform ellipticity;
+the degeneracy of $K_h$ at $\{Dv=0\}$ is the obstruction common to both.
 \end{enumerate}
 
 %======================================================================
@@ -875,6 +913,15 @@ regularity for the fractional $p$-Laplacian in the superquadratic case},
 Adv. Math. 338 (2018), 782--846.
 \bibitem{CP} J.C. Correa, D. dos Prazeres, \emph{A two-phase quenching-type
 problem for the $p$-Laplacian}, preprint arXiv:2504.11370.
+\bibitem{DSV} S. Dipierro, O. Savin, E. Valdinoci, \emph{Definition of
+fractional Laplacian for functions with polynomial growth}, Rev. Mat.
+Iberoam. 35 (2019), no.~4, 1079--1122; arXiv:1610.04663.
+\bibitem{FRO} X. Fern\'andez-Real, X. Ros-Oton, \emph{Schauder and
+Cordes--Nirenberg estimates for nonlocal elliptic equations with singular
+kernels}, preprint arXiv:2308.11383.
+\bibitem{Serra} J. Serra, \emph{$C^{\sigma+\alpha}$ regularity for concave
+nonlocal fully nonlinear elliptic equations with rough kernels}, Calc. Var.
+Partial Differential Equations 54 (2015), 3571--3601; arXiv:1405.0930.
 \bibitem{GJS} D. Giovagnoli, D. Jesus, L. Silvestre, \emph{$C^{1+\alpha}$
 regularity for fractional $p$-harmonic functions}, preprint arXiv:2509.26565.
 \bibitem{KKL} J. Korvenp\"a\"a, T. Kuusi, E. Lindgren, \emph{Equivalence of
