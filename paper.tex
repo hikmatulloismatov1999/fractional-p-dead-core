@@ -622,6 +622,43 @@ not mysterious, it is a degree-zero polynomial obstruction; handled by the
 analogue for $p\neq2$.}
 \end{remark}
 
+Independently of the modulo-polynomial route, the constant can be made to
+vanish under a regularity hypothesis on the \emph{exterior data} alone.
+
+\begin{lemma}[Stability under exterior H\"older data]\label{lem:exterior}
+Suppose the exterior data are uniformly H\"older,
+$|u_k(x)-u_k(y)|\le C|x-y|^{\sigma}$ for $x,y\in\R^n\setminus B_1$, with
+\[
+  \sigma>\delta:=\beta(p-1)-sp\ \ (>0).
+\]
+Then the far-field constant of \eqref{eq:trunc-incr} satisfies
+$|a_k(h)|\lesssim|h|^{\sigma}\,\theta_k^{-(p-1)}\,r_k^{\,\sigma-\delta}\to0$. In
+particular, since $\delta<1$ under the tail condition~\eqref{eq:tailcond},
+\emph{exterior Lipschitz data $(\sigma=1)$ suffices}, and the constant-mode
+hypothesis \textnormal{(CM)} of Lemma~\ref{lem:truncdiff} holds.
+\end{lemma}
+\begin{proof}
+For $|y|>R_k\sim 1/r_k$ one has $r_ky\notin B_1$, so the exterior modulus gives
+$|w_k^h(y)|=\theta_k^{-1}r_k^{-\beta}|u_k(r_ky+r_kh)-u_k(r_ky)|\le
+C|h|^{\sigma}\theta_k^{-1}r_k^{\sigma-\beta}$. With
+$|K_{k,h}(0,y)|\lesssim|v_k(y)|^{p-2}\le(M\theta_k^{-1}r_k^{-\beta})^{p-2}$ and
+$\int_{|y|>R_k}|y|^{-n-sp}dy\sim r_k^{sp}$,
+\[
+  |a_k(h)|\lesssim |h|^{\sigma}\,\theta_k^{-1}r_k^{\sigma-\beta}\cdot
+   \theta_k^{-(p-2)}r_k^{-\beta(p-2)}\cdot r_k^{sp}
+   =|h|^{\sigma}\,\theta_k^{-(p-1)}\,r_k^{\,\sigma-\delta}.\qedhere
+\]
+\end{proof}
+
+\begin{remark}\label{rem:exterior}
+Lemma~\ref{lem:exterior} turns the stability obstruction into a
+\emph{checkable hypothesis on the data}: any solution whose exterior values are
+Lipschitz (e.g.\ $u$ globally Lipschitz, or the exterior datum chosen smooth)
+satisfies \textnormal{(CM)}, so for such solutions compactness \emph{and}
+stability are in place, and the only remaining input of
+Theorem~\ref{thm:growth} is the Liouville step.
+\end{remark}
+
 \begin{remark}\label{rem:nocompact}
 Known interior H\"older estimates for fractional $p$-Laplacian equations
 contain tail terms. Therefore \emph{local $L^\infty$-bounds alone are not
@@ -856,17 +893,40 @@ truncation with differencing closes the constant at $p=2$
 removed neither by a commutator/cocycle nor by an a posteriori bound
 (Proposition~\ref{prop:pneq2}). The precise remaining obstruction is therefore
 the \emph{uniform far-field increment control} $a_k(h)\to0$ of
-Remark~\ref{rem:farfield}; establishing it (or replacing it by a nondegeneracy
-input) is the most concrete next target.
+Remark~\ref{rem:farfield}. This last point is \emph{discharged} under a
+hypothesis on the exterior data: by Lemma~\ref{lem:exterior}, exterior
+$C^{0,\sigma}$ data with $\sigma>\beta(p-1)-sp$ (in particular exterior
+Lipschitz data) give $a_k(h)\to0$. So compactness and stability are in place for
+solutions with regular exterior data; the obstruction migrates entirely to the
+Liouville step.
 \item \emph{Control of divergent tails / a stability theorem.} A stability
 statement for $\fpl{}$ (resp.\ $L_{K}$) under local uniform convergence with
-the appropriate global tail convergence, of the type underlying~\cite{BLS,KKL}.
-\item \emph{A global, scale-uniform Liouville theorem for the linearized
-kernel}, i.e.\ the hypothesis $(\star)$ of
-Theorem~\ref{thm:liouville-incr}. The \emph{local} H\"older estimate is
-available (\cite[\S7]{GJS}, building on the De Giorgi-type theory cited there);
-its global/scale-uniform Liouville form is, to our knowledge, not, and is the
-principal new analytic input.
+the appropriate global tail convergence, of the type underlying~\cite{BLS,KKL};
+for the constant mode, Lemma~\ref{lem:exterior} suffices under regular exterior
+data.
+\item \emph{A global, scale-uniform Liouville theorem for the degenerate
+linearized kernel} --- the hypothesis $(\star)$ of
+Theorem~\ref{thm:liouville-incr}, and the principal remaining problem. The
+\emph{local} H\"older estimate is available (\cite[\S7]{GJS,FRO,Serra}, under
+uniform ellipticity); the scale-uniform/global form for the \emph{degenerate}
+$K_h$ is not. Two structured routes appear more tractable than arbitrary
+degeneracy:
+\begin{itemize}[leftmargin=2.2em]
+\item[(W)] \emph{Weighted-kernel model.} Near a flat point $|Dv(x)|\sim
+  |x|^{\beta-1}$, so $K_h$ behaves like the \emph{weighted} kernel
+  $\mathcal K(x,y)\sim(|x|+|y|)^{a}|x-y|^{-n-m}$ with $m=sp-p+2$ and
+  $a=(\beta-1)(p-2)\ge0$. For $a<n$ (i.e.\ $(\beta-1)(p-2)<n$) the weight
+  $|x|^a$ is of Muckenhoupt $A_2$ type; proving H\"older/Liouville estimates
+  for this weighted class is a concrete, structured problem replacing
+  ``arbitrary degenerate kernel''.
+\item[(A)] \emph{Annular nondegeneracy.} If the blow-up limit satisfies
+  $|Dv(x)|\sim R^{\beta-1}$ on a large portion of each annulus
+  $B_{2R}\setminus B_R$, rescaling the annulus to unit size makes $K_h$
+  uniformly elliptic, so the \cite{GJS}-type local estimate applies per annulus
+  and the decay argument closes the Liouville. Establishing annular
+  nondegeneracy (e.g.\ via a barrier for $\fpl{|x|^{\beta}}$) is the remaining
+  step.
+\end{itemize}
 \item \emph{Degeneracy of the linearized kernel where $Dv=0$.} The kernel
 $K_h$ degenerates at critical points of $v$, in particular at the flat origin
 of the blow-up limit (Remark~\ref{rem:order}); hence the nondegeneracy
