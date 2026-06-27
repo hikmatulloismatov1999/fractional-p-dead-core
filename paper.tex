@@ -869,6 +869,85 @@ of~\cite[\S6]{CP} with classical $C^{1,\al}$ theory for $\Delta_p$), to be
 carried out separately.
 \end{proof}
 
+\subsection{A scale-local barrier}\label{ssec:barrier}
+The non-admissibility of $|x|^{\beta}$ as a global profile ($\beta(p-1)>sp$) is,
+for barriers, an \emph{advantage}: a power capped far away retains a large
+negative tail contribution that fixes the sign of the operator on a fixed
+annulus.
+
+\begin{lemma}[Scale-local barrier]\label{lem:barrier}
+Let $p\ge2$, $s\in(0,1)$, $0<\gamma<p-1$, $\beta=\frac{sp}{p-1-\gamma}>1$, so
+$\beta(p-1)-sp=\beta\gamma>0$. For $L>1$ let $\psi_L:\R^n\to[0,\infty)$ be radial,
+nondecreasing in $|x|$, $\psi_L\in C^2(\R^n\setminus\{0\})\cap L^\infty(\R^n)$,
+with
+\[
+  \psi_L(x)=|x|^{\beta}\ (|x|\le2),\qquad \psi_L(x)=L^{\beta}\ (|x|\ge2L),\qquad
+  |x|^{\beta}\le\psi_L(x)\le L^{\beta}\ (2\le|x|\le2L),
+\]
+the interpolation on $\{2<|x|<2L\}$ being smooth and monotone. Write
+$Q_L:=\fpl{\psi_L}$, $\mathcal A:=\{1\le|z|\le\tfrac32\}$. Then:
+\begin{enumerate}[leftmargin=2.2em]
+\item[\textnormal{(i)}] $\fpl{[R^{\beta}\psi_L(\cdot/R)]}(x)=R^{\beta\gamma}\,
+  Q_L(x/R)$;
+\item[\textnormal{(ii)}] $Q_L$ is finite and continuous on $\mathcal A$, and there
+  exist $L_0>1$, $c_0>0$ (depending on $n,s,p,\beta$ and the fixed interpolation)
+  with $Q_L(z)\le -c_0<0$ on $\mathcal A$ for all $L\ge L_0$;
+\item[\textnormal{(iii)}] hence, with $\psi_{L,R}(x):=R^{\beta}\psi_L(x/R)$,
+  \[
+    \fpl{\psi_{L,R}}(x)\le -c_0\,R^{\beta\gamma}<0,\qquad R\le|x|\le\tfrac32R .
+  \]
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(i) As in Proposition~\ref{prop:scaling}, using $\beta(p-1)-sp=\beta\gamma$.
+
+(ii) Fix $z\in\mathcal A$. Since $z\ne0$, $\psi_L\in C^2$ near $z$ and is
+bounded, so the principal value converges; continuity in $z$ follows. Split
+$Q_L=Q_{\mathrm{sing}}+Q_{\mathrm{far}}$ with $Q_{\mathrm{sing}}=
+\mathrm{P.V.}\!\int_{|y-z|<1/4}$ and $Q_{\mathrm{far}}=\int_{|y-z|\ge1/4}$
+(absolutely convergent). For $Q_{\mathrm{sing}}$, both $z\pm\zeta\in B_2$ when
+$|\zeta|<\tfrac14$, where $\psi_L=|\cdot|^{\beta}$; symmetrizing
+$y=z\pm\zeta$ and using $J_p$ odd,
+\[
+  Q_{\mathrm{sing}}(z)=-\tfrac{c}{2}\!\int_{|\zeta|<1/4}\!\big[J_p(a_\zeta)+
+   J_p(b_\zeta)\big]|\zeta|^{-n-sp}d\zeta,\quad a_\zeta+b_\zeta\ge0,
+\]
+by convexity of $|z|^{\beta}$ ($\beta>1$); $J_p$ nondecreasing then gives
+$J_p(a_\zeta)+J_p(b_\zeta)\ge0$, so $Q_{\mathrm{sing}}(z)\le0$. For
+$Q_{\mathrm{far}}$ (no singularity), $\psi_L$ nondecreasing gives
+$\psi_L(y)\ge\psi_L(z)$ on $\{|y|>|z|\}$, so $J_p(\psi_L(z)-\psi_L(y))\le0$
+there; the only positive part is $\{|y-z|\ge\tfrac14\}\cap\{|y|<|z|\}\subset
+B_{3/2}$, where $\psi_L=|\cdot|^{\beta}$ and the kernel is $\le 4^{n+sp}$,
+contributing at most $P_1=P_1(n,s,p,\beta)$ \emph{independent of $L$}. On
+$\{|y|\ge2L\}$, $\psi_L(y)=L^{\beta}$ and, for $L$ large,
+$\psi_L(z)\le(\tfrac32)^{\beta}\le\tfrac12L^{\beta}$, so
+\[
+  \int_{|y|\ge2L}\!J_p(\psi_L(z)-L^{\beta})\,|z-y|^{-n-sp}dy
+  \le -\big(\tfrac12L^{\beta}\big)^{p-1}\!\!\int_{|y|\ge2L}\!|z-y|^{-n-sp}dy
+  \le -c_1L^{\beta(p-1)}L^{-sp}=-c_1L^{\beta\gamma}.
+\]
+Hence $Q_L(z)\le Q_{\mathrm{sing}}+P_1-c_1L^{\beta\gamma}\le P_1-c_1
+L^{\beta\gamma}$ uniformly on $\mathcal A$; choosing $L_0$ with $c_1L_0^{\beta
+\gamma}\ge P_1+c_0$ gives (ii). (iii) is (i) on $\mathcal A$ rescaled.
+\end{proof}
+
+\begin{remark}[Amplitude vs.\ reaction; two-phase caveat]\label{rem:barrier}
+For $A>0$, $\fpl{(A\psi_{L,R})}=A^{p-1}\fpl{\psi_{L,R}}$ while
+$(A\psi_{L,R})_+^{\gamma}=A^{\gamma}R^{\beta\gamma}\psi_L(\cdot/R)^{\gamma}$;
+since $p-1>\gamma$, the operator and reaction terms (both of order
+$R^{\beta\gamma}$) are separated by the free factor $A^{p-1-\gamma}$, so
+$A\psi_{L,R}$ can be made a super- or sub-solution of \eqref{eq:main} at each
+scale. The mechanism of Lemma~\ref{lem:barrier} is that the \emph{non-admissible
+tail} of $|x|^{\beta}$, once capped at height $L^{\beta}$, contributes
+$\sim -L^{\beta\gamma}\to-\infty$, fixing the sign on the fixed annulus.
+\textbf{Two-phase caveat.} The comparison principle for $\fpl{}$ is nonlocal and
+requires ordering on the entire complement; $\psi_{L,R}\ge0$ controls the
+positive phase only, and (by $u\mapsto-u$) the negative phase. We thus obtain
+annular nondegeneracy \emph{within each one-phase region under the comparison
+hypotheses}, not across a branching point, where the complement ordering is
+delicate --- the open step in route (A) of Section~\ref{sec:open}.
+\end{remark}
+
 %======================================================================
 \section{Remaining analytic inputs}\label{sec:open}
 %======================================================================
@@ -923,9 +1002,11 @@ degeneracy:
   $|Dv(x)|\sim R^{\beta-1}$ on a large portion of each annulus
   $B_{2R}\setminus B_R$, rescaling the annulus to unit size makes $K_h$
   uniformly elliptic, so the \cite{GJS}-type local estimate applies per annulus
-  and the decay argument closes the Liouville. Establishing annular
-  nondegeneracy (e.g.\ via a barrier for $\fpl{|x|^{\beta}}$) is the remaining
-  step.
+  and the decay argument closes the Liouville. The scale-local barrier
+  Lemma~\ref{lem:barrier} ($\fpl{\psi_{L,R}}\le-c_0R^{\beta\gamma}$ on
+  $R\le|x|\le\frac32R$) is the tool for this, valid \emph{within one phase};
+  establishing annular nondegeneracy \emph{across} a branching point
+  (Remark~\ref{rem:barrier}) is the remaining step.
 \end{itemize}
 \item \emph{Degeneracy of the linearized kernel where $Dv=0$.} The kernel
 $K_h$ degenerates at critical points of $v$, in particular at the flat origin
