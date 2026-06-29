@@ -1,0 +1,210 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!55!black, citecolor=blue!55!black,
+  urlcolor=blue!55!black}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\fpl}[1]{(-\Delta_p)^{s}#1}
+\newcommand{\Jp}[1]{|#1|^{p-2}#1}
+\newcommand{\Lv}{\mathcal L_{v}}
+\newcommand{\al}{\alpha}
+\newcommand{\asp}{\alpha_{s,p}}
+
+\title{Fractional $p$-Laplacian dead-core problem:\\
+PTU-faithful lemmas and proofs ($p$-case)}
+\author{Hikmatullo Ismatov}
+\date{\today\ --- working manuscript}
+
+\begin{document}
+\maketitle
+
+\noindent\emph{Plan.} We reprove, for the fractional $p$-Laplacian, the
+lemmas and theorems of dos Prazeres--Teymurazyan--Urbano~\cite{PTU}, one at a
+time, keeping their structure and flagging precisely where the nonlinear
+nonlocal operator forces a substitute or a new hypothesis. We begin with the
+Liouville theorem (their Theorem~3.1).
+
+%======================================================================
+\section{Preliminaries}\label{sec:prelim}
+%======================================================================
+For $p\ge2$, $s\in(0,1)$, $J_p(t):=\Jp{t}$, the fractional $p$-Laplacian is
+\[
+  \fpl{v}(x)=\mathrm{P.V.}\!\int_{\R^n}\frac{J_p(v(x)-v(y))}{|x-y|^{n+sp}}\,dy
+\]
+(normalizing constant omitted). We say $v$ is \emph{$(s,p)$-harmonic} in
+$\Omega$ if $\fpl{v}=0$ there, in the weak/viscosity sense~\cite{KKL}.
+
+\subsection{The linearized operator along $v$}
+For $v\in C^1_{loc}$, the linearization of $\fpl{}$ at $v$ has kernel
+\[
+  K_v(x,y):=(p-1)\,|v(x)-v(y)|^{p-2},\qquad
+  \Lv\phi(x):=\mathrm{P.V.}\!\int_{\R^n}\big(\phi(x)-\phi(y)\big)
+   \frac{K_v(x,y)}{|x-y|^{n+sp}}\,dy,
+\]
+a symmetric, nonnegative-kernel operator of effective order $sp-p+2$ (positive
+for $s>1-\tfrac2p$). It is the operator denoted $L_u$ in~\cite[(2.1)--(2.2)]{GJS}.
+
+\subsection{Two facts from~\cite{GJS}, used as inputs}
+The following are established in~\cite{GJS} and play here the roles that
+\cite[Thm 2.2]{PTU} (interior estimate) and linearity play in the case $p=2$.
+
+\begin{lemma}[Directional derivatives solve the linearized equation, {\cite[\S3,\S9]{GJS}}]\label{lem:der-eq}
+Let $v\in C^{1,\al_0}_{loc}(\R^n)$ be $(s,p)$-harmonic, with $K_v$ locally
+integrable against $|x-y|^{-n-sp}$. Then for each unit vector $e$, the
+directional derivative $D_e v$ is a weak solution of
+\[
+  \Lv (D_e v)=0\qquad\text{in }\R^n.
+\]
+\end{lemma}
+
+\begin{lemma}[Interior H\"older estimate for the linearized equation, {\cite[\S7]{GJS}}]\label{lem:gjs7}
+Let $\phi$ solve $\Lv\phi=0$ in $B_2$, and suppose $K_v$ satisfies on $B_2$ the
+symmetry, scaled upper-bound and coercivity hypotheses of~\cite[Thm 7.3]{GJS}
+\textnormal{(}in particular $K_v$ is \emph{uniformly elliptic}: there is a unit
+vector $e$ with $|\nabla v-e|<\tfrac14$, equivalently $0<\lambda\le|\nabla v|\le
+\Lambda$, on $B_2$\textnormal{)}. Then $\phi\in C^{\asp}(B_{1})$ for some
+$\asp=\asp(n,s,p)\in(0,1)$, with
+\[
+  [\phi]_{C^{\asp}(B_{1})}\le C\big(\|\phi\|_{L^\infty(\R^n)}
+   +\mathrm{Tail}_{p-1,sp+1}(\phi;2)\big),\qquad C=C(n,s,p,\lambda,\Lambda).
+\]
+\end{lemma}
+
+\begin{remark}\label{rem:nondeg}
+Lemma~\ref{lem:gjs7} requires \emph{nondegeneracy} of $v$ (a gradient bounded
+below). For an entire $v$ this can fail where $Dv=0$. We therefore carry a
+standing
+\[
+  \textbf{(ND)}\qquad Dv\not\equiv0\text{ on any open set, and on every compact
+  }K\Subset\{Dv\ne0\}\text{ the constants }\lambda,\Lambda\text{ of
+  Lemma~\ref{lem:gjs7} are uniform,}
+\]
+together with the scale-uniform form $(\star)$: under the rescalings used in the
+proof, the constant in Lemma~\ref{lem:gjs7} is independent of the scale. At
+$p=2$, $K_v\equiv\text{const}$, $\Lv=(-\Delta)^s$, and \textnormal{(ND)},
+$(\star)$ are automatic.
+\end{remark}
+
+%======================================================================
+\section{Theorem 3.1 ($p$-case): a Liouville theorem}\label{sec:liouville}
+%======================================================================
+
+\begin{theorem}[Liouville; $p$-analogue of {\cite[Thm 3.1]{PTU}}, $\nu=1$]\label{thm:liouville}
+Let $p\ge2$, $s\in\big(1-\tfrac1p,1\big)$, and let $v\in C^{1,\al_0}_{loc}(\R^n)$
+be an entire $(s,p)$-harmonic function satisfying \textnormal{(ND)},
+$(\star)$ of Remark~\ref{rem:nondeg}. Suppose that, for some
+$0\le\alpha<\delta<\asp$,
+\begin{equation}\label{eq:growth}
+  [v]_{C^{1+\alpha}(B_R)}\le C\,R^{\,\delta-\alpha}\qquad\text{for all }R\ge1,
+\end{equation}
+and that the tail condition $\delta(p-1)<sp$ holds. Then $v$ is affine:
+\[
+  v(x)=v(0)+Dv(0)\cdot x .
+\]
+In particular, if $v(0)=|Dv(0)|=0$, then $v\equiv0$.
+\end{theorem}
+
+\begin{remark}[Dictionary with~\cite{PTU}]\label{rem:dict}
+In the application (Section~\ref{sec:liouville} is used after the blow-up of the
+main theorem), $v$ grows like $|x|^{\beta}$ with $\beta=\frac{sp}{p-1-\gamma}$,
+so $Dv$ grows like $|x|^{\beta-1}$ and $\delta=\beta-1$. The cap
+$\delta<\asp$ then reads $\beta<1+\asp$, the exact analogue of PTU's
+$\nu+\alpha<\nu+1$ ($\beta<\nu+1$) --- except that PTU's $s$-harmonic increments
+are smooth, giving the generous cap $\delta<1$, whereas the rough linearized
+operator $\Lv$ gives only the H\"older cap $\delta<\asp$.
+\end{remark}
+
+\begin{proof}
+We follow~\cite[Thm 3.1, Step 1]{PTU}. The one structural change is that for
+$p\ne2$ one cannot subtract the affine part of $v$ (it does not preserve
+$\fpl{v}=0$); instead we work directly with the directional derivative, which
+\emph{does} solve a linear equation by Lemma~\ref{lem:der-eq}.
+
+Fix a unit vector $e$ and set
+\[
+  w:=D_e v-D_e v(0).
+\]
+Then $w(0)=0$, and since constants lie in the kernel of $\Lv$,
+Lemma~\ref{lem:der-eq} gives
+\begin{equation}\label{eq:weq}
+  \Lv w=0\qquad\text{in }\R^n .
+\end{equation}
+
+\emph{Step 1: growth of $w$.} By \eqref{eq:growth} and $w(0)=0$, for $|x|\ge1$,
+\[
+  |w(x)|=|D_e v(x)-D_e v(0)|\le [v]_{C^{1+\alpha}(B_{|x|})}\,|x|^{\alpha}
+   \le C\,|x|^{\delta-\alpha}\,|x|^{\alpha}=C\,|x|^{\delta},
+\]
+and $|w|\le C$ on $B_1$ by \eqref{eq:growth} with $R=1$. Since
+$\delta(p-1)<sp<sp+1$, the function $w$ has finite
+$\mathrm{Tail}_{p-1,sp+1}(w;R)$ for every $R$ (the integrand decays like
+$|y|^{\delta(p-1)-n-sp-1}$, integrable). This is the analogue of PTU's
+$\beta<1<2s\Rightarrow w_e\in L^1_s$.
+
+\emph{Step 2: regularity and rescaled decay.} By \eqref{eq:weq} and
+Lemma~\ref{lem:gjs7} (valid under \textnormal{(ND)}), $w\in C^{\asp}_{loc}$. For
+$\rho\ge1$ set
+\[
+  \phi_\rho(x):=\rho^{-\delta}\,w(\rho x).
+\]
+By the growth bound, $\|\phi_\rho\|_{L^\infty(B_1)}\le C$ and
+$\mathrm{Tail}_{p-1,sp+1}(\phi_\rho;2)\le C$, both uniformly in $\rho$; and
+$\phi_\rho$ solves $\mathcal L_{v_\rho}\phi_\rho=0$ with
+$v_\rho(x):=\rho^{-(1+\delta)}v(\rho x)$, whose kernel is, by $(\star)$, in the
+class of Lemma~\ref{lem:gjs7} with constants independent of $\rho$. Hence
+\[
+  [\phi_\rho]_{C^{\asp}(B_{1/2})}\le C\quad\Longrightarrow\quad
+  [w]_{C^{\asp}(B_{\rho/2})}=\rho^{\,\delta-\asp}\,[\phi_\rho]_{C^{\asp}(B_{1/2})}
+   \le C\,\rho^{\,\delta-\asp}.
+\]
+
+\emph{Step 3: conclusion.} Since $\delta<\asp$, letting $\rho\to\infty$ gives
+$[w]_{C^{\asp}(\R^n)}=0$, so $w$ is constant; as $w(0)=0$, $w\equiv0$, i.e.\
+$D_e v\equiv D_e v(0)$ is constant. (Unlike~\cite{PTU}, no separate
+translation-invariance step is needed: the H\"older \emph{seminorm} itself
+decays to $0$ globally. The role of translation invariance is played by the
+scale-uniformity $(\star)$, which is where \textnormal{(ND)} is used.) As $e$
+was arbitrary, $Dv$ is constant, so $v$ is affine; if $v(0)=|Dv(0)|=0$ then
+$Dv\equiv0$ and $v\equiv v(0)=0$.
+\end{proof}
+
+\begin{remark}[What is rigorous and what is an input]\label{rem:status}
+The proof is complete \emph{given} Lemmas~\ref{lem:der-eq}--\ref{lem:gjs7} and
+hypotheses \textnormal{(ND)}, $(\star)$. The genuinely open point is precisely
+\textnormal{(ND)}/$(\star)$: Lemma~\ref{lem:gjs7} \textnormal{(\cite[\S7]{GJS})}
+is a \emph{local} estimate under uniform ellipticity, and the kernel $K_v$
+degenerates where $Dv=0$ --- at a flat point, the origin. Establishing the
+scale-uniform estimate across the degenerate set is the analogue, for the
+$p$-Laplacian, of the (free) interior estimate \cite[Thm 2.2]{PTU} for the
+fractional Laplacian. At $p=2$ everything is automatic and the theorem reduces
+to \cite[Thm 3.1]{PTU} ($\nu=1$).
+\end{remark}
+
+\begin{remark}[The case $\nu=2$]\label{rem:nu2}
+PTU's $\nu=2$ (vanishing $2$-jet, cap $\beta<3$) has no $p$-analogue: it would
+require a $C^{1,\asp}$ estimate for $\Lv$ (equivalently $C^{2,\asp}$ for
+$\fpl{}$), which does not hold for the $p$-Laplacian. Hence only the $\nu=1$
+theorem above is available, and the usable cap is $\beta<1+\asp$.
+\end{remark}
+
+\begin{thebibliography}{9}
+\bibitem{GJS} D. Giovagnoli, D. Jesus, L. Silvestre, \emph{$C^{1+\alpha}$
+regularity for fractional $p$-harmonic functions}, arXiv:2509.26565.
+\bibitem{KKL} J. Korvenp\"a\"a, T. Kuusi, E. Lindgren, \emph{Equivalence of
+solutions to fractional $p$-Laplace type equations}, J. Math. Pures Appl.
+132 (2019), 1--26.
+\bibitem{PTU} D. dos Prazeres, R. Teymurazyan, J.M. Urbano, \emph{Improved
+regularity for a nonlocal dead-core problem}, arXiv:2504.09557.
+\end{thebibliography}
+\end{document}
