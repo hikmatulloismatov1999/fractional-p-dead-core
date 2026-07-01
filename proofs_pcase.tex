@@ -198,6 +198,53 @@ $\fpl{}$), which does not hold for the $p$-Laplacian. Hence only the $\nu=1$
 theorem above is available, and the usable cap is $\beta<1+\asp$.
 \end{remark}
 
+%======================================================================
+\section{Lemma 3.1 ($p$-case): jet to growth}\label{sec:jet}
+%======================================================================
+The next lemma is the $p$-analogue of~\cite[Lemma 3.1]{PTU}. It converts a
+controlled $C^{1+\alpha}$ seminorm at small scales, together with a vanishing
+$1$-jet, into a pointwise growth bound. It is purely a consequence of the mean
+value theorem, hence \emph{operator-free}: the proof is identical to PTU's, and
+the only restriction to $\nu=1$ comes from the absence of a $C^{2,\alpha}$
+theory for the $p$-Laplacian (Remark~\ref{rem:nu2}).
+
+\begin{lemma}[Jet to growth; $p$-analogue of {\cite[Lemma 3.1]{PTU}}, $\nu=1$]\label{lem:jet}
+Let $u\in C^{1+\alpha}(B_1)$, $0<\alpha<1$, with $u(0)=|Du(0)|=0$. If, for some
+$\beta>\alpha$ and $A>0$,
+\[
+  \sup_{0<r<1/2} r^{\,\alpha-\beta}\,[u]_{C^{1+\alpha}(B_r)}\le A,
+\]
+then
+\[
+  |u(x)|\le A\,|x|^{1+\beta}\qquad\text{for }x\in B_{1/2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix $x\in B_{1/2}$. Since $u(0)=0$, the mean value theorem gives a point
+$\xi\in B_{|x|}$ on the segment $[0,x]$ with
+\[
+  |u(x)|=|u(x)-u(0)|\le|Du(\xi)|\,|x|.
+\]
+Since $Du(0)=0$ and $Du\in C^{\alpha}(B_{1/2})$,
+\[
+  |Du(\xi)|=|Du(\xi)-Du(0)|\le [u]_{C^{1+\alpha}(B_{|x|})}\,|\xi|^{\alpha}
+   \le [u]_{C^{1+\alpha}(B_{|x|})}\,|x|^{\alpha}
+   \le A\,|x|^{\beta-\alpha}\,|x|^{\alpha}=A\,|x|^{\beta},
+\]
+where the last step used the hypothesis with $r=|x|$. Combining the two
+displays gives $|u(x)|\le A\,|x|^{1+\beta}$.
+\end{proof}
+
+\begin{remark}\label{rem:jet-use}
+This lemma feeds Theorem~\ref{thm:liouville}: in the blow-up of the main
+theorem, the $\theta_k$-device produces a uniform $C^{1+\alpha}$ seminorm bound
+and a vanishing $1$-jet; Lemma~\ref{lem:jet} converts these into the growth
+hypothesis~\eqref{eq:growth} for the limit, with $\delta=\beta-1$. (The
+contrapositive --- a violated growth bound forcing the device quantity to blow
+up --- is the form used inside the contradiction argument of the main theorem.)
+\end{remark}
+
 \begin{thebibliography}{9}
 \bibitem{GJS} D. Giovagnoli, D. Jesus, L. Silvestre, \emph{$C^{1+\alpha}$
 regularity for fractional $p$-harmonic functions}, arXiv:2509.26565.
