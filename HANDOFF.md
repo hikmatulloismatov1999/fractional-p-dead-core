@@ -32,15 +32,32 @@ Useful identity: $\beta(p-1)-sp=\beta\gamma$.
 
 ---
 
-## 2. STATUS IN ONE PARAGRAPH
+## 2. STATUS IN ONE PARAGRAPH (updated 2026-07-02)
 
 The easy structure is rigorous (scaling, vanishing RHS along blow-ups, increment
 linearization, tail condition, $C^0$ compactness via the seminorm device, a
 barrier, stability under exterior data). The PTU-faithful proofs are written
 (Thm 3.1 Liouville, Lemma 3.1 jet-to-growth, Thm 4.1 main) **modulo one open
-input**. That input has been reduced (this session) to a single concrete,
-classical-flavored free-boundary statement. **The whole project now hinges on
-one implication** (see §5). At $p=2$ everything closes and reduces to PTU.
+input**, the coercivity (ND) of the linearized kernel. This session: the former
+reduction target (Sup ⟹ directional) was **withdrawn** (its hypothesis does not
+transfer to the amplified blow-up — correction in red in `proofs_pcase.tex`),
+and replaced by something stronger: **(ND) at unit scale is now PROVED**
+(Lemma `lem:interp`, a two-exponent interpolation argument + Lemma 5.1, explicit
+constants). **The single remaining open point is the scale dichotomy**: propagate
+the increment-decay iteration through scales where the seminorm degenerates
+(good scales: coercivity proved; bad scales: increments automatically small;
+task: interleave). See §4d and §5.1. At $p=2$ everything closes and reduces to
+PTU (with the (4.12) truncation repair).
+
+**Stage ladder (where we are):**
+1. ✅ Infrastructure, literature, three pillars extracted
+2. ✅ Soft structure (scaling, homogeneity blow-up, tail condition, compactness, barrier)
+3. ✅ PTU-faithful conditional proofs written (`proofs_pcase.tex`), conditional paper drafted (`paper.tex`)
+4. ✅ Open input reduced to (ND); unit-scale (ND) **proved** (2026-07-02)
+5. ◐ **← WE ARE HERE:** scale dichotomy — the last mathematical gap of the one-phase theorem
+6. ⬜ Two-phase (comparison across branching points / two-signed barrier)
+7. ⬜ Rigor pass: Lemma 5.2 complement ordering; stability lemma details; constants
+8. ⬜ Write-up: intro, existence plumbing, $s\nearrow1$ direct local proof, submission
 
 ---
 
@@ -201,13 +218,18 @@ write $\nabla u(x_0)=0$.
 
 ---
 
-## 6. STRATEGIC NOTES for the supervisor meeting
-- Ask Rafayel about **(Sup ⟹ directional)** directly — it is a classical-flavored
-  free-boundary nondegeneracy he will have intuition about.
+## 6. STRATEGIC NOTES for the supervisor meeting (updated 2026-07-02)
+- ~~Ask about (Sup ⟹ directional)~~ — superseded; instead present the two-step
+  news: (i) unit-scale (ND) is proved by interpolation (show Lemma `lem:interp`,
+  it is two paragraphs), (ii) the residual is the **scale dichotomy** — ask
+  whether he knows a precedent for interleaving degenerate/nondegenerate scales
+  in a nonlocal iteration (De Giorgi-style two-parameter arguments).
 - Ask whether **PTU (4.12)** was a real gap (then the $(c')$ truncation repair is a
   publishable note) or standard.
-- Decide: **publish the conditional analysis now** vs **hold** until (ND) is proved.
-  The conditional paper is ~70–75% ready; the unconditional one is gated by (ND).
+- Decide: **publish the conditional analysis now** vs **hold** until the scale
+  dichotomy is assembled. The conditional paper is ~75–80% ready (the open input
+  is now much smaller than at the last update); the unconditional one is gated
+  only by the dichotomy + the two-phase comparison.
 
 ---
 
