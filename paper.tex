@@ -1684,6 +1684,119 @@ to $v_0$ across the double limit is the unresolved step; we record this as
 the proposed attack, not as a proof.
 \end{remark}
 
+\subsubsection*{The second blow-up at transition scales}
+We now carry out the program of Remark~\ref{rem:window} as far as it goes,
+and isolate exactly where it stops. Throughout, $v_0$ is a window profile:
+flat at $0$ \textnormal{(}$v_0(0)=0$, $\nabla v_0(0)=0$, by
+Theorem~\ref{thm:E4}\textnormal{)}, $(s,p)$-harmonic in the profile sense,
+with caps $\mathcal D\le1$, anchor $\mathcal D(1)\ge c_0$, and
+\eqref{eq:window}.
+
+\begin{lemma}[Selection of transition scales]\label{lem:select}
+There exist $R_j\to\infty$ and $C_\sharp\ge1$ with
+\begin{equation}\label{eq:pin}
+  \mathcal D(R_jt)\ \le\ C_\sharp\,\mathcal D(R_j)
+  \qquad\text{for all }t\ge1,\ j\in\mathbb N .
+\end{equation}
+\end{lemma}
+\begin{proof}
+If $\liminf_{R\to\infty}\mathcal D(R)>0$, all large scales are
+$\delta_0$-good for small $\delta_0$ and the pure-good branch of
+Lemma~\ref{lem:dichotomy} applies directly; the lemma is then not needed.
+If $m_\infty:=\limsup\mathcal D>0=\liminf\mathcal D$, choose $R_j\to\infty$
+with $\mathcal D(R_j)\ge m_\infty/2$; then
+$\mathcal D(R_jt)\le m_\infty+o(1)\le(2+o(1))\mathcal D(R_j)$. If
+$\mathcal D(R)\to0$, let $\varepsilon_j\downarrow0$ and take the
+\emph{last-exit scales} $R_j:=\sup\{R\ge1:\mathcal D(R)\ge\varepsilon_j\}$
+\textnormal{(}finite; $\mathcal D$ is continuous in $R$\textnormal{)}: then
+$\mathcal D(R_j)=\varepsilon_j$ and $\mathcal D(R)<\mathcal D(R_j)$ for all
+$R>R_j$, i.e.\ \eqref{eq:pin} with $C_\sharp=1$.
+\end{proof}
+
+\begin{lemma}[Second blow-up: compactness and nontriviality]\label{lem:z}
+Set $z_j(x):=v_0(R_jx)/(\mathcal D(R_j)R_j^{\beta})$ \textnormal{(}no
+affine subtraction: the jet of $v_0$ at $0$ vanishes, so $P_j=0$ is the
+correct normalization and no shifted operator appears\textnormal{)}. Then:
+\begin{itemize}[leftmargin=2em]
+\item[\textnormal{(i)}] $[z_j]_{C^{1,\al'}(B_t)}
+  =\frac{\mathcal D(R_jt)}{\mathcal D(R_j)}\,t^{\beta-1-\al'}
+  \le C_\sharp t^{\beta-1-\al'}$ for $t\ge1$, and
+  $[z_j]_{C^{1,\al'}(B_1)}=1$ exactly;
+\item[\textnormal{(ii)}] $z_j$ is $(s,p)$-harmonic in the same profile
+  sense as $v_0$ \textnormal{(}homogeneous rescaling, zero right-hand
+  side\textnormal{)}, with vanishing jet at $0$;
+\item[\textnormal{(iii)}] assume in addition the profile-level interior
+  estimate $\|z_j\|_{C^{1,\al_0}(B_2)}\le\Lambda$ with $\al_0>\al'$
+  \textnormal{(}the same conditional input used throughout this section:
+  the \cite{GJS}-type bound for profiles, with the far field as
+  datum\textnormal{)}. Then, for every $\al''\in(0,\al')$, along a
+  subsequence $z_j\to z_\infty$ in $C^{1,\al''}_{loc}(\R^n)$, and
+\[
+  [z_\infty]_{C^{1,\al''}(B_1)}\ \ge\
+  \tfrac12\,d_0^{\,\al'-\al''},\qquad
+  d_0:=(2\Lambda)^{-\frac1{\al_0-\al'}} ,
+\]
+so the limit is nontrivial; it has vanishing jet at $0$ and caps
+$\mathcal D_{z_\infty}(t)\le C_\sharp$ for all $t\ge1$.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+(i) is the scaling identity for seminorms plus \eqref{eq:pin}. (ii) is the
+homogeneity of $J_p$; no subtraction is performed, so no shift arises.
+(iii): (i) bounds $\{z_j\}$ in $C^{1,\al'}(B_t)$ for each $t$;
+Arzel\`a--Ascoli in the compact embedding
+$C^{1,\al'}\hookrightarrow C^{1,\al''}$ gives the convergence --- \emph{no
+equation is used for compactness}. Nontriviality is the two-exponent-gap
+mechanism of Lemma~\ref{lem:interp-paper}: the pair $x,y\in B_1$
+near-attaining $[\nabla z_j]_{C^{0,\al'}(B_1)}=1$ satisfies
+$\tfrac12|x-y|^{\al'}\le|\nabla z_j(x)-\nabla z_j(y)|\le\Lambda|x-y|^{\al_0}$,
+forcing $|x-y|\ge d_0$: concentration at small pair-distances is forbidden
+by the $C^{1,\al_0}$ bound, \emph{not} by interpolation alone
+\textnormal{(}for arbitrary functions the $\al''$-seminorm can indeed
+concentrate away\textnormal{)}. Hence
+$[\nabla z_j]_{C^{0,\al''}(B_1)}\ge|\nabla z_j(x)-\nabla z_j(y)|\,|x-y|^{-\al''}
+\ge\tfrac12 d_0^{\al'-\al''}$, and strong $C^{1,\al''}(B_1)$ convergence
+transfers this to $z_\infty$.
+\end{proof}
+
+\begin{remark}[The transfer-back difficulty dissolves; the real missing
+step]\label{rem:z-missing}
+Two points, one positive and one negative.
+\emph{Positive:} no delicate double-limit transfer to $v_0$ is needed. If
+the pure-good branch applied to $z_\infty$ and forced its increments
+constant, then $z_\infty$ would be affine, contradicting
+$[z_\infty]_{C^{1,\al''}(B_1)}\ge c>0$ outright. The contradiction lives
+entirely at the level of $z_\infty$; nontriviality is inherited
+\emph{forward} by Lemma~\ref{lem:z}(iii).
+\emph{Negative:} what fails is the \textbf{persistence of goodness}. The
+selection \eqref{eq:pin} pins the excess of $z_\infty$ from \emph{above}
+only; the lower pinning $\mathcal D(R_jt)\ge c\,\mathcal D(R_j)$ is false
+in general --- in the last-exit case $\mathcal D$ strictly decays beyond
+$R_j$, and the one-sided dyadic comparability gives only
+$\mathcal D_{z_\infty}(t)\ge t^{-(\beta-1-\al')}$. Hence $z_\infty$ may
+again have decaying excess at large scales, i.e.\ may itself be a window
+profile: the second blow-up reproduces the class instead of exiting it.
+\textbf{This --- a uniform lower bound on the excess of the second blow-up
+limit at all scales --- is the exact missing step}, and iterating the
+construction lacks a strictly decreasing quantity: precisely where a
+monotonicity formula would be decisive \textnormal{(}available for $p=2$
+via the extension; unknown for $p\neq2$\textnormal{)}.
+\end{remark}
+
+\begin{remark}[Complementarity with the weighted route]\label{rem:window-bdor}
+The window has a feature that the weighted route (W) of \S\ref{sec:open}
+can exploit: small $\kappa$ means $\mathcal D$ is \emph{slowly varying}, so
+the natural weight $w=|\nabla v_0|^{p-2}\sim(\mathcal D(R)R^{\beta-1})^{p-2}$
+has controlled ratios on dyadic annuli --- a large part of a Muckenhoupt
+bound. What is missing for BDOR-admissibility is a \emph{lower average}
+bound for $|\nabla v_0|^{p-2}$ on annuli \textnormal{(}nondegeneracy in
+average; $\nabla v_0$ may still vanish on large portions\textnormal{)}.
+Thus the combined criterion kills fast decay and dense good scales, while
+the weighted route is best adapted exactly to the slowly-varying window ---
+the two attacks are complementary, and the window is squeezed from both
+sides. Neither claim is completed here.
+\end{remark}
+
 \begin{remark}[Limitations]\label{rem:dichotomy-limits}
 \textnormal{(a)} The good-scale decay \eqref{eq:good-decay} is conditional
 on packaging the \cite[\S7]{GJS} linearized estimate with far-field datum;
