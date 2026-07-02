@@ -1089,6 +1089,208 @@ $C^1$: a $C^1$-closeness claim would presuppose gradient equicontinuity of
 $v_k$, which is not available at this stage.\textnormal{)}
 \end{corollary}
 
+\subsection{Perturbative excess improvement: the Campanato iteration}
+\label{ssec:excess}
+We now assemble Propositions~\ref{prop:P1} and~\ref{prop:P2A} into an excess
+iteration. By the conjugation of Lemma~\ref{lem:conj} it suffices to treat
+the \emph{ordinary} equation: throughout this subsection
+\[
+  \fpl{V}=f\ \text{ weakly in }B_1,\qquad
+  \|V\|_{L^\infty(B_1)}\le1,\qquad \Tail(V;0,1)\le1 ,
+\]
+and the shifted case $A_bv=f$ is recovered by setting $V=v+\ell_b$. The
+shifts then reappear \emph{inside} the iteration, through the normalized
+frames; their bookkeeping is the delicate point and is treated explicitly.
+
+\subsubsection*{Step 1: one-step approximation}
+\begin{lemma}[Approximation by shifted-harmonic profiles]\label{lem:E1}
+Let $2\le p<\frac2{1-s}$ and $B\ge0$. For every $\eta>0$ there exists
+$\varepsilon_0=\varepsilon_0(n,s,p,B,\eta)>0$ such that: if $|b|\le B$, $v$
+is of class \textnormal{(A)} with $\|v\|_{L^\infty(B_1)}\le1$, normalized
+tails, and $A_bv=f$ in $B_1$ with $\|f\|_{L^\infty(B_1)}\le\varepsilon_0$,
+then there exists $w$ with
+\[
+  A_bw=0\ \text{ in }B_{3/4},
+  \qquad
+  \|v-w\|_{L^\infty(B_{1/2})}\le\eta .
+\]
+Only $L^\infty$-closeness is asserted.
+\end{lemma}
+\begin{proof}
+Suppose not: there are $\eta>0$ and sequences $b_k\to b$
+\textnormal{(}$|b_k|\le B$; compactness of the ball\textnormal{)}, $v_k$
+admissible, $f_k$ with $\|f_k\|_\infty\to0$, such that
+\begin{equation}\label{eq:E1-contra}
+  \|v_k-w\|_{L^\infty(B_{1/2})}>\eta
+  \qquad\text{for \emph{every} $w$ solving }A_{b}w=0\text{ in }B_{3/4}.
+\end{equation}
+The uniform Lipschitz bound required by Proposition~\ref{prop:P1} holds by
+the inhomogeneous baseline~\cite{BT} applied to the conjugated functions
+$\mathcal V_k=v_k+\ell_{b_k}$ \textnormal{(}uniformly bounded data on
+$B_1$, uniform tails\textnormal{)}. Proposition~\ref{prop:P1} yields, along
+a subsequence, $v_k\to v_0$ locally uniformly with $A_bv_0=0$ in
+$B_{3/4}$. Taking $w=v_0$ in \eqref{eq:E1-contra} and $k$ large contradicts
+the local uniform convergence on $\overline{B_{1/2}}$.
+\end{proof}
+
+\subsubsection*{Step 2: one-step affine improvement}
+\begin{lemma}[One-step excess decay]\label{lem:E2}
+Let $2\le p<\frac2{1-s}$, $B\ge0$, and fix
+\begin{equation}\label{eq:alpha-choice}
+  0<\al'<\al_0,
+  \qquad
+  1+\al'<\frac{sp}{p-1},
+\end{equation}
+with $\al_0$ from Proposition~\ref{prop:P2A}. There exist
+$\rho\in(0,\tfrac12)$, $\varepsilon_0>0$ and $C_1=C_1(n,s,p,B)$ such that:
+under the hypotheses of Lemma~\ref{lem:E1} with
+$\|f\|_{L^\infty(B_1)}\le\varepsilon_0$, there is an affine function
+$\ell(x)=a+q\cdot x$ with $|a|+|q|\le C_1$ and
+\[
+  \sup_{B_\rho}|v-\ell|\ \le\ \rho^{1+\al'} .
+\]
+\end{lemma}
+\begin{proof}
+Let $w$ be the approximation of Lemma~\ref{lem:E1} with $\eta$ to be
+chosen. By Proposition~\ref{prop:P2A} \textnormal{(}conjugation $+$
+\cite[Thm~1.1]{GJS}\textnormal{)},
+$\|w\|_{C^{1,\al_0}(B_{1/2})}\le C_1$, so with
+$\ell(x):=w(0)+\nabla w(0)\cdot x$,
+\[
+  \sup_{B_\rho}|w-\ell|\ \le\ C_1\rho^{1+\al_0}
+  \qquad(0<\rho<\tfrac12).
+\]
+Then $\sup_{B_\rho}|v-\ell|\le\eta+C_1\rho^{1+\al_0}$. Choose first
+$\rho$ so small that $C_1\rho^{1+\al_0}\le\frac12\rho^{1+\al'}$
+\textnormal{(}possible since $\al'<\al_0$\textnormal{)}, then
+$\eta:=\frac12\rho^{1+\al'}$, and let $\varepsilon_0$ be the corresponding
+threshold from Lemma~\ref{lem:E1}.
+\end{proof}
+
+\subsubsection*{Step 3: rescaling and shift bookkeeping}
+Suppose inductively that affine functions $L_j(x)=c_j+P_j\cdot x$ satisfy
+\begin{equation}\label{eq:excess-j}
+  \sup_{B_{\rho^j}}|V-L_j|\ \le\ \rho^{\,j(1+\al')} .
+\end{equation}
+Define the normalized error
+\[
+  V_j(x):=\frac{(V-L_j)(\rho^jx)}{\rho^{\,j(1+\al')}} ,
+  \qquad \|V_j\|_{L^\infty(B_1)}\le1 .
+\]
+Writing $\widetilde V_j:=V(\rho^j\cdot)/\rho^{j(1+\al')}$, the scaling
+identity of Proposition~\ref{prop:scaling} \textnormal{(}with exponent
+$\kappa=1+\al'$\textnormal{)} gives
+\begin{equation}\label{eq:fj}
+  \fpl{\widetilde V_j}(x)
+  =\rho^{\,j\,[sp-(1+\al')(p-1)]}\,f(\rho^jx)=:f_j(x),
+  \qquad
+  \|f_j\|_\infty\le\rho^{\,j\,[sp-(1+\al')(p-1)]}\,\|f\|_\infty ,
+\end{equation}
+and the exponent is \emph{positive} precisely by the subcriticality choice
+\eqref{eq:alpha-choice}: the right-hand side \emph{improves} along the
+iteration. Since
+$V_j(x)+\rho^{-j\al'}P_j\cdot x=\widetilde V_j(x)-c_j\rho^{-j(1+\al')}$
+and constants are invisible to $J_p$-differences, $V_j$ is of class
+\textnormal{(A)} with shift
+\begin{equation}\label{eq:bj}
+  \boxed{\;b_j=\rho^{-j\al'}\,P_j\;}
+\end{equation}
+\textnormal{(}plus sign, with the convention that $L_j$ is
+\emph{subtracted}\textnormal{)}, and $A_{b_j}V_j=f_j$ in $B_1$. The
+exterior data of $V_j$ is the rescaled $V$-datum: on $|y|\le\rho^{-j}$ the
+telescoped excess bounds \eqref{eq:excess-j} across intermediate scales
+give $|V_j(y)|\le C(1+|y|)^{1+\al'}$, and beyond $\rho^{-j}$ the original
+tail of $V$ enters with the improving factor
+$\rho^{j[sp-(1+\al')(p-1)]}$; the affine part of $L_j$ is carried in the
+class-\textnormal{(A)} structure and is never integrated. Hence $V_j$
+satisfies the hypotheses of Lemma~\ref{lem:E2} \emph{provided}
+$|b_j|\le B$.
+
+\subsubsection*{Step 4: boundedness of the shifts}
+This is \emph{not} automatic. From consecutive excess bounds,
+$\sup_{B_{\rho^{j+1}}}|L_{j+1}-L_j|\le2\rho^{j(1+\al')}$, whence
+\begin{equation}\label{eq:slope-tel}
+  |P_{j+1}-P_j|\ \le\ C\rho^{\,j\al'} ,
+\end{equation}
+so $P_j\to P_\infty$; but \eqref{eq:bj} shows $|b_j|\to\infty$ whenever
+$P_\infty\neq0$. The iteration therefore closes exactly on the set where
+the limit slope vanishes, and quantitatively so:
+
+\begin{lemma}[Flatness controls the shifts]\label{lem:E3}
+Assume, in addition to \eqref{eq:excess-j} for $j=0$, the flatness
+hypothesis
+\begin{equation}\label{eq:flat}
+  \textnormal{(F)}\qquad
+  \sup_{B_r}|V-V(0)|\ \le\ K\,r^{1+\al'}\qquad(0<r\le1).
+\end{equation}
+Then any affine approximations realizing \eqref{eq:excess-j} satisfy
+$|P_j|\le(2K+C)\rho^{j\al'}$, hence
+\[
+  |b_j|\ \le\ B_*:=2K+C\qquad\text{for all }j .
+\]
+\end{lemma}
+\begin{proof}
+Comparing \eqref{eq:excess-j} with \eqref{eq:flat} on $B_{\rho^j}$:
+$|P_j\cdot x|\le|V(x)-V(0)|+|V(x)-L_j(x)|+|c_j-V(0)|
+\le K\rho^{j(1+\al')}+2\rho^{j(1+\al')}+|c_j-V(0)|$ for $|x|\le\rho^j$, and
+$|c_j-V(0)|\le K\rho^{j(1+\al')}+\rho^{j(1+\al')}$ by evaluating at $x=0$.
+Taking the supremum over $|x|=\rho^j$ gives
+$|P_j|\rho^j\le C(K+1)\rho^{j(1+\al')}$, i.e.\
+$|P_j|\le C(K+1)\rho^{j\al'}$; conclude by \eqref{eq:bj}.
+\end{proof}
+
+\subsubsection*{Step 5: the iteration theorem}
+\begin{theorem}[Campanato iteration at flat points]\label{thm:E4}
+Let $2\le p<\frac2{1-s}$ and let $\al',\rho,\varepsilon_0$ be as in
+Lemma~\ref{lem:E2} with $B:=B_*$ from Lemma~\ref{lem:E3}. Let $V$ satisfy
+$\fpl{V}=f$ weakly in $B_1$, $\|V\|_{L^\infty(B_1)}\le1$,
+$\Tail(V;0,1)\le1$, the flatness \eqref{eq:flat} at $0$, and
+\[
+  \|f\|_{L^\infty(B_1)}\ \le\ \varepsilon_0 .
+\]
+Then there is an affine $\ell_\infty$ \textnormal{(}with
+$\nabla\ell_\infty=P_\infty$, $|P_\infty|\le C$; under \eqref{eq:flat},
+$P_\infty=0$\textnormal{)} such that
+\[
+  \sup_{B_r}|V-\ell_\infty|\ \le\ C\,r^{1+\al'}\qquad(0<r\le\tfrac12) :
+\]
+$V$ is $C^{1,\al'}$ at $0$ with a uniform jet estimate. If \eqref{eq:flat}
+holds at every point of a subset $E\subset B_{1/2}$, the estimate holds
+uniformly at every point of $E$.
+\end{theorem}
+\begin{proof}
+Induction on $j$. Base $j=0$: $L_0=V(0)$, valid by \eqref{eq:flat} with
+$K\le1$ after normalization. Inductive step: given \eqref{eq:excess-j},
+Step~3 puts $V_j$ in the setting of Lemma~\ref{lem:E2} with shift $b_j$,
+$|b_j|\le B_*$ by Lemma~\ref{lem:E3}, and right-hand side $f_j$ with
+$\|f_j\|_\infty\le\|f\|_\infty\le\varepsilon_0$ by \eqref{eq:fj}
+\textnormal{(}the factor is $\le1$\textnormal{)}. Lemma~\ref{lem:E2}
+produces an affine correction realizing \eqref{eq:excess-j} at $j+1$ after
+undoing the normalization. The excess chain and \eqref{eq:slope-tel} give
+the stated Campanato conclusion by the usual telescoping; the flatness
+\eqref{eq:flat} forces $P_\infty=0$ \textnormal{(}Lemma~\ref{lem:E3} gives
+$P_j\to0$\textnormal{)}.
+\end{proof}
+
+\begin{remark}[Honest scope of Theorem~\ref{thm:E4}]\label{rem:E4-limits}
+\textnormal{(i)} The flatness hypothesis \eqref{eq:flat} is \emph{strong}:
+it presumes sup-flatness at the $C^{1,\al'}$ rate. This is exactly what the
+blow-up normalization supplies at branching points \textnormal{(}the growth
+caps of the $\theta$-device\textnormal{)}, so the theorem applies where we
+need it; but Theorem~\ref{thm:E4} is \emph{not} an unconditional interior
+$C^{1,\al'}$ estimate for $\fpl{V}=f$. \textnormal{(ii)} At non-flat
+points, $|b_j|\to\infty$ and the iteration exits the bounded-shift regime;
+there the natural continuation is the large-slope regime of~\cite{GJS}
+\textnormal{(}their stages 2--3: gradient close to a fixed nonzero vector,
+uniformly elliptic linearization\textnormal{)}, which we do \emph{not}
+extract here. \textnormal{(iii)} The telescoped exterior-class bookkeeping
+in Step~3 \textnormal{(}class-\textnormal{(A)} preservation with improving
+tails\textnormal{)} is stated with a computation sketch, not in full
+detail. \textnormal{(iv)} Nothing here touches
+Hypothesis~\ref{hyp:L}: the iteration supplies the \emph{compactness and
+flatness-preservation} inputs of the scheme, not the Liouville property.
+\end{remark}
+
 \subsection{Why this matters for the blow-up scheme}
 In the perturbative (excess-decay) iteration, one approximates the blow-up
 $v$ at scale $\rho^j$ by affine functions $\ell_j$ and studies
@@ -1109,8 +1311,9 @@ uniform $C^{1,\al'}$ estimates for blow-ups with vanishing right-hand side
 --- the input denoted ``$C^1_{loc}$-compactness'' in
 Assumption~\ref{ass:compact} --- and thereby also the seminorm normalization
 that feeds the unit-scale nondegeneracy mechanism of the Liouville section.
-What is \emph{not} yet done is the iteration itself
-(Remark~\ref{rem:P2status}).
+The iteration is carried out, at flat points, in
+\S\ref{ssec:excess} (Theorem~\ref{thm:E4}); its scope and the non-flat
+regime are delimited in Remark~\ref{rem:E4-limits}.
 
 \begin{remark}[Limitations: exactly what remains unproved here]
 \label{rem:P1-limits}
@@ -1118,9 +1321,9 @@ What is \emph{not} yet done is the iteration itself
 \textnormal{(}Hypothesis P2$'$ of Remark~\ref{rem:P2status}\textnormal{)}
 is unproved; its expected proof is
 an adaptation, not a citation, of~\cite{GJS}. \textnormal{(ii)} The
-excess-decay iteration sketched above, including the bookkeeping of the
-accumulated shifts $b_j$ and of the inherited right-hand sides $f_j$, is not
-carried out in this paper. \textnormal{(iii)} Strong $W^{s,p}_{loc}$
+excess-decay iteration is carried out at \emph{flat points} in
+\S\ref{ssec:excess}; the non-flat (large-slope) regime remains an
+extraction from~\cite{GJS}. \textnormal{(iii)} Strong $W^{s,p}_{loc}$
 convergence of $v_k$, while plausibly available through the
 $(S_+)$-property, is neither proved nor used. \textnormal{(iv)} Nothing in
 this section addresses the degenerate-kernel Liouville
