@@ -200,10 +200,24 @@ constants of~\cite{GJS} are not uniform as $s\to1$.
 \noindent\textbf{Organization.} Section~\ref{sec:prelim} fixes notation, the
 notion of solution, the scaling and homogeneity identities, the increment
 linearization, the regularity inputs, and the tail obstruction.
-Section~\ref{sec:liouville} treats the Liouville step, both the conditional
-direct form and the conditional increment form. Section~\ref{sec:growth} proves
-the conditional growth theorem. Section~\ref{sec:consequences} collects
-consequences, and Section~\ref{sec:open} lists the remaining analytic inputs.
+Section~\ref{sec:shifted} develops the shifted-operator framework: the
+conjugation identity for the exterior class produced by the blow-up
+(Lemma~\ref{lem:conj}), perturbative compactness
+(Proposition~\ref{prop:P1}), the shifted regularity estimate proved by
+conjugation (Proposition~\ref{prop:P2A}), and the Campanato excess iteration
+at flat points (Theorem~\ref{thm:E4}).
+Section~\ref{sec:liouville} treats the Liouville step: the conditional direct
+and increment forms, the degenerate-kernel Hypothesis~\ref{hyp:L}, and the
+scale-dichotomy analysis --- the bridge inequality
+(Lemma~\ref{lem:bridge}), the combined criterion
+(Proposition~\ref{prop:combined}), the second blow-up at transition scales
+(Lemmas~\ref{lem:select}--\ref{lem:z}), and the reduction of the residual
+window to the three-scales Hypothesis~\ref{hyp:H3S}
+(Theorem~\ref{thm:H3S}), with its calibrations and minimal substitutes.
+Section~\ref{sec:growth} proves the conditional growth theorem.
+Section~\ref{sec:consequences} collects consequences,
+Section~\ref{sec:open} lists the remaining analytic inputs, and
+Section~\ref{sec:conclusion} tabulates the status of every step.
 
 %======================================================================
 \section{Preliminaries}\label{sec:prelim}
@@ -1225,9 +1239,9 @@ hypothesis
   \sup_{B_r}|V-V(0)|\ \le\ K\,r^{1+\al'}\qquad(0<r\le1).
 \end{equation}
 Then any affine approximations realizing \eqref{eq:excess-j} satisfy
-$|P_j|\le(2K+C)\rho^{j\al'}$, hence
+$|P_j|\le(K+2)\rho^{j\al'}$, hence
 \[
-  |b_j|\ \le\ B_*:=2K+C\qquad\text{for all }j .
+  |b_j|\ \le\ B_*:=K+2\qquad\text{for all }j .
 \]
 \end{lemma}
 \begin{proof}
@@ -1236,8 +1250,10 @@ $|P_j\cdot x|\le|V(x)-V(0)|+|V(x)-L_j(x)|+|c_j-V(0)|
 \le K\rho^{j(1+\al')}+2\rho^{j(1+\al')}+|c_j-V(0)|$ for $|x|\le\rho^j$, and
 $|c_j-V(0)|\le K\rho^{j(1+\al')}+\rho^{j(1+\al')}$ by evaluating at $x=0$.
 Taking the supremum over $|x|=\rho^j$ gives
-$|P_j|\rho^j\le C(K+1)\rho^{j(1+\al')}$, i.e.\
-$|P_j|\le C(K+1)\rho^{j\al'}$; conclude by \eqref{eq:bj}.
+$|P_j|\rho^j\le(K+2)\rho^{j(1+\al')}$ \textnormal{(}one factor
+$\rho^{j(1+\al')}$ from the excess on $B_{\rho^j}$, one $K\rho^{j(1+\al')}$
+from flatness, one from the excess at $x=0$\textnormal{)}, i.e.\
+$|P_j|\le(K+2)\rho^{j\al'}$; conclude by \eqref{eq:bj}.
 \end{proof}
 
 \subsubsection*{Step 5: the iteration theorem}
@@ -2222,7 +2238,14 @@ The following are unconditional: the scaling identity
 (Proposition~\ref{prop:scaling}), the vanishing of the right-hand side along
 amplified blow-ups (Proposition~\ref{prop:homog}), the increment linearization
 (Proposition~\ref{prop:linincr}), the tail obstruction
-(Proposition~\ref{prop:tailobstruction}), and the contradiction scheme modulo
+(Proposition~\ref{prop:tailobstruction}), the conjugation identity and
+class-(A) well-posedness (Lemma~\ref{lem:conj}), the shifted compactness
+(Proposition~\ref{prop:P1}), the shifted regularity for class (A)
+(Proposition~\ref{prop:P2A}, by conjugation from~\cite{GJS}), the Campanato
+iteration at flat points (Theorem~\ref{thm:E4}, given its flatness
+hypothesis), the bridge inequality (Lemma~\ref{lem:bridge}), the
+transition-scale selection (Lemma~\ref{lem:select}), the automatic power
+bound (Lemma~\ref{lem:autopower}), and the contradiction scheme modulo
 its inputs (Theorem~\ref{thm:growth}). The growth estimate is conditional on
 the following, each a concrete analytic statement rather than a black box. We
 emphasize that the principal missing ingredient is \emph{not} local regularity
