@@ -423,9 +423,17 @@ $0$ be a flat branching point. There exist $c,r_0>0$ such that
 \[
   \sup_{B_r}u\ \ge\ c\,r^{\beta}\qquad(0<r<r_0).
 \]
-Consequently the blow-up limit $v_0$ satisfies $\sup_{B_R}v_0\ge cR^{\beta}$ for
-all $R\ge1$.
 \end{lemma}
+\noindent\textcolor{red}{\textbf{Correction (2026-07-02).} The sentence
+``consequently $\sup_{B_R}v_0\ge cR^\beta$'' previously appended to this lemma
+is \emph{withdrawn}: the blow-up is amplified,
+$v_k=u_k(r_k\cdot)/(\theta_kr_k^\beta)$ with $\theta_k\to\infty$, so the sup
+lower bound transfers only as $cR^\beta/\theta_k\to0$. Sup-nondegeneracy of $u$
+does \emph{not} pass to $v_0$. What does pass is the normalization
+$[v_0]_{C^{1+\al'}(B_1)}\ge\frac12$, and Lemma~\ref{lem:interp} below extracts
+directional nondegeneracy from exactly that. Lemma~\ref{lem:supnd} remains of
+independent interest (nondegeneracy of $u$ itself; the Liouville-with-growth
+theorem), where no amplification occurs.}
 \begin{proof}[Proof (barrier comparison; strategy)]
 Suppose not: $\sup_{B_{2r}}u\le\varepsilon r^{\beta}$ for $r$ along a sequence
 and $\varepsilon\to0$. Let $\Psi=A\,\psi_{L,r}$ be the scale-$r$ barrier of the
@@ -451,38 +459,105 @@ point. We state it as a lemma with the strategy above; the verification of the
 complement ordering is the point to complete rigorously.
 \end{remark}
 
-\subsection{The residual step, isolated}
-Combining Lemmas~\ref{lem:coerc} and~\ref{lem:supnd} \emph{almost} closes the
-one-phase problem. The precise gap is the following implication.
+\subsection{(Seminorm $\Rightarrow$ directional) at unit scale: an
+interpolation lemma}\label{sec:interp}
+The following elementary lemma resolves the nondegeneracy question \emph{at the
+normalized scale}. It needs no equation: only two H\"older exponents strictly
+apart.
+
+\begin{lemma}[Seminorm-to-directional nondegeneracy]\label{lem:interp}
+Let $0<\al'<\al_0\le1$ and $\Lambda\ge1$. Let $v\in C^{1,\al_0}(B_2)$ with
+$\|v\|_{C^{1,\al_0}(B_2)}\le\Lambda$ and $[v]_{C^{1+\al'}(B_1)}\ge\tfrac12$.
+Then there exist a unit vector $e$ and constants
+\[
+  c_1=\tfrac18\,(2\Lambda)^{-\frac{\al'}{\al_0-\al'}},\qquad
+  r_1=(c_1/\Lambda)^{1/\al_0},\qquad \mu=(r_1/4)^n,
+\]
+such that
+\[
+  \big|\{x\in B_2:\ D_e v(x)\ge c_1\}\big|\ \ge\ \mu\,|B_2| .
+\]
+\end{lemma}
+
+\begin{proof}
+Since $[v]_{C^{1+\al'}(B_1)}\ge\frac12$, there are $x,y\in B_1$, $x\neq y$, with
+\[
+  |\nabla v(x)-\nabla v(y)|\ \ge\ \tfrac12\,|x-y|^{\al'} .
+\]
+On the other hand $|\nabla v(x)-\nabla v(y)|\le\Lambda|x-y|^{\al_0}$. Combining,
+$\tfrac12|x-y|^{\al'}\le\Lambda|x-y|^{\al_0}$, i.e.
+\[
+  |x-y|\ \ge\ d_0:=(2\Lambda)^{-\frac{1}{\al_0-\al'}} .
+\]
+\emph{(Interpolation forbids concentration: a $C^{1,\al_0}$ bound does not allow
+the $C^{1,\al'}$ seminorm to live on pairs closer than $d_0$.)} Hence
+\[
+  |\nabla v(x)-\nabla v(y)|\ \ge\ \tfrac12 d_0^{\al'},
+\]
+so at one of the two points --- call it $x_0\in B_1$ --- we have
+$|\nabla v(x_0)|\ge\tfrac14 d_0^{\al'}=2c_1$. Set
+$e:=\nabla v(x_0)/|\nabla v(x_0)|$. For $|z-x_0|\le r_1=(c_1/\Lambda)^{1/\al_0}$,
+\[
+  |\nabla v(z)-\nabla v(x_0)|\le\Lambda r_1^{\al_0}=c_1,
+  \qquad\text{whence}\qquad
+  D_ev(z)\ \ge\ |\nabla v(x_0)|-c_1\ \ge\ c_1 .
+\]
+Since $x_0\in B_1$ and $r_1\le1$, the ball $B_{r_1}(x_0)$ lies in $B_2$, and its
+measure is $\ge\mu|B_2|$ with $\mu=(r_1/4)^n$.
+\end{proof}
+
+\begin{corollary}[Unit-scale coercivity of the blow-up limit]\label{cor:unitcoerc}
+Let $v_0$ be the blow-up limit of the main-theorem scheme, normalized by
+$[v_0]_{C^{1+\al'}(B_1)}\ge\frac12$, and suppose the interior
+$C^{1,\al_0}$ estimate (\textnormal{GJS}$+f\in L^\infty$ input) provides
+$\|v_0\|_{C^{1,\al_0}(B_2)}\le\Lambda$ with $\al_0>\al'$. Then, by
+Lemma~\ref{lem:interp} followed by Lemma~\ref{lem:coerc}, the kernel $K_{v_0}$
+satisfies the coercivity \textnormal{(7.1)} on a fixed sub-ball of $B_2$, with
+constants depending only on $n,s,p,\al',\al_0,\Lambda$. \emph{At unit scale,
+\textnormal{(ND)} is no longer open.}
+\end{corollary}
+
+\subsection{The residual step, restated (scales)}
+What remains open is \emph{propagation across scales}. The Liouville rescaling
+(Theorem~\ref{thm:liouville}, Step 2) needs the H\"older estimate for the
+linearized equation at every scale $\rho\ge1$, i.e.\ coercivity of $K_{v_0}$ at
+every scale, while the normalization gives the seminorm lower bound only at
+$\rho=1$. Define the scale-$\rho$ degeneracy
+\[
+  \delta(\rho)\ :=\ \rho^{\,1+\al'-\beta'}\,[v_0]_{C^{1+\al'}(B_\rho)}
+  \ \in[0,1]
+  \qquad(\beta'<1\text{ the growth exponent of the scheme}),
+\]
+normalized so that the growth cap gives $\delta(\rho)\le1$ and the unit-scale
+normalization gives $\delta(1)\ge\frac12$.
 
 \begin{quote}
-\textbf{(Sup $\Rightarrow$ directional).} From $\sup_{B_R}v_0\ge cR^{\beta}$ and
-$v_0(0)=0$, deduce that on each annulus $B_{2R}\setminus B_R$ there is a unit
-vector $e_R$ and a set of measure $\ge\mu\,|B_{2R}\setminus B_R|$ on which
-$D_{e_R}v_0\ge c\,R^{\beta-1}$ (directional nondegeneracy at scale $R$,
-uniformly in $R$).
+\textbf{(Scale dichotomy --- the remaining work.)} For $\delta_0\in(0,\tfrac12]$
+fixed: at \emph{good} scales ($\delta(\rho)\ge\delta_0$),
+Lemma~\ref{lem:interp} applies to the rescaling
+$\bar v_\rho=v_0(\rho\,\cdot)/\rho^{\beta'}$ (whose $C^{1,\al_0}$ bound is
+uniform by the growth caps) and yields coercivity with constants depending only
+on $\delta_0$; the GJS \S7 estimate then propagates decay of the increment. At
+\emph{bad} scales ($\delta(\rho)<\delta_0$), coercivity may fail --- but the
+increment is automatically small at that scale:
+$\sup_{B_\rho}|v_0(\cdot+h)-v_0|\le|h|\sup_{B_{2\rho}}|\nabla v_0|$, and small
+$\delta$ at all scales up to $\rho$ controls $\sup_{B_{2\rho}}|\nabla v_0|$ via
+the jet-to-growth mechanism (Lemma~\ref{lem:jet}). \emph{The task: interleave
+the two regimes into a single decay iteration for the increment.} The danger is
+scale-interlacing (good and bad scales alternating so that neither mechanism
+runs long enough); the tool against it is that $\delta$ has bounded oscillation
+across dyadic scales (both bounds come from the same seminorm on nested balls).
 \end{quote}
 
-If this holds, then: rescale $\bar v_R(z)=R^{-\beta}v_0(Rz)$; the above gives
-\eqref{eq:dirnd} for $\bar v_R$ on a fixed sub-ball of the unit annulus,
-Lemma~\ref{lem:coerc} gives the coercivity \textnormal{(7.1)} there,
-Lemma~\ref{lem:gjs7} gives the interior H\"older estimate, and the rescaling of
-Theorem~\ref{thm:liouville} (Step 2, run on the annuli rather than centred at
-the flat origin) forces the increment to be constant --- hence $v_0$ affine,
-hence $v_0\equiv0$, contradicting nontriviality. This would complete the
-one-phase main theorem.
-
-\begin{remark}[What the hard analysis shows]\label{rem:crux}
-The bracketed implication \textnormal{(Sup $\Rightarrow$ directional)} is the
-\emph{entire} remaining content for the one-phase problem. It is a concrete,
-classical-flavoured free-boundary statement --- ``a solution that grows at the
-sharp rate has a definite-sign directional derivative on a positive fraction of
-each annulus'' --- far sharper than ``prove a degenerate-kernel Liouville''.
-Sup-nondegeneracy (Lemma~\ref{lem:supnd}) gives the mass of the variation but
-not yet its \emph{directional} coherence; controlling the direction is the
-missing ingredient. This is the sharpest form we can give the open problem, and
-the natural next target: it reduces a frontier regularity question to a
-free-boundary nondegeneracy of Alt--Caffarelli type.
+\begin{remark}[Status after this reduction]\label{rem:crux}
+The open content of the one-phase problem is now: \emph{assemble the scale
+dichotomy}. Both regimes are individually understood --- coercivity at good
+scales is \textbf{proved} (Lemma~\ref{lem:interp} $+$ Lemma~\ref{lem:coerc}),
+smallness at bad scales is elementary --- and the previous form of the open
+problem (\textnormal{(Sup $\Rightarrow$ directional)}, which relied on the
+withdrawn transfer of sup-nondegeneracy to $v_0$) is superseded. This is both
+sharper and more honest: no free-boundary nondegeneracy of the limit is needed,
+only bookkeeping of degenerate scales in a linear nonlocal iteration.
 \end{remark}
 
 \begin{thebibliography}{9}

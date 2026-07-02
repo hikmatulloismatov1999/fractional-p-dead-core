@@ -130,40 +130,55 @@ from Terminal.)
   *integrability*, not pointwise $C^{1,\alpha}$; the $p\in(1,2]$ gradient-regularity
   paper arXiv:2409.02012 is the wrong range.)
 
-### 4d. THE OPEN PROBLEM (this is the whole game)
-The one open input of Thm 3.1 / Thm 4.1 is **(ND)/$(\star)$**: coercivity of the
-degenerate linearized kernel $K_{v_0}$, scale-uniformly. By Lemma 5.1 this equals
-**directional nondegeneracy of the blow-up limit $v_0$**. It has been reduced to:
+### 4d. THE OPEN PROBLEM (updated 2026-07-02 — read carefully, it changed)
+**Two developments this session (in `proofs_pcase.tex` §5):**
 
-> **(Sup ⟹ directional).** From $\sup_{B_R}v_0\ge cR^\beta$ (sup-nondegeneracy,
-> provable via the barrier, one phase — Lemma 5.2) and $v_0(0)=0$, deduce that on
-> each annulus $B_{2R}\setminus B_R$ there is a unit vector $e_R$ and a set of
-> measure $\ge\mu|B_{2R}\setminus B_R|$ with $D_{e_R}v_0\ge cR^{\beta-1}$,
-> **uniformly in $R$**.
+**(i) CORRECTION.** The former reduction target (Sup ⟹ directional) was based on
+the claim that sup-nondegeneracy of $u$ transfers to the blow-up limit $v_0$.
+**That transfer is FALSE**: the blow-up is amplified,
+$v_k=u_k(r_k\cdot)/(\theta_k r_k^\beta)$, $\theta_k\to\infty$, so
+$\sup_{B_R}v_k\ge cR^\beta/\theta_k\to0$. The withdrawn sentence is marked in
+red in `proofs_pcase.tex`. Lemma 5.2 (sup-nondegeneracy of $u$) stays, but feeds
+only the Liouville-with-growth theorem and nondegeneracy of $u$ — NOT (ND).
 
-If (Sup ⟹ directional) holds: Lemma 5.1 ⇒ coercivity (7.1) on each rescaled
-annulus ⇒ GJS §7 Hölder estimate ⇒ Thm 3.1 rescaling (run on annuli, not centred
-at the flat origin) ⇒ $v_0$ affine ⇒ $v_0\equiv0$ ⇒ contradiction ⇒ **main
-theorem (one phase).**
+**(ii) PROVED: (Seminorm ⟹ directional) at unit scale — Lemma `lem:interp`.**
+Pure interpolation, no equation: if $\|v\|_{C^{1,\alpha_0}(B_2)}\le\Lambda$ and
+$[v]_{C^{1+\alpha'}(B_1)}\ge\frac12$ with $\alpha'<\alpha_0$, then some direction
+$e$ has $D_ev\ge c_1$ on measure $\ge\mu|B_2|$, with explicit
+$c_1=\frac18(2\Lambda)^{-\alpha'/(\alpha_0-\alpha')}$. Mechanism: the two-exponent
+gap forbids the seminorm from concentrating on close pairs ($|x-y|\ge d_0$),
+giving a definite gradient at a definite point, spread by $C^{0,\alpha_0}$
+continuity of $\nabla v$. Combined with Lemma 5.1 (coercivity ⟺ directional):
+**at unit scale, (ND) is CLOSED** (Corollary `cor:unitcoerc`).
 
-**Difficulty:** sup-nondegeneracy gives the *magnitude* of $v_0$'s variation but
-not its *directional coherence*. Controlling the direction is the nut.
-**Two-phase:** the barrier is one-signed; across a genuine branching point the
-nonlocal comparison (ordering on the whole complement) is delicate — do the two
-phases separately or find a two-signed barrier.
+**THE remaining open point — (Scale dichotomy).** The Liouville rescaling needs
+coercivity at every scale $\rho$; the normalization gives $\delta(1)\ge\frac12$
+only, where $\delta(\rho):=\rho^{1+\alpha'-\beta'}[v_0]_{C^{1+\alpha'}(B_\rho)}\in[0,1]$.
+Good scales ($\delta\ge\delta_0$): coercivity PROVED (interp lemma applies to the
+rescaling, uniform constants). Bad scales ($\delta<\delta_0$): coercivity may
+fail, but increments are automatically small
+($\sup_{B_\rho}|w^h|\le|h|\sup_{B_{2\rho}}|\nabla v_0|$, controlled by small
+$\delta$'s via jet-to-growth). **Task: interleave the two regimes into one decay
+iteration.** Danger: alternating good/bad scales; tool: $\delta$ has bounded
+dyadic oscillation (nested seminorms).
+
+**Two-phase (unchanged):** the barrier is one-signed; across a genuine branching
+point the nonlocal comparison is delicate — two phases separately or a
+two-signed barrier.
 
 ---
 
 ## 5. NEXT STEPS (prioritized)
 
-1. **Attack (Sup ⟹ directional).** This is THE target. Ideas: (a) monotonicity /
-   moving-planes to get a preferred direction; (b) an Alt–Caffarelli-type
-   nondegeneracy-of-the-gradient argument; (c) De Giorgi oscillation on annuli to
-   upgrade sup-nondegeneracy to gradient nondegeneracy on a positive fraction.
-   Compare with the LOCAL $p$-Laplacian: $C^{1,\alpha}$ there is proved WITHOUT the
-   linearized operator (Uhlenbeck/DiBenedetto/Tolksdorf, direct on $|\nabla u|$) —
-   the fractional case cannot avoid the linearized operator (GJS need §6), so the
-   local trick only partially transfers.
+1. **Attack (Scale dichotomy).** [REPLACES (Sup ⟹ directional), which is
+   superseded — see §4d.] Write the decay iteration for the increment $w^h$ that
+   interleaves: good scales (coercivity from Lemma `lem:interp` ⇒ GJS §7 Hölder
+   decay) and bad scales ($|w^h|$ small directly from small $\delta$). Key
+   technical points: (a) prove the bounded-dyadic-oscillation of $\delta(\rho)$;
+   (b) make the bad-scale smallness quantitative via jet-to-growth; (c) check the
+   good-scale estimate only needs coercivity in a fixed sub-ball (GJS (A3) is a
+   positive-fraction condition — it does). If interlacing resists, try a
+   two-parameter iteration (scale + seminorm level) à la De Giorgi.
 2. **Alternative route (W): weighted-kernel Liouville.** Prove Liouville for
    $\mathcal K\sim(|x|+|y|)^{a}|x-y|^{-n-m}$, $m=sp-p+2$, $a=(\beta-1)(p-2)$
    (weight near the flat origin), $A_2$ iff $a<n$. Model of the degeneracy;
