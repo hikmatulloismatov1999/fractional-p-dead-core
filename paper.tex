@@ -1906,6 +1906,122 @@ nonlocal analogue is \textbf{not known} in any dimension. The
 inverse-average bound is the genuinely hard half of BDOR-admissibility.
 \end{remark}
 
+\subsubsection*{On the three-scales hypothesis: calibrations and substitutes}
+
+\begin{lemma}[Norm transfer]\label{lem:normtransfer}
+Under the standing profile interior estimates, for $R\ge1$,
+\[
+  M(R):=\|z\|_{L^\infty(B_R)}\le [z]_{C^{1,\al'}(B_R)}R^{1+\al'},
+  \qquad
+  [z]_{C^{1,\al'}(B_R)}\le C R^{-(1+\al')}M(2R),
+\]
+the first by the vanishing jet, the second by interior regularity applied
+at scale $R$. Consequently \textnormal{(H3S)} for the seminorm and for the
+sup norm $M$ are equivalent up to bounded additive errors in the
+$\log$--$\log$ plane and a fixed radius doubling --- harmless for every use
+made of \textnormal{(H3S)} above. The sup norm \textnormal{(}or the
+spherical $L^2$ norm\textnormal{)} is the natural primary quantity.
+\end{lemma}
+
+\begin{remark}[Calibration at $p=2$: \textnormal{(H3S)} holds]
+\label{rem:p2calib}
+For $(-\Delta)^sz=0$ the Caffarelli--Silvestre extension $Z$ solves the
+$A_2$-weighted equation $\mathrm{div}(y^{1-2s}\nabla Z)=0$ in
+$\R^{n+1}_+$, with vanishing weighted Neumann datum on all of
+$\{y=0\}$; the Almgren frequency
+$N(R)=R\,\mathcal D_{\mathrm{ext}}(R)/H(R)$,
+$H(R)=\int_{\partial B_R^+}y^{1-2s}Z^2$, is monotone nondecreasing
+\textnormal{(}Caffarelli--Salsa--Silvestre/Fall--Felli-type; to be quoted
+with precise hypotheses\textnormal{)}, and monotonicity of $N$ gives
+convexity of $\log H$ in $\log R$ up to an explicit linear term:
+\textnormal{(H3S)} holds \emph{exactly} for $H$. The transfer to $M(R)$
+uses trace and doubling comparabilities standard in the
+unique-continuation literature; we flag it as an adaptation to verify, not
+a gap of principle. Thus at $p=2$ the trichotomy of
+Theorem~\ref{thm:H3S} runs and the window closes in principle --- a
+consistency check of the whole architecture. What fails for $p\neq2$: the
+extension does not exist, the frequency requires the bilinear structure,
+and spherical decompositions are linear tools.
+\end{remark}
+
+\begin{remark}[Sobering calibration: the local sibling is open]
+\label{rem:localcalib}
+For the \emph{local} $p$-Laplacian, three-spheres/doubling inequalities
+and strong unique continuation are: known in the plane, via
+quasiregularity of the complex gradient
+\textnormal{(}Bojarski--Iwaniec; Hadamard three-circles with
+distortion-modified exponents; isolated critical points with power
+vanishing\textnormal{)}; and \textbf{open in dimension $n\ge3$} --- a
+well-known problem, where even $|\{\nabla z=0\}|=0$ is not known in
+general. \textnormal{(H3S)} for $(-\Delta_p)^s$ in general dimension would
+therefore imply progress on a problem whose local version has resisted for
+decades. Two mitigations: the profile class is far more special than
+arbitrary solutions \textnormal{(}flatness, growth caps, two-sided excess
+bounds\textnormal{)}, and only the substitutes below are needed; and the
+cases $p=2$ \textnormal{(}above\textnormal{)} and $n=2$
+\textnormal{(}quasiregular toolbox\textnormal{)} are realistic targets.
+\end{remark}
+
+\begin{remark}[Minimal substitutes for \textnormal{(H3S)}]
+\label{rem:substitutes}
+The full convexity is more than the proof uses. Two strictly weaker
+statements suffice:
+\begin{itemize}[leftmargin=2em]
+\item[\textnormal{(S1)}] \emph{Polynomial-or-nothing with threshold:} if
+$\mathcal D_z(R)\to0$ then $\mathcal D_z(R)\le CR^{-\varepsilon}$
+eventually, for some $\varepsilon>\varepsilon_*=\frac{\beta\gamma}{p-1}$.
+Then the \emph{direct} route \textnormal{(}branch (ii) of
+Lemma~\ref{lem:dichotomy}\textnormal{)} closes the window with no second
+blow-up and no pinning.
+\item[\textnormal{(S2)}] \emph{Quasi-monotone rates:}
+$r_{j+1}\ge r_j-\epsilon_j$ with $\sum\epsilon_j<\infty$, where
+$r_j=\log_2\frac{\mathcal D_z(2^j)}{\mathcal D_z(2^{j+1})}$. This is the
+weakest hypothesis under which the full trichotomy of
+Theorem~\ref{thm:H3S}, including the exact pinning in case (iii), runs
+verbatim.
+\end{itemize}
+Automatically true, for comparison: rates are bounded \emph{above}
+($r_j\le\eta_0\log2$, Lemma~\ref{lem:autopower}); no lower
+quasi-monotonicity is proved here. We also record why the soft routes
+fail: Caccioppoli and reverse H\"older are \emph{inequalities}, while
+convexity requires an \emph{identity}; Harnack for increments is circular
+\textnormal{(}it is Hypothesis~\ref{hyp:L}\textnormal{)}; the classical
+comparison proof of three-spheres superposes radial solutions linearly,
+which $p\neq2$ forbids \textnormal{(}a quasi-superposition barrier
+$(a^{p-1}+b^{p-1}r^{\lambda(p-1)})^{1/(p-1)}$ is untested and
+speculative\textnormal{)}.
+\end{remark}
+
+\begin{remark}[The exact missing identity]\label{rem:pohozaev}
+The monotonicity route reduces to a single unproved formula: a
+Pohozaev--Rellich identity for the Gagliardo $p$-energy, i.e.\ an exact
+expression for the derivative of
+$R\mapsto R^{sp-n}\iint_{B_R\times B_R}
+\frac{|z(x)-z(y)|^p}{|x-y|^{n+sp}}\,dx\,dy$
+along the position vector field, generalizing the $p=2$ identity of
+Ros-Oton--Serra. For $p\neq2$ no such identity is known; its discovery
+would yield an Almgren-type frequency for $(-\Delta_p)^s$ and, through
+Theorem~\ref{thm:H3S}, close this paper's program. We record it as the
+sharpest formulation of what is missing.
+\end{remark}
+
+\begin{remark}[Exact weighted-route hypothesis]\label{rem:wadm}
+The BDOR alternative requires precisely:
+\begin{quote}
+\textnormal{(W-adm)}: there are $C$ and infinitely many $R$ with
+$\displaystyle\Big(\fint_{A_R}|\nabla z|^{p-2}\Big)
+\Big(\fint_{A_R}|\nabla z|^{-(p-2)}\Big)\le C .$
+\end{quote}
+The direct factor is controlled \textnormal{(}below at good scales by
+Remark~\ref{rem:H3S-status}(b), above by slow variation\textnormal{)}.
+The inverse factor requires power-type smallness of
+$\{|\nabla z|<t\}\cap A_R$; this is \emph{not} implied by
+$C^{1,\al}$-regularity plus nontrivial excess \textnormal{(}gradients of
+$C^{1,\al}$ functions may vanish on open sets\textnormal{)}, is open for
+the profile class, and a nonlocal Bojarski--Iwaniec theorem is not known
+in any dimension.
+\end{remark}
+
 \begin{remark}[Limitations]\label{rem:dichotomy-limits}
 \textnormal{(a)} The good-scale decay \eqref{eq:good-decay} is conditional
 on packaging the \cite[\S7]{GJS} linearized estimate with far-field datum;
