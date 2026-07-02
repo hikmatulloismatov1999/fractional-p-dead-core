@@ -1797,6 +1797,114 @@ the two attacks are complementary, and the window is squeezed from both
 sides. Neither claim is completed here.
 \end{remark}
 
+\subsubsection*{Persistence of good scales via a three-scales property}
+The missing step of Remark~\ref{rem:z-missing} reduces, in its entirety, to
+a single classical-flavoured inequality. We first record what is automatic.
+
+\begin{lemma}[Automatic power lower bound]\label{lem:autopower}
+For any profile $z$ with $\mathcal D_z(1)\ge c_0$,
+\[
+  \mathcal D_z(R)\ \ge\ c_0\,R^{-\eta_0},
+  \qquad \eta_0:=\beta-1-\al'\qquad(R\ge1).
+\]
+\end{lemma}
+\begin{proof}
+$[z]_{C^{1,\al'}(B_R)}$ is nondecreasing in $R$;
+$\mathcal D_z(R)=R^{-\eta_0}[z]_{C^{1,\al'}(B_R)}\ge R^{-\eta_0}c_0$.
+\end{proof}
+
+\noindent Thus the excess can never decay \emph{faster} than the fixed
+power $R^{-\eta_0}$; the danger is decay to zero \emph{slower than every
+power}. The following hypothesis excludes it.
+
+\begin{hypothesis}[Three-scales property \textnormal{(H3S)}]\label{hyp:H3S}
+For profiles $z$ as above \textnormal{(}entire, $(s,p)$-harmonic in the
+profile sense, flat at $0$\textnormal{)}, the function
+\[
+  \tau\ \longmapsto\ \log\,[z]_{C^{1,\al'}(B_{e^\tau})}
+\]
+is convex on $[0,\infty)$ --- or quasi-convex up to additive errors
+$\epsilon_j$ with $\sum\epsilon_j<\infty$ along dyadic scales.
+\end{hypothesis}
+
+\begin{theorem}[The window closes under \textnormal{(H3S)}]\label{thm:H3S}
+Assume the good-scale packaging \eqref{eq:good-decay} with
+$\sigma>\beta-1$, and Hypothesis~\ref{hyp:H3S}. Then no nontrivial window
+profile exists; combined with Proposition~\ref{prop:combined}, Hypothesis
+\ref{hyp:L} holds for all blow-up profiles.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Under \textnormal{(H3S)}, $\log\mathcal D_z$ is convex in $\log R$
+\textnormal{(}convex minus linear\textnormal{)}, so the dyadic decay rates
+$r_j:=\log_2\frac{\mathcal D_z(2^j)}{\mathcal D_z(2^{j+1})}$ are
+nondecreasing, with limit $\kappa\ge0$. Trichotomy:
+
+\emph{(i) $\inf_R\mathcal D_z>0$.} All scales are $\delta_0$-good for
+small $\delta_0$; the pure-good branch of Lemma~\ref{lem:dichotomy}(i)
+kills $z$.
+
+\emph{(ii) $\mathcal D_z(R)\to0$ with $\kappa=0$: impossible.} Decay to
+zero forces $\sum_jr_j=+\infty$, while $r_j$ nondecreasing with
+$r_j\to\kappa=0$ forces $r_j\le0$ for all $j$ --- contradiction.
+\emph{Sub-polynomial decay is excluded by convexity alone.}
+
+\emph{(iii) $\kappa>0$: descent of the exponent.} Difference quotients of
+convex functions converge locally uniformly, so along the transition
+scales of Lemma~\ref{lem:select} the rates converge to $\kappa$ uniformly
+on bounded $\log$-windows, and the second blow-up limit $z_\infty$ of
+Lemma~\ref{lem:z} has \emph{exactly}
+$\mathcal D_{z_\infty}(t)=t^{-\kappa}$: this is precisely the persistence
+input missing in Remark~\ref{rem:z-missing}, supplied here by
+\textnormal{(H3S)}. Consequently $z_\infty$ has exact growth exponent
+$\beta':=\beta-\kappa<\beta$, and its excess \emph{relative to $\beta'$},
+$t^{1+\al'-\beta'}[z_\infty]_{C^{1,\al'}(B_t)}$, is constant in $t$: all
+scales are good at exponent $\beta'$. The increment machinery applies
+verbatim at $\beta'$ \textnormal{(}the tail condition
+$\beta'(p-1)<sp+1$ is inherited from $\beta'<\beta$; the pure-good
+constraint weakens to $\sigma>\beta'-1$\textnormal{)}, and the pure-good
+branch forces the increments of $z_\infty$ to be constant, hence
+$z_\infty$ affine --- contradicting the nontriviality
+$[z_\infty]_{C^{1,\al''}(B_1)}\ge c>0$ of Lemma~\ref{lem:z}(iii). One
+descent step suffices; no iteration is needed.
+\end{proof}
+
+\begin{remark}[Status of \textnormal{(H3S)}; annular nondegeneracy; the
+$A_2$ criterion]\label{rem:H3S-status}
+\textnormal{(a)} \emph{Status.} For harmonic functions the convexity of
+$\log\sup_{B_R}|u|$ is Hadamard's three-circles theorem, and seminorm
+versions follow from interior estimates. For \emph{linear} $s$-harmonic
+functions, frequency-function methods through the extension
+\textnormal{(}Almgren monotonicity; cf.\ the unique-continuation
+literature\textnormal{)} give doubling and three-spheres statements ---
+for sup-norms, and by an adaptation that we do not carry out here, for the
+seminorms used in \textnormal{(H3S)}. For the fractional $p$-Laplacian,
+\textbf{no three-spheres or doubling inequality is known}; there is no
+extension, no frequency function, and no unique-continuation theory. This
+is now the precise frontier of the paper: Hypothesis~\ref{hyp:L} has been
+reduced to \textnormal{(H3S)} \textnormal{(}plus the packaging
+\eqref{eq:good-decay}\textnormal{)}.
+\textnormal{(b)} \emph{Annular nondegeneracy at good scales is free:} if
+$\mathcal D_z(R)\ge\delta_0$, Lemma~\ref{lem:interp-paper} gives a ball
+$B_{r_1R}(x_R)\subset B_{2R}$ with $|\nabla z|\ge c_1R^{\beta-1}$, whence
+\[
+  \fint_{A_R}|\nabla z|^{p-2}\,dx\ \ge\ c\,\mu\,(c_1R^{\beta-1})^{p-2},
+  \qquad A_R=B_{2R}\setminus B_R ;
+\]
+at bad scales such a bound is equivalent to the persistence problem
+itself.
+\textnormal{(c)} \emph{The $A_2$ criterion, made exact.} For the weighted
+route the missing half is the \emph{inverse} average: $w=|\nabla z|^{p-2}$
+satisfies the $A_2$ condition on $A_R$ iff
+$\big(\fint_{A_R}w\big)\big(\fint_{A_R}w^{-1}\big)\le C$; the direct
+average is controlled at good scales by (b) and from above by slow
+variation, but $\fint_{A_R}|\nabla z|^{-(p-2)}$ requires the critical set
+$\{\nabla z=0\}$ to be small with power-type vanishing. For local
+$p$-harmonic functions in the plane this follows from quasiregularity of
+the complex gradient \textnormal{(}Bojarski--Iwaniec\textnormal{)}; a
+nonlocal analogue is \textbf{not known} in any dimension. The
+inverse-average bound is the genuinely hard half of BDOR-admissibility.
+\end{remark}
+
 \begin{remark}[Limitations]\label{rem:dichotomy-limits}
 \textnormal{(a)} The good-scale decay \eqref{eq:good-decay} is conditional
 on packaging the \cite[\S7]{GJS} linearized estimate with far-field datum;
