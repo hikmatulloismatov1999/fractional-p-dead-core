@@ -15,6 +15,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 % ---------- macros ----------
@@ -321,6 +322,64 @@ C^1$)
 with $b-a=w^h(x)-w^h(y)$, yields the displayed bilinear identity.
 \end{proof}
 
+\begin{corollary}[Weak increment identity for the blow-up sequence]
+\label{cor:incr-weak}
+Let $v_k$ solve $\fpl{v_k}=\theta_k^{\gamma-(p-1)}\Phi(v_k)$ weakly in
+$B_{\rho_k}$, $\rho_k:=1/r_k$, with $\Phi(t)=t_+^{\gamma}-t_-^{\gamma}$, and fix
+$h\in\R^n$, $|h|<\rho_k/4$. Set $W_k^h:=v_k(\cdot+h)-v_k$ and let
+\[
+  \Omega_k^h:=\{x\in\R^n:\ x\in B_{\rho_k}\text{ and }x+h\in B_{\rho_k}\}
+  \supset B_{\rho_k/2}
+\]
+be the common admissible domain. Then for every
+$\varphi\in C_c^\infty(\Omega_k^h)$,
+\begin{equation}\label{eq:weak-incr-full}
+  \frac12\iint_{\R^n\times\R^n}
+   a_k^h(x,y)\,
+   \frac{\big(W_k^h(x)-W_k^h(y)\big)\big(\varphi(x)-\varphi(y)\big)}
+        {|x-y|^{n+sp}}\;dx\,dy
+  \;=\;\int_{\R^n} f_k^h\,\varphi\,dx,
+\end{equation}
+with
+\[
+  a_k^h(x,y)=(p-1)\int_0^1\big|B_k(x,y)+t\big(A_k(x,y)-B_k(x,y)\big)\big|^{p-2}dt,
+  \qquad
+  \begin{aligned}
+   A_k(x,y)&=v_k(x+h)-v_k(y+h),\\
+   B_k(x,y)&=v_k(x)-v_k(y),
+  \end{aligned}
+\]
+and
+\[
+  f_k^h:=\theta_k^{\gamma-(p-1)}\big[\Phi\big(v_k(\cdot+h)\big)-\Phi(v_k)\big].
+\]
+Moreover $f_k^h\to0$ in $L^\infty_{loc}$: on any fixed ball $B_R$ where
+$\sup_k\|v_k\|_{L^\infty(B_{R+|h|})}\le C_R$,
+\[
+  \|f_k^h\|_{L^\infty(B_R)}
+  \le 2\,\theta_k^{\gamma-(p-1)}\,C_R^{\gamma}\ \longrightarrow\ 0
+  \qquad(k\to\infty),
+\]
+since $\gamma<p-1$ and $\theta_k\to\infty$.
+\end{corollary}
+\begin{proof}
+Test the weak formulation of the equation for $v_k(\cdot+h)$ (valid in
+$B_{\rho_k}-h\supset\Omega_k^h$, by translating the formulation for $v_k$)
+and that for $v_k$ against the same $\varphi\in C_c^\infty(\Omega_k^h)$, and
+subtract. On the left, apply the identity of
+Proposition~\ref{prop:linincr} pointwise in $(x,y)$ (legitimate for $p\ge2$,
+where $J_p\in C^1(\R)$, by the fundamental theorem of calculus); the symmetric
+$\frac12\iint$ normalization matches the convention in
+\eqref{eq:weak-incr-full}. Every integral converges absolutely: near the
+diagonal, $a_k^h(x,y)\le(p-1)(|A_k|+|B_k|)^{p-2}\lesssim|x-y|^{p-2}$ by the
+local Lipschitz bound for $v_k$, so the integrand is
+$O(|x-y|^{p-n-sp})$ with $p>sp$; in the far field, the tail hypotheses of
+\S\ref{ssec:truncdiff} apply. On the right, $|\Phi(a)-\Phi(b)|\le
+2\max(|a|,|b|)^{\gamma}$ for $0<\gamma\le1$ (and
+$\le\gamma\max(|a|,|b|)^{\gamma-1}|a-b|$ for $\gamma\ge1$), giving the stated
+$L^\infty_{loc}$ bound and the convergence $f_k^h\to0$.
+\end{proof}
+
 \begin{remark}[Degeneracy and order of the linearized kernel]\label{rem:order}
 When $v$ is differentiable, $K_h(x,y)\sim(p-1)|Dv(x)|^{p-2}|x-y|^{p-2}$ near
 the diagonal, so $K_h(x,y)|x-y|^{-n-sp}$ is of homogeneity $-n-(sp-(p-2))$:
@@ -329,8 +388,25 @@ $s>1-\frac2p$, i.e.\ in the range \eqref{eq:gjs-range}. For $p>2$ the weight
 $|Dv|^{p-2}$ \emph{vanishes where $Dv=0$} and grows in the far field; thus
 $L_{K_h}$ is \emph{degenerate} at critical points of $v$ and is not uniformly
 elliptic globally. This is a serious issue here, because the blow-up limit is
-expected to be flat at the origin ($Dv_0(0)=0$), exactly where the kernel
-degenerates.
+flat at the origin in the sup sense ($\sup_{B_r}|v_0|=o(r)$ along the
+normalization; the pointwise statement $Dv_0(0)=0$ would require the
+$C^1_{loc}$-compactness of Assumption~\ref{ass:compact} and is not asserted
+unconditionally), exactly where the kernel degenerates.
+
+\emph{Warning (three exponents, not one).} The coefficient $K_h$ scales
+differently in three regimes and these must not be conflated:
+\begin{itemize}[leftmargin=2em]
+\item \emph{near-diagonal:} $K_h\sim|Dv(x)|^{p-2}|x-y|^{p-2}$ --- governs the
+  \emph{order} $sp-p+2$ of $L_{K_h}$;
+\item \emph{near a flat point:} the weight $|Dv(x)|^{p-2}\sim
+  |x|^{(\beta-1)(p-2)}$ --- governs the \emph{degeneracy at the origin}
+  (route~(W) of \S\ref{sec:open});
+\item \emph{far field:} $K_h(x,y)\sim|v(y)|^{p-2}\sim|y|^{\beta(p-2)}$ for
+  $x$ in a fixed ball and $|y|\to\infty$ --- the coefficient sees the
+  \emph{function values}, not the increments; this exponent, and not
+  $(\beta-1)(p-2)$, is the one entering the tail condition
+  \eqref{eq:tailcond}.
+\end{itemize}
 \end{remark}
 
 \subsection{Regularity inputs}
@@ -722,6 +798,31 @@ converges iff $(\beta-1)+\beta(p-2)-sp<0$, i.e.\ $\beta(p-1)<sp+1$, which is
 $\mathrm{Tail}_{p-1,sp+1}$ that appears in the linearized estimates of~\cite{GJS}.
 \end{remark}
 
+The missing global input deserves a name and a precise statement.
+
+\begin{hypothesis}[Degenerate-kernel Liouville property]\label{hyp:L}
+Let $v_0$ be an entire function in the admissible class \textnormal{(}growth
+$|v_0(x)|\le C(1+|x|)^{\beta}$, tail condition \eqref{eq:tailcond}\textnormal{)}
+and let $L_{0,h}$ denote the linearized operator with kernel
+$K_0^h(x,y)=a_0^h(x,y)|x-y|^{-n-sp}$, where $a_0^h$ is the increment
+coefficient of Corollary~\ref{cor:incr-weak} built from $v_0$. \emph{We say
+that Hypothesis \textnormal{(L)} holds if}: whenever $W\in C^0(\R^n)$
+satisfies, weakly,
+\[
+  L_{0,h}W=0\ \text{ in }\R^n,
+  \qquad |W(x)|\le C\,(1+|x|)^{\delta}\ \text{ for some }0<\delta<1,
+\]
+then $W$ is constant.
+\end{hypothesis}
+
+\noindent The coefficient $a_0^h$ may vanish (Remark~\ref{rem:order}), so
+Hypothesis~(L) does \emph{not} follow from the uniformly elliptic nonlocal
+Liouville theory \cite{FRO,Serra}; it is exactly the statement those theories
+would give if uniform ellipticity held. The scale-uniform H\"older hypothesis
+$(\star)$ below implies Hypothesis~(L) by the rescaling argument in the proof
+of Theorem~\ref{thm:liouville-incr}; conversely (L) is the minimal form needed
+to close the contradiction scheme of \S\ref{sec:growth}.
+
 \begin{theorem}[Conditional Liouville, increment route]\label{thm:liouville-incr}
 Let $p\ge2$, $s>1-\frac2p$, and let $v\in C^{1,\al_0}_{loc}(\R^n)$ be entire
 $(s,p)$-harmonic with $v(0)=|Dv(0)|=0$, growth $|v(x)|\le C(1+|x|)^{\beta}$ and
@@ -997,7 +1098,26 @@ degeneracy:
   $a=(\beta-1)(p-2)\ge0$. For $a<n$ (i.e.\ $(\beta-1)(p-2)<n$) the weight
   $|x|^a$ is of Muckenhoupt $A_2$ type; proving H\"older/Liouville estimates
   for this weighted class is a concrete, structured problem replacing
-  ``arbitrary degenerate kernel''.
+  ``arbitrary degenerate kernel''. This route has recently acquired a solid
+  foundation: Behn--Diening--Ok--Rolfes~\cite{BDOR} develop interior H\"older
+  continuity and Harnack inequalities (their Theorems 3.4--3.6) for nonlocal
+  equations whose kernels are comparable to
+  $w(x)w(y)/w(B_{x,y})\cdot|x-y|^{-n}$ with a Muckenhoupt $A_p$ weight $w$ ---
+  a nonlocal analogue of Fabes--Kenig--Serapioni, with constants stable as
+  $s\nearrow1$. The BDOR framework suggests a possible path to the missing
+  Liouville theorem (Hypothesis~\ref{hyp:L}), \emph{provided} one can verify a
+  suitable Muckenhoupt-type admissibility condition for the linearized
+  coefficient $a_0^h$. We emphasize what is \emph{not} automatic: their
+  kernels are point-degenerate of product type, whereas $a_0^h$ is
+  pair-degenerate ($a_0^h$ small where $v_0(x)\approx v_0(y)$); their theory
+  is stated for the homogeneous equation (they indicate the nonhomogeneous
+  extension is expected); and their energy is the $p$-form, while $L_{0,h}$ is
+  the linearized quadratic form. Verifying an \emph{averaged} comparability
+  $a_0^h(x,y)\gtrsim w(x)^{1/2}w(y)^{1/2}$ with $w\sim|Dv_0|^{p-2}$ in the
+  $A_2$ sense --- strictly weaker than pointwise nondegeneracy --- is the
+  concrete open problem; the case $n=2$, where $|Du|^{p-2}$ is known to be a
+  Muckenhoupt weight for local $p$-harmonic $u$ via quasiregularity of the
+  gradient, is the natural first target.
 \item[(A)] \emph{Annular nondegeneracy.} If the blow-up limit satisfies
   $|Dv(x)|\sim R^{\beta-1}$ on a large portion of each annulus
   $B_{2R}\setminus B_R$, rescaling the annulus to unit size makes $K_h$
@@ -1021,7 +1141,16 @@ $f\in L^\infty$) and higher differentiability $u\in W^{1+\al,p}_{loc}$, but
 $W^{1+\al,p}\hookrightarrow C^{1,\sigma}$ requires $\al p>n$. Hence the
 $C^1$-flatness gap is \emph{not} closed: the condition $Du(x_0)=0$ in
 Definition~\ref{def:branch} remains conditional, and the weaker flatness
-$\sup_{B_r}|u|=o(r)$ is the right formulation.
+$\sup_{B_r}|u|=o(r)$ is the right formulation. A natural intermediate target
+is a \emph{perturbation lemma}: since the blow-up right-hand sides satisfy
+$f_k\to0$ (Corollary~\ref{cor:incr-weak}), a compactness/improvement-of-
+flatness argument against the homogeneous estimate of~\cite{GJS} should yield
+uniform interior $C^{1,\al'}$ bounds, $\al'<\al_0$, for solutions with
+$\|f\|_{L^\infty}$ small --- weaker than a full inhomogeneous $C^{1,\al}$
+theory and plausibly within reach, but \emph{it is another input to prove},
+not to cite; it would inherit the restriction $p<\frac{2}{1-s}$ and lose
+uniformity as $s\nearrow1$. Until it is proved, the $C^1_{loc}$-compactness
+of the blow-ups (Assumption~\ref{ass:compact}) must not be assumed silently.
 \item \emph{A modulo-polynomial theory for the degenerate increment kernel.}
 The blow-up limit has too large a tail to be $(s,p)$-harmonic in the standard
 sense (Remark~\ref{rem:renorm}); the right framework is the polynomial-growth
@@ -1044,9 +1173,77 @@ the degeneracy of $K_h$ at $\{Dv=0\}$ is the obstruction common to both.
 \end{enumerate}
 
 %======================================================================
+\section{Conclusion: status of each step}\label{sec:conclusion}
+%======================================================================
+The table below records the status of every step of the program. ``Rigorous''
+means proved in this paper; ``literature'' means used with a precise citation;
+``conditional'' means proved here modulo a stated assumption; ``open'' means a
+genuinely new statement that must be proved before the main theorem becomes
+unconditional.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{|p{0.21\textwidth}|p{0.72\textwidth}|}
+\hline
+\textbf{Rigorous} &
+Scaling identity and the exponent $\beta_*=\frac{sp}{p-1-\gamma}$
+(Prop.~\ref{prop:scaling}); vanishing right-hand side along amplified
+blow-ups (Prop.~\ref{prop:homog}); weak increment identity and
+$f_k^h\to0$ (Prop.~\ref{prop:linincr}, Cor.~\ref{cor:incr-weak}); far-field
+tail condition $\beta_*(p-1)<sp+1\iff\gamma<\frac{p-1}{1+sp}$, with the
+far-field coefficient $\sim|y|^{\beta_*(p-2)}$
+(Rem.~\ref{rem:tailcond}); tail obstruction for the normalized sequence
+(Prop.~\ref{prop:tailobstruction}); truncation oscillation estimates
+(Lem.~\ref{lem:trunc}, \ref{lem:trunc-incr}); constant cancellation at
+$p=2$ and its failure mechanisms at $p\neq2$
+(Prop.~\ref{prop:p2cancel}, \ref{prop:pneq2}); stability under exterior
+H\"older data (Lem.~\ref{lem:exterior}); scale-local barrier
+(Lem.~\ref{lem:barrier}); contradiction scheme modulo its inputs
+(Thm.~\ref{thm:growth}). \\
+\hline
+\textbf{Literature} &
+Inhomogeneous H\"older/Lipschitz baseline, $p<\frac2{1-s}$~\cite{BT};
+homogeneous interior $C^{1,\al_0}$ and local linearized H\"older
+estimates~\cite{GJS}; weighted nonlocal
+H\"older/Harnack (Fabes--Kenig--Serapioni analogue)~\cite{BDOR};
+weak--viscosity equivalence~\cite{KKL}; higher H\"older
+machinery~\cite{BLS}; the $p=2$ template~\cite{PTU}. \\
+\hline
+\textbf{Conditional} &
+The growth estimate $|u(x)|\le C|x-x_0|^{\beta_*}$ at flat branching points
+(Thm.~\ref{thm:growth}), under Assumption~\ref{ass:compact}
+($C^1_{loc}$-compactness of normalized blow-ups) and
+Hypothesis~\ref{hyp:L} (degenerate-kernel Liouville); the increment-route
+Liouville under \textnormal{(ND)}$+(\star)$
+(Thm.~\ref{thm:liouville-incr}); the local limit $s\nearrow1$
+(Thm.~\ref{thm:local}). \\
+\hline
+\textbf{Open} &
+Hypothesis~\ref{hyp:L} itself: Liouville for the degenerate linearized
+kernel --- equivalently, scale-uniform H\"older/Harnack for $L_{0,h}$; the
+Muckenhoupt/BDOR admissibility of $a_0^h$ (route (W), \S\ref{sec:open});
+the perturbation lemma (uniform $C^{1,\al'}$ for small right-hand side);
+annular nondegeneracy across a two-phase branching point; sharpness of
+$\gamma<\frac{p-1}{1+sp}$. \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\noindent\textbf{Safe statement.} The theorem this paper proves is
+Theorem~\ref{thm:growth}: \emph{for $p\ge2$, $p<\frac2{1-s}$,
+$0<\gamma<\frac{p-1}{1+sp}$, if $u$ is a bounded weak solution of
+\eqref{eq:main} and $x_0$ is a flat branching point in the sup sense, then,
+under Assumption~\ref{ass:compact} and Hypothesis~\ref{hyp:L},
+$|u(x)|\le C|x-x_0|^{\beta_*}$ near $x_0$.} No unconditional claim is made,
+and no pointwise gradient condition at $x_0$ is used.
+
+%======================================================================
 \begin{thebibliography}{9}
 \bibitem{BDLM} V. B\"ogelein, F. Duzaar, N. Liao, S. Moring, \emph{Gradient
 estimates for the fractional $p$-Poisson equation}. % details to verify before submission
+\bibitem{BDOR} L. Behn, L. Diening, J. Ok, J. Rolfes, \emph{Nonlocal
+equations with degenerate weights}, preprint arXiv:2409.11829.
 \bibitem{BT} A. Biswas, E. Topp, \emph{Lipschitz regularity of fractional
 $p$-Laplacian}, Ann. PDE 11 (2025), no.~2, Paper No.~27.
 \bibitem{BLS} L. Brasco, E. Lindgren, A. Schikorra, \emph{Higher H\"older
