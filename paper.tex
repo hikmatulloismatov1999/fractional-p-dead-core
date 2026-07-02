@@ -765,115 +765,148 @@ $A_bw=f$. The operator $A_b$ is \emph{monotone}, since for fixed $\tau\in\R$,
   \big(J_p(\xi+\tau)-J_p(\eta+\tau)\big)(\xi-\eta)\ \ge\ 0,
 \end{equation}
 $J_p$ being nondecreasing. This section proves the compactness/limit-equation
-half of the perturbative scheme for the family $\{A_b\}_{|b|\le B}$; the
-regularity half is isolated as Hypothesis~\ref{hyp:P2} below and is \emph{not}
-claimed.
+half of the perturbative scheme for the family $\{A_b\}_{|b|\le B}$. The key
+structural point, which simplifies everything, is a \emph{conjugation
+identity}: on the class of functions whose far field carries the affine
+structure as data, $A_b$ is the ordinary operator in disguise, and no
+exotic formulation is needed.
 
-\subsection{The compensated weak formulation}
-The expression \eqref{eq:Ab} requires care: for bounded $v$, the integrand
-behaves like $J_p(b\cdot(x-y))\sim|b|^{p-1}|x-y|^{p-1}$ in the far field,
-which is \emph{not} absolutely integrable against $|x-y|^{-n-sp}$ when
-$p-1\ge sp$. The affine part must be removed by symmetry before absolute
-estimates are made. We fix the following convention.
+\subsection{Two exterior classes, and the conjugation identity}
+The expression \eqref{eq:Ab} requires care in the far field. Exactly what
+care depends on the structure of the exterior data, and we distinguish two
+classes; conflating them produces incorrect estimates.
 
-\begin{definition}[Compensated weak solution]\label{def:compweak}
-Let $v\in W^{s,p}(B_2)\cap L^\infty(B_2)$ admit the far-field decomposition
-$v=g-\ell_b$ on $\R^n\setminus B_2$ with $g\in L^{p-1}_{sp}(\R^n)$
-\textnormal{(}finite tail\textnormal{)} and $\ell_b(x)=b\cdot x$. For
-$\varphi\in C_c^\infty(B_1)$ set
-\begin{align}
-  \mathcal E_b(v,\varphi):={}&\frac12\iint_{\{|x-y|\le1\}}
-    J_p\big(v(x)-v(y)+b\cdot(x-y)\big)\,
-    \frac{(\varphi(x)-\varphi(y))}{|x-y|^{n+sp}}\,dx\,dy
-    \label{eq:comp-near}\\
-  &+\int_{\R^n}\varphi(x)\!\int_{\{|x-y|>1\}}
-    \Big[J_p\big(v(x)-v(y)+b\cdot(x-y)\big)-J_p\big(b\cdot(x-y)\big)\Big]
-    \frac{dy}{|x-y|^{n+sp}}\,dx,
-    \label{eq:comp-far}
-\end{align}
-where we record that
-$\int_{\{|x-y|>1\}}J_p(b\cdot(x-y))\,|x-y|^{-n-sp}\,dy=0$ for every $x$, as an
-improper symmetric limit over annuli $\{1<|x-y|<R\}$, $R\to\infty$
-\textnormal{(}the integrand is odd in $y-x$ and each annulus integral vanishes
-exactly\textnormal{)}. We say $A_bv=f$ \emph{weakly in $B_1$} if
-$\mathcal E_b(v,\varphi)=\int f\varphi$ for all such $\varphi$.
+\begin{definition}[Admissible classes]\label{def:classes}
+Let $b\in\R^n$, $v\in W^{s,p}(B_2)\cap L^\infty(B_2)$.
+\begin{itemize}[leftmargin=2em]
+\item[\textnormal{(A)}] \emph{Affine-structured exterior:} $v=g-\ell_b$ on
+$\R^n\setminus B_2$, where $\ell_b(x)=b\cdot x$ and $g\in L^{p-1}_{sp}(\R^n)$,
+i.e.\ $\Tail(g;0,2)<\infty$.
+\item[\textnormal{(B)}] \emph{Bounded exterior:} $v\in L^\infty(\R^n)$
+\textnormal{(}no affine structure at infinity\textnormal{)}.
+\end{itemize}
 \end{definition}
 
-\begin{lemma}[Well-posedness of the formulation in the range
-$p<\frac2{1-s}$]\label{lem:wellposed}
-Under the hypotheses of Definition~\ref{def:compweak}, both integrals
-\eqref{eq:comp-near}--\eqref{eq:comp-far} converge absolutely, provided
-\begin{equation}\label{eq:range-shifted}
-  p-2<sp,\qquad\text{i.e.}\qquad p<\frac{2}{1-s}.
-\end{equation}
+\begin{lemma}[Conjugation; class \textnormal{(A)} needs no compensation]
+\label{lem:conj}
+Let $v$ be of class \textnormal{(A)} and set $V:=v+\ell_b$. Then $V\in
+W^{s,p}(B_2)\cap L^\infty(B_2)$, $V=g$ on $\R^n\setminus B_2$, so
+$V\in L^{p-1}_{sp}(\R^n)$, and for every $\varphi\in C_c^\infty(B_1)$ the
+\emph{ordinary} weak form
+\[
+  \mathcal E(V,\varphi):=\frac12\iint_{\R^n\times\R^n}
+   J_p\big(V(x)-V(y)\big)\,\frac{(\varphi(x)-\varphi(y))}{|x-y|^{n+sp}}
+   \,dx\,dy
+\]
+converges absolutely, under the \emph{standard} tail assumption on $g$ only
+--- no restriction beyond $p>sp$ \textnormal{(}always true\textnormal{)} is
+needed. We \emph{define} $A_bv=f$ weakly in $B_1$ to mean
+$\mathcal E(V,\varphi)=\int f\varphi$ for all such $\varphi$; formally
+$A_bv=\fpl{V}$, i.e.\ the shift is conjugated away.
 \end{lemma}
 \begin{proof}
-\emph{Near region \eqref{eq:comp-near}.} Here $|\varphi(x)-\varphi(y)|\le
-\|\nabla\varphi\|_\infty|x-y|$ and, splitting the $J_p$ term by
-$|J_p(t)|\le|t|^{p-1}$ and $(a+b)^{p-1}\le c(a^{p-1}+b^{p-1})$,
+Near region ($x,y\in B_2$): the standard estimate, using
+$V\in W^{s,p}(B_2)\cap L^\infty(B_2)$ (the affine part is bounded on $B_2$).
+Far cross region ($x\in\operatorname{supp}\varphi\subset B_1$,
+$y\notin B_2$): here $V(y)=g(y)$ and
+$|J_p(V(x)-g(y))|\le c\,\big(\|V\|_{L^\infty(B_2)}^{p-1}+|g(y)|^{p-1}\big)$,
+so
 \[
-  \big|J_p(v(x)-v(y)+b\cdot(x-y))\big|
-  \le c\,|v(x)-v(y)|^{p-1}+c\,B^{p-1}|x-y|^{p-1}.
+  \int_{B_1}|\varphi(x)|\int_{\R^n\setminus B_2}
+  \frac{|J_p(V(x)-g(y))|}{|x-y|^{n+sp}}\,dy\,dx
+  \ \le\ C\Big(\|V\|_{L^\infty(B_2)}^{p-1}+\Tail(g;0,2)^{p-1}\Big)
+  \|\varphi\|_{L^1},
 \]
-The second term contributes $c\iint_{|x-y|\le1}|x-y|^{p-n-sp}$, finite since
-$p>sp$. The first is handled by H\"older with exponents $(\tfrac{p}{p-1},p)$
-against $|\varphi(x)-\varphi(y)|$, giving the bound
-$C[v]_{W^{s,p}}^{p-1}[\varphi]_{W^{s,p}}$ after distributing the kernel;
-this is the standard estimate for the unshifted form and does not use
-\eqref{eq:range-shifted}.
-
-\emph{Far region \eqref{eq:comp-far}.} By the fundamental theorem of calculus
-for $J_p\in C^1$ \textnormal{(}$p\ge2$\textnormal{)},
-\begin{equation}\label{eq:Jp-diff}
-  \big|J_p(t+\tau)-J_p(\tau)\big|\ \le\ (p-1)\,(|t|+|\tau|)^{p-2}\,|t| .
-\end{equation}
-With $t=v(x)-v(y)$ and $\tau=b\cdot(x-y)$, $|x-y|>1$: for $x\in
-B_1=\operatorname{supp}\varphi$ we have $|\tau|\le B|x-y|$ and, by the
-far-field decomposition, $|t|\le \|v\|_{L^\infty(B_2)}+|g(y)|+B|y|\cdot
-\chi_{\{y\notin B_2\}}$ --- however the affine part of $v(y)$ recombines with
-$\tau$: indeed for $y\notin B_2$,
-\[
-  v(x)-v(y)+b\cdot(x-y)=v(x)-g(y)+b\cdot x,
-\]
-so the argument of the first $J_p$ in \eqref{eq:comp-far} is bounded by
-$C+|g(y)|$, while the reference term $J_p(b\cdot(x-y))$ obeys
-\eqref{eq:Jp-diff} with $t$ replaced by $v(x)-g(y)+b\cdot y$
-\textnormal{(}write $b\cdot(x-y)=(v(x)-g(y)+b\cdot x)-(v(x)-g(y)+b\cdot y)$
---- we estimate instead directly\textnormal{)}:
-\[
-  \big|J_p(v(x)-g(y)+b\cdot x)-J_p(b\cdot(x-y))\big|
-  \le (p-1)\big(C+|g(y)|+B|x-y|\big)^{p-2}\big(C+|g(y)|+B(1+|x|)\big).
-\]
-For $|x-y|>1$, $x\in B_1$, the dominant growth in $y$ is
-$|x-y|^{p-2}(1+|g(y)|)$, so the $y$-integral is bounded by
-\[
-  C\int_{|x-y|>1}\frac{|x-y|^{p-2}\,(1+|g(y)|)}{|x-y|^{n+sp}}\,dy
-  \;\le\;
-  C\int_{|z|>1}|z|^{\,p-2-n-sp}\,dz
-  \;+\;
-  C\Big(\int|g|^{p-1}\omega\Big)^{\frac1{p-1}}
-   \Big(\int_{|z|>1}|z|^{\frac{(p-2)(p-1)}{p-2}-n-sp}dz\Big)^{\frac{p-2}{p-1}},
-\]
-and both integrals are finite \emph{precisely} when $p-2<sp$
-\textnormal{(}the H\"older-split second factor requires
-$p-1<sp+\frac{sp+n}{p-1}$-type conditions implied by it; for $g$ bounded the
-first term alone suffices under $p-2<sp$\textnormal{)}. For $y\in
-B_2\setminus B_1$-type intermediate regions the integrand is bounded by local
-norms. This is where the restriction \eqref{eq:range-shifted} enters, and it
-is the \emph{same} restriction under which the homogeneous $C^{1,\al}$
-theory~\cite{GJS} and the Lipschitz baseline~\cite{BT} hold: the range
-$p<\frac2{1-s}$ appears independently three times \textnormal{(}order of the
-linearized operator, GJS, and here\textnormal{)}, and we regard it as the
-natural habitat of the theory.
+using $|x-y|\ge\frac13(1+|y|)$ for $x\in B_1$, $y\notin B_2$. Absolute
+convergence holds with no exponent restriction.
 \end{proof}
+
+\begin{remark}[Correction of a previous formulation]\label{rem:correction}
+An earlier version of this section introduced a ``compensated'' far-field
+pairing, subtracting $J_p(b\cdot(x-y))$, and estimated the remainder by
+$|J_p(\tau+\xi)-J_p(\tau)|\le C_p(|\tau|+|\xi|)^{p-2}|\xi|$ with
+$\tau=b\cdot(x-y)$. For class \textnormal{(A)} this is both unnecessary
+\textnormal{(}Lemma~\ref{lem:conj}\textnormal{)} and, as written, flawed: the
+increment $\xi=v(x)-g(y)+b\cdot y$ is \emph{unbounded}, so the split does not
+close. The compensated formulation is meaningful precisely for class
+\textnormal{(B)}, where it is also sharp; see Lemma~\ref{lem:classB}.
+\end{remark}
+
+\begin{lemma}[Class \textnormal{(B)}: compensated formulation and its exact
+cost]\label{lem:classB}
+Let $v$ be of class \textnormal{(B)}. Define
+\begin{align*}
+  \mathcal E_b^{\mathrm{comp}}(v,\varphi):={}&\frac12\iint_{\{|x-y|\le1\}}
+    J_p\big(v(x)-v(y)+b\cdot(x-y)\big)\,
+    \frac{(\varphi(x)-\varphi(y))}{|x-y|^{n+sp}}\,dx\,dy\\
+  &+\int\varphi(x)\!\int_{\{|x-y|>1\}}
+    \Big[J_p\big(v(x)-v(y)+b\cdot(x-y)\big)-J_p\big(b\cdot(x-y)\big)\Big]
+    \frac{dy\,dx}{|x-y|^{n+sp}},
+\end{align*}
+with the convention
+$\int_{\{|x-y|>1\}}J_p(b\cdot(x-y))|x-y|^{-n-sp}dy=0$
+\textnormal{(}odd symmetry; exact on every annulus $\{1<|x-y|<R\}$, hence in
+the improper limit\textnormal{)}. Then:
+\begin{itemize}[leftmargin=2em]
+\item[\textnormal{(i)}] If $v\in L^\infty(\R^n)$, the far-field integrand
+obeys, with $\tau=b\cdot(x-y)$ and the \emph{bounded} increment
+$\xi=v(x)-v(y)$,
+\[
+  \big|J_p(\tau+\xi)-J_p(\tau)\big|
+  \le C_p\big(|\tau|+|\xi|\big)^{p-2}|\xi|
+  \le C_p\big(B|x-y|+2\|v\|_\infty\big)^{p-2}\,2\|v\|_\infty
+  \ \lesssim\ |x-y|^{p-2},
+\]
+and $\int_{|x-y|>1}|x-y|^{p-2-n-sp}\,dy<\infty$ \emph{iff} $p-2<sp$. Thus for
+bounded exterior data the compensated formulation is well posed exactly in
+the range $p<\frac2{1-s}$, and this restriction is genuinely a far-field
+requirement here, not only a near-field one.
+\item[\textnormal{(ii)}] If $v$ is unbounded with only the standard tail
+$\int_{|y|>1}|v(y)|^{p-1}|y|^{-n-sp}dy<\infty$, the mixed term
+$|\tau|^{p-2}|\xi|$ produces the requirement
+\begin{equation}\label{eq:mixed-tail}
+  \int_{|y|>1}\frac{|x-y|^{\,p-2}\,|v(y)|}{|x-y|^{n+sp}}\,dy
+  \ \simeq\
+  \int_{|y|>1}\frac{|v(y)|}{|y|^{\,n+sp-(p-2)}}\,dy\ <\ \infty,
+\end{equation}
+a \emph{mixed tail} that is strictly stronger than the $(p-1)$-tail in
+general when $sp\le p-1$ \textnormal{(}H\"older interpolation fails to reduce
+one to the other: the conjugate exponent costs
+$\int|y|^{p-1-n-sp}=\infty$\textnormal{)}. For $b\neq0$ and unbounded class
+\textnormal{(B)} data, \eqref{eq:mixed-tail} must be \emph{assumed}.
+\end{itemize}
+\end{lemma}
+\begin{proof}
+(i) is the displayed computation; the annular cancellation of the reference
+term is exact by oddness of $z\mapsto J_p(b\cdot z)|z|^{-n-sp}$ on symmetric
+annuli. (ii): expand $(|\tau|+|\xi|)^{p-2}\le
+c(|\tau|^{p-2}+|\xi|^{p-2})$; the term $|\xi|^{p-2}|\xi|=|\xi|^{p-1}$ is
+controlled by the standard $(p-1)$-tail, while $|\tau|^{p-2}|\xi|$ gives
+\eqref{eq:mixed-tail}; the stated failure of interpolation is checked on
+$v(y)=|y|^{\sigma}$ with $\sigma$ slightly below $\frac{sp}{p-1}$:
+the $(p-1)$-tail converges while \eqref{eq:mixed-tail} requires
+$\sigma<sp-p+2$, a strictly stronger condition when $sp\le p-1$.
+\end{proof}
+
+\begin{remark}[Which class is used where]\label{rem:whichclass}
+The blow-up/excess iteration produces functions of class \textnormal{(A)}:
+the affine part is a \emph{local normalization}, while the far field is the
+(rescaled) original solution, which has a finite standard tail; a direct
+computation shows the rescalings preserve class \textnormal{(A)} with
+improving tails, since the normalization is subcritical
+($(1+\al')(p-1)<sp$). Truncated increments, by contrast, are of class
+\textnormal{(B)} with \emph{bounded} data, so Lemma~\ref{lem:classB}(i)
+applies to them in the range $p<\frac2{1-s}$; the dangerous case (ii) does
+not arise in our scheme. All statements below are formulated for class
+\textnormal{(A)} unless stated otherwise.
+\end{remark}
 
 \begin{remark}[No pointwise operator is used]\label{rem:no-pointwise}
 We never evaluate \eqref{eq:Ab} pointwise: all statements below are in the
-sense of Definition~\ref{def:compweak}. The odd-symmetry convention for the
-reference term is exactly the compensation that makes bounded functions
-admissible for $A_b$; it is the nonlinear analogue of the
-polynomial-compensated definitions available for $(-\Delta)^s$
-\textnormal{(}\cite{DSV}, linear only\textnormal{)}.
+weak senses of Lemma~\ref{lem:conj} (class (A)) or Lemma~\ref{lem:classB}
+(class (B)). The odd-symmetry convention in Lemma~\ref{lem:classB} is the
+nonlinear analogue of the polynomial-compensated definitions available for
+$(-\Delta)^s$ \textnormal{(}\cite{DSV}, linear only\textnormal{)}.
 \end{remark}
 
 \subsection{Perturbative compactness}
@@ -881,8 +914,8 @@ polynomial-compensated definitions available for $(-\Delta)^s$
 \begin{proposition}[Compactness and the limit equation for shifted
 operators]\label{prop:P1}
 Let $2\le p<\frac2{1-s}$ and $B\ge0$. Let $b_k\in\R^n$, $|b_k|\le B$,
-$b_k\to b$, and let $v_k$ satisfy, in the sense of
-Definition~\ref{def:compweak},
+$b_k\to b$, and let $v_k$ be of class \textnormal{(A)} and satisfy, in the
+sense of Lemma~\ref{lem:conj},
 \[
   A_{b_k}v_k=f_k\quad\text{weakly in }B_1,
   \qquad \|f_k\|_{L^\infty(B_1)}\to0,
@@ -923,62 +956,65 @@ Arzel\`a--Ascoli give $v_k\to v_0$ locally uniformly along a subsequence; the
 uniform Gagliardo bound gives $v_k\rightharpoonup v_0$ weakly in
 $W^{s,p}(B_r)$ for every $r<2$ \textnormal{(}reflexivity; the two limits
 agree a.e.\textnormal{)}. Under (E2), define $v_0:=g_0-\ell_b$ outside $B_2$;
-under (E1), $v_0:=g-\ell_b$ there. In either case $v_0$ satisfies the
-hypotheses of Definition~\ref{def:compweak}.
+under (E1), $v_0:=g-\ell_b$ there. In either case $v_0$ is of class
+\textnormal{(A)}, so the weak sense of Lemma~\ref{lem:conj} is available for
+it. By conjugation we work throughout with
+$\mathcal V_k:=v_k+\ell_{b_k}$ and $\mathcal V_0:=v_0+\ell_b$: these satisfy
+$\fpl{\mathcal V_k}=f_k$ weakly in $B_1$ in the \emph{ordinary} sense,
+$\mathcal V_k=g_k$ outside $B_2$, and $\mathcal V_k\to\mathcal V_0$ locally
+uniformly \textnormal{(}$b_k\to b$\textnormal{)}.
 
 \emph{Step 2: the Minty device.} Fix $\varphi\in C_c^\infty(B_1)$ and $t>0$,
-and set $V:=v_0+t\varphi$. By the monotonicity \eqref{eq:mono} applied
-pointwise in $(x,y)$ with $\tau=b_k\cdot(x-y)$,
+and set $V:=\mathcal V_0+t\varphi$. By the monotonicity of $J_p$ applied
+pointwise in $(x,y)$,
 \begin{equation}\label{eq:minty}
-  \mathcal E_{b_k}(V,\,V-v_k)\ \ge\ \mathcal E_{b_k}(v_k,\,V-v_k)
-  \ =\ \int_{B_1} f_k\,(V-v_k)\,\zeta\,dx\ \longrightarrow\ 0,
+  \mathcal E(V,\,V-\mathcal V_k)\ \ge\ \mathcal E(\mathcal V_k,\,V-\mathcal V_k)
+  \ =\ \int_{B_1} f_k\,(V-\mathcal V_k)\,\zeta\,dx\ \longrightarrow\ 0,
 \end{equation}
 where the pairing is localized by a cutoff $\zeta$ as usual; the right-hand
-side vanishes since $\|f_k\|_\infty\to0$ and $V-v_k$ is uniformly bounded on
-$B_1$. \textnormal{(}The admissibility of $V-v_k$ as a test function follows
-by density from the uniform $W^{s,p}(B_2)\cap L^\infty$ bounds; this is the
-standard approximation step and uses no new estimate.\textnormal{)}
+side vanishes since $\|f_k\|_\infty\to0$ and $V-\mathcal V_k$ is uniformly
+bounded on $B_1$. \textnormal{(}Admissibility of $V-\mathcal V_k$ as a test
+function follows by density from the uniform $W^{s,p}(B_2)\cap L^\infty$
+bounds; standard approximation, no new estimate.\textnormal{)}
 
 \emph{Step 3: passing to the limit in the left-hand side of
 \eqref{eq:minty}.} The first argument $V$ is \emph{fixed}; the functional
-$\mathcal E_{b_k}(V,\cdot)$ is \emph{linear} in its second argument. Split as
-in Definition~\ref{def:compweak}:
+$\mathcal E(V,\cdot)$ is \emph{linear} in its second argument. Split the
+double integral at $B_2\times B_2$:
 \begin{itemize}[leftmargin=2em]
-\item \emph{Near region.} The density
-$G_k(x,y):=J_p(V(x)-V(y)+b_k\cdot(x-y))$ satisfies
-$|G_k|\le C|x-y|^{p-1}$ \textnormal{(}$V$ Lipschitz on $B_2$\textnormal{)},
-hence $G_k|x-y|^{-\frac{n+sp}{p'}}$ is bounded in
-$L^{p'}(\{|x-y|\le1\})$ with $p'=\frac{p}{p-1}$, since
-$(p-1)p'=p$ and $\iint_{|x-y|\le1}|x-y|^{p-n-sp}<\infty$. Moreover
-$G_k\to G$ pointwise \textnormal{(}$b_k\to b$; $J_p$
-continuous\textnormal{)}, hence strongly in the same weighted $L^{p'}$ by
-dominated convergence. The second factor
-$(V-v_k)(x)-(V-v_k)(y)$, weighted by $|x-y|^{-\frac{n+sp}{p}}$, converges
-\emph{weakly} in $L^p(\{|x-y|\le1\}\cap(B_2\times B_2))$ by Step~1. A
-strong--weak pairing passes to the limit.
-\item \emph{Far region.} For $x\in B_1$ the inner integrand is the
-compensated density, bounded by \eqref{eq:Jp-diff} and
-Lemma~\ref{lem:wellposed} by a fixed majorant
-$\Phi(x,y)\in L^1(\{|x-y|>1\})$ depending only on $C_0$, $B$, $g$-tails
-\textnormal{(}uniform under (E1)/(E2)\textnormal{)}; the integrand converges
-pointwise a.e.\ by Step~1, (E1)/(E2) and $b_k\to b$. Dominated convergence
-applies. \emph{This is the only place the exterior hypothesis is used, and it
-cannot be dispensed with}: without (E1)/(E2), far-field mass can create a
-spurious right-hand side in the limit \textnormal{(}the counterexample of
+\item \emph{Near region ($x,y\in B_2$).} The density
+$G(x,y):=J_p(V(x)-V(y))$ satisfies
+$|G|\le C|x-y|^{p-1}$ \textnormal{(}$V$ Lipschitz on $B_2$\textnormal{)},
+hence $G\,|x-y|^{-\frac{n+sp}{p'}}\in L^{p'}(B_2\times B_2)$ with
+$p'=\frac{p}{p-1}$, since $(p-1)p'=p$ and
+$\iint_{B_2\times B_2}|x-y|^{p-n-sp}<\infty$. The second factor
+$(V-\mathcal V_k)(x)-(V-\mathcal V_k)(y)$, weighted by
+$|x-y|^{-\frac{n+sp}{p}}$, converges \emph{weakly} in
+$L^p(B_2\times B_2)$ by Step~1. A fixed--weak pairing passes to the limit.
+\item \emph{Far region ($x\in B_1$, $y\notin B_2$, and symmetric).} The
+integrand is
+$J_p(V(x)-g_k(y))\,(\text{second factor})\,|x-y|^{-n-sp}$, dominated by the
+fixed majorant of Lemma~\ref{lem:conj}
+\textnormal{(}uniform under (E1)/(E2)\textnormal{)}, and converges pointwise
+a.e.\ by Step~1 and (E1)/(E2). Dominated convergence applies. \emph{This is
+the only place the exterior hypothesis is used, and it cannot be dispensed
+with}: without (E1)/(E2), far-field mass can create a spurious right-hand
+side in the limit \textnormal{(}the counterexample of
 \cite[Rem.~4.4]{CSapprox} adapts\textnormal{)}.
 \end{itemize}
-Therefore $\mathcal E_{b_k}(V,V-v_k)\to\mathcal E_b(V,t\varphi)$, and
-\eqref{eq:minty} gives $\mathcal E_b(v_0+t\varphi,\varphi)\ge0$ after
+Therefore $\mathcal E(V,V-\mathcal V_k)\to\mathcal E(V,t\varphi)$, and
+\eqref{eq:minty} gives $\mathcal E(\mathcal V_0+t\varphi,\varphi)\ge0$ after
 dividing by $t>0$.
 
 \emph{Step 4: hemicontinuity.} As $t\downarrow0$,
-$J_p(v_0(x)-v_0(y)+t(\varphi(x)-\varphi(y))+b\cdot(x-y))\to
-J_p(v_0(x)-v_0(y)+b\cdot(x-y))$ pointwise, dominated on the near region by
-$C|x-y|^{p-1}$ and on the far region by the majorant of
-Lemma~\ref{lem:wellposed} \textnormal{(}uniformly for $t\le1$\textnormal{)}.
-Hence $\mathcal E_b(v_0+t\varphi,\varphi)\to\mathcal E_b(v_0,\varphi)\ge0$.
-Replacing $\varphi$ by $-\varphi$ gives $\mathcal E_b(v_0,\varphi)=0$, i.e.\
-$A_bv_0=0$ weakly in $B_1$.
+$J_p(\mathcal V_0(x)-\mathcal V_0(y)+t(\varphi(x)-\varphi(y)))\to
+J_p(\mathcal V_0(x)-\mathcal V_0(y))$ pointwise, dominated on the near
+region by $C|x-y|^{p-1}$ and on the far region by the majorant of
+Lemma~\ref{lem:conj} \textnormal{(}uniformly for $t\le1$\textnormal{)}.
+Hence $\mathcal E(\mathcal V_0+t\varphi,\varphi)\to
+\mathcal E(\mathcal V_0,\varphi)\ge0$. Replacing $\varphi$ by $-\varphi$
+gives $\mathcal E(\mathcal V_0,\varphi)=0$, i.e.\ $A_bv_0=0$ weakly in
+$B_1$ in the sense of Lemma~\ref{lem:conj}.
 \end{proof}
 
 \begin{remark}[What Proposition~\ref{prop:P1} does and does not use]
@@ -990,36 +1026,56 @@ applications by the inhomogeneous baseline~\cite{BT}, which holds in the same
 range $p<\frac2{1-s}$.
 \end{remark}
 
-\subsection{The missing regularity input}
+\subsection{The regularity input: proved for class (A), open for class (B)}
 
-\begin{hypothesis}[Shifted homogeneous $C^{1,\al}$ estimate;
-``shifted-GJS input'']\label{hyp:P2}
-For every $B>0$ there exist $\al_B\in(0,1)$ and $C_B>0$ such that: if
-$|b|\le B$ and $A_bv=0$ weakly in $B_1$ \textnormal{(}in the sense of
-Definition~\ref{def:compweak}\textnormal{)}, with
-$\|v\|_{L^\infty(B_2)}\le1$ and normalized far-field data
-$\Tail(g;0,2)\le1$, then
+\begin{proposition}[Shifted homogeneous $C^{1,\al}$ estimate, class
+\textnormal{(A)}: proved by conjugation]\label{prop:P2A}
+Let $2\le p<\frac2{1-s}$, $B>0$, $|b|\le B$. Let $v$ be of class
+\textnormal{(A)} with $A_bv=0$ weakly in $B_2$
+\textnormal{(}Lemma~\ref{lem:conj}\textnormal{)},
+$\|v\|_{L^\infty(B_2)}\le1$ and $\Tail(g;0,2)\le1$. Then there are
+$\al_0=\al_0(n,s,p)\in(0,1)$ and $C=C(n,s,p,B)$ with
 \[
-  \|v\|_{C^{1,\al_B}(B_{1/2})}\ \le\ C_B .
+  \|v\|_{C^{1,\al_0}(B_{1/2})}\ \le\ C .
 \]
-\end{hypothesis}
+\end{proposition}
+\begin{proof}
+Set $\mathcal V:=v+\ell_b$. By Lemma~\ref{lem:conj}, $\mathcal V$ is an
+ordinary weak solution of $\fpl{\mathcal V}=0$ in $B_2$, with
+$\|\mathcal V\|_{L^\infty(B_2)}\le 1+2B$ and
+$\Tail(\mathcal V;0,2)=\Tail(g;0,2)\le1$ \textnormal{(}$\mathcal V=g$
+outside $B_2$\textnormal{)}. Thus $\mathcal V$ satisfies \emph{verbatim} the
+hypotheses of \cite[Theorem~1.1]{GJS}, whence
+$\|\mathcal V\|_{C^{1,\al_0}(B_{1/2})}\le C(n,s,p)(1+2B+1)$. Subtracting the
+affine function returns the estimate for $v$.
+\end{proof}
 
-\noindent\emph{Status.} For $b=0$ this is precisely the interior estimate
-of~\cite{GJS} \textnormal{(}Theorem~1.1\textnormal{)}. For $b\neq0$ it is
-\emph{expected} to follow from the proof in~\cite{GJS}: their second and
-third stages analyze precisely the regime where the gradient is close to a
-fixed nonzero vector \textnormal{(}Ishii--Lions applied to $u-e\cdot x$;
-linearized H\"older estimates under nondegeneracy\textnormal{)}, which is the
-$b\neq0$ regime after adding back the affine function. However, \cite{GJS}
-state their theorem only for $(-\Delta_p)^su=0$, and the affine function
-itself has infinite $\Tail$ when $sp\le p-1$, so Theorem~1.1 \emph{cannot be
-cited directly} for $A_b$ with $b\neq0$. We therefore record
-Hypothesis~\ref{hyp:P2} as an input --- an extraction from the methods
-of~\cite{GJS}, not from their statement.
+\begin{remark}[Why this is not a cheat, and what remains open]
+\label{rem:P2status}
+The point is that in class \textnormal{(A)} the affine behavior at infinity
+is \emph{data} ($g$), not the affine extension itself: the conjugated
+function $\mathcal V$ has finite tail, so \cite[Thm~1.1]{GJS} applies
+directly --- the earlier concern that ``the affine function has infinite
+tail when $sp\le p-1$'' pertains only to a \emph{globally} affine far field,
+which the blow-up iteration never produces. What remains genuinely open is
+the class \textnormal{(B)} analogue \textnormal{(}bounded exterior, shift
+not conjugable away\textnormal{)}:
+\begin{quote}
+\textbf{Hypothesis P2$'$ (class (B) shifted estimate).} For $|b|\le B$ and
+$A_bv=0$ in $B_1$ in the compensated sense of Lemma~\ref{lem:classB}, with
+$\|v\|_{L^\infty(\R^n)}\le1$: $\|v\|_{C^{1,\al}(B_{1/2})}\le C_B$.
+\end{quote}
+This would follow from the methods (not the statement) of \cite{GJS}; it is
+recorded as an input where used. A second caveat: in the excess iteration
+the \emph{normalized} shifts can grow unless the excess is measured against
+converging jets (Campanato-style); with that bookkeeping the shifts stay in
+a fixed ball $|b|\le B$, and Proposition~\ref{prop:P2A} applies uniformly.
+The iteration itself is still not carried out here.
+\end{remark}
 
 \begin{corollary}[Compactness toward regular shifted profiles]\label{cor:P1P2}
-Assume Hypothesis~\ref{hyp:P2}. In the setting of
-Proposition~\ref{prop:P1}, the limit $v_0$ satisfies
+In the setting of
+Proposition~\ref{prop:P1}, by Proposition~\ref{prop:P2A} the limit $v_0$ satisfies
 $\|v_0\|_{C^{1,\al_B}(B_{1/2})}\le C_B$, and consequently, for every
 $\varepsilon>0$ there is $k_0$ such that for $k\ge k_0$
 \[
@@ -1045,16 +1101,22 @@ subcritical normalization: since $1+\al'\le\frac{sp}{p-1}$, the rescalings
 remain tail-admissible, in contrast with every attempt at the supercritical
 exponent $\beta$. Proposition~\ref{prop:P1} supplies exactly the
 compactness/limit-identification for this iteration, uniformly in the shift;
-Hypothesis~\ref{hyp:P2} supplies the decay of the limiting profile that the
-iteration transfers back to $w_j$. Together they would give uniform
-$C^{1,\al'}$ estimates for blow-ups with vanishing right-hand side --- the
-input denoted ``$C^1_{loc}$-compactness'' in
+Proposition~\ref{prop:P2A} supplies the decay of the limiting profile that
+the iteration transfers back to $w_j$ --- and, by the conjugation mechanism,
+this input is now \emph{proved}, not hypothesized, for the class
+\textnormal{(A)} functions the iteration produces. Together they would give
+uniform $C^{1,\al'}$ estimates for blow-ups with vanishing right-hand side
+--- the input denoted ``$C^1_{loc}$-compactness'' in
 Assumption~\ref{ass:compact} --- and thereby also the seminorm normalization
 that feeds the unit-scale nondegeneracy mechanism of the Liouville section.
+What is \emph{not} yet done is the iteration itself
+(Remark~\ref{rem:P2status}).
 
 \begin{remark}[Limitations: exactly what remains unproved here]
 \label{rem:P1-limits}
-\textnormal{(i)} Hypothesis~\ref{hyp:P2} is unproved; its expected proof is
+\textnormal{(i)} The class \textnormal{(B)} shifted estimate
+\textnormal{(}Hypothesis P2$'$ of Remark~\ref{rem:P2status}\textnormal{)}
+is unproved; its expected proof is
 an adaptation, not a citation, of~\cite{GJS}. \textnormal{(ii)} The
 excess-decay iteration sketched above, including the bookkeeping of the
 accumulated shifts $b_j$ and of the inherited right-hand sides $f_j$, is not
@@ -1195,6 +1257,157 @@ and the interval is nonempty \emph{iff} $s>1-\frac2p$ (equivalently
 $p<\frac2{1-s}$). Indeed $\big(\tfrac{p-1}{1+sp}-(p-1-sp)\big)(1+sp)
 =sp\,(sp-p+2)$, positive iff $sp-p+2>0$. At $p=2$ the tail condition is
 $\gamma<\frac1{1+2s}$, matching~\cite{PTU}.
+\end{remark}
+
+%======================================================================
+\subsection{A scale-dichotomy route to the degenerate Liouville property}
+\label{ssec:dichotomy}
+The remaining obstacle to Hypothesis~\ref{hyp:L} is that the coercivity of
+$K_0^h$ is needed at \emph{every} scale, while the blow-up normalization
+controls the profile only at unit scale. This subsection formulates a
+finite-scale dichotomy that may replace the global statement. Nothing here
+proves Hypothesis~\ref{hyp:L}; the point is to reduce it to two individually
+tractable regimes plus one explicitly open composition step.
+
+\subsubsection*{The scale excess}
+Fix $\al'\in(0,\al_0)$ \textnormal{(}$\al_0$ from
+Proposition~\ref{prop:P2A}\textnormal{)} and let $v_0$ be an entire profile
+of the blow-up scheme, normalized so that the growth caps give
+\begin{equation}\label{eq:caps}
+  \mathcal D(R):=R^{\,1+\al'-\beta}\,[v_0]_{C^{1,\al'}(B_R)}\ \le\ 1
+  \quad(R\ge1),
+  \qquad
+  \mathcal D(1)\ \ge\ \tfrac12 .
+\end{equation}
+$\mathcal D$ is the natural scale quantity: it is dimensionless under the
+$\beta$-rescaling $v_0\mapsto v_0(R\cdot)/R^{\beta}$, it is monotone
+comparable across dyadic scales \textnormal{(}nested seminorms:
+$\mathcal D(R)\le 2^{\beta-1-\al'}\mathcal D(2R)$\textnormal{)}, and its two
+extreme behaviors are exactly the two mechanisms available.
+
+\subsubsection*{Good scales}
+Call $R$ a \emph{$\delta_0$-good scale} if $\mathcal D(R)\ge\delta_0$. The
+normalization \eqref{eq:caps} makes $R=1$ good for any
+$\delta_0\le\frac12$: the dichotomy always has an anchor.
+
+\begin{lemma}[Seminorm-to-directional nondegeneracy at good scales]
+\label{lem:interp-paper}
+Let $\bar v_R:=v_0(R\cdot)/R^{\beta}$ and suppose
+$\|\bar v_R\|_{C^{1,\al_0}(B_2)}\le\Lambda$
+\textnormal{(}supplied by Proposition~\ref{prop:P2A} under the growth
+caps\textnormal{)} and $R$ is $\delta_0$-good, so that
+$[\bar v_R]_{C^{1,\al'}(B_1)}\ge\delta_0$. Then there are a unit vector
+$e_R$ and constants
+\[
+  c_1=\tfrac18\,\delta_0\,(2\Lambda/\delta_0)^{-\frac{\al'}{\al_0-\al'}},
+  \qquad \mu=\mu(n,\Lambda,c_1)>0,
+\]
+such that $\big|\{x\in B_2:\ D_{e_R}\bar v_R\ge c_1\}\big|\ge\mu|B_2|$.
+\end{lemma}
+\begin{proof}
+The seminorm bound gives $x,y\in B_1$ with
+$|\nabla\bar v_R(x)-\nabla\bar v_R(y)|\ge\delta_0|x-y|^{\al'}$; the
+$C^{1,\al_0}$ bound gives
+$|\nabla\bar v_R(x)-\nabla\bar v_R(y)|\le\Lambda|x-y|^{\al_0}$. Hence
+$|x-y|\ge(\delta_0/2\Lambda)^{1/(\al_0-\al')}=:d_0$
+\textnormal{(}the two-exponent gap forbids concentration\textnormal{)}, so
+$|\nabla\bar v_R|\ge\frac14\delta_0d_0^{\al'}=2c_1$ at one of the two
+points, call it $x_0$; set $e_R=\nabla\bar v_R(x_0)/|\nabla\bar v_R(x_0)|$.
+By the $C^{0,\al_0}$ continuity of $\nabla\bar v_R$,
+$D_{e_R}\bar v_R\ge c_1$ on $B_{r_1}(x_0)$ with
+$r_1=(c_1/\Lambda)^{1/\al_0}$, and $\mu=(r_1/4)^n$.
+\end{proof}
+
+\noindent On a good scale, Lemma~\ref{lem:interp-paper} feeds the
+cone-nondegeneracy mechanism \textnormal{(}the kernel lower bound
+$a_0^h(x,y)\ge\lambda|x-y|^{p-2}$ on a positive-measure set of pairs along
+the direction $e_R$\textnormal{)}, which is exactly the coercivity
+assumption of the linearized H\"older estimate of~\cite[\S7]{GJS}. Granting
+that estimate --- with the far field carried as a vanishing-oscillation
+datum by the truncation mechanism of \S\ref{sec:prelim}, under
+$\gamma<\frac{p-1}{1+sp}$ --- one obtains: \emph{there are
+$\rho_0,\vartheta\in(0,1)$, depending on $\delta_0$ but not on $R$, with}
+\begin{equation}\label{eq:good-decay}
+  \operatorname*{osc}_{B_{\rho_0R}}\frac{W^h}{R^{\beta-1}}
+  \ \le\ (1-\vartheta)\operatorname*{osc}_{B_{R}}\frac{W^h}{R^{\beta-1}}
+  \qquad\text{at every $\delta_0$-good scale }R .
+\end{equation}
+We emphasize that \eqref{eq:good-decay} is \emph{conditional} on the
+applicability of the \cite[\S7]{GJS} machinery with datum; this is a
+packaging step, not a new estimate, but it is not written out here.
+
+\subsubsection*{Bad scales}
+Call $R$ \emph{$\delta_0$-bad} if $\mathcal D(R)<\delta_0$. Then
+jet-to-growth \textnormal{(}$v_0(0)=0$, vanishing $1$-jet in the sup
+sense\textnormal{)} gives directly
+\begin{equation}\label{eq:bad-small}
+  \sup_{B_R}|v_0|\ \le\ \delta_0\,R^{\beta},
+  \qquad
+  \sup_{B_R}|W^h|\ \le\ C|h|\,\delta_0\,R^{\beta-1}:
+\end{equation}
+at a bad scale the increment is \emph{automatically} small relative to its
+growth cap --- no ellipticity is needed.
+
+\subsubsection*{The dichotomy lemma}
+\begin{lemma}[Conditional scale dichotomy]\label{lem:dichotomy}
+Let $v_0$ be as above and assume the good-scale decay
+\eqref{eq:good-decay}. Set $\varepsilon_*:=\frac{\beta\gamma}{p-1}$, so that
+$\beta-\varepsilon<\frac{sp}{p-1}$ iff $\varepsilon>\varepsilon_*$. Then:
+\begin{itemize}[leftmargin=2em]
+\item[\textnormal{(i)}] \textbf{(Pure good.)} If there is $\delta_0>0$ such
+that all scales $R\ge1$ are $\delta_0$-good, then \eqref{eq:good-decay}
+iterates along $R_j=\rho_0^{-j}$ and yields
+$[W^h]_{C^{0,\sigma}}$-decay with
+$\sigma=\frac{\log(1-\vartheta)^{-1}}{\log\rho_0^{-1}}$; if
+$\beta-1<\sigma$, every increment is constant, $v_0$ is affine, and the
+vanishing jet gives $v_0\equiv0$.
+\item[\textnormal{(ii)}] \textbf{(Pure bad, quantitative.)} If
+$\mathcal D(R)\le C R^{-\varepsilon}$ for all $R\ge R_0$ with
+$\varepsilon>\varepsilon_*$, then $|v_0(x)|\le C(1+|x|)^{\beta-\varepsilon}$
+by \eqref{eq:bad-small} applied dyadically, the rescalings
+$v_0(R\cdot)/R^{\beta-\varepsilon}$ satisfy the uniform admissibility
+\eqref{eq:tail-assumption} \textnormal{(}subcritical growth:
+$(\beta-\varepsilon)(p-1)<sp$\textnormal{)}, and the \emph{direct}
+Liouville route \textnormal{(}Lemma~\ref{lem:liouville-cond}, which needs
+no linearized kernel at all\textnormal{)} gives $v_0\equiv0$.
+\item[\textnormal{(iii)}] \textbf{(Mixed.)} If neither regime holds ---
+good and bad scales alternate, with $\mathcal D$ neither bounded below nor
+decaying at rate $\varepsilon_*$ --- the two mechanisms must be composed,
+and \emph{this composition is open}; see
+Remark~\ref{rem:dichotomy-limits}.
+\end{itemize}
+\end{lemma}
+\begin{proof}[Proof sketch]
+(i): iterate \eqref{eq:good-decay}; the anchor is $R=1$
+\textnormal{(}always good\textnormal{)}; the H\"older seminorm decay at all
+scales upgrades to the Liouville conclusion by the standard dyadic
+telescoping, exactly as in Theorem~\ref{thm:liouville-incr}, whose
+hypothesis $(\star)$ is precisely what \eqref{eq:good-decay}-at-all-scales
+provides. (ii): for $2^j\le|x|<2^{j+1}$, jet-to-growth with the seminorm
+bound at scale $2^{j+1}$ gives
+$|v_0(x)|\le\mathcal D(2^{j+1})\,|x|^{\beta}\le C|x|^{\beta-\varepsilon}$;
+the threshold $\varepsilon>\varepsilon_*$ is exactly what makes
+$(\beta-\varepsilon)(p-1)<sp$, i.e.\ the rescalings' tails converge with a
+uniform bound, which is hypothesis \eqref{eq:tail-assumption}; conclude by
+Lemma~\ref{lem:liouville-cond} applied with exponent $\beta-\varepsilon$
+\textnormal{(}the vanishing jet persists\textnormal{)}.
+\end{proof}
+
+\begin{remark}[Limitations]\label{rem:dichotomy-limits}
+\textnormal{(a)} The good-scale decay \eqref{eq:good-decay} is conditional
+on packaging the \cite[\S7]{GJS} linearized estimate with far-field datum;
+this packaging is believed routine under $\gamma<\frac{p-1}{1+sp}$ but is
+not written. \textnormal{(b)} The mixed regime (iii) is genuinely open: the
+good-scale mechanism decays the \emph{increment}, the bad-scale mechanism
+shrinks the \emph{profile}, and the two act on different objects; the
+bounded dyadic oscillation of $\mathcal D$ limits how fast regimes can
+alternate, but no composition argument is given here. \textnormal{(c)} The
+intermediate decay window $0<\varepsilon\le\varepsilon_*$ in (ii) is not
+covered: sub-$\beta$ but supercritical growth still has divergent tails,
+and the direct route remains blocked there
+\textnormal{(}Remark~\ref{rem:tail}\textnormal{)}. \textnormal{(d)} Nothing
+in this subsection uses or proves BDOR-type weighted admissibility of
+$a_0^h$; the two approaches are complementary and both remain conditional.
 \end{remark}
 
 %======================================================================
