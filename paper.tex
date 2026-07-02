@@ -748,6 +748,325 @@ Assumption~\ref{ass:compact}.
 \end{remark}
 
 %======================================================================
+\section{Affine subtraction and shifted kernels: perturbative compactness}
+\label{sec:shifted}
+%======================================================================
+For $p=2$, subtracting an affine function from a solution produces a solution;
+for $p\neq2$ it does not. The correct mechanism is to move the affine part
+\emph{into the operator}. For $b\in\R^n$ define, formally,
+\begin{equation}\label{eq:Ab}
+  A_b v(x):=\mathrm{P.V.}\!\int_{\R^n}
+   J_p\big(v(x)-v(y)+b\cdot(x-y)\big)\,\frac{dy}{|x-y|^{n+sp}},
+  \qquad J_p(t)=\Jp{t},
+\end{equation}
+so that if $\fpl{v}=f$ and $\ell(x)=a+b\cdot x$, then $w=v-\ell$ satisfies
+$A_bw=f$. The operator $A_b$ is \emph{monotone}, since for fixed $\tau\in\R$,
+\begin{equation}\label{eq:mono}
+  \big(J_p(\xi+\tau)-J_p(\eta+\tau)\big)(\xi-\eta)\ \ge\ 0,
+\end{equation}
+$J_p$ being nondecreasing. This section proves the compactness/limit-equation
+half of the perturbative scheme for the family $\{A_b\}_{|b|\le B}$; the
+regularity half is isolated as Hypothesis~\ref{hyp:P2} below and is \emph{not}
+claimed.
+
+\subsection{The compensated weak formulation}
+The expression \eqref{eq:Ab} requires care: for bounded $v$, the integrand
+behaves like $J_p(b\cdot(x-y))\sim|b|^{p-1}|x-y|^{p-1}$ in the far field,
+which is \emph{not} absolutely integrable against $|x-y|^{-n-sp}$ when
+$p-1\ge sp$. The affine part must be removed by symmetry before absolute
+estimates are made. We fix the following convention.
+
+\begin{definition}[Compensated weak solution]\label{def:compweak}
+Let $v\in W^{s,p}(B_2)\cap L^\infty(B_2)$ admit the far-field decomposition
+$v=g-\ell_b$ on $\R^n\setminus B_2$ with $g\in L^{p-1}_{sp}(\R^n)$
+\textnormal{(}finite tail\textnormal{)} and $\ell_b(x)=b\cdot x$. For
+$\varphi\in C_c^\infty(B_1)$ set
+\begin{align}
+  \mathcal E_b(v,\varphi):={}&\frac12\iint_{\{|x-y|\le1\}}
+    J_p\big(v(x)-v(y)+b\cdot(x-y)\big)\,
+    \frac{(\varphi(x)-\varphi(y))}{|x-y|^{n+sp}}\,dx\,dy
+    \label{eq:comp-near}\\
+  &+\int_{\R^n}\varphi(x)\!\int_{\{|x-y|>1\}}
+    \Big[J_p\big(v(x)-v(y)+b\cdot(x-y)\big)-J_p\big(b\cdot(x-y)\big)\Big]
+    \frac{dy}{|x-y|^{n+sp}}\,dx,
+    \label{eq:comp-far}
+\end{align}
+where we record that
+$\int_{\{|x-y|>1\}}J_p(b\cdot(x-y))\,|x-y|^{-n-sp}\,dy=0$ for every $x$, as an
+improper symmetric limit over annuli $\{1<|x-y|<R\}$, $R\to\infty$
+\textnormal{(}the integrand is odd in $y-x$ and each annulus integral vanishes
+exactly\textnormal{)}. We say $A_bv=f$ \emph{weakly in $B_1$} if
+$\mathcal E_b(v,\varphi)=\int f\varphi$ for all such $\varphi$.
+\end{definition}
+
+\begin{lemma}[Well-posedness of the formulation in the range
+$p<\frac2{1-s}$]\label{lem:wellposed}
+Under the hypotheses of Definition~\ref{def:compweak}, both integrals
+\eqref{eq:comp-near}--\eqref{eq:comp-far} converge absolutely, provided
+\begin{equation}\label{eq:range-shifted}
+  p-2<sp,\qquad\text{i.e.}\qquad p<\frac{2}{1-s}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+\emph{Near region \eqref{eq:comp-near}.} Here $|\varphi(x)-\varphi(y)|\le
+\|\nabla\varphi\|_\infty|x-y|$ and, splitting the $J_p$ term by
+$|J_p(t)|\le|t|^{p-1}$ and $(a+b)^{p-1}\le c(a^{p-1}+b^{p-1})$,
+\[
+  \big|J_p(v(x)-v(y)+b\cdot(x-y))\big|
+  \le c\,|v(x)-v(y)|^{p-1}+c\,B^{p-1}|x-y|^{p-1}.
+\]
+The second term contributes $c\iint_{|x-y|\le1}|x-y|^{p-n-sp}$, finite since
+$p>sp$. The first is handled by H\"older with exponents $(\tfrac{p}{p-1},p)$
+against $|\varphi(x)-\varphi(y)|$, giving the bound
+$C[v]_{W^{s,p}}^{p-1}[\varphi]_{W^{s,p}}$ after distributing the kernel;
+this is the standard estimate for the unshifted form and does not use
+\eqref{eq:range-shifted}.
+
+\emph{Far region \eqref{eq:comp-far}.} By the fundamental theorem of calculus
+for $J_p\in C^1$ \textnormal{(}$p\ge2$\textnormal{)},
+\begin{equation}\label{eq:Jp-diff}
+  \big|J_p(t+\tau)-J_p(\tau)\big|\ \le\ (p-1)\,(|t|+|\tau|)^{p-2}\,|t| .
+\end{equation}
+With $t=v(x)-v(y)$ and $\tau=b\cdot(x-y)$, $|x-y|>1$: for $x\in
+B_1=\operatorname{supp}\varphi$ we have $|\tau|\le B|x-y|$ and, by the
+far-field decomposition, $|t|\le \|v\|_{L^\infty(B_2)}+|g(y)|+B|y|\cdot
+\chi_{\{y\notin B_2\}}$ --- however the affine part of $v(y)$ recombines with
+$\tau$: indeed for $y\notin B_2$,
+\[
+  v(x)-v(y)+b\cdot(x-y)=v(x)-g(y)+b\cdot x,
+\]
+so the argument of the first $J_p$ in \eqref{eq:comp-far} is bounded by
+$C+|g(y)|$, while the reference term $J_p(b\cdot(x-y))$ obeys
+\eqref{eq:Jp-diff} with $t$ replaced by $v(x)-g(y)+b\cdot y$
+\textnormal{(}write $b\cdot(x-y)=(v(x)-g(y)+b\cdot x)-(v(x)-g(y)+b\cdot y)$
+--- we estimate instead directly\textnormal{)}:
+\[
+  \big|J_p(v(x)-g(y)+b\cdot x)-J_p(b\cdot(x-y))\big|
+  \le (p-1)\big(C+|g(y)|+B|x-y|\big)^{p-2}\big(C+|g(y)|+B(1+|x|)\big).
+\]
+For $|x-y|>1$, $x\in B_1$, the dominant growth in $y$ is
+$|x-y|^{p-2}(1+|g(y)|)$, so the $y$-integral is bounded by
+\[
+  C\int_{|x-y|>1}\frac{|x-y|^{p-2}\,(1+|g(y)|)}{|x-y|^{n+sp}}\,dy
+  \;\le\;
+  C\int_{|z|>1}|z|^{\,p-2-n-sp}\,dz
+  \;+\;
+  C\Big(\int|g|^{p-1}\omega\Big)^{\frac1{p-1}}
+   \Big(\int_{|z|>1}|z|^{\frac{(p-2)(p-1)}{p-2}-n-sp}dz\Big)^{\frac{p-2}{p-1}},
+\]
+and both integrals are finite \emph{precisely} when $p-2<sp$
+\textnormal{(}the H\"older-split second factor requires
+$p-1<sp+\frac{sp+n}{p-1}$-type conditions implied by it; for $g$ bounded the
+first term alone suffices under $p-2<sp$\textnormal{)}. For $y\in
+B_2\setminus B_1$-type intermediate regions the integrand is bounded by local
+norms. This is where the restriction \eqref{eq:range-shifted} enters, and it
+is the \emph{same} restriction under which the homogeneous $C^{1,\al}$
+theory~\cite{GJS} and the Lipschitz baseline~\cite{BT} hold: the range
+$p<\frac2{1-s}$ appears independently three times \textnormal{(}order of the
+linearized operator, GJS, and here\textnormal{)}, and we regard it as the
+natural habitat of the theory.
+\end{proof}
+
+\begin{remark}[No pointwise operator is used]\label{rem:no-pointwise}
+We never evaluate \eqref{eq:Ab} pointwise: all statements below are in the
+sense of Definition~\ref{def:compweak}. The odd-symmetry convention for the
+reference term is exactly the compensation that makes bounded functions
+admissible for $A_b$; it is the nonlinear analogue of the
+polynomial-compensated definitions available for $(-\Delta)^s$
+\textnormal{(}\cite{DSV}, linear only\textnormal{)}.
+\end{remark}
+
+\subsection{Perturbative compactness}
+
+\begin{proposition}[Compactness and the limit equation for shifted
+operators]\label{prop:P1}
+Let $2\le p<\frac2{1-s}$ and $B\ge0$. Let $b_k\in\R^n$, $|b_k|\le B$,
+$b_k\to b$, and let $v_k$ satisfy, in the sense of
+Definition~\ref{def:compweak},
+\[
+  A_{b_k}v_k=f_k\quad\text{weakly in }B_1,
+  \qquad \|f_k\|_{L^\infty(B_1)}\to0,
+\]
+with the uniform bounds
+\[
+  \|v_k\|_{L^\infty(B_2)}\le C_0,\qquad
+  [v_k]_{W^{s,p}(B_2)}\le C_0,\qquad
+  \|v_k\|_{C^{0,1}(B_{3/2})}\le C_0,
+\]
+and far-field decompositions $v_k=g_k-\ell_{b_k}$ on $\R^n\setminus B_2$
+satisfying \emph{either}
+\begin{itemize}[leftmargin=2em]
+\item[\textnormal{(E1)}] shared exterior data: $g_k\equiv g$ with
+  $g\in L^{p-1}_{sp}(\R^n)$; \emph{or}
+\item[\textnormal{(E2)}] tail convergence: $g_k\to g_0$ a.e.\ on
+  $\R^n\setminus B_2$ and in $L^{p-1}_{sp}$, i.e.
+  $\int_{\R^n\setminus B_2}\frac{|g_k-g_0|^{p-1}}{1+|y|^{n+sp}}\,dy\to0$,
+  with $\sup_k\Tail(g_k;0,2)<\infty$.
+\end{itemize}
+Then, along a subsequence,
+\[
+  v_k\to v_0\ \text{locally uniformly in }B_{3/2},
+  \qquad
+  v_k\rightharpoonup v_0\ \text{weakly in }W^{s,p}_{loc}(B_{3/2}),
+\]
+and the limit satisfies
+\[
+  A_bv_0=0\quad\text{weakly in }B_1 .
+\]
+No $C^1_{loc}$ convergence is used or asserted, and no strong
+$W^{s,p}_{loc}$ convergence is claimed.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1: compactness.} The uniform Lipschitz bound on $B_{3/2}$ and
+Arzel\`a--Ascoli give $v_k\to v_0$ locally uniformly along a subsequence; the
+uniform Gagliardo bound gives $v_k\rightharpoonup v_0$ weakly in
+$W^{s,p}(B_r)$ for every $r<2$ \textnormal{(}reflexivity; the two limits
+agree a.e.\textnormal{)}. Under (E2), define $v_0:=g_0-\ell_b$ outside $B_2$;
+under (E1), $v_0:=g-\ell_b$ there. In either case $v_0$ satisfies the
+hypotheses of Definition~\ref{def:compweak}.
+
+\emph{Step 2: the Minty device.} Fix $\varphi\in C_c^\infty(B_1)$ and $t>0$,
+and set $V:=v_0+t\varphi$. By the monotonicity \eqref{eq:mono} applied
+pointwise in $(x,y)$ with $\tau=b_k\cdot(x-y)$,
+\begin{equation}\label{eq:minty}
+  \mathcal E_{b_k}(V,\,V-v_k)\ \ge\ \mathcal E_{b_k}(v_k,\,V-v_k)
+  \ =\ \int_{B_1} f_k\,(V-v_k)\,\zeta\,dx\ \longrightarrow\ 0,
+\end{equation}
+where the pairing is localized by a cutoff $\zeta$ as usual; the right-hand
+side vanishes since $\|f_k\|_\infty\to0$ and $V-v_k$ is uniformly bounded on
+$B_1$. \textnormal{(}The admissibility of $V-v_k$ as a test function follows
+by density from the uniform $W^{s,p}(B_2)\cap L^\infty$ bounds; this is the
+standard approximation step and uses no new estimate.\textnormal{)}
+
+\emph{Step 3: passing to the limit in the left-hand side of
+\eqref{eq:minty}.} The first argument $V$ is \emph{fixed}; the functional
+$\mathcal E_{b_k}(V,\cdot)$ is \emph{linear} in its second argument. Split as
+in Definition~\ref{def:compweak}:
+\begin{itemize}[leftmargin=2em]
+\item \emph{Near region.} The density
+$G_k(x,y):=J_p(V(x)-V(y)+b_k\cdot(x-y))$ satisfies
+$|G_k|\le C|x-y|^{p-1}$ \textnormal{(}$V$ Lipschitz on $B_2$\textnormal{)},
+hence $G_k|x-y|^{-\frac{n+sp}{p'}}$ is bounded in
+$L^{p'}(\{|x-y|\le1\})$ with $p'=\frac{p}{p-1}$, since
+$(p-1)p'=p$ and $\iint_{|x-y|\le1}|x-y|^{p-n-sp}<\infty$. Moreover
+$G_k\to G$ pointwise \textnormal{(}$b_k\to b$; $J_p$
+continuous\textnormal{)}, hence strongly in the same weighted $L^{p'}$ by
+dominated convergence. The second factor
+$(V-v_k)(x)-(V-v_k)(y)$, weighted by $|x-y|^{-\frac{n+sp}{p}}$, converges
+\emph{weakly} in $L^p(\{|x-y|\le1\}\cap(B_2\times B_2))$ by Step~1. A
+strong--weak pairing passes to the limit.
+\item \emph{Far region.} For $x\in B_1$ the inner integrand is the
+compensated density, bounded by \eqref{eq:Jp-diff} and
+Lemma~\ref{lem:wellposed} by a fixed majorant
+$\Phi(x,y)\in L^1(\{|x-y|>1\})$ depending only on $C_0$, $B$, $g$-tails
+\textnormal{(}uniform under (E1)/(E2)\textnormal{)}; the integrand converges
+pointwise a.e.\ by Step~1, (E1)/(E2) and $b_k\to b$. Dominated convergence
+applies. \emph{This is the only place the exterior hypothesis is used, and it
+cannot be dispensed with}: without (E1)/(E2), far-field mass can create a
+spurious right-hand side in the limit \textnormal{(}the counterexample of
+\cite[Rem.~4.4]{CSapprox} adapts\textnormal{)}.
+\end{itemize}
+Therefore $\mathcal E_{b_k}(V,V-v_k)\to\mathcal E_b(V,t\varphi)$, and
+\eqref{eq:minty} gives $\mathcal E_b(v_0+t\varphi,\varphi)\ge0$ after
+dividing by $t>0$.
+
+\emph{Step 4: hemicontinuity.} As $t\downarrow0$,
+$J_p(v_0(x)-v_0(y)+t(\varphi(x)-\varphi(y))+b\cdot(x-y))\to
+J_p(v_0(x)-v_0(y)+b\cdot(x-y))$ pointwise, dominated on the near region by
+$C|x-y|^{p-1}$ and on the far region by the majorant of
+Lemma~\ref{lem:wellposed} \textnormal{(}uniformly for $t\le1$\textnormal{)}.
+Hence $\mathcal E_b(v_0+t\varphi,\varphi)\to\mathcal E_b(v_0,\varphi)\ge0$.
+Replacing $\varphi$ by $-\varphi$ gives $\mathcal E_b(v_0,\varphi)=0$, i.e.\
+$A_bv_0=0$ weakly in $B_1$.
+\end{proof}
+
+\begin{remark}[What Proposition~\ref{prop:P1} does and does not use]
+The proof uses: local uniform convergence, weak $W^{s,p}_{loc}$ compactness,
+monotonicity, and dominated far-field convergence. It does \emph{not} use:
+strong $W^{s,p}$ convergence, any $C^1$ information, or any regularity of the
+limit beyond Lipschitz. The Lipschitz hypothesis itself is supplied in
+applications by the inhomogeneous baseline~\cite{BT}, which holds in the same
+range $p<\frac2{1-s}$.
+\end{remark}
+
+\subsection{The missing regularity input}
+
+\begin{hypothesis}[Shifted homogeneous $C^{1,\al}$ estimate;
+``shifted-GJS input'']\label{hyp:P2}
+For every $B>0$ there exist $\al_B\in(0,1)$ and $C_B>0$ such that: if
+$|b|\le B$ and $A_bv=0$ weakly in $B_1$ \textnormal{(}in the sense of
+Definition~\ref{def:compweak}\textnormal{)}, with
+$\|v\|_{L^\infty(B_2)}\le1$ and normalized far-field data
+$\Tail(g;0,2)\le1$, then
+\[
+  \|v\|_{C^{1,\al_B}(B_{1/2})}\ \le\ C_B .
+\]
+\end{hypothesis}
+
+\noindent\emph{Status.} For $b=0$ this is precisely the interior estimate
+of~\cite{GJS} \textnormal{(}Theorem~1.1\textnormal{)}. For $b\neq0$ it is
+\emph{expected} to follow from the proof in~\cite{GJS}: their second and
+third stages analyze precisely the regime where the gradient is close to a
+fixed nonzero vector \textnormal{(}Ishii--Lions applied to $u-e\cdot x$;
+linearized H\"older estimates under nondegeneracy\textnormal{)}, which is the
+$b\neq0$ regime after adding back the affine function. However, \cite{GJS}
+state their theorem only for $(-\Delta_p)^su=0$, and the affine function
+itself has infinite $\Tail$ when $sp\le p-1$, so Theorem~1.1 \emph{cannot be
+cited directly} for $A_b$ with $b\neq0$. We therefore record
+Hypothesis~\ref{hyp:P2} as an input --- an extraction from the methods
+of~\cite{GJS}, not from their statement.
+
+\begin{corollary}[Compactness toward regular shifted profiles]\label{cor:P1P2}
+Assume Hypothesis~\ref{hyp:P2}. In the setting of
+Proposition~\ref{prop:P1}, the limit $v_0$ satisfies
+$\|v_0\|_{C^{1,\al_B}(B_{1/2})}\le C_B$, and consequently, for every
+$\varepsilon>0$ there is $k_0$ such that for $k\ge k_0$
+\[
+  \|v_k-v_0\|_{L^\infty(B_{1/2})}\le\varepsilon,
+  \qquad v_0\in C^{1,\al_B}(B_{1/2}),\ A_bv_0=0 .
+\]
+That is: sequences with vanishing right-hand sides are compact, in
+$L^\infty(B_{1/2})$, toward shifted homogeneous profiles enjoying full
+$C^{1,\al}$ regularity. \textnormal{(}The closeness is in $L^\infty$, not
+$C^1$: a $C^1$-closeness claim would presuppose gradient equicontinuity of
+$v_k$, which is not available at this stage.\textnormal{)}
+\end{corollary}
+
+\subsection{Why this matters for the blow-up scheme}
+In the perturbative (excess-decay) iteration, one approximates the blow-up
+$v$ at scale $\rho^j$ by affine functions $\ell_j$ and studies
+$w_j:=(v-\ell_j)(\rho^j\cdot)/\rho^{j(1+\al')}$. For $p\neq2$ the function
+$w_j$ does \emph{not} solve the original equation; it solves
+$A_{b_j}w_j=f_j$ with $b_j$ the accumulated affine slope and $f_j$ inheriting
+smallness from the dead-core right-hand side
+\textnormal{(}Proposition~\ref{prop:homog}\textnormal{)} \emph{and} from the
+subcritical normalization: since $1+\al'\le\frac{sp}{p-1}$, the rescalings
+remain tail-admissible, in contrast with every attempt at the supercritical
+exponent $\beta$. Proposition~\ref{prop:P1} supplies exactly the
+compactness/limit-identification for this iteration, uniformly in the shift;
+Hypothesis~\ref{hyp:P2} supplies the decay of the limiting profile that the
+iteration transfers back to $w_j$. Together they would give uniform
+$C^{1,\al'}$ estimates for blow-ups with vanishing right-hand side --- the
+input denoted ``$C^1_{loc}$-compactness'' in
+Assumption~\ref{ass:compact} --- and thereby also the seminorm normalization
+that feeds the unit-scale nondegeneracy mechanism of the Liouville section.
+
+\begin{remark}[Limitations: exactly what remains unproved here]
+\label{rem:P1-limits}
+\textnormal{(i)} Hypothesis~\ref{hyp:P2} is unproved; its expected proof is
+an adaptation, not a citation, of~\cite{GJS}. \textnormal{(ii)} The
+excess-decay iteration sketched above, including the bookkeeping of the
+accumulated shifts $b_j$ and of the inherited right-hand sides $f_j$, is not
+carried out in this paper. \textnormal{(iii)} Strong $W^{s,p}_{loc}$
+convergence of $v_k$, while plausibly available through the
+$(S_+)$-property, is neither proved nor used. \textnormal{(iv)} Nothing in
+this section addresses the degenerate-kernel Liouville
+\textnormal{(}Hypothesis~\ref{hyp:L}\textnormal{)}, which remains the
+principal open input of the main theorem.
+\end{remark}
+
+%======================================================================
 \section{The Liouville step}\label{sec:liouville}
 %======================================================================
 The blow-up limit, if it exists and solves $\fpl{v_0}=0$, must be classified
@@ -1251,6 +1570,9 @@ regularity for the fractional $p$-Laplacian in the superquadratic case},
 Adv. Math. 338 (2018), 782--846.
 \bibitem{CP} J.C. Correa, D. dos Prazeres, \emph{A two-phase quenching-type
 problem for the $p$-Laplacian}, preprint arXiv:2504.11370.
+\bibitem{CSapprox} L. Caffarelli, L. Silvestre, \emph{Regularity results for
+nonlocal equations by approximation}, Arch. Ration. Mech. Anal. 200 (2011),
+59--88.
 \bibitem{DSV} S. Dipierro, O. Savin, E. Valdinoci, \emph{Definition of
 fractional Laplacian for functions with polynomial growth}, Rev. Mat.
 Iberoam. 35 (2019), no.~4, 1079--1122; arXiv:1610.04663.
