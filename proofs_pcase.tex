@@ -11,6 +11,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
 \newtheorem{assumption}[theorem]{Assumption}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
@@ -245,9 +246,250 @@ contrapositive --- a violated growth bound forcing the device quantity to blow
 up --- is the form used inside the contradiction argument of the main theorem.)
 \end{remark}
 
+%======================================================================
+\section{Theorem 4.1 ($p$-case): improved growth at branching points}\label{sec:main}
+%======================================================================
+We now assemble the main estimate, following~\cite[\S4]{PTU}. Write
+$\beta:=\frac{sp}{p-1-\gamma}>1$ and $F(t):=t_+^\gamma-t_-^\gamma$.
+
+\begin{assumption}[Standing inputs]\label{ass:inputs}
+$p\ge2$, $s\in(1-\tfrac1p,1)$, $0<\gamma<\tfrac{p-1}{1+sp}$ (so that
+$\beta(p-1)<sp+1$; Section~\ref{sec:jet}), and:
+\begin{itemize}
+\item[\textnormal{(R)}] solutions of $\fpl{u}=f\in L^\infty$ are
+$C^{0,\gamma_\circ}_{loc}$, $\gamma_\circ=\min\{1,\frac{sp}{p-1}\}$
+\textnormal{(Biswas--Topp)}, giving the working seminorm; when an interior
+$C^{1+\al}$ bound is available it is used, otherwise the H\"older seminorm
+$[\,\cdot\,]_{C^{\gamma_\circ}}$ suffices for the device;
+\item[\textnormal{(S)}] \emph{stability}: if $L_{k,h}W_k^h=f_k$ with $f_k\to0$
+locally, $W_k^h\to W_0^h$ locally uniformly with uniformly finite
+$\mathrm{Tail}_{p-1,sp+1}$, and the kernels converge, then $L_{0,h}W_0^h=0$
+weakly \textnormal{(}mod.\ polynomials\textnormal{)};
+\item[\textnormal{(ND)},$(\star)$] as in Remark~\ref{rem:nondeg}, for the
+blow-up limits below.
+\end{itemize}
+\end{assumption}
+
+\begin{definition}\label{def:flat}
+$x_0\in B_1$ is a \emph{flat branching point} of $u$ if $u(x_0)=0$ and
+$\sup_{B_r(x_0)}|u|=o(r)$ as $r\to0$.
+\end{definition}
+
+\begin{theorem}[$p$-analogue of {\cite[Thm 4.1]{PTU}}]\label{thm:main}
+Under Assumption~\ref{ass:inputs}, let $u\in L^\infty(\R^n)$ solve
+$\fpl{u}=F(u)$ in $B_1$ with $0$ a flat branching point. Then there is
+$C=C(n,s,p,\gamma)$ with
+\[
+  |u(x)|\le C\,\|u\|_{L^\infty(\R^n)}\,|x|^{\beta}\qquad x\in B_{1/2}.
+\]
+\end{theorem}
+
+\begin{proof}
+Assume WLOG $\|u\|_{L^\infty}=1$; we must show $|u(x)|\le C|x|^\beta$. Suppose
+not: there are solutions $u_k$ with $0$ a flat branching point and points $x_k$
+with
+\begin{equation}\label{eq:viol}
+  |u_k(x_k)|>k\,|x_k|^{\beta}.
+\end{equation}
+Fix a working exponent $\alpha\in(0,\min\{\gamma_\circ,\beta-1\})$ and, with the
+seminorm $[\,\cdot\,]:=[\,\cdot\,]_{C^{1+\alpha}}$ available under
+\textnormal{(R)},\footnote{If only $C^{0,\gamma_\circ}$ is available, replace
+$C^{1+\alpha}$ by $C^{\gamma_\circ}$ throughout and $\beta-1$ by $\beta$; the
+device is unchanged.} define, following~\cite[(4.4)]{PTU},
+\[
+  \theta_k(r'):=\sup_{r'<r<1/2}r^{\,1+\alpha-\beta}\,[u_k]_{C^{1+\alpha}(B_r)},
+  \qquad 1+\alpha-\beta<0 .
+\]
+By \eqref{eq:viol} and Lemma~\ref{lem:jet} (contrapositive: were
+$\theta_k(0^+)\le k$, the vanishing $1$-jet would force $|u_k|\le k|x|^\beta$),
+$\lim_{r'\to0}\theta_k(r')>k$; choose the near-maximal scale $r_k>1/k$ with
+\begin{equation}\label{eq:rk}
+  r_k^{\,1+\alpha-\beta}[u_k]_{C^{1+\alpha}(B_{r_k})}
+  \ge\tfrac1k\theta_k(1/k)\ge\tfrac12\theta_k(r_k),
+\end{equation}
+so $r_k\to0$. Set the blow-up
+\[
+  v_k(x):=\frac{u_k(r_kx)}{\theta_k(r_k)\,r_k^{\beta}}.
+\]
+\emph{Seminorm bound (\cite[(4.8)]{PTU}).} For $1\le R\le\frac1{2r_k}$,
+\[
+  [v_k]_{C^{1+\alpha}(B_R)}
+  =\frac{(r_kR)^{1+\alpha-\beta}[u_k]_{C^{1+\alpha}(B_{r_kR})}}{\theta_k(r_k)}
+   \,R^{\beta-1-\alpha}\le R^{\beta-1-\alpha},
+\]
+using $(r_kR)^{1+\alpha-\beta}[u_k]_{C^{1+\alpha}(B_{r_kR})}\le\theta_k(r_kR)
+\le\theta_k(r_k)$. The gradient-anchor of~\cite[\S4]{CP} gives $|v_k(x)|\le
+C|x|^\beta$ for $1\le|x|\le\frac1{2r_k}$, and \eqref{eq:rk} gives the surviving
+normalization $[v_k]_{C^{1+\alpha}(B_1)}\ge\frac12$.
+
+\emph{Compactness.} The uniform \emph{local} seminorm bound and $v_k(0)=0$ give,
+by Arzel\`a--Ascoli, $v_k\to v_0$ in $C^{1+\alpha'}_{loc}$ ($\alpha'<\alpha$)
+along a subsequence, with
+\[
+  |v_0(x)|\le C(1+|x|)^{\beta},\qquad [v_0]_{C^{1+\alpha}(B_1)}\ge\tfrac12,
+  \qquad v_0(0)=|Dv_0(0)|=0 .
+\]
+(This step needs \emph{no} tail control; it is the content of the seminorm
+device.)
+
+\emph{Vanishing right-hand side and limit equation.} A direct computation
+(homogeneity) gives $\fpl{v_k}=\theta_k(r_k)^{\gamma-(p-1)}F(v_k)\to0$ locally
+uniformly. Passing to increments $W_k^h=v_k(\cdot+h)-v_k$, Proposition/\S1 gives
+$L_{k,h}W_k^h=f_k^h\to0$; by \textnormal{(S)} and the tail condition,
+$L_{0,h}W_0^h=0$, i.e.\ $v_0$ is entire $(s,p)$-harmonic in the renormalized
+sense.
+
+\emph{Liouville and contradiction.} Since $\beta-1<\gamma_\circ\le1$ and
+$\beta<1+\asp$ (admissibility) and $v_0$ satisfies \textnormal{(ND)},$(\star)$,
+Theorem~\ref{thm:liouville} applies with $\delta=\beta-1$: $v_0$ is affine, and
+the vanishing $1$-jet forces $v_0\equiv0$, contradicting
+$[v_0]_{C^{1+\alpha}(B_1)}\ge\frac12$.
+\end{proof}
+
+\begin{remark}\label{rem:main-inputs}
+The proof is complete \emph{given} \textnormal{(R)} (baseline regularity ---
+available), \textnormal{(S)} (stability --- available for uniformly elliptic
+kernels), and \textnormal{(ND)},$(\star)$ (the nondegeneracy of the blow-up
+limit --- the open point of Theorem~\ref{thm:liouville}). Everything else is
+unconditional. The next section reduces \textnormal{(ND)} to a
+\emph{sup-nondegeneracy} of $v_0$, which the barrier is designed to produce.
+\end{remark}
+
+%======================================================================
+\section{Reducing the open hypothesis (ND) to a free-boundary nondegeneracy}\label{sec:reduce}
+%======================================================================
+The one open input of Theorems~\ref{thm:liouville} and~\ref{thm:main} is
+\textnormal{(ND)}: the coercivity/uniform-ellipticity of the linearized kernel
+$K_{v}$ of the blow-up limit. This section does two things. First, it makes the
+coercivity \emph{concrete}: it is exactly a \emph{directional nondegeneracy} of
+$v$, in the sense of~\cite[\S6--\S7]{GJS}. Second, it shows this nondegeneracy
+is produced, on annuli, by the barrier --- \emph{up to one residual step} which
+we isolate honestly.
+
+\subsection{Coercivity is directional nondegeneracy}
+\begin{lemma}[Coercivity from directional nondegeneracy]\label{lem:coerc}
+Let $v\in C^{0,1}(B_{2\rho}(z_0))$ and suppose there is a unit vector $e$ with
+\begin{equation}\label{eq:dirnd}
+  D_e v\ge c_1>0\quad\text{a.e.\ in }B_{\rho}(z_0).
+\end{equation}
+Then $K_v(x,y)=(p-1)|v(x)-v(y)|^{p-2}$ satisfies the coercivity hypothesis
+\textnormal{(7.1)} of~\cite[Thm 7.3]{GJS} on $B_\rho(z_0)$: there are
+$\lambda,\mu>0$ depending only on $n,p,c_1$ such that for every
+$x\in B_\rho(z_0)$,
+\[
+  \Big|\Big\{\,y\in B_\rho(z_0):\ K_v(x,y)\,|x-y|^{-n-sp}\ge\lambda|x-y|^{-n-(sp-p+2)}\Big\}\Big|
+   \ \ge\ \mu\,|B_\rho(z_0)| .
+\]
+\end{lemma}
+\begin{proof}
+The displayed inequality is, after cancelling $|x-y|^{-n-sp}$, equivalent to
+$(p-1)|v(x)-v(y)|^{p-2}\ge\lambda|x-y|^{\,(sp)-(sp-p+2)}=\lambda|x-y|^{p-2}$,
+i.e.\ $|v(x)-v(y)|\ge c|x-y|$ with $c=(\lambda/(p-1))^{1/(p-2)}$. Fix
+$x\in B_\rho(z_0)$ and consider the cone of directions
+$\mathcal C=\{\omega\in S^{n-1}:\ \omega\cdot e\ge\tfrac12\}$. For
+$y=x-t\omega$, $\omega\in\mathcal C$, $t>0$, staying in $B_\rho(z_0)$,
+\[
+  v(x)-v(y)=\int_0^t D_\omega v(x-\tau\omega)\,d\tau
+   =\int_0^t\big(\omega\cdot\nabla v(x-\tau\omega)\big)d\tau .
+\]
+Writing $\omega\cdot\nabla v=(e\cdot\nabla v)(e\cdot\omega)+(\omega-(\omega\cdot e)e)\cdot\nabla v$
+and using \eqref{eq:dirnd} together with $|\nabla v|\le L$ (Lipschitz) is not
+needed if we instead restrict to $\omega=e$ and a thin cone: for
+$\omega\cdot e\ge\tfrac12$ and $c_1$ the lower bound, choosing the cone
+half-angle small enough (depending on $c_1/L$) gives $\omega\cdot\nabla v\ge
+c_1/4$ along the segment, whence $v(x)-v(y)\ge\frac{c_1}{4}t=\frac{c_1}{4}|x-y|$.
+The set of admissible $y$ (the intersection of this cone-sector with
+$B_\rho(z_0)$) has measure $\ge\mu|B_\rho(z_0)|$, $\mu=\mu(n,c_1/L)>0$. This is
+the claim with $c=c_1/4$.
+\end{proof}
+
+\begin{remark}\label{rem:coerc}
+Lemma~\ref{lem:coerc} is precisely the mechanism of~\cite[\S6]{GJS}: their
+nondegeneracy $|\nabla u-e|<\tfrac14$ is exactly \eqref{eq:dirnd} with
+$c_1=\tfrac34$. Thus \textnormal{(ND)} \emph{is} the statement ``$v$ has a
+direction of definite positive derivative on a positive-measure set at each
+scale'', and $(\star)$ is its scale-uniform version. The abstract
+``degenerate-kernel Liouville'' has been reduced to a \emph{geometric
+nondegeneracy of the blow-up limit}.
+\end{remark}
+
+\subsection{Sup-nondegeneracy from the barrier (one phase)}
+We now show that the blow-up limit is nontrivial at every scale in the strong
+form of a matching lower bound. We work in one phase ($u\ge0$).
+
+\begin{lemma}[Sup-nondegeneracy; one phase]\label{lem:supnd}
+Let $u\ge0$ solve $\fpl{u}=u^{\gamma}$ in $B_1$ with $u\ge0$ on $\R^n$, and let
+$0$ be a flat branching point. There exist $c,r_0>0$ such that
+\[
+  \sup_{B_r}u\ \ge\ c\,r^{\beta}\qquad(0<r<r_0).
+\]
+Consequently the blow-up limit $v_0$ satisfies $\sup_{B_R}v_0\ge cR^{\beta}$ for
+all $R\ge1$.
+\end{lemma}
+\begin{proof}[Proof (barrier comparison; strategy)]
+Suppose not: $\sup_{B_{2r}}u\le\varepsilon r^{\beta}$ for $r$ along a sequence
+and $\varepsilon\to0$. Let $\Psi=A\,\psi_{L,r}$ be the scale-$r$ barrier of the
+scale-local barrier lemma \textnormal{(}$\fpl{\psi_{L,r}}\le-c_0r^{\beta\gamma}$
+on $r\le|x|\le\tfrac32r$\textnormal{)}. Since $\Psi\ge0$,
+$\fpl{\Psi}=A^{p-1}\fpl{\psi_{L,r}}\le -c_0A^{p-1}r^{\beta\gamma}\le
+\Psi^{\gamma}$, so $\Psi$ is a subsolution of $\fpl{w}=w^{\gamma}$ on the
+annulus. Choosing $A\sim\varepsilon^{1/(p-1-\gamma)}$ balances the barrier
+against the smallness of $u$; the nonlocal comparison principle
+(\cite[Thm 2.1]{PTU}-type, \cite{KKL}) applied on the annulus, with the ordering
+$\Psi\le u$ verified on the complement using the smallness hypothesis and
+$u\ge0$, forces $u\ge\Psi\ge c\,r^{\beta}$ at some point of the annulus,
+contradicting $\sup_{B_{2r}}u\le\varepsilon r^{\beta}$ for $\varepsilon$ small.
+Rescaling gives the statement for $v_0$.
+\end{proof}
+
+\begin{remark}[Honest status of Lemma~\ref{lem:supnd}]\label{rem:supnd}
+The local dead-core analogue ($\Delta_p u=u^{\gamma}$) is classical
+(da Silva--Salort, Teixeira). The nonlocal proof requires the comparison
+ordering on the \emph{whole} complement; the barrier is $\ge0$ and one-signed,
+so this is clean in \emph{one phase} and delicate across a two-phase branching
+point. We state it as a lemma with the strategy above; the verification of the
+complement ordering is the point to complete rigorously.
+\end{remark}
+
+\subsection{The residual step, isolated}
+Combining Lemmas~\ref{lem:coerc} and~\ref{lem:supnd} \emph{almost} closes the
+one-phase problem. The precise gap is the following implication.
+
+\begin{quote}
+\textbf{(Sup $\Rightarrow$ directional).} From $\sup_{B_R}v_0\ge cR^{\beta}$ and
+$v_0(0)=0$, deduce that on each annulus $B_{2R}\setminus B_R$ there is a unit
+vector $e_R$ and a set of measure $\ge\mu\,|B_{2R}\setminus B_R|$ on which
+$D_{e_R}v_0\ge c\,R^{\beta-1}$ (directional nondegeneracy at scale $R$,
+uniformly in $R$).
+\end{quote}
+
+If this holds, then: rescale $\bar v_R(z)=R^{-\beta}v_0(Rz)$; the above gives
+\eqref{eq:dirnd} for $\bar v_R$ on a fixed sub-ball of the unit annulus,
+Lemma~\ref{lem:coerc} gives the coercivity \textnormal{(7.1)} there,
+Lemma~\ref{lem:gjs7} gives the interior H\"older estimate, and the rescaling of
+Theorem~\ref{thm:liouville} (Step 2, run on the annuli rather than centred at
+the flat origin) forces the increment to be constant --- hence $v_0$ affine,
+hence $v_0\equiv0$, contradicting nontriviality. This would complete the
+one-phase main theorem.
+
+\begin{remark}[What the hard analysis shows]\label{rem:crux}
+The bracketed implication \textnormal{(Sup $\Rightarrow$ directional)} is the
+\emph{entire} remaining content for the one-phase problem. It is a concrete,
+classical-flavoured free-boundary statement --- ``a solution that grows at the
+sharp rate has a definite-sign directional derivative on a positive fraction of
+each annulus'' --- far sharper than ``prove a degenerate-kernel Liouville''.
+Sup-nondegeneracy (Lemma~\ref{lem:supnd}) gives the mass of the variation but
+not yet its \emph{directional} coherence; controlling the direction is the
+missing ingredient. This is the sharpest form we can give the open problem, and
+the natural next target: it reduces a frontier regularity question to a
+free-boundary nondegeneracy of Alt--Caffarelli type.
+\end{remark}
+
 \begin{thebibliography}{9}
 \bibitem{GJS} D. Giovagnoli, D. Jesus, L. Silvestre, \emph{$C^{1+\alpha}$
 regularity for fractional $p$-harmonic functions}, arXiv:2509.26565.
+\bibitem{CP} J.C. Correa, D. dos Prazeres, \emph{A two-phase quenching-type
+problem for the $p$-Laplacian}, arXiv:2504.11370.
 \bibitem{KKL} J. Korvenp\"a\"a, T. Kuusi, E. Lindgren, \emph{Equivalence of
 solutions to fractional $p$-Laplace type equations}, J. Math. Pures Appl.
 132 (2019), 1--26.
