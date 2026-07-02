@@ -1596,21 +1596,114 @@ Lemma~\ref{lem:liouville-cond} applied with exponent $\beta-\varepsilon$
 \textnormal{(}the vanishing jet persists\textnormal{)}.
 \end{proof}
 
+\subsubsection*{The mixed regime: a bridge inequality and a combined
+criterion}
+The two branches act on different objects --- good scales decay the
+\emph{increment}, bad scales shrink the \emph{profile}. The following
+elementary inequality connects them: the increment can never be worse than
+the scale excess.
+
+\begin{lemma}[Bridge inequality]\label{lem:bridge}
+Let $v_0$ be a blow-up profile as above, $C^1$ at the flat origin with
+$\nabla v_0(0)=0$ \textnormal{(}available at flat points by
+Theorem~\ref{thm:E4}\textnormal{)}. Then, for $0<|h|\le1$ and $R\ge1$,
+\[
+  X(R):=\frac{\operatorname{osc}_{B_R}W^h}{|h|\,R^{\beta-1}}
+  \ \le\ C\,\mathcal D(2R) .
+\]
+\end{lemma}
+\begin{proof}
+Since $\nabla v_0(0)=0$,
+$|\nabla v_0(x)|\le[v_0]_{C^{1,\al'}(B_{2R})}|x|^{\al'}
+\le\mathcal D(2R)(2R)^{\beta-1-\al'}|x|^{\al'}
+\le C\mathcal D(2R)R^{\beta-1}$ for $|x|\le R+1$. The mean value theorem
+gives $\operatorname{osc}_{B_R}W^h\le2|h|\sup_{B_{R+1}}|\nabla v_0|$.
+\end{proof}
+
+\begin{proposition}[Combined criterion; conditional]\label{prop:combined}
+Assume the good-scale decay \eqref{eq:good-decay} with parameters
+$(\rho_0,\vartheta)$, and let $\sigma$ denote the resulting H\"older
+exponent, assumed to satisfy $\sigma>\beta-1$. For $R\ge\rho\ge1$ let
+$\#G(\rho,R)$ be the number of $\delta_0$-good dyadic scales in
+$[\rho,R]$, and set
+\[
+  \nu:=\liminf_{R\to\infty}\frac{\#G(1,R)}{\log_2R},
+  \qquad
+  \kappa:=\liminf_{R\to\infty}\frac{\log\mathcal D(R)^{-1}}{\log R},
+  \qquad
+  c_\vartheta:=\frac{\log(1-\vartheta)^{-1}}{\log2} .
+\]
+If
+\begin{equation}\label{eq:window-out}
+  \nu\,c_\vartheta+\kappa\ >\ \beta-1
+  \qquad\text{or}\qquad
+  \kappa\ >\ \varepsilon_*=\frac{\beta\gamma}{p-1},
+\end{equation}
+then $v_0\equiv0$ \textnormal{(}and in particular Hypothesis~\ref{hyp:L}
+holds for the profile $v_0$\textnormal{)}.
+\end{proposition}
+\begin{proof}[Proof sketch]
+If $\kappa>\varepsilon_*$, branch (ii) of Lemma~\ref{lem:dichotomy}
+applies. Otherwise, fix $\rho\ge1$ and run the good-scale decay
+\eqref{eq:good-decay} \emph{downward} from a large scale $R$, anchoring
+with the bridge inequality at $R$:
+\[
+  \operatorname{osc}_{B_\rho}W^h
+  \ \le\ (1-\vartheta)^{\#G(\rho,R)}\,\operatorname{osc}_{B_R}W^h
+  \ \le\ (1-\vartheta)^{\#G(\rho,R)}\,C\,\mathcal D(2R)\,R^{\beta-1}|h| ,
+\]
+bad scales contributing no growth to the chain since
+$\operatorname{osc}_{B_r}W^h$ is monotone in $r$. Taking logarithms, the
+right-hand side tends to $0$ along a sequence $R\to\infty$ precisely when
+$\nu c_\vartheta+\kappa>\beta-1$. Hence $W^h$ is constant for every $h$,
+$v_0$ is affine, and the vanishing jet gives $v_0\equiv0$.
+\end{proof}
+
+\begin{remark}[The residual window, and a proposed attack]
+\label{rem:window}
+The mixed regime is thereby reduced to the explicit \emph{window}
+\begin{equation}\label{eq:window}
+  \kappa\ \le\ \varepsilon_*
+  \qquad\text{and}\qquad
+  \nu\,c_\vartheta+\kappa\ \le\ \beta-1 :
+\end{equation}
+profiles whose scale excess decays, but slowly, with good scales too
+sparse. Three structural facts confine the window further:
+\textnormal{(a)} the one-sided dyadic comparability
+$\mathcal D(2R)\ge2^{-(\beta-1-\al')}\mathcal D(R)$ plus the normalization
+$\mathcal D(1)\ge\frac12$ force an \emph{initial good block} of length
+$\gtrsim\log(1/\delta_0)$; \textnormal{(b)} by the bridge inequality, in
+the window the increments are already uniformly small relative to their
+caps ($X\le C\mathcal D\le C\delta_0$ at bad scales); \textnormal{(c)} the
+window pins $\mathcal D$ between two rates. Fact (c) suggests a
+\emph{second blow-up}: along window scales $R_j$, renormalize
+$v_j:=v_0(R_j\cdot)/(\mathcal D(R_j)R_j^{\beta})$; any limit has excess
+pinned at unit size at all scales --- i.e.\ \emph{all scales good} --- and
+the pure-good branch (i) applies to it. Transferring the conclusion back
+to $v_0$ across the double limit is the unresolved step; we record this as
+the proposed attack, not as a proof.
+\end{remark}
+
 \begin{remark}[Limitations]\label{rem:dichotomy-limits}
 \textnormal{(a)} The good-scale decay \eqref{eq:good-decay} is conditional
 on packaging the \cite[\S7]{GJS} linearized estimate with far-field datum;
 this packaging is believed routine under $\gamma<\frac{p-1}{1+sp}$ but is
-not written. \textnormal{(b)} The mixed regime (iii) is genuinely open: the
-good-scale mechanism decays the \emph{increment}, the bad-scale mechanism
-shrinks the \emph{profile}, and the two act on different objects; the
-bounded dyadic oscillation of $\mathcal D$ limits how fast regimes can
-alternate, but no composition argument is given here. \textnormal{(c)} The
-intermediate decay window $0<\varepsilon\le\varepsilon_*$ in (ii) is not
-covered: sub-$\beta$ but supercritical growth still has divergent tails,
-and the direct route remains blocked there
-\textnormal{(}Remark~\ref{rem:tail}\textnormal{)}. \textnormal{(d)} Nothing
-in this subsection uses or proves BDOR-type weighted admissibility of
-$a_0^h$; the two approaches are complementary and both remain conditional.
+not written. Its H\"older exponent $\sigma$ is small and non-explicit, and
+\emph{both} the pure-good branch and Proposition~\ref{prop:combined}
+require $\sigma>\beta-1$: an implicit smallness condition on
+$\beta-1$ \textnormal{(}i.e.\ on $\gamma-(p-1-sp)$\textnormal{)} that we
+cannot quantify with current tools. \textnormal{(b)} Bad scales give
+\emph{constant}-level improvement only; no mechanism in this paper
+upgrades repeated smallness of $\mathcal D$ to a decay \emph{rate}, so
+$\kappa>0$ is an assumption about the profile, not a consequence.
+\textnormal{(c)} The window \eqref{eq:window} is genuinely open; the
+second blow-up of Remark~\ref{rem:window} is a program.
+\textnormal{(d)} The intermediate decay range
+$0<\varepsilon\le\varepsilon_*$ in branch (ii) remains blocked for the
+direct route \textnormal{(}supercritical tails,
+Remark~\ref{rem:tail}\textnormal{)}. \textnormal{(e)} Nothing here uses or
+proves BDOR-type weighted admissibility of $a_0^h$; the approaches are
+complementary and all remain conditional.
 \end{remark}
 
 %======================================================================
